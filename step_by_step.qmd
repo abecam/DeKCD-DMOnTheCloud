@@ -6,7 +6,20 @@ Process and documentation on adapting a docker-based Data Management platform, S
 
 # Goals and scope
 
-Overview, cost, quick start, advices, considerations for research and tips.
+This documentation is intended as a quickstart for setting up and managing one or several Data Management platforms, while considering the benefits and costs: how much effort, how complex, the security risks, what is gain.
+It does not replace a detailed explanation on each topics, but intend on saving time in (1) deciding which solution to adopt, (2) understand enough of each solution to navigate efficiently through their documentation, (3) give working and explained solutions that can be used as it or as base for your own solution.
+
+It goes from a simple local setup to a full Kubernetes based set-up with distributed data, with some side documentations on Authentication and Authorization, setting up a Central Identity Service, monitoring and logging and considerations for connecting applications in the cloud.
+
+We try to give a clear view on the cost and benefit of each solution so it is easy to have a rough idea what solution is the best. It is quickly summarized and emphasized at each section.
+
+We will also compile advices and tips, and we welcome all contributions (and corrections).
+
+Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases.
+
+# How to use
+
+Each section assumes that you know the precedents. If you already know one section, feel free to jump to the next one.
 
 # Quick introduction to Linux/Unix
 
@@ -65,13 +78,16 @@ The different types of volumes
 
 Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.
 
-## Labels in Kubernetes
 
 # From Docker compose to Kubernetes
 
 Quick overview
 
 -> Kubernetes section
+
+-> First vocabulary
+
+## Labels in Kubernetes
 
 # Other solutions
 
