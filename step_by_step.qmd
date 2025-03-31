@@ -1,0 +1,88 @@
+---
+title: "De.KCD - Preparing Seek4Science for Kubernetes"
+---
+
+Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.
+
+# Goals and scope
+
+Overview, cost, quick start, advices, considerations for research and tips.
+
+# Quick introduction to Linux/Unix
+
+* Check external introduction
+* Check Galaxy training for deeper knowledge
+
+For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.
+
+
+There is a good Linux tutorial on the Carpentry.
+
+
+??? We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
+Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.
+
+
+ls    ls -al -> list the content of a directory
+
+cd -> go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)
+
+ps ps -edf ps -aux -> list the running processes and their owner
+
+top -> show the current running processes and their memory/cpu usage (CTRL-C to end)
+
+more
+
+less
+
+vim/emacs
+
+man -> show the manual for a command
+
+ln -> create a symbolic link
+
+chown/chmod -> change the owner of a file or folder, change the permissions of a file or a folder (see below)
+
+Cgroups ???
+
+# Overview of Docker usage
+
+(consider PodMan too)
+
+# How to build a Dockerfile
+
+# Moving to Docker compose
+
+## Advantages
+
+## Things to take into account
+
+Adding parameters
+
+The different types of volumes
+
+## Namespaces and namespaces collisions
+
+Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.
+
+## Labels in Kubernetes
+
+# From Docker compose to Kubernetes
+
+Quick overview
+
+-> Kubernetes section
+
+# Other solutions
+
+# Scalability
+
+# Databases
+
+# Security
+
+# Going to an assembly
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

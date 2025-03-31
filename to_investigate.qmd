@@ -1,0 +1,78 @@
+---
+title: "Scrap page: things to investigate"
+---
+
+All in K8 is RESTful with an unique HTTP path
+
+Storage: persistent volume shouldn't be on local storage! (can be still...)
+
+Health check: several kind of health check are possible, liveness and readiness
+
+AAA
+
+Remote storage vs local: security benefits, cost issue
+
+Session handling with replicaset: load balancing or microservices and/or RESTful and/or with DB
+
+Cloud DB: managed (AWS), specialised (PostGres k8s), "regular", key-value
+
+[Free K8s training:](https://github.com/jpetazzo/container.training)
+
+## Structure
+
+### General overview
+
+Bare metal vs VM vs container vs orchestrated container
+
+### Why container are better adapted for cloud application
+
+### Security concern, a short overview
+
+VM isolation vs containerization -> introduction to cgroups
+
+Images can be compromised: VM can be created from a Linux distribution
+
+Once created, VM by themselves can be more at risk (images are immutables)
+
+### Creating an image
+
+### Short introduction to CD/CI
+
+### Docker and docker-compose
+
+### K8s
+
+With sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize
+
+Link to section
+
+Storage on the cloud: scalability, issue of desynchronization, where to push the data.
+
+Pod - Replica Sets - Deployments- DaemonSets
+
+Decoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB<->Application.
+
+Volumes and why they are often not a good solution (aside for DB operators)
+
+#### Different cases
+
+1 node with all
+
+1 node with 1 external DB
+
+1..* nodes with simple load balancing, 1 external DB
+
+1..* nodes with simple load balancing, 1 DB on 1st Node
+
+1..* nodes with simple load balancing -> Daemon set for action on all nodes
+
+1..* nodes with simple load balancing -> Object storage -> local HD on 1st Node, S3 instance
+
+1..* nodes with load balancing, Redis
+
+1..* nodes with load balancing -> DB managed by operator
+
+1..* nodes with load balancing 
+
+
+#### Vocabulary

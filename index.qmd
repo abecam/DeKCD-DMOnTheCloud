@@ -1,0 +1,35 @@
+---
+title: "De.KCD - Preparing Seek4Science for Kubernetes"
+---
+
+Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.
+
+# General Introduction
+
+# Learning Kubernetes
+
+# Benefits and costs
+
+# Quick overview
+
+# From Docker compose to manifest
+
+* Medium data storage needs
+
+* Large data storage needs
+
+# From manifest to Helm chart
+
+# Other solutions
+
+# Scalability
+
+# Databases
+
+# Security
+
+# Going to an assembly
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

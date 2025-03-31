@@ -1,0 +1,27 @@
+project:
+  type: website
+
+website:
+  title: "De.KCD - Data Management Platform on the Cloud - Quickstart"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+  sidebar:
+    style : "docked"
+    search: true
+    contents:
+        - step_by_step.qmd
+        - roadblocks.qmd
+        - to_investigate.qmd
+      
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
