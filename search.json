@@ -31,16 +31,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud",
     "section": "",
     "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "TBD"
   },
   {
     "objectID": "roadblocks.html",
@@ -54,58 +47,65 @@
     ]
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "TBD"
+  },
+  {
     "objectID": "step_by_step.html",
     "href": "step_by_step.html",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "",
     "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
     "crumbs": [
       "Home",
-      "De.KCD - Preparing Seek4Science for Kubernetes"
+      "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
   },
   {
     "objectID": "step_by_step.html#advantages",
     "href": "step_by_step.html#advantages",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Advantages",
     "text": "Advantages",
     "crumbs": [
       "Home",
-      "De.KCD - Preparing Seek4Science for Kubernetes"
+      "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
   },
   {
     "objectID": "step_by_step.html#things-to-take-into-account",
     "href": "step_by_step.html#things-to-take-into-account",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Things to take into account",
     "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
     "crumbs": [
       "Home",
-      "De.KCD - Preparing Seek4Science for Kubernetes"
+      "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
   },
   {
     "objectID": "step_by_step.html#namespaces-and-namespaces-collisions",
     "href": "step_by_step.html#namespaces-and-namespaces-collisions",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Namespaces and namespaces collisions",
     "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
     "crumbs": [
       "Home",
-      "De.KCD - Preparing Seek4Science for Kubernetes"
+      "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
   },
   {
     "objectID": "step_by_step.html#labels-in-kubernetes",
     "href": "step_by_step.html#labels-in-kubernetes",
-    "title": "De.KCD - Preparing Seek4Science for Kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Labels in Kubernetes",
     "text": "Labels in Kubernetes",
     "crumbs": [
       "Home",
-      "De.KCD - Preparing Seek4Science for Kubernetes"
+      "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
   }
 ]
