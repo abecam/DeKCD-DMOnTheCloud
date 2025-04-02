@@ -1,0 +1,24 @@
+---
+title: "Kubernetes - introduction"
+---
+
+# A quick overview of Kubernetes
+
+## Good free instructory resources
+
+[Kubernetes Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=s_o8dwzRlu4&t=3s)
+
+## Terminology & main elements
+
+A first glance on Kubernetes can be very confusing. A big part of this confusion is due to a lot of "moving" parts with confusing names.
+
+A full list of terms can be found on the [official documentation](https://kubernetes.io/docs/reference/glossary/?fundamental=true).
+
+The maim terms/elements you should know are:
+
+* Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
+* Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
+* Label: labels are used for Kubernetes to find the different elements.
+* Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
+* Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
+* 
