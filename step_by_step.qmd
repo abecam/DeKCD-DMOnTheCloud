@@ -60,6 +60,8 @@ Cgroups ???
 
 # Overview of Docker usage
 
+A clear presentation of Docker is available [here](https://container.training/intro-selfpaced.yml.html#1) and the [official documentation](https://docs.docker.com/engine/) is good. The section you should consult is "Open Source", so about Docker Engine, Docker Build and Docker Compose. If running Docker on Windows, you might want to use Docker Desktop, which is also proposing a single node Kubernetes and is the simples way to use and test Docker and Kubernetes on Windows.
+
 (consider PodMan too)
 
 # How to build a Dockerfile

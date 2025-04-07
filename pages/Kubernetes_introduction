@@ -18,10 +18,10 @@ The maim terms/elements you should know are:
 
 * Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
 * Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
+* Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
 * Label: labels are used for Kubernetes to find the different elements.
 * Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
 * Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
-* 
 
 ## Everything decoupled
 
