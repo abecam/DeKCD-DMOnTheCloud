@@ -4,7 +4,7 @@
     "href": "to_investigate.html",
     "title": "Scrap page: things to investigate",
     "section": "",
-    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
+    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
     "crumbs": [
       "Home",
       "Scrap page: things to investigate"
