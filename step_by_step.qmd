@@ -101,6 +101,12 @@ Quick overview
 
 # Going to an assembly
 
+# Automatize the setup
+
+Ansible & Terraform -> short introduction, links to documentation/
+
+CI/CD/GitOps (Flux CD & others) -> also short introduction and links. Maybe a short tutorial for GitHub
+
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
