@@ -23,6 +23,15 @@ Each section assumes that you know the precedents. If you already know one secti
 
 # Quick introduction to Linux/Unix
 
+::: {.callout-tip}
+## Recommended learning path
+
+Online documentations and tutorials are enough for the basic.
+A book is strongly recommended for advanced topics.
+
+Learning difficulty from easy (the basic) to very hard (how it all works). For dealing with a cloud installation it is probably intermediate as you should have some knowledge about security concerns.
+:::
+
 * Check external introduction
 * Check Galaxy training for deeper knowledge
 
