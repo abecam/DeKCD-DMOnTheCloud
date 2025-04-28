@@ -29,7 +29,15 @@ How Kubernetes makes everything through API and labels
 
 ## The various objects for your application
 
-Deployment, ReplicaSet, DaemonSet, StatefulSet
+Deployment, Job, ReplicaSet, DaemonSet, StatefulSet
+
+While the Pod is the smallest element in Kubernetes, it is directly started *only* for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.
+
+A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one.
+
+## Updating an application
+
+
 
 ## Where do you store the data
 

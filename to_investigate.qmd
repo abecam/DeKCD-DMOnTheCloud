@@ -8,6 +8,8 @@ Storage: persistent volume shouldn't be on local storage! (can be still...)
 
 Health check: several kind of health check are possible, liveness and readiness
 
+Endpoint: service without cluster IP (like external service (p.83 and following))
+
 AAA
 
 Remote storage vs local: security benefits, cost issue
