@@ -1,41 +1,5 @@
 [
   {
-    "objectID": "to_investigate.html",
-    "href": "to_investigate.html",
-    "title": "Scrap page: things to investigate",
-    "section": "",
-    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
-  },
-  {
-    "objectID": "to_investigate.html#structure",
-    "href": "to_investigate.html#structure",
-    "title": "Scrap page: things to investigate",
-    "section": "Structure",
-    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\n1 node with all\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n\n\nVocabulary",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
-  },
-  {
-    "objectID": "static_md/tutorials_links.html",
-    "href": "static_md/tutorials_links.html",
-    "title": "Tutorials’ Links",
-    "section": "",
-    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "De.KCD - Data Management Platform on the Cloud",
-    "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
     "objectID": "roadblocks.html",
     "href": "roadblocks.html",
     "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
@@ -45,13 +9,6 @@
       "Home",
       "Scrap page: roadblocks, difficulties to remove or solutions to issues"
     ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "TBD"
   },
   {
     "objectID": "step_by_step.html",
@@ -107,5 +64,48 @@
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
     ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "TBD"
+  },
+  {
+    "objectID": "to_investigate.html",
+    "href": "to_investigate.html",
+    "title": "Scrap page: things to investigate",
+    "section": "",
+    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
+  },
+  {
+    "objectID": "to_investigate.html#structure",
+    "href": "to_investigate.html#structure",
+    "title": "Scrap page: things to investigate",
+    "section": "Structure",
+    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\n1 node with all\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n\n\nVocabulary",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "De.KCD - Data Management Platform on the Cloud",
+    "section": "",
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "static_md/tutorials_links.html",
+    "href": "static_md/tutorials_links.html",
+    "title": "Tutorials’ Links",
+    "section": "",
+    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
   }
 ]
