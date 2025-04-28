@@ -22,6 +22,17 @@
     ]
   },
   {
+    "objectID": "step_by_step.html#recommended-learning-path-3",
+    "href": "step_by_step.html#recommended-learning-path-3",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Recommended learning path",
+    "text": "Recommended learning path\nThe official Online documentations is good and complete. Online tutorials should be enough as a complement.\nLearning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system). :::",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
     "objectID": "step_by_step.html#advantages",
     "href": "step_by_step.html#advantages",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
