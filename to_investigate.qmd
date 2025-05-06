@@ -58,7 +58,15 @@ Volumes and why they are often not a good solution (aside for DB operators)
 
 #### Different cases
 
+We consider an application that need several containers: at minima one application and one database. Our example will evolve to cover a full data management application, with object storage, jobs, reverse-proxy.
+
+1 pod with all
+
+It is possible to set-up the containers to run in one pod, i.e. not decouple anything. It is the closest configuration to a docker compose installation and the one that will offer no benefit - only added complexity - over docker compose. Thus it should only be used as a starting point to learn Kubernetes, and basically is the use case we need to break down.
+
 1 node with all
+
+While 1 pod with all applications is rarely desirable, 1 node with all applications is the standard situation if you use Kubernetes on one machine only (so the node). It is also suitable for application that do not need to scale, do not store a lot of data, do not expect a lot of trafic, do not need to have redundancy. So a light web-application or a simple service will often need only one node.
 
 1 node with 1 external DB
 
@@ -78,3 +86,8 @@ Volumes and why they are often not a good solution (aside for DB operators)
 
 
 #### Vocabulary
+
+
+#### How to debug & Troubleshooting
+
+If possible a section with step by step troubleshooting instructions

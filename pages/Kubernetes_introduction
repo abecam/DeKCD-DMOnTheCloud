@@ -2,6 +2,12 @@
 title: "Kubernetes - introduction"
 ---
 
+# Working progress
+
+Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible.
+Explain everything: so start from a simple (and stupid) solution and add to it.
+Do not drown: keep things structured so things are not confusing.
+
 # A quick overview of Kubernetes
 
 ## Good free instructory resources
@@ -43,9 +49,11 @@ A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there 
 
 Volumes, ...
 
-## Configuration variables
+## Configuration values
 
 ConfigMap and Secrets
+
+Regular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values **out** of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool).
 
 ## Namespace
 
@@ -58,3 +66,5 @@ ConfigMap and Secrets
 kustomize
 
 helm
+
+## Affinities
