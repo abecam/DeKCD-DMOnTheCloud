@@ -254,6 +254,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="how-to-debug-troubleshooting" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-debug-troubleshooting">How to debug &amp; Troubleshooting</h4>
 <p>If possible a section with step by step troubleshooting instructions</p>
+<p>kubectl exec –stdin –tty bare-seek-7dc954955d-h2xd8 – /bin/bash</p>
+<p>inside container: more/vi/vim/ps -edf/check user/links/logs</p>
+<p>Remove a deployment:</p>
+<p>kubectl get deployments –all-namespaces</p>
+<p>kubectl delete -n NAMESPACE deployment DEPLOYMENT_NAME</p>
+<p>Not enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:</p>
+<p>[1]+ Killed bundle exec puma -C docker/puma.rb</p>
 
 
 </section>
