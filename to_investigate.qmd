@@ -106,3 +106,8 @@ kubectl delete  -n NAMESPACE deployment DEPLOYMENT_NAME
 Not enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:
 
 [1]+  Killed                  bundle exec puma -C docker/puma.rb
+
+
+Do the simplest setup-> from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.
+
+Using kompose probably a good idea to remove env variable then extract them later (to check more)
