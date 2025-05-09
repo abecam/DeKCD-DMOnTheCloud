@@ -91,3 +91,18 @@ While 1 pod with all applications is rarely desirable, 1 node with all applicati
 #### How to debug & Troubleshooting
 
 If possible a section with step by step troubleshooting instructions
+
+kubectl exec --stdin --tty bare-seek-7dc954955d-h2xd8 -- /bin/bash
+
+inside container: more/vi/vim/ps -edf/check user/links/logs
+
+Remove a deployment:
+
+
+kubectl get deployments --all-namespaces
+
+kubectl delete  -n NAMESPACE deployment DEPLOYMENT_NAME
+
+Not enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:
+
+[1]+  Killed                  bundle exec puma -C docker/puma.rb
