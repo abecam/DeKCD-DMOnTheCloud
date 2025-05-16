@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.30">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,10 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-de070a7b0ab54f8780927367ac907214.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6c437caa095562069354f84ede9975ef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cd74cba69e18857596157f6e1f3f0483.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -158,7 +158,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#goals-and-scope" id="toc-goals-and-scope" class="nav-link active" data-scroll-target="#goals-and-scope">Goals and scope</a></li>
   <li><a href="#how-to-use" id="toc-how-to-use" class="nav-link" data-scroll-target="#how-to-use">How to use</a></li>
-  <li><a href="#quick-introduction-to-linuxunix" id="toc-quick-introduction-to-linuxunix" class="nav-link" data-scroll-target="#quick-introduction-to-linuxunix">Quick introduction to Linux/Unix</a></li>
+  <li><a href="#quick-introduction-to-linuxunix" id="toc-quick-introduction-to-linuxunix" class="nav-link" data-scroll-target="#quick-introduction-to-linuxunix">Quick introduction to Linux/Unix</a>
+  <ul class="collapse">
+  <li><a href="#what-makes-the-containers-possible-cgroups" id="toc-what-makes-the-containers-possible-cgroups" class="nav-link" data-scroll-target="#what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</a></li>
+  </ul></li>
   <li><a href="#overview-of-docker-usage" id="toc-overview-of-docker-usage" class="nav-link" data-scroll-target="#overview-of-docker-usage">Overview of Docker usage</a></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a></li>
   <li><a href="#moving-to-docker-compose" id="toc-moving-to-docker-compose" class="nav-link" data-scroll-target="#moving-to-docker-compose">Moving to Docker compose</a>
@@ -234,7 +237,7 @@ Recommended learning path
 </div>
 <ul>
 <li>Check external introduction</li>
-<li>Check Galaxy training for deeper knowledge</li>
+<li>Check Galaxy/NFDI training for deeper knowledge</li>
 </ul>
 <p>For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.</p>
 <p>There is a good Linux tutorial on the Carpentry.</p>
@@ -243,13 +246,21 @@ Recommended learning path
 <p>cd -&gt; go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)</p>
 <p>ps ps -edf ps -aux -&gt; list the running processes and their owner</p>
 <p>top -&gt; show the current running processes and their memory/cpu usage (CTRL-C to end)</p>
-<p>more</p>
-<p>less</p>
-<p>vim/emacs</p>
-<p>man -&gt; show the manual for a command</p>
-<p>ln -&gt; create a symbolic link</p>
-<p>chown/chmod -&gt; change the owner of a file or folder, change the permissions of a file or a folder (see below)</p>
-<p>Cgroups ???</p>
+<p>more, less, cat</p>
+<p>vi/vim/emacs -&gt; most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).</p>
+<p>man -&gt; show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p>
+<p>ln -&gt; create a symbolic link and know the difference between: * a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file * and a symbolic link: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</p>
+<p>For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.</p>
+<p>chown/chmod -&gt; change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x——-, 755, chmod o+r filename, chmod -R username filename</p>
+<p>grep -&gt;</p>
+<p>Ideally the pipe (|) should be well understood</p>
+<p>? Which other</p>
+<section id="what-makes-the-containers-possible-cgroups" class="level3">
+<h3 class="anchored" data-anchor-id="what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</h3>
+<p>One more advanced element which is important to understand in the container context is cgroups. Cgroups (short for control groups) are a Linux kernel feature to isolate processes: limits the resource usage, track their usage, give them a “sub” filesystem isolated from the host file system.</p>
+<p>It is important to be aware of these for understanding the difference between container and virtual machine, and be aware that the security risk is higher with a container: bypassing the isolation would allow a direct access to the host filesystem. And it is not only if an exploit is found. As the container are a part of the host, they can use a folder out of their isolated space (host volume). If not properly set-up, it could open a sensitive part of the host to an intruder. On the other hand, virtual machine save their data within the virtual disk, part of the virtual machine. There is no possible access to the host system aside a proper exploit. So for a quick set-up of an exposed application, a virtual machine might be a better solution.</p>
+<p>A long term set-up should take a proper care of security in all case, and in this case there should be not benefit in using a virtual machine, aside of cybersecurity needs (like a honeypot).</p>
+</section>
 </section>
 <section id="overview-of-docker-usage" class="level1">
 <h1>Overview of Docker usage</h1>
