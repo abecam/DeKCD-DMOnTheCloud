@@ -1,0 +1,70 @@
+---
+title: "Kubernetes - introduction"
+---
+
+# Working progress
+
+Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible.
+Explain everything: so start from a simple (and stupid) solution and add to it.
+Do not drown: keep things structured so things are not confusing.
+
+# A quick overview of Kubernetes
+
+## Good free instructory resources
+
+[Kubernetes Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=s_o8dwzRlu4&t=3s)
+
+## Terminology & main elements
+
+A first glance on Kubernetes can be very confusing. A big part of this confusion is due to a lot of "moving" parts with confusing names.
+
+A full list of terms can be found on the [official documentation](https://kubernetes.io/docs/reference/glossary/?fundamental=true).
+
+The maim terms/elements you should know are:
+
+* Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
+* Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
+* Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
+* Label: labels are used for Kubernetes to find the different elements.
+* Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
+* Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
+
+## Everything decoupled
+
+How Kubernetes makes everything through API and labels
+
+## The various objects for your application
+
+Deployment, Job, ReplicaSet, DaemonSet, StatefulSet
+
+While the Pod is the smallest element in Kubernetes, it is directly started *only* for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.
+
+A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one.
+
+## Updating an application
+
+
+
+## Where do you store the data
+
+Volumes, ...
+
+## Configuration values
+
+ConfigMap and Secrets
+
+Regular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values **out** of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool).
+
+## Namespace
+
+## Network access
+
+## LoadBalancing
+
+## Several Deployments
+
+kustomize
+
+helm
+
+## Affinities
