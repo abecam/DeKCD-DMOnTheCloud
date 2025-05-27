@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes - introduction"
+number-sections: true
 ---
 
 # Working progress
@@ -22,12 +23,24 @@ A full list of terms can be found on the [official documentation](https://kubern
 
 The maim terms/elements you should know are:
 
+* Cluster: 
 * Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
 * Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
 * Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
 * Label: labels are used for Kubernetes to find the different elements.
 * Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
 * Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
+
+And generally, the applications are deployed as:
+
+* ReplicatSet: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn't enough resources typically). It is possible to influence on which node the pods will run using affinities, see @sec-affinities
+* Deployment:
+* DaemonSet:
+* StatefulSet:
+* Job:
+
+* ConfigMap:
+* Secret:
 
 ## Everything decoupled
 
@@ -67,4 +80,4 @@ kustomize
 
 helm
 
-## Affinities
+## Affinities {#sec-affinities}

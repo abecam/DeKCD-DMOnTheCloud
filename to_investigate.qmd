@@ -84,6 +84,8 @@ While 1 pod with all applications is rarely desirable, 1 node with all applicati
 
 1..* nodes with load balancing 
 
+-- Then introduce an assembly
+
 
 #### Vocabulary
 
