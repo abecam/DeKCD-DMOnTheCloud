@@ -1,0 +1,7 @@
+---
+title: "De.KCD - Backups and Security"
+---
+
+Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage.
+Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that.
+

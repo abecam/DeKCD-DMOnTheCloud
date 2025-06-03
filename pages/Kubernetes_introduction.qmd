@@ -45,6 +45,7 @@ And generally, the applications are deployed as:
 ## Everything decoupled
 
 How Kubernetes makes everything through API and labels
+Why there is so many extra layers compared to docker compose -> full decoupling.
 
 ## The various objects for your application
 
@@ -56,7 +57,7 @@ A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there 
 
 ## Updating an application
 
-
+Applications are still running in container, so updating consists in updating the image. If deployment are used, the update is managed by kubernetes: it will follow an update strategy to run the new containers while stopping and removing the old ones.
 
 ## Where do you store the data
 

@@ -1,5 +1,5 @@
 ---
-title: "De.KCD - Volume"
+title: "De.KCD - Volumes"
 ---
 
 Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solution, which might be more adapted to certain cases.
