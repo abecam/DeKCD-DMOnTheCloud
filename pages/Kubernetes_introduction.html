@@ -234,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="everything-decoupled" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="everything-decoupled"><span class="header-section-number">2.3</span> Everything decoupled</h2>
-<p>How Kubernetes makes everything through API and labels</p>
+<p>How Kubernetes makes everything through API and labels Why there is so many extra layers compared to docker compose -&gt; full decoupling.</p>
 </section>
 <section id="the-various-objects-for-your-application" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="the-various-objects-for-your-application"><span class="header-section-number">2.4</span> The various objects for your application</h2>
@@ -244,6 +244,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="updating-an-application" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="updating-an-application"><span class="header-section-number">2.5</span> Updating an application</h2>
+<p>Applications are still running in container, so updating consists in updating the image. If deployment are used, the update is managed by kubernetes: it will follow an update strategy to run the new containers while stopping and removing the old ones.</p>
 </section>
 <section id="where-do-you-store-the-data" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="where-do-you-store-the-data"><span class="header-section-number">2.6</span> Where do you store the data</h2>

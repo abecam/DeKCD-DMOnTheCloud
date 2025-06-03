@@ -1,94 +1,71 @@
 [
   {
-    "objectID": "pages/Kubernetes_introduction.html",
-    "href": "pages/Kubernetes_introduction.html",
-    "title": "Kubernetes - introduction",
+    "objectID": "pages/Backups_and_security.html",
+    "href": "pages/Backups_and_security.html",
+    "title": "De.KCD - Backups and Security",
     "section": "",
-    "text": "Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible. Explain everything: so start from a simple (and stupid) solution and add to it. Do not drown: keep things structured so things are not confusing."
+    "text": "Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that."
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#good-free-instructory-resources",
-    "href": "pages/Kubernetes_introduction.html#good-free-instructory-resources",
-    "title": "Kubernetes - introduction",
-    "section": "2.1 Good free instructory resources",
-    "text": "2.1 Good free instructory resources\nKubernetes Crash Course for Absolute Beginners"
+    "objectID": "pages/Volumes.html",
+    "href": "pages/Volumes.html",
+    "title": "De.KCD - Volumes",
+    "section": "",
+    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solution, which might be more adapted to certain cases.\nSome more advanced solution might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#terminology-main-elements",
-    "href": "pages/Kubernetes_introduction.html#terminology-main-elements",
-    "title": "Kubernetes - introduction",
-    "section": "2.2 Terminology & main elements",
-    "text": "2.2 Terminology & main elements\nA first glance on Kubernetes can be very confusing. A big part of this confusion is due to a lot of “moving” parts with confusing names.\nA full list of terms can be found on the official documentation.\nThe maim terms/elements you should know are:\n\nCluster:\nNode: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.\nPod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.\nService: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).\nLabel: labels are used for Kubernetes to find the different elements.\nKubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them…\nManifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, …\n\nAnd generally, the applications are deployed as:\n\nReplicatSet: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn’t enough resources typically). It is possible to influence on which node the pods will run using affinities, see Section 2.12\nDeployment:\nDaemonSet:\nStatefulSet:\nJob:\nConfigMap:\nSecret:"
+    "objectID": "roadblocks.html",
+    "href": "roadblocks.html",
+    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
+    "section": "",
+    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security?\nAssembly on the cloud -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility?\nDaemonSet for monitoring and other tasks.",
+    "crumbs": [
+      "Home",
+      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
+    ]
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#everything-decoupled",
-    "href": "pages/Kubernetes_introduction.html#everything-decoupled",
-    "title": "Kubernetes - introduction",
-    "section": "2.3 Everything decoupled",
-    "text": "2.3 Everything decoupled\nHow Kubernetes makes everything through API and labels"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "De.KCD - Data Management Platform on the Cloud",
+    "section": "",
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#the-various-objects-for-your-application",
-    "href": "pages/Kubernetes_introduction.html#the-various-objects-for-your-application",
-    "title": "Kubernetes - introduction",
-    "section": "2.4 The various objects for your application",
-    "text": "2.4 The various objects for your application\nDeployment, Job, ReplicaSet, DaemonSet, StatefulSet\nWhile the Pod is the smallest element in Kubernetes, it is directly started only for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.\nA ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one."
+    "objectID": "static_md/tutorials_links.html",
+    "href": "static_md/tutorials_links.html",
+    "title": "Tutorials’ Links",
+    "section": "",
+    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#updating-an-application",
-    "href": "pages/Kubernetes_introduction.html#updating-an-application",
-    "title": "Kubernetes - introduction",
-    "section": "2.5 Updating an application",
-    "text": "2.5 Updating an application"
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "TBD"
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#where-do-you-store-the-data",
-    "href": "pages/Kubernetes_introduction.html#where-do-you-store-the-data",
-    "title": "Kubernetes - introduction",
-    "section": "2.6 Where do you store the data",
-    "text": "2.6 Where do you store the data\nVolumes, …"
+    "objectID": "to_investigate.html",
+    "href": "to_investigate.html",
+    "title": "Scrap page: things to investigate",
+    "section": "",
+    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
   },
   {
-    "objectID": "pages/Kubernetes_introduction.html#configuration-values",
-    "href": "pages/Kubernetes_introduction.html#configuration-values",
-    "title": "Kubernetes - introduction",
-    "section": "2.7 Configuration values",
-    "text": "2.7 Configuration values\nConfigMap and Secrets\nRegular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values out of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool)."
-  },
-  {
-    "objectID": "pages/Kubernetes_introduction.html#namespace",
-    "href": "pages/Kubernetes_introduction.html#namespace",
-    "title": "Kubernetes - introduction",
-    "section": "2.8 Namespace",
-    "text": "2.8 Namespace"
-  },
-  {
-    "objectID": "pages/Kubernetes_introduction.html#network-access",
-    "href": "pages/Kubernetes_introduction.html#network-access",
-    "title": "Kubernetes - introduction",
-    "section": "2.9 Network access",
-    "text": "2.9 Network access"
-  },
-  {
-    "objectID": "pages/Kubernetes_introduction.html#loadbalancing",
-    "href": "pages/Kubernetes_introduction.html#loadbalancing",
-    "title": "Kubernetes - introduction",
-    "section": "2.10 LoadBalancing",
-    "text": "2.10 LoadBalancing"
-  },
-  {
-    "objectID": "pages/Kubernetes_introduction.html#several-deployments",
-    "href": "pages/Kubernetes_introduction.html#several-deployments",
-    "title": "Kubernetes - introduction",
-    "section": "2.11 Several Deployments",
-    "text": "2.11 Several Deployments\nkustomize\nhelm"
-  },
-  {
-    "objectID": "pages/Kubernetes_introduction.html#sec-affinities",
-    "href": "pages/Kubernetes_introduction.html#sec-affinities",
-    "title": "Kubernetes - introduction",
-    "section": "2.12 Affinities",
-    "text": "2.12 Affinities"
+    "objectID": "to_investigate.html#structure",
+    "href": "to_investigate.html#structure",
+    "title": "Scrap page: things to investigate",
+    "section": "Structure",
+    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\nWe consider an application that need several containers: at minima one application and one database. Our example will evolve to cover a full data management application, with object storage, jobs, reverse-proxy.\n1 pod with all\nIt is possible to set-up the containers to run in one pod, i.e. not decouple anything. It is the closest configuration to a docker compose installation and the one that will offer no benefit - only added complexity - over docker compose. Thus it should only be used as a starting point to learn Kubernetes, and basically is the use case we need to break down.\n1 node with all\nWhile 1 pod with all applications is rarely desirable, 1 node with all applications is the standard situation if you use Kubernetes on one machine only (so the node). It is also suitable for application that do not need to scale, do not store a lot of data, do not expect a lot of trafic, do not need to have redundancy. So a light web-application or a simple service will often need only one node.\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n– Then introduce an assembly\n\n\nVocabulary\n\n\nHow to debug & Troubleshooting\nIf possible a section with step by step troubleshooting instructions\nkubectl exec –stdin –tty bare-seek-7dc954955d-h2xd8 – /bin/bash\ninside container: more/vi/vim/ps -edf/check user/links/logs\nRemove a deployment:\nkubectl get deployments –all-namespaces\nkubectl delete -n NAMESPACE deployment DEPLOYMENT_NAME\nNot enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:\n[1]+ Killed bundle exec puma -C docker/puma.rb\nDo the simplest setup-&gt; from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.\nUsing kompose probably a good idea to remove env variable then extract them later (to check more)",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
   },
   {
     "objectID": "step_by_step.html",
@@ -157,64 +134,94 @@
     ]
   },
   {
-    "objectID": "to_investigate.html",
-    "href": "to_investigate.html",
-    "title": "Scrap page: things to investigate",
+    "objectID": "pages/Kubernetes_introduction.html",
+    "href": "pages/Kubernetes_introduction.html",
+    "title": "Kubernetes - introduction",
     "section": "",
-    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
+    "text": "Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible. Explain everything: so start from a simple (and stupid) solution and add to it. Do not drown: keep things structured so things are not confusing."
   },
   {
-    "objectID": "to_investigate.html#structure",
-    "href": "to_investigate.html#structure",
-    "title": "Scrap page: things to investigate",
-    "section": "Structure",
-    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\nWe consider an application that need several containers: at minima one application and one database. Our example will evolve to cover a full data management application, with object storage, jobs, reverse-proxy.\n1 pod with all\nIt is possible to set-up the containers to run in one pod, i.e. not decouple anything. It is the closest configuration to a docker compose installation and the one that will offer no benefit - only added complexity - over docker compose. Thus it should only be used as a starting point to learn Kubernetes, and basically is the use case we need to break down.\n1 node with all\nWhile 1 pod with all applications is rarely desirable, 1 node with all applications is the standard situation if you use Kubernetes on one machine only (so the node). It is also suitable for application that do not need to scale, do not store a lot of data, do not expect a lot of trafic, do not need to have redundancy. So a light web-application or a simple service will often need only one node.\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n– Then introduce an assembly\n\n\nVocabulary\n\n\nHow to debug & Troubleshooting\nIf possible a section with step by step troubleshooting instructions\nkubectl exec –stdin –tty bare-seek-7dc954955d-h2xd8 – /bin/bash\ninside container: more/vi/vim/ps -edf/check user/links/logs\nRemove a deployment:\nkubectl get deployments –all-namespaces\nkubectl delete -n NAMESPACE deployment DEPLOYMENT_NAME\nNot enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:\n[1]+ Killed bundle exec puma -C docker/puma.rb\nDo the simplest setup-&gt; from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.\nUsing kompose probably a good idea to remove env variable then extract them later (to check more)",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
+    "objectID": "pages/Kubernetes_introduction.html#good-free-instructory-resources",
+    "href": "pages/Kubernetes_introduction.html#good-free-instructory-resources",
+    "title": "Kubernetes - introduction",
+    "section": "2.1 Good free instructory resources",
+    "text": "2.1 Good free instructory resources\nKubernetes Crash Course for Absolute Beginners"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "TBD"
+    "objectID": "pages/Kubernetes_introduction.html#terminology-main-elements",
+    "href": "pages/Kubernetes_introduction.html#terminology-main-elements",
+    "title": "Kubernetes - introduction",
+    "section": "2.2 Terminology & main elements",
+    "text": "2.2 Terminology & main elements\nA first glance on Kubernetes can be very confusing. A big part of this confusion is due to a lot of “moving” parts with confusing names.\nA full list of terms can be found on the official documentation.\nThe maim terms/elements you should know are:\n\nCluster:\nNode: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.\nPod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.\nService: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).\nLabel: labels are used for Kubernetes to find the different elements.\nKubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them…\nManifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, …\n\nAnd generally, the applications are deployed as:\n\nReplicatSet: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn’t enough resources typically). It is possible to influence on which node the pods will run using affinities, see Section 2.12\nDeployment:\nDaemonSet:\nStatefulSet:\nJob:\nConfigMap:\nSecret:"
   },
   {
-    "objectID": "static_md/tutorials_links.html",
-    "href": "static_md/tutorials_links.html",
-    "title": "Tutorials’ Links",
-    "section": "",
-    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
+    "objectID": "pages/Kubernetes_introduction.html#everything-decoupled",
+    "href": "pages/Kubernetes_introduction.html#everything-decoupled",
+    "title": "Kubernetes - introduction",
+    "section": "2.3 Everything decoupled",
+    "text": "2.3 Everything decoupled\nHow Kubernetes makes everything through API and labels Why there is so many extra layers compared to docker compose -&gt; full decoupling."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "De.KCD - Data Management Platform on the Cloud",
-    "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "objectID": "pages/Kubernetes_introduction.html#the-various-objects-for-your-application",
+    "href": "pages/Kubernetes_introduction.html#the-various-objects-for-your-application",
+    "title": "Kubernetes - introduction",
+    "section": "2.4 The various objects for your application",
+    "text": "2.4 The various objects for your application\nDeployment, Job, ReplicaSet, DaemonSet, StatefulSet\nWhile the Pod is the smallest element in Kubernetes, it is directly started only for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.\nA ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one."
   },
   {
-    "objectID": "roadblocks.html",
-    "href": "roadblocks.html",
-    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
-    "section": "",
-    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security?\nAssembly on the cloud -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility?\nDaemonSet for monitoring and other tasks.",
-    "crumbs": [
-      "Home",
-      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
-    ]
+    "objectID": "pages/Kubernetes_introduction.html#updating-an-application",
+    "href": "pages/Kubernetes_introduction.html#updating-an-application",
+    "title": "Kubernetes - introduction",
+    "section": "2.5 Updating an application",
+    "text": "2.5 Updating an application\nApplications are still running in container, so updating consists in updating the image. If deployment are used, the update is managed by kubernetes: it will follow an update strategy to run the new containers while stopping and removing the old ones."
   },
   {
-    "objectID": "pages/Volumes.html",
-    "href": "pages/Volumes.html",
-    "title": "De.KCD - Volume",
-    "section": "",
-    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solution, which might be more adapted to certain cases.\nSome more advanced solution might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
+    "objectID": "pages/Kubernetes_introduction.html#where-do-you-store-the-data",
+    "href": "pages/Kubernetes_introduction.html#where-do-you-store-the-data",
+    "title": "Kubernetes - introduction",
+    "section": "2.6 Where do you store the data",
+    "text": "2.6 Where do you store the data\nVolumes, …"
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#configuration-values",
+    "href": "pages/Kubernetes_introduction.html#configuration-values",
+    "title": "Kubernetes - introduction",
+    "section": "2.7 Configuration values",
+    "text": "2.7 Configuration values\nConfigMap and Secrets\nRegular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values out of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool)."
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#namespace",
+    "href": "pages/Kubernetes_introduction.html#namespace",
+    "title": "Kubernetes - introduction",
+    "section": "2.8 Namespace",
+    "text": "2.8 Namespace"
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#network-access",
+    "href": "pages/Kubernetes_introduction.html#network-access",
+    "title": "Kubernetes - introduction",
+    "section": "2.9 Network access",
+    "text": "2.9 Network access"
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#loadbalancing",
+    "href": "pages/Kubernetes_introduction.html#loadbalancing",
+    "title": "Kubernetes - introduction",
+    "section": "2.10 LoadBalancing",
+    "text": "2.10 LoadBalancing"
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#several-deployments",
+    "href": "pages/Kubernetes_introduction.html#several-deployments",
+    "title": "Kubernetes - introduction",
+    "section": "2.11 Several Deployments",
+    "text": "2.11 Several Deployments\nkustomize\nhelm"
+  },
+  {
+    "objectID": "pages/Kubernetes_introduction.html#sec-affinities",
+    "href": "pages/Kubernetes_introduction.html#sec-affinities",
+    "title": "Kubernetes - introduction",
+    "section": "2.12 Affinities",
+    "text": "2.12 Affinities"
   }
 ]
