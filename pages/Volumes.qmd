@@ -2,6 +2,6 @@
 title: "De.KCD - Volumes"
 ---
 
-Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solution, which might be more adapted to certain cases.
+Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.
 
-Some more advanced solution might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.
+Some more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.
