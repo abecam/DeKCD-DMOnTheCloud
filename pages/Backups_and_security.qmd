@@ -32,3 +32,5 @@ difficult configurations and their possible issues (such as .htaccess or apache 
 ## What to never log
 
 ## What to never store (or never in "reversible" format)
+
+## Know your infrastructure
