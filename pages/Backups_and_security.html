@@ -151,8 +151,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#backups" id="toc-backups" class="nav-link active" data-scroll-target="#backups">Backups</a></li>
+  <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a>
+  <ul class="collapse">
+  <li><a href="#general-dispositions" id="toc-general-dispositions" class="nav-link" data-scroll-target="#general-dispositions">General dispositions</a></li>
+  <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall">Firewall</a></li>
+  <li><a href="#protections-against-attacks" id="toc-protections-against-attacks" class="nav-link" data-scroll-target="#protections-against-attacks">Protections against attacks</a></li>
+  <li><a href="#passwords-and-keys" id="toc-passwords-and-keys" class="nav-link" data-scroll-target="#passwords-and-keys">Passwords and keys</a></li>
+  <li><a href="#what-to-never-log" id="toc-what-to-never-log" class="nav-link" data-scroll-target="#what-to-never-log">What to never log</a></li>
+  <li><a href="#what-to-never-store-or-never-in-reversible-format" id="toc-what-to-never-store-or-never-in-reversible-format" class="nav-link" data-scroll-target="#what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -176,9 +191,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="backups" class="level1">
+<h1>Backups</h1>
 <p>Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that.</p>
+</section>
+<section id="security" class="level1">
+<h1>Security</h1>
+<section id="general-dispositions" class="level2">
+<h2 class="anchored" data-anchor-id="general-dispositions">General dispositions</h2>
+<p>Default user not root (or super user if Windows)</p>
+<p>Careful with the paths and their access rights</p>
+<p>Symbolic links</p>
+<p>Database user, schema protections</p>
+<p>difficult configurations and their possible issues (such as .htaccess or apache configuration in general)</p>
+<p>???</p>
+</section>
+<section id="firewall" class="level2">
+<h2 class="anchored" data-anchor-id="firewall">Firewall</h2>
+</section>
+<section id="protections-against-attacks" class="level2">
+<h2 class="anchored" data-anchor-id="protections-against-attacks">Protections against attacks</h2>
+</section>
+<section id="passwords-and-keys" class="level2">
+<h2 class="anchored" data-anchor-id="passwords-and-keys">Passwords and keys</h2>
+</section>
+<section id="what-to-never-log" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-never-log">What to never log</h2>
+</section>
+<section id="what-to-never-store-or-never-in-reversible-format" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</h2>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

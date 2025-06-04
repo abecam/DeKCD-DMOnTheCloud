@@ -7,11 +7,53 @@
     "text": "Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that."
   },
   {
+    "objectID": "pages/Backups_and_security.html#general-dispositions",
+    "href": "pages/Backups_and_security.html#general-dispositions",
+    "title": "De.KCD - Backups and Security",
+    "section": "General dispositions",
+    "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#firewall",
+    "href": "pages/Backups_and_security.html#firewall",
+    "title": "De.KCD - Backups and Security",
+    "section": "Firewall",
+    "text": "Firewall"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#protections-against-attacks",
+    "href": "pages/Backups_and_security.html#protections-against-attacks",
+    "title": "De.KCD - Backups and Security",
+    "section": "Protections against attacks",
+    "text": "Protections against attacks"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#passwords-and-keys",
+    "href": "pages/Backups_and_security.html#passwords-and-keys",
+    "title": "De.KCD - Backups and Security",
+    "section": "Passwords and keys",
+    "text": "Passwords and keys"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-log",
+    "href": "pages/Backups_and_security.html#what-to-never-log",
+    "title": "De.KCD - Backups and Security",
+    "section": "What to never log",
+    "text": "What to never log"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "title": "De.KCD - Backups and Security",
+    "section": "What to never store (or never in “reversible” format)",
+    "text": "What to never store (or never in “reversible” format)"
+  },
+  {
     "objectID": "pages/Volumes.html",
     "href": "pages/Volumes.html",
     "title": "De.KCD - Volumes",
     "section": "",
-    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solution, which might be more adapted to certain cases.\nSome more advanced solution might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
+    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
   },
   {
     "objectID": "roadblocks.html",
