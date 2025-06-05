@@ -15,11 +15,15 @@ We try to give a clear view on the cost and benefit of each solution so it is ea
 
 We will also compile advices and tips, and we welcome all contributions (and corrections).
 
-Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases.
+Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases. By Data Management Platforms we mean an online application with a data repository (database or other), such as those listed in our [Data Management Platforms registry](https://abecam.github.io/CloudForDM/)
 
 # How to use
 
 Each section assumes that you know the precedents. If you already know one section, feel free to jump to the next one.
+
+# When to...
+
+When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and we are working on a [detailed decision tree](pages/TechPlatformDecisionTree.qmd)
 
 # Quick introduction to Linux/Unix
 

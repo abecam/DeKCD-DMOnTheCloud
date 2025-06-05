@@ -1,0 +1,6 @@
+---
+title: "Technical Platform decision tree for Data Management Platforms"
+number-sections: true
+---
+
+Here we will provide a decision tree on when to use which solution. It will try to take most factors into account (as in the availability of technical support, if a Cloud is already available...).
