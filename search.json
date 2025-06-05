@@ -1,186 +1,10 @@
 [
   {
-    "objectID": "pages/Backups_and_security.html",
-    "href": "pages/Backups_and_security.html",
-    "title": "De.KCD - Backups and Security",
+    "objectID": "pages/TechPlatformDecisionTree.html",
+    "href": "pages/TechPlatformDecisionTree.html",
+    "title": "Technical Platform decision tree for Data Management Platforms",
     "section": "",
-    "text": "Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that."
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#general-dispositions",
-    "href": "pages/Backups_and_security.html#general-dispositions",
-    "title": "De.KCD - Backups and Security",
-    "section": "General dispositions",
-    "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#firewall",
-    "href": "pages/Backups_and_security.html#firewall",
-    "title": "De.KCD - Backups and Security",
-    "section": "Firewall",
-    "text": "Firewall"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#protections-against-attacks",
-    "href": "pages/Backups_and_security.html#protections-against-attacks",
-    "title": "De.KCD - Backups and Security",
-    "section": "Protections against attacks",
-    "text": "Protections against attacks"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#passwords-and-keys",
-    "href": "pages/Backups_and_security.html#passwords-and-keys",
-    "title": "De.KCD - Backups and Security",
-    "section": "Passwords and keys",
-    "text": "Passwords and keys"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#what-to-never-log",
-    "href": "pages/Backups_and_security.html#what-to-never-log",
-    "title": "De.KCD - Backups and Security",
-    "section": "What to never log",
-    "text": "What to never log"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
-    "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
-    "title": "De.KCD - Backups and Security",
-    "section": "What to never store (or never in “reversible” format)",
-    "text": "What to never store (or never in “reversible” format)"
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#know-your-infrastructure",
-    "href": "pages/Backups_and_security.html#know-your-infrastructure",
-    "title": "De.KCD - Backups and Security",
-    "section": "Know your infrastructure",
-    "text": "Know your infrastructure"
-  },
-  {
-    "objectID": "pages/Volumes.html",
-    "href": "pages/Volumes.html",
-    "title": "De.KCD - Volumes",
-    "section": "",
-    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
-  },
-  {
-    "objectID": "roadblocks.html",
-    "href": "roadblocks.html",
-    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
-    "section": "",
-    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security?\nAssembly on the cloud -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility?\nDaemonSet for monitoring and other tasks.",
-    "crumbs": [
-      "Home",
-      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "De.KCD - Data Management Platform on the Cloud",
-    "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
-    "objectID": "static_md/tutorials_links.html",
-    "href": "static_md/tutorials_links.html",
-    "title": "Tutorials’ Links",
-    "section": "",
-    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "TBD"
-  },
-  {
-    "objectID": "to_investigate.html",
-    "href": "to_investigate.html",
-    "title": "Scrap page: things to investigate",
-    "section": "",
-    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
-  },
-  {
-    "objectID": "to_investigate.html#structure",
-    "href": "to_investigate.html#structure",
-    "title": "Scrap page: things to investigate",
-    "section": "Structure",
-    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\nWe consider an application that need several containers: at minima one application and one database. Our example will evolve to cover a full data management application, with object storage, jobs, reverse-proxy.\n1 pod with all\nIt is possible to set-up the containers to run in one pod, i.e. not decouple anything. It is the closest configuration to a docker compose installation and the one that will offer no benefit - only added complexity - over docker compose. Thus it should only be used as a starting point to learn Kubernetes, and basically is the use case we need to break down.\n1 node with all\nWhile 1 pod with all applications is rarely desirable, 1 node with all applications is the standard situation if you use Kubernetes on one machine only (so the node). It is also suitable for application that do not need to scale, do not store a lot of data, do not expect a lot of trafic, do not need to have redundancy. So a light web-application or a simple service will often need only one node.\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n– Then introduce an assembly\n\n\nVocabulary\n\n\nHow to debug & Troubleshooting\nIf possible a section with step by step troubleshooting instructions\nkubectl exec –stdin –tty bare-seek-7dc954955d-h2xd8 – /bin/bash\ninside container: more/vi/vim/ps -edf/check user/links/logs\nRemove a deployment:\nkubectl get deployments –all-namespaces\nkubectl delete -n NAMESPACE deployment DEPLOYMENT_NAME\nNot enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:\n[1]+ Killed bundle exec puma -C docker/puma.rb\nDo the simplest setup-&gt; from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.\nUsing kompose probably a good idea to remove env variable then extract them later (to check more)",
-    "crumbs": [
-      "Home",
-      "Scrap page: things to investigate"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html",
-    "href": "step_by_step.html",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html#recommended-learning-path-3",
-    "href": "step_by_step.html#recommended-learning-path-3",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Recommended learning path",
-    "text": "Recommended learning path\nThe official Online documentations is good and complete. Online tutorials should be enough as a complement.\nLearning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system). :::",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html#advantages",
-    "href": "step_by_step.html#advantages",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Advantages",
-    "text": "Advantages",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html#things-to-take-into-account",
-    "href": "step_by_step.html#things-to-take-into-account",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Things to take into account",
-    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html#namespaces-and-namespaces-collisions",
-    "href": "step_by_step.html#namespaces-and-namespaces-collisions",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Namespaces and namespaces collisions",
-    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "step_by_step.html#labels-in-kubernetes",
-    "href": "step_by_step.html#labels-in-kubernetes",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Labels in Kubernetes",
-    "text": "Labels in Kubernetes",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
+    "text": "Here we will provide a decision tree on when to use which solution. It will try to take most factors into account (as in the availability of technical support, if a Cloud is already available…)."
   },
   {
     "objectID": "pages/Kubernetes_introduction.html",
@@ -272,5 +96,188 @@
     "title": "Kubernetes - introduction",
     "section": "2.12 Affinities",
     "text": "2.12 Affinities"
+  },
+  {
+    "objectID": "step_by_step.html",
+    "href": "step_by_step.html",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "",
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "step_by_step.html#recommended-learning-path-3",
+    "href": "step_by_step.html#recommended-learning-path-3",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Recommended learning path",
+    "text": "Recommended learning path\nThe official Online documentations is good and complete. Online tutorials should be enough as a complement.\nLearning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system). :::",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "step_by_step.html#advantages",
+    "href": "step_by_step.html#advantages",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Advantages",
+    "text": "Advantages",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "step_by_step.html#things-to-take-into-account",
+    "href": "step_by_step.html#things-to-take-into-account",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Things to take into account",
+    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "step_by_step.html#namespaces-and-namespaces-collisions",
+    "href": "step_by_step.html#namespaces-and-namespaces-collisions",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Namespaces and namespaces collisions",
+    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "step_by_step.html#labels-in-kubernetes",
+    "href": "step_by_step.html#labels-in-kubernetes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Labels in Kubernetes",
+    "text": "Labels in Kubernetes",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "to_investigate.html",
+    "href": "to_investigate.html",
+    "title": "Scrap page: things to investigate",
+    "section": "",
+    "text": "All in K8 is RESTful with an unique HTTP path\nStorage: persistent volume shouldn’t be on local storage! (can be still…)\nHealth check: several kind of health check are possible, liveness and readiness\nEndpoint: service without cluster IP (like external service (p.83 and following))\nAAA\nRemote storage vs local: security benefits, cost issue\nSession handling with replicaset: load balancing or microservices and/or RESTful and/or with DB\nCloud DB: managed (AWS), specialised (PostGres k8s), “regular”, key-value\nFree K8s training:",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
+  },
+  {
+    "objectID": "to_investigate.html#structure",
+    "href": "to_investigate.html#structure",
+    "title": "Scrap page: things to investigate",
+    "section": "Structure",
+    "text": "Structure\n\nGeneral overview\nBare metal vs VM vs container vs orchestrated container\n\n\nWhy container are better adapted for cloud application\n\n\nSecurity concern, a short overview\nVM isolation vs containerization -&gt; introduction to cgroups\nImages can be compromised: VM can be created from a Linux distribution\nOnce created, VM by themselves can be more at risk (images are immutables)\n\n\nCreating an image\n\n\nShort introduction to CD/CI\n\n\nDocker and docker-compose\n\n\nK8s\nWith sample: Seek (1st) from current docker image/compose to simple pod to full deployment to helm/kustomize\nLink to section\nStorage on the cloud: scalability, issue of desynchronization, where to push the data.\nPod - Replica Sets - Deployments- DaemonSets\nDecoupled applications can gain a lot, strongly coupled might not gain anything. Same for DB&lt;-&gt;Application.\nVolumes and why they are often not a good solution (aside for DB operators)\n\nDifferent cases\nWe consider an application that need several containers: at minima one application and one database. Our example will evolve to cover a full data management application, with object storage, jobs, reverse-proxy.\n1 pod with all\nIt is possible to set-up the containers to run in one pod, i.e. not decouple anything. It is the closest configuration to a docker compose installation and the one that will offer no benefit - only added complexity - over docker compose. Thus it should only be used as a starting point to learn Kubernetes, and basically is the use case we need to break down.\n1 node with all\nWhile 1 pod with all applications is rarely desirable, 1 node with all applications is the standard situation if you use Kubernetes on one machine only (so the node). It is also suitable for application that do not need to scale, do not store a lot of data, do not expect a lot of trafic, do not need to have redundancy. So a light web-application or a simple service will often need only one node.\n1 node with 1 external DB\n1..* nodes with simple load balancing, 1 external DB\n1..* nodes with simple load balancing, 1 DB on 1st Node\n1..* nodes with simple load balancing -&gt; Daemon set for action on all nodes\n1..* nodes with simple load balancing -&gt; Object storage -&gt; local HD on 1st Node, S3 instance\n1..* nodes with load balancing, Redis\n1..* nodes with load balancing -&gt; DB managed by operator\n1..* nodes with load balancing\n– Then introduce an assembly\n\n\nVocabulary\n\n\nHow to debug & Troubleshooting\nIf possible a section with step by step troubleshooting instructions\nkubectl exec –stdin –tty bare-seek-7dc954955d-h2xd8 – /bin/bash\ninside container: more/vi/vim/ps -edf/check user/links/logs\nRemove a deployment:\nkubectl get deployments –all-namespaces\nkubectl delete -n NAMESPACE deployment DEPLOYMENT_NAME\nNot enough ressources allocated: one of the application process can be killed by the Linux watchdog (Out Of Memory (OOM) killer). In our case the main executable:\n[1]+ Killed bundle exec puma -C docker/puma.rb\nDo the simplest setup-&gt; from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.\nUsing kompose probably a good idea to remove env variable then extract them later (to check more)",
+    "crumbs": [
+      "Home",
+      "Scrap page: things to investigate"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "TBD"
+  },
+  {
+    "objectID": "static_md/tutorials_links.html",
+    "href": "static_md/tutorials_links.html",
+    "title": "Tutorials’ Links",
+    "section": "",
+    "text": "Editing these pages\n\nStackEdit, a Wysiwyg MD editor\n\n\n\nDocker & Docker compose\n\nDocker manual\n\n\n\nOpenStack\n\nYoutube: Introduction to OpenStack\nYoutube: Alternative Introduction to OpenStack\n\n\n\nKubernetes\n\nYoutube: Kubernetes crash course\nTutorials at IBM\n\n\n\nIdentity Management\n\nOauth on Wikipedia\nOpenID\nAAI: Elixir Authentication and Authorization Infrastructure\nAuthentik: a simplified but powerful identity server\nLDAP on Wikipedia\n\n\n\nAnsible\n\nGetting started - Official documentation\n\n\n\nTerraform\n\nTerraform vs Kubernetes\n\n\n\nData Management\n\nDM - Corporate\n\nKnowledge Graphs - SciBite\nWhat is a Semantic Knowledge Graph? - SciBite\n\n\n\nDM - Tools and Apps\n\nOpen Knowledge Foundation – For a fair, sustainable and open future\nCKAN - The open source data management system\nREDCap – Research Electronic Data Capture - Universitätsrechenzentrum Heidelberg\nTool assembly | RDMkit\nTool assembly: Galaxy | RDMkit\nTool assembly: Plant Phenomics | RDMkit\nGitHub - BiBiServ/bibigrid: BiBiGrid is a tool for an easy cluster setup inside a cloud environment.\nVault by HashiCorp\nData Stewardship Wizard\nELIXIR-CONVERGE deliverables | ELIXIR\nELIXIR-CONVERGE | ELIXIR\nAbout - TeSS (Training eSupport System)\nDSW Cloud for ELIXIR\nHome | re3data.org\nCancer Galaxy\nTool assembly: Marine Metagenomics | RDMkit\nMIAPPE\nFAIR Cookbook\nFAIR Wizard\nFAIRsharing | Home\nFAIR Solutions Products\nRucio - Scientific Data Management\nOverture - Home\nGitHub - irods/irods: Open Source Data Management Software\nZenodo - Google Search\nFAIRmat - FAIRmat\nELIXIR CONVERGE WP3: Common Data Management Toolkit | ELIXIR\nNOMAD\nZenodo\nMaterials - OpenWetWare\nDataPLAN, generate a data management plan DMP easily\nAruna | The data orchestration engine\nFAIRshare | FAIR Data Innovations Hub\n\n\n\nDM - Misc\n\nFORCE11 – The Future of Research Communications and e-Scholarship\nNFDI4Biodiversity - YouTube\nData Management and Data Literacy - YouTube\n\n\n\nTechnical tools and languages\n\nDiscover GO\n\n\nWritten with the help of StackEdit."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "De.KCD - Data Management Platform on the Cloud",
+    "section": "",
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.\n\nGeneral Introduction\n\n\nLearning Kubernetes\n\n\nBenefits and costs\n\n\nQuick overview\n\n\nFrom Docker compose to manifest\n\nMedium data storage needs\nLarge data storage needs\n\n\n\nFrom manifest to Helm chart\n\n\nOther solutions\n\n\nScalability\n\n\nDatabases\n\n\nSecurity\n\n\nGoing to an assembly\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "roadblocks.html",
+    "href": "roadblocks.html",
+    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
+    "section": "",
+    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security?\nAssembly on the cloud -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility?\nDaemonSet for monitoring and other tasks.",
+    "crumbs": [
+      "Home",
+      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
+    ]
+  },
+  {
+    "objectID": "pages/Volumes.html",
+    "href": "pages/Volumes.html",
+    "title": "De.KCD - Volumes",
+    "section": "",
+    "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin."
+  },
+  {
+    "objectID": "pages/Backups_and_security.html",
+    "href": "pages/Backups_and_security.html",
+    "title": "De.KCD - Backups and Security",
+    "section": "",
+    "text": "Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that."
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#general-dispositions",
+    "href": "pages/Backups_and_security.html#general-dispositions",
+    "title": "De.KCD - Backups and Security",
+    "section": "General dispositions",
+    "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#firewall",
+    "href": "pages/Backups_and_security.html#firewall",
+    "title": "De.KCD - Backups and Security",
+    "section": "Firewall",
+    "text": "Firewall"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#protections-against-attacks",
+    "href": "pages/Backups_and_security.html#protections-against-attacks",
+    "title": "De.KCD - Backups and Security",
+    "section": "Protections against attacks",
+    "text": "Protections against attacks"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#passwords-and-keys",
+    "href": "pages/Backups_and_security.html#passwords-and-keys",
+    "title": "De.KCD - Backups and Security",
+    "section": "Passwords and keys",
+    "text": "Passwords and keys"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-log",
+    "href": "pages/Backups_and_security.html#what-to-never-log",
+    "title": "De.KCD - Backups and Security",
+    "section": "What to never log",
+    "text": "What to never log"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "title": "De.KCD - Backups and Security",
+    "section": "What to never store (or never in “reversible” format)",
+    "text": "What to never store (or never in “reversible” format)"
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#know-your-infrastructure",
+    "href": "pages/Backups_and_security.html#know-your-infrastructure",
+    "title": "De.KCD - Backups and Security",
+    "section": "Know your infrastructure",
+    "text": "Know your infrastructure"
   }
 ]
