@@ -7,6 +7,13 @@
     "text": "Here we will provide a decision tree on when to use which solution. It will try to take most factors into account (as in the availability of technical support, if a Cloud is already available…)."
   },
   {
+    "objectID": "pages/DM_planning.html",
+    "href": "pages/DM_planning.html",
+    "title": "DataManagement - Planning",
+    "section": "",
+    "text": "A great introduction for Data Management can be found here"
+  },
+  {
     "objectID": "pages/Kubernetes_introduction.html",
     "href": "pages/Kubernetes_introduction.html",
     "title": "Kubernetes - introduction",
