@@ -141,10 +141,6 @@ Quick overview
 
 -> Kubernetes section
 
--> First vocabulary
-
-## Labels in Kubernetes
-
 # Other solutions
 
 # Scalability
