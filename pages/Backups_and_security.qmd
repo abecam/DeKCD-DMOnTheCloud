@@ -15,7 +15,7 @@ TODO: Add links
 When some research data is linked to person, it is advised to pseudonymize or to anonymize the data.
 
 ::: {.callout-important}
-Limitation of data storage for personal information include backups
+The limitation of data storage for personal information includes backups
 :::
 
 ## Confidential data
