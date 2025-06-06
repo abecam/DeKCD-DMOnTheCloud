@@ -323,7 +323,7 @@
     "href": "pages/Backups_and_security.html",
     "title": "De.KCD - Backups and Security",
     "section": "",
-    "text": "One generally important aspect of Data Management and data usage is to know which data to store and how to store it.\n\n\nIn many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nLimitation of data storage for personal information include backups",
+    "text": "One generally important aspect of Data Management and data usage is to know which data to store and how to store it.\n\n\nIn many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
     "crumbs": [
       "Home",
       "Kubernetes",
@@ -335,7 +335,7 @@
     "href": "pages/Backups_and_security.html#personal-data",
     "title": "De.KCD - Backups and Security",
     "section": "",
-    "text": "In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nLimitation of data storage for personal information include backups",
+    "text": "In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
     "crumbs": [
       "Home",
       "Kubernetes",
