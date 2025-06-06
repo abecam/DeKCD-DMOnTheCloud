@@ -9,6 +9,16 @@ Try to explain clearly what the Kubernetes elements translate to and repeat it o
 Explain everything: so start from a simple (and stupid) solution and add to it.
 Do not drown: keep things structured so things are not confusing.
 
+# Our showcase application: [FAIRDOM Seek]
+
+Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bar metal to full cloud setup as (1) it is already available as container and bare-metal installation, with a complete Docker compose which is still easy to understand,(2) it generally relies on several containers (4 with the default docker compose), several volumes, workers (i.e. side process that run regularly for doing batch works), a comprehensive search using Solr, and object storage and (3) it can be run with the unique Seek container (using a sqlite database within the container) so can go from really simple (for discovery or tutorials) to rather large (with load balancing, external DB, backups) which will allow us to go from a simple and stupid (in a Kubernetes context) case to full setups with most of the cases suitable for production.
+
+## Seek and his components
+
+## The default Docker Compose
+
+## What could benefit from a cloud setup
+
 # A quick overview of Kubernetes
 
 ## Good free instructory resources

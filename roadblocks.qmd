@@ -6,8 +6,8 @@ StatefulSet for temporary data (like a cache)
 
 Backup, K8s cronjob for backup, where to backup
 
-GitHub CI/CD to a cloud -> security?
+GitHub CI/CD to a cloud -> security? (keys)
 
-Assembly on the cloud -> security of set-up and exchange, who is monitoring (and how), where lies the responsibility?
+Assembly on the cloud, Assembly between clouds (or cloud/servers) -> security of set-up and exchange, who is monitoring (and how), where lies the responsibility? (GDPR, simple privacy concern, data theft, data loss, data leaks, data corruption)
 
 DaemonSet for monitoring and other tasks.

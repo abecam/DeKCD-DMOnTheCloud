@@ -8,14 +8,28 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+    tools:
+     - icon: github
+       href: https://github.com/abecam/DeKCD-DMOnTheCloud
 
   sidebar:
     style : "docked"
     search: true
     contents:
         - step_by_step.qmd
-        - roadblocks.qmd
-        - to_investigate.qmd
+        - pages/TechPlatformDecisionTree.qmd
+        - section: "Data Management Principles"
+          contents:
+            - pages/DM_planning.qmd
+        - section: "Kubernetes"
+          contents:
+            - pages/Kubernetes_introduction.qmd
+            - pages/Volumes.qmd
+            - pages/Backups_and_security.qmd
+        - section: "Scrap pages"
+          contents:
+            - roadblocks.qmd
+            - to_investigate.qmd
       
 format:
   html:

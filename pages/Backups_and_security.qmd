@@ -2,6 +2,26 @@
 title: "De.KCD - Backups and Security"
 ---
 
+# Which data
+
+One generally important aspect of Data Management and data usage is to know which data to store and how to store it. 
+
+## Personal data
+
+In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.
+
+TODO: Add links
+
+When some research data is linked to person, it is advised to pseudonymize or to anonymize the data.
+
+::: {.callout-important}
+Limitation of data storage for personal information include backups
+:::
+
+## Confidential data
+
+## Passwords & keys
+
 # Backups
 
 Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage.
