@@ -16,7 +16,7 @@ website:
     style : "docked"
     search: true
     contents:
-        - step_by_step.qmd
+        - index.qmd
         - pages/TechPlatformDecisionTree.qmd
         - section: "Data Management Principles"
           contents:
