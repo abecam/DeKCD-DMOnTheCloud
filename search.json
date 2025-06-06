@@ -250,13 +250,6 @@
     "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace."
   },
   {
-    "objectID": "index.html#labels-in-kubernetes",
-    "href": "index.html#labels-in-kubernetes",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Labels in Kubernetes",
-    "text": "Labels in Kubernetes"
-  },
-  {
     "objectID": "index_bak.html",
     "href": "index_bak.html",
     "title": "De.KCD - Data Management Platform on the Cloud",
