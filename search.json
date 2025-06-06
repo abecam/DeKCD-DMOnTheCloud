@@ -219,35 +219,55 @@
     "href": "index.html",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud."
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "index.html#recommended-learning-path-3",
     "href": "index.html#recommended-learning-path-3",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Recommended learning path",
-    "text": "Recommended learning path\nThe official Online documentations is good and complete. Online tutorials should be enough as a complement.\nLearning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system). :::"
+    "text": "Recommended learning path\nThe official Online documentations is good and complete. Online tutorials should be enough as a complement.\nLearning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system). :::",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "index.html#advantages",
     "href": "index.html#advantages",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Advantages",
-    "text": "Advantages"
+    "text": "Advantages",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "index.html#things-to-take-into-account",
     "href": "index.html#things-to-take-into-account",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Things to take into account",
-    "text": "Things to take into account\nAdding parameters\nThe different types of volumes"
+    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "index.html#namespaces-and-namespaces-collisions",
     "href": "index.html#namespaces-and-namespaces-collisions",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Namespaces and namespaces collisions",
-    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace."
+    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "index_bak.html",
