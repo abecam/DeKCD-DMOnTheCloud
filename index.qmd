@@ -101,7 +101,7 @@ Learning difficulty is easy, assuming you have some knowledge of Linux.
 
 A clear presentation of Docker is available [here](https://container.training/intro-selfpaced.yml.html#1) and the [official documentation](https://docs.docker.com/engine/) is good. The section you should consult is "Open Source", so about Docker Engine, Docker Build and Docker Compose. If running Docker on Windows, you might want to use Docker Desktop, which is also proposing a single node Kubernetes and is the simples way to use and test Docker and Kubernetes on Windows.
 
-(consider PodMan too)
+If Docker is the *de facto* standard, there are other containers engines, such as [PodMan](https://podman.io/), [containerd ](https://containerd.io/), or [cri-o](https://cri-o.io/) and a standard, [Open Container Initiative (OCI)](https://opencontainers.org/) that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an [OCI exporter](https://docs.docker.com/build/exporters/oci-docker/) for the image builts.
 
 # How to build a Dockerfile
 
@@ -113,8 +113,11 @@ The official Online documentations is good and complete. Online tutorials or boo
 Learning difficulty is medium, assuming you have some knowledge of Linux. There is nothing really difficult but there are a lot of aspects to take into account.
 :::
 
+
+
 # Moving to Docker compose
 
+::: {.callout-tip}
 ## Recommended learning path
 
 The official Online documentations is good and complete. Online tutorials should be enough as a complement.
@@ -136,6 +139,21 @@ Namespacing is by using the name of the containing folder of the docker-compose 
 
 
 # From Docker compose to Kubernetes
+
+::: {.callout-tip}
+## Recommended learning path
+
+Kubernetes is composed of many elements and has its own vocabulary. Each elements and the way the work together are not complex, but to grasp a minimal working set of Kubernetes will take some effort.
+We recommend to start with an online tutorial, interactive or not (**links to separate resource page**), and ideally a book, such as Kubernetes in Action, Production Kubernetes, Cloud Native DevOps with Kubernetes or Kubernetes: Up and Running
+
+Learning difficulty is medium/hard, assuming you have some knowledge of containers. Using Kubernetes is still much easier than to set-up a production cluster. As software developers, we recommend that you set-up a cluster only as a testbed and rely on sysadmins for a production cluster.
+:::
+
+Kubernetes is not more complex than docker compose, but it is much more than docker compose, with many elements. It is an orchestration engine: where docker compose can ask for these containers to be restarted when stopped, on the same machine, Kubernetes can choose on which machine the containers will run, can duplicate them, can kill them if they seem unhealthy to create some healthy ones, can create services out of these containers so they can be used by other clients, which could be other containers within Kubernets, can create network access of these containers, without knowing where they run.
+
+For simplest application it could be a full overkill, then the more complex your application is (in term of size and elements), the more to gain from Kubernetes. If you need an application that needs to run 24/7, with transparent updates and that can scale from hundred of clients to several thousands, Kubernetes will make things much easier, and in a well thought way.
+
+But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is made by and aimed at non-sys-admin persons.
 
 Quick overview
 
