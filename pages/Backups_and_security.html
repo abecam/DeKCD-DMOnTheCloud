@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,10 +36,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6fc0b4f21feaadf59918ca6973b0cd26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ecd7484abd448711fd8810a5eeb38bee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -229,13 +229,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#backups" id="toc-backups" class="nav-link" data-scroll-target="#backups">Backups</a></li>
   <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a>
   <ul class="collapse">
+  <li><a href="#defence-need-to-be-always-a-success-attack-need-only-one" id="toc-defence-need-to-be-always-a-success-attack-need-only-one" class="nav-link" data-scroll-target="#defence-need-to-be-always-a-success-attack-need-only-one">Defence need to be always a success, attack need only one</a></li>
   <li><a href="#general-dispositions" id="toc-general-dispositions" class="nav-link" data-scroll-target="#general-dispositions">General dispositions</a></li>
   <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall">Firewall</a></li>
   <li><a href="#protections-against-attacks" id="toc-protections-against-attacks" class="nav-link" data-scroll-target="#protections-against-attacks">Protections against attacks</a></li>
   <li><a href="#passwords-and-keys" id="toc-passwords-and-keys" class="nav-link" data-scroll-target="#passwords-and-keys">Passwords and keys</a></li>
-  <li><a href="#what-to-never-log" id="toc-what-to-never-log" class="nav-link" data-scroll-target="#what-to-never-log">What to never log</a></li>
+  <li><a href="#what-to-never-log-log-levels" id="toc-what-to-never-log-log-levels" class="nav-link" data-scroll-target="#what-to-never-log-log-levels">What to never log, log levels</a></li>
   <li><a href="#what-to-never-store-or-never-in-reversible-format" id="toc-what-to-never-store-or-never-in-reversible-format" class="nav-link" data-scroll-target="#what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</a></li>
   <li><a href="#know-your-infrastructure" id="toc-know-your-infrastructure" class="nav-link" data-scroll-target="#know-your-infrastructure">Know your infrastructure</a></li>
+  <li><a href="#deleting-data" id="toc-deleting-data" class="nav-link" data-scroll-target="#deleting-data">Deleting data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -311,6 +313,10 @@ Note
 </section>
 <section id="security" class="level1">
 <h1>Security</h1>
+<section id="defence-need-to-be-always-a-success-attack-need-only-one" class="level2">
+<h2 class="anchored" data-anchor-id="defence-need-to-be-always-a-success-attack-need-only-one">Defence need to be always a success, attack need only one</h2>
+<p>One very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.</p>
+</section>
 <section id="general-dispositions" class="level2">
 <h2 class="anchored" data-anchor-id="general-dispositions">General dispositions</h2>
 <p>Default user not root (or super user if Windows)</p>
@@ -329,14 +335,27 @@ Note
 <section id="passwords-and-keys" class="level2">
 <h2 class="anchored" data-anchor-id="passwords-and-keys">Passwords and keys</h2>
 </section>
-<section id="what-to-never-log" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-never-log">What to never log</h2>
+<section id="what-to-never-log-log-levels" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-never-log-log-levels">What to never log, log levels</h2>
+<p>Log are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).</p>
+<p>For instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e.&nbsp;the attacker hoping that a mechanism in the code will execute a payload. A simple example would be executing raw SQL queries: * The URL subpath is /users/[name] where [name] is the name you want to look for. * The code will then simply execute “SELECT * FROM users WHERE name=[name];” * The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“. * The code will execute”SELECT * FROM users WHERE name=“name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error. * If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it should not work).</p>
+<p>This is a really well known and simple example and no modern web framework or API should allow such attacks nowadays. But the actual issue is with unknow vulnerability. Going back to this example, the web application should log something like:</p>
+<p>“2025-11-23_2:32:22 - Warning - incorrect characters in path:”/users/name”;DROP%20TABLE%20admin;%20 –”</p>
+<p>And that would allow to check what was attempted.</p>
+<p>But logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:</p>
+<ul>
+<li>username, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.</li>
+<li></li>
+</ul>
 </section>
 <section id="what-to-never-store-or-never-in-reversible-format" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</h2>
 </section>
 <section id="know-your-infrastructure" class="level2">
 <h2 class="anchored" data-anchor-id="know-your-infrastructure">Know your infrastructure</h2>
+</section>
+<section id="deleting-data" class="level2">
+<h2 class="anchored" data-anchor-id="deleting-data">Deleting data</h2>
 
 
 </section>
