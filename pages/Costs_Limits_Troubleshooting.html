@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DataManagement - Planning – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
+<title>Kubernetes - costs, limits and troubleshooting – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/DM_planning.html">Data Management Principles</a></li><li class="breadcrumb-item"><a href="../pages/DM_planning.html">DataManagement - Planning</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Kubernetes - costs, limits and troubleshooting</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/DM_planning.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/DM_planning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">DataManagement - Planning</span></a>
   </div>
 </li>
@@ -215,15 +215,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-cost-of-kubernetes" id="toc-the-cost-of-kubernetes" class="nav-link active" data-scroll-target="#the-cost-of-kubernetes"><span class="header-section-number">1</span> The cost of Kubernetes</a></li>
+  <li><a href="#when-an-image-does-not-work" id="toc-when-an-image-does-not-work" class="nav-link" data-scroll-target="#when-an-image-does-not-work"><span class="header-section-number">2</span> When an image does not work</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/DM_planning.html">Data Management Principles</a></li><li class="breadcrumb-item"><a href="../pages/DM_planning.html">DataManagement - Planning</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">DataManagement - Planning</h1>
+<h1 class="title">Kubernetes - costs, limits and troubleshooting</h1>
 </div>
 
 
@@ -240,9 +247,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A great introduction for Data Management can be found <a href="https://github.com/llmcloud24/de.KCD-Summer-School-2024/blob/main/Day_2/Data_Management/README.md">here</a></p>
+<section id="the-cost-of-kubernetes" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The cost of Kubernetes</h1>
+<p>High complexity of some setup with less clarity than normal installation (complex Helm chart or operator).</p>
+</section>
+<section id="when-an-image-does-not-work" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> When an image does not work</h1>
+<p>One common issue with Docker and Kubernetes, or any other technologies using containers, is that the used images must work. Generally, with popular and well-maintained tools it isn’t an issue, but there could still be popular tools where the containerisation is an after-thought, and not always up-to-date, or older tools or less popular without an image or with an obsolete image. Or it could be a specific issue that makes this image breaks on your set-up.</p>
+<p>In these cases, fixing the issue might be a high-cost operation, and a bare-metal or virtual-machine installation might help figure out the problem and fix it, or at the very last choice, be used instead.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
