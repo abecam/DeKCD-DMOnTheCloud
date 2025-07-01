@@ -1,0 +1,15 @@
+---
+title: "Kubernetes - costs, limits and troubleshooting"
+number-sections: true
+---
+
+# The cost of Kubernetes
+
+High complexity of some setup with less clarity than normal installation (complex Helm chart or operator).
+
+
+# When an image does not work
+
+One common issue with Docker and Kubernetes, or any other technologies using containers, is that the used images must work. Generally, with popular and well-maintained tools it isn't an issue, but there could still be popular tools where the containerisation is an after-thought, and not always up-to-date, or older tools or less popular without an image or with an obsolete image. Or it could be a specific issue that makes this image breaks on your set-up.
+
+In these cases, fixing the issue might be a high-cost operation, and a bare-metal or virtual-machine installation might help figure out the problem and fix it, or at the very last choice, be used instead.
