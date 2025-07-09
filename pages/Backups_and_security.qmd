@@ -1,5 +1,5 @@
 ---
-title: "De.KCD - Backups and Security"
+title: "Backups and Security"
 ---
 
 # Which data
