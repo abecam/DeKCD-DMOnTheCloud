@@ -201,133 +201,133 @@
   {
     "objectID": "pages/Backups_and_security.html",
     "href": "pages/Backups_and_security.html",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "",
     "text": "One generally important aspect of Data Management and data usage is to know which data to store and how to store it.\n\n\nIn many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#personal-data",
     "href": "pages/Backups_and_security.html#personal-data",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "",
     "text": "In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
     "href": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Defence need to be always a success, attack need only one",
     "text": "Defence need to be always a success, attack need only one\nOne very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#general-dispositions",
     "href": "pages/Backups_and_security.html#general-dispositions",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "General dispositions",
     "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#firewall",
     "href": "pages/Backups_and_security.html#firewall",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Firewall",
     "text": "Firewall",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#protections-against-attacks",
     "href": "pages/Backups_and_security.html#protections-against-attacks",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Protections against attacks",
     "text": "Protections against attacks",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#passwords-and-keys",
     "href": "pages/Backups_and_security.html#passwords-and-keys",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Passwords and keys",
     "text": "Passwords and keys",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#what-to-never-log-log-levels",
     "href": "pages/Backups_and_security.html#what-to-never-log-log-levels",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "What to never log, log levels",
     "text": "What to never log, log levels\nLog are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).\nFor instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e. the attacker hoping that a mechanism in the code will execute a payload. A simple example would be executing raw SQL queries: * The URL subpath is /users/[name] where [name] is the name you want to look for. * The code will then simply execute “SELECT * FROM users WHERE name=[name];” * The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“. * The code will execute”SELECT * FROM users WHERE name=“name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error. * If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it should not work).\nThis is a really well known and simple example and no modern web framework or API should allow such attacks nowadays. But the actual issue is with unknow vulnerability. Going back to this example, the web application should log something like:\n“2025-11-23_2:32:22 - Warning - incorrect characters in path:”/users/name”;DROP%20TABLE%20admin;%20 –”\nAnd that would allow to check what was attempted.\nBut logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:\n\nusername, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
     "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "What to never store (or never in “reversible” format)",
     "text": "What to never store (or never in “reversible” format)",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#know-your-infrastructure",
     "href": "pages/Backups_and_security.html#know-your-infrastructure",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Know your infrastructure",
     "text": "Know your infrastructure",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
     "objectID": "pages/Backups_and_security.html#deleting-data",
     "href": "pages/Backups_and_security.html#deleting-data",
-    "title": "De.KCD - Backups and Security",
+    "title": "Backups and Security",
     "section": "Deleting data",
     "text": "Deleting data",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Backups and Security"
+      "Backups and Security"
     ]
   },
   {
@@ -438,13 +438,13 @@
   {
     "objectID": "pages/Volumes.html",
     "href": "pages/Volumes.html",
-    "title": "De.KCD - Volumes",
+    "title": "Volumes",
     "section": "",
     "text": "Evidently, an important part of Data Management is the storage of data. From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.",
     "crumbs": [
       "Home",
       "Kubernetes",
-      "De.KCD - Volumes"
+      "Volumes"
     ]
   },
   {
