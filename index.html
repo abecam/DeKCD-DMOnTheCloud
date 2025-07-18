@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-293e81bb0733230b9e755d5a7d46e87a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-025db3b089a7e65f2676a8a92be6aa8b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -227,7 +227,10 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#what-makes-the-containers-possible-cgroups" id="toc-what-makes-the-containers-possible-cgroups" class="nav-link" data-scroll-target="#what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</a></li>
   </ul></li>
-  <li><a href="#overview-of-docker-usage" id="toc-overview-of-docker-usage" class="nav-link" data-scroll-target="#overview-of-docker-usage">Overview of Docker usage</a></li>
+  <li><a href="#overview-of-docker-usage" id="toc-overview-of-docker-usage" class="nav-link" data-scroll-target="#overview-of-docker-usage">Overview of Docker usage</a>
+  <ul class="collapse">
+  <li><a href="#useful-things-to-know" id="toc-useful-things-to-know" class="nav-link" data-scroll-target="#useful-things-to-know">Useful things to know</a></li>
+  </ul></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a></li>
   <li><a href="#moving-to-docker-compose" id="toc-moving-to-docker-compose" class="nav-link" data-scroll-target="#moving-to-docker-compose">Moving to Docker compose</a>
   <ul class="collapse">
@@ -345,6 +348,11 @@ Recommended learning path
 </div>
 <p>A clear presentation of Docker is available <a href="https://container.training/intro-selfpaced.yml.html#1">here</a> and the <a href="https://docs.docker.com/engine/">official documentation</a> is good. The section you should consult is “Open Source”, so about Docker Engine, Docker Build and Docker Compose. If running Docker on Windows, you might want to use Docker Desktop, which is also proposing a single node Kubernetes and is the simples way to use and test Docker and Kubernetes on Windows.</p>
 <p>If Docker is the <em>de facto</em> standard, there are other containers engines, such as <a href="https://podman.io/">PodMan</a>, <a href="https://containerd.io/">containerd</a>, or <a href="https://cri-o.io/">cri-o</a> and a standard, <a href="https://opencontainers.org/">Open Container Initiative (OCI)</a> that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an <a href="https://docs.docker.com/build/exporters/oci-docker/">OCI exporter</a> for the image builts.</p>
+<section id="useful-things-to-know" class="level2">
+<h2 class="anchored" data-anchor-id="useful-things-to-know">Useful things to know</h2>
+<p>A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using <code>docker inspect &lt;image id&gt;</code>, but also individually by using <code>docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt;</code> and <code>docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;</code>. This is useful in case something goes wrong inside a container to know how the container is supposed to start.</p>
+<p>Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.</p>
+</section>
 </section>
 <section id="how-to-build-a-dockerfile" class="level1">
 <h1>How to build a Dockerfile</h1>
