@@ -34,7 +34,14 @@ Seek is an extensive Data Management platform mostly aimed at Life Sciences but 
 
 On Windows, the simplest way to run Kubernetes is probably using Docker Desktop. A simple Kubernetes setup is part of the options.
 
-On Linux, there are lightweight setup using various approached. The main ones are [kubeadm, the official setup](https://kubernetes.io/docs/reference/setup-tools/kubeadm/), [k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL](https://k3s.io/), [k0s, another binary distribution, for Linux and Docker](https://k0sproject.io/), [RKE2, another binary distribution that also works on Windows](https://docs.rke2.io/), [Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker](https://www.talos.dev/), [Canonical Kubernetes, a snap install for Ubuntu](https://ubuntu.com/kubernetes/install) and [MicroK8s, which can be installed on Windows and Mac but shouldn't be used on production](https://microk8s.io/).
+On Linux, there are lightweight setup using various approached. The main ones are:
+* [kubeadm, the official setup](https://kubernetes.io/docs/reference/setup-tools/kubeadm/),
+* [k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL](https://k3s.io/),
+* [k0s, another binary distribution, for Linux and Docker](https://k0sproject.io/), 
+* [RKE2, another binary distribution that also works on Windows](https://docs.rke2.io/),
+* [Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker](https://www.talos.dev/),
+* [Canonical Kubernetes, a snap install for Ubuntu](https://ubuntu.com/kubernetes/install),
+* [MicroK8s, which can be installed on Windows and Mac but shouldn't be used on production](https://microk8s.io/).
 
 ::: {.callout-warning}
 It is important to consider that, if some of these setup can be used in production (such as Talos or k3s), Kubernetes is a complex system and should be probably be managed by sys-admin persons, for ensuring fault-tolerance, backups and security.
