@@ -294,7 +294,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="3.1" class="anchored" data-anchor-id="good-free-instructory-resources"><span class="header-section-number">3.1</span> Good free instructory resources</h2>
 <section id="tutorials-and-sandboxes" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="tutorials-and-sandboxes"><span class="header-section-number">3.1.1</span> Tutorials and sandboxes</h3>
-<p><a href="https://www.youtube.com/watch?v=s_o8dwzRlu4&amp;t=3s">Kubernetes Crash Course for Absolute Beginners</a> <a href="https://container.training/">Kubernetes online course, also containers (docker-based)</a> <a href="https://kubebyexample.com/learning-paths/kubernetes-fundamentals/what-kubernetes-3-minutes">Kubernetes essentials, the site also offers many other useful tutorials</a> <a href="https://labs.play-with-k8s.com/">Online Kubernetes sandbox, Play with K8s</a> and the <a href="https://training.play-with-kubernetes.com/kubernetes-workshop/">corresponding workshop</a></p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=s_o8dwzRlu4&amp;t=3s">Kubernetes Crash Course for Absolute Beginners</a></li>
+<li><a href="https://container.training/">Kubernetes online course, also containers (docker-based)</a></li>
+<li><a href="https://kubebyexample.com/learning-paths/kubernetes-fundamentals/what-kubernetes-3-minutes">Kubernetes essentials, the site also offers many other useful tutorials</a></li>
+<li><a href="https://labs.play-with-k8s.com/">Online Kubernetes sandbox, Play with K8s</a> and the <a href="https://training.play-with-kubernetes.com/kubernetes-workshop/">corresponding workshop</a></li>
+</ul>
 </section>
 <section id="simple-kubernetes-setup" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="simple-kubernetes-setup"><span class="header-section-number">3.1.2</span> Simple Kubernetes setup</h3>
@@ -330,7 +335,7 @@ Warning
 <p>A full list of terms can be found on the <a href="https://kubernetes.io/docs/reference/glossary/?fundamental=true">official documentation</a>.</p>
 <p>The maim terms/elements you should know are:</p>
 <ul>
-<li>Cluster: the whole Kubernetes setup for several nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.</li>
+<li>Cluster: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.</li>
 <li>Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.</li>
 <li>Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.</li>
 <li>Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).</li>
