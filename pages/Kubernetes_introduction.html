@@ -300,6 +300,19 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="simple-kubernetes-setup"><span class="header-section-number">3.1.2</span> Simple Kubernetes setup</h3>
 <p>On Windows, the simplest way to run Kubernetes is probably using Docker Desktop. A simple Kubernetes setup is part of the options.</p>
 <p>On Linux, there are lightweight setup using various approached. The main ones are <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">kubeadm, the official setup</a>, <a href="https://k3s.io/">k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL</a>, <a href="https://k0sproject.io/">k0s, another binary distribution, for Linux and Docker</a>, <a href="https://docs.rke2.io/">RKE2, another binary distribution that also works on Windows</a>, <a href="https://www.talos.dev/">Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker</a>, <a href="https://ubuntu.com/kubernetes/install">Canonical Kubernetes, a snap install for Ubuntu</a> and <a href="https://microk8s.io/">MicroK8s, which can be installed on Windows and Mac but shouldn’t be used on production</a>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to consider that, if some of these setup can be used in production (such as Talos or k3s), Kubernetes is a complex system and should be probably be managed by sys-admin persons, for ensuring fault-tolerance, backups and security.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="terminology-main-elements" class="level2" data-number="3.2">
