@@ -25,10 +25,10 @@ Seek is an extensive Data Management platform mostly aimed at Life Sciences but 
 
 ### Tutorials and sandboxes
 
-[Kubernetes Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=s_o8dwzRlu4&t=3s)
-[Kubernetes online course, also containers (docker-based)](https://container.training/)
-[Kubernetes essentials, the site also offers many other useful tutorials](https://kubebyexample.com/learning-paths/kubernetes-fundamentals/what-kubernetes-3-minutes)
-[Online Kubernetes sandbox, Play with K8s](https://labs.play-with-k8s.com/) and the [corresponding workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
+* [Kubernetes Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=s_o8dwzRlu4&t=3s)
+* [Kubernetes online course, also containers (docker-based)](https://container.training/)
+* [Kubernetes essentials, the site also offers many other useful tutorials](https://kubebyexample.com/learning-paths/kubernetes-fundamentals/what-kubernetes-3-minutes)
+* [Online Kubernetes sandbox, Play with K8s](https://labs.play-with-k8s.com/) and the [corresponding workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
 
 ### Simple Kubernetes setup
 
@@ -56,7 +56,7 @@ A full list of terms can be found on the [official documentation](https://kubern
 
 The maim terms/elements you should know are:
 
-* Cluster: the whole Kubernetes setup for several nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.
+* Cluster: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.
 * Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
 * Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
 * Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
