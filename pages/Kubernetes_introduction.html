@@ -299,7 +299,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="simple-kubernetes-setup" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="simple-kubernetes-setup"><span class="header-section-number">3.1.2</span> Simple Kubernetes setup</h3>
 <p>On Windows, the simplest way to run Kubernetes is probably using Docker Desktop. A simple Kubernetes setup is part of the options.</p>
-<p>On Linux, there are lightweight setup using various approached. The main ones are: * <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">kubeadm, the official setup</a>, * <a href="https://k3s.io/">k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL</a>, * <a href="https://k0sproject.io/">k0s, another binary distribution, for Linux and Docker</a>, * <a href="https://docs.rke2.io/">RKE2, another binary distribution that also works on Windows</a>, * <a href="https://www.talos.dev/">Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker</a>, * <a href="https://ubuntu.com/kubernetes/install">Canonical Kubernetes, a snap install for Ubuntu</a>, * <a href="https://microk8s.io/">MicroK8s, which can be installed on Windows and Mac but shouldn’t be used on production</a>.</p>
+<p>On Linux, there are lightweight setup using various approached. The main ones are:</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">kubeadm, the official setup</a>,</li>
+<li><a href="https://k3s.io/">k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL</a>,</li>
+<li><a href="https://k0sproject.io/">k0s, another binary distribution, for Linux and Docker</a>,</li>
+<li><a href="https://docs.rke2.io/">RKE2, another binary distribution that also works on Windows</a>,</li>
+<li><a href="https://www.talos.dev/">Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker</a>,</li>
+<li><a href="https://ubuntu.com/kubernetes/install">Canonical Kubernetes, a snap install for Ubuntu</a>,</li>
+<li><a href="https://microk8s.io/">MicroK8s, which can be installed on Windows and Mac but shouldn’t be used on production</a>.</li>
+</ul>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -321,7 +330,7 @@ Warning
 <p>A full list of terms can be found on the <a href="https://kubernetes.io/docs/reference/glossary/?fundamental=true">official documentation</a>.</p>
 <p>The maim terms/elements you should know are:</p>
 <ul>
-<li>Cluster:</li>
+<li>Cluster: the whole Kubernetes setup for several nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.</li>
 <li>Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.</li>
 <li>Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.</li>
 <li>Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).</li>
