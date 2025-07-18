@@ -23,7 +23,18 @@ Seek is an extensive Data Management platform mostly aimed at Life Sciences but 
 
 ## Good free instructory resources
 
+### Tutorials and sandboxes
+
 [Kubernetes Crash Course for Absolute Beginners](https://www.youtube.com/watch?v=s_o8dwzRlu4&t=3s)
+[Kubernetes online course, also containers (docker-based)](https://container.training/)
+[Kubernetes essentials, the site also offers many other useful tutorials](https://kubebyexample.com/learning-paths/kubernetes-fundamentals/what-kubernetes-3-minutes)
+[Online Kubernetes sandbox, Play with K8s](https://labs.play-with-k8s.com/) and the [corresponding workshop](https://training.play-with-kubernetes.com/kubernetes-workshop/)
+
+### Simple Kubernetes setup
+
+On Windows, the simplest way to run Kubernetes is probably using Docker Desktop. A simple Kubernetes setup is part of the options.
+
+On Linux, there are lightweight setup using various approached. The main ones are [k3s](https://k3s.io/), ... (TBC)
 
 ## Terminology & main elements
 

@@ -103,6 +103,12 @@ A clear presentation of Docker is available [here](https://container.training/in
 
 If Docker is the *de facto* standard, there are other containers engines, such as [PodMan](https://podman.io/), [containerd ](https://containerd.io/), or [cri-o](https://cri-o.io/) and a standard, [Open Container Initiative (OCI)](https://opencontainers.org/) that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an [OCI exporter](https://docs.docker.com/build/exporters/oci-docker/) for the image builts.
 
+## Useful things to know
+
+A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using ```docker inspect <image id>```, but also individually by using ```docker inspect -f '{{.Config.Entrypoint}}' <image id>``` and ```docker inspect -f '{{.Config.Cmd}}' <image id>```. This is useful in case something goes wrong inside a container to know how the container is supposed to start.
+
+Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.
+
 # How to build a Dockerfile
 
 ::: {.callout-tip}
