@@ -225,6 +225,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#when-to" id="toc-when-to" class="nav-link" data-scroll-target="#when-to">When to…</a></li>
   <li><a href="#quick-introduction-to-linuxunix" id="toc-quick-introduction-to-linuxunix" class="nav-link" data-scroll-target="#quick-introduction-to-linuxunix">Quick introduction to Linux/Unix</a>
   <ul class="collapse">
+  <li><a href="#commands-that-should-be-known" id="toc-commands-that-should-be-known" class="nav-link" data-scroll-target="#commands-that-should-be-known">Commands that should be known</a></li>
+  <li><a href="#folders-you-should-know" id="toc-folders-you-should-know" class="nav-link" data-scroll-target="#folders-you-should-know">Folders you should know</a></li>
+  <li><a href="#online-resources" id="toc-online-resources" class="nav-link" data-scroll-target="#online-resources">Online resources</a></li>
   <li><a href="#what-makes-the-containers-possible-cgroups" id="toc-what-makes-the-containers-possible-cgroups" class="nav-link" data-scroll-target="#what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</a></li>
   </ul></li>
   <li><a href="#overview-of-docker-usage" id="toc-overview-of-docker-usage" class="nav-link" data-scroll-target="#overview-of-docker-usage">Overview of Docker usage</a>
@@ -308,21 +311,41 @@ Recommended learning path
 <li>Check Galaxy/NFDI training for deeper knowledge</li>
 </ul>
 <p>For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.</p>
-<p>There is a good Linux tutorial on the Carpentry.</p>
-<p>??? We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.</p>
+<p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.</p>
+<section id="commands-that-should-be-known" class="level3">
+<h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
 <p>ls ls -al -&gt; list the content of a directory</p>
 <p>cd -&gt; go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)</p>
 <p>ps ps -edf ps -aux -&gt; list the running processes and their owner</p>
 <p>top -&gt; show the current running processes and their memory/cpu usage (CTRL-C to end)</p>
+<p>cp/mv/mkdir</p>
 <p>more, less, cat</p>
-<p>vi/vim/emacs -&gt; most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).</p>
+<p>tail, tail -f</p>
+<p>vi/vim/emacs/nano -&gt; most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).</p>
 <p>man -&gt; show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p>
 <p>ln -&gt; create a symbolic link and know the difference between: * a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file * and a symbolic link: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</p>
 <p>For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.</p>
 <p>chown/chmod -&gt; change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x——-, 755, chmod o+r filename, chmod -R username filename</p>
-<p>grep -&gt;</p>
-<p>Ideally the pipe (|) should be well understood</p>
+<p>grep -&gt; search for the presence of a string in files, often used combined with another command with a |</p>
+<p>mount</p>
+<p>pwd/whoami</p>
+<p>eval</p>
+<p>Ideally the pipe (|) should be well understood, as well as the I/O indirections (&gt;, &gt;&gt;, &lt;).</p>
+<p>curl is also good to know.</p>
+<p>free/df/dh -&gt; know how available resources</p>
+<p>command &amp;, CTRL-Z + bg/fg -&gt; running a command in the backgound</p>
+<p>kill command -&gt; signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)</p>
 <p>? Which other</p>
+</section>
+<section id="folders-you-should-know" class="level3">
+<h3 class="anchored" data-anchor-id="folders-you-should-know">Folders you should know</h3>
+<p>/usr /usr/bin /var /var/log /etc /root /bin /home /mnt /opt</p>
+</section>
+<section id="online-resources" class="level3">
+<h3 class="anchored" data-anchor-id="online-resources">Online resources</h3>
+<p>The Unix command line is well explained <a href="https://swcarpentry.github.io/shell-novice/index.html">here</a>. It is probably useful to know about the main principle of Unix, and a good course if available <a href="https://www.doc.ic.ac.uk/~wjk/UnixIntro/">here</a> and Wikipedia has a <a href="https://en.wikipedia.org/wiki/Unix_filesystem">good overview of the Unix filesystem and its layout</a>.</p>
+<p><a href="https://github.com/deNBI/unix-course?tab=readme-ov-file">DeNBI Unix course</a> -&gt; TBD, adapt using a light Linux image (or public online VM)</p>
+</section>
 <section id="what-makes-the-containers-possible-cgroups" class="level3">
 <h3 class="anchored" data-anchor-id="what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</h3>
 <p>One more advanced element which is important to understand in the container context is cgroups. Cgroups (short for control groups) are a Linux kernel feature to isolate processes: limits the resource usage, track their usage, give them a “sub” filesystem isolated from the host file system.</p>
@@ -350,7 +373,7 @@ Recommended learning path
 <p>If Docker is the <em>de facto</em> standard, there are other containers engines, such as <a href="https://podman.io/">PodMan</a>, <a href="https://containerd.io/">containerd</a>, or <a href="https://cri-o.io/">cri-o</a> and a standard, <a href="https://opencontainers.org/">Open Container Initiative (OCI)</a> that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an <a href="https://docs.docker.com/build/exporters/oci-docker/">OCI exporter</a> for the image builts.</p>
 <section id="useful-things-to-know" class="level2">
 <h2 class="anchored" data-anchor-id="useful-things-to-know">Useful things to know</h2>
-<p>A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using <code>docker inspect &lt;image id&gt;</code>, but also individually by using <code>docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt;</code> and <code>docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;</code>. This is useful in case something goes wrong inside a container to know how the container is supposed to start.</p>
+<p>A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using <code>docker inspect &lt;image id&gt;</code>, but also individually by using <code>docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt;</code> and <code>docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;</code>. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about <code>cmd</code> and <code>Entrypoint</code>, the official Docker documentation offer a <a href="https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/">great overview</a>.</p>
 <p>Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.</p>
 </section>
 </section>

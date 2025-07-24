@@ -263,7 +263,7 @@
     "href": "index.html#useful-things-to-know",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Useful things to know",
-    "text": "Useful things to know\nA docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using docker inspect &lt;image id&gt;, but also individually by using docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt; and docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;. This is useful in case something goes wrong inside a container to know how the container is supposed to start.\nChanging something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.",
+    "text": "Useful things to know\nA docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using docker inspect &lt;image id&gt;, but also individually by using docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt; and docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about cmd and Entrypoint, the official Docker documentation offer a great overview.\nChanging something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
@@ -470,7 +470,7 @@
     "href": "pages/DM_planning.html",
     "title": "DataManagement - Planning",
     "section": "",
-    "text": "A great introduction for Data Management can be found here",
+    "text": "A great introduction for Data Management can be found here and a cookbook (with examples for Life Science) here",
     "crumbs": [
       "Home",
       "Data Management Principles",
