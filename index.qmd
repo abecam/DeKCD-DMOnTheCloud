@@ -42,12 +42,10 @@ Learning difficulty from easy (the basic) to very hard (how it all works). For d
 For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.
 
 
-There is a good Linux tutorial on the Carpentry.
-
-
-??? We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
+We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
 Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.
 
+### Commands that should be known
 
 ls    ls -al -> list the content of a directory
 
@@ -57,9 +55,13 @@ ps ps -edf ps -aux -> list the running processes and their owner
 
 top -> show the current running processes and their memory/cpu usage (CTRL-C to end)
 
+cp/mv/mkdir
+
 more, less, cat
 
-vi/vim/emacs -> most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).
+tail, tail -f
+
+vi/vim/emacs/nano -> most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).
 
 man -> show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
 
@@ -71,12 +73,46 @@ For setting-up an application, we generally use symbolic links, mostly as a way 
 
 chown/chmod -> change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x-------, 755, chmod o+r filename, chmod -R username filename
 
-grep ->
+grep -> search for the presence of a string in files, often used combined with another command with a |
 
-Ideally the pipe (|) should be well understood
+mount
+
+pwd/whoami
+
+eval
+
+Ideally the pipe (|) should be well understood, as well as the I/O indirections (>, >>, <).
+
+curl is also good to know.
+
+free/df/dh -> know how available resources
+
+command &, CTRL-Z + bg/fg -> running a command in the backgound
+
+kill command -> signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)
 
 ? Which other 
 
+### Folders you should know
+
+/usr
+/usr/bin
+/var
+/var/log
+/etc
+/root
+/bin
+/home
+/mnt
+/opt
+
+
+### Online resources
+
+The Unix command line is well explained [here](https://swcarpentry.github.io/shell-novice/index.html).
+It is probably useful to know about the main principle of Unix, and a good course if available [here](https://www.doc.ic.ac.uk/~wjk/UnixIntro/) and Wikipedia has a [good overview of the Unix filesystem and its layout](https://en.wikipedia.org/wiki/Unix_filesystem). 
+
+[DeNBI Unix course](https://github.com/deNBI/unix-course?tab=readme-ov-file) -> TBD, adapt using a light Linux image (or public online VM)
 
 ### What makes the containers possible: cgroups
 
@@ -105,7 +141,7 @@ If Docker is the *de facto* standard, there are other containers engines, such a
 
 ## Useful things to know
 
-A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using ```docker inspect <image id>```, but also individually by using ```docker inspect -f '{{.Config.Entrypoint}}' <image id>``` and ```docker inspect -f '{{.Config.Cmd}}' <image id>```. This is useful in case something goes wrong inside a container to know how the container is supposed to start.
+A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using ```docker inspect <image id>```, but also individually by using ```docker inspect -f '{{.Config.Entrypoint}}' <image id>``` and ```docker inspect -f '{{.Config.Cmd}}' <image id>```. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about ```cmd``` and ```Entrypoint```, the official Docker documentation offer a [great overview](https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/).
 
 Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.
 
