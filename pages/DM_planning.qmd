@@ -3,4 +3,4 @@ title: "DataManagement - Planning"
 number-sections: true
 ---
 
-A great introduction for Data Management can be found [here](https://github.com/llmcloud24/de.KCD-Summer-School-2024/blob/main/Day_2/Data_Management/README.md)
+A great introduction for Data Management can be found [here](https://github.com/llmcloud24/de.KCD-Summer-School-2024/blob/main/Day_2/Data_Management/README.md) and a cookbook (with examples for Life Science) [here](https://faircookbook.elixir-europe.org/content/home.html)
