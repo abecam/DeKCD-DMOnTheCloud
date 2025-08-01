@@ -259,6 +259,28 @@
     ]
   },
   {
+    "objectID": "index.html#vocabulary",
+    "href": "index.html#vocabulary",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Vocabulary",
+    "text": "Vocabulary\n“Bare-Metal” is a bit of a misnomer, as it means originally using a computer without operating system, directly on the hardware (so using a low-level language such as ASM or C). But a bare-metal setup means a direct installation on a machine with the operating system.\n\n\n\n\n\n\nNote\n\n\n\nNote that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e. difficulty of maintenance)\n\n\nA Virtual Machine is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.\nIt can be an emulation, “imitating” a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.\nOr a virtualization, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used: * full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update. * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals. * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed images that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.\n\n\n\n\n\n\nNote\n\n\n\nA main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#vocabulary-1",
+    "href": "index.html#vocabulary-1",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Vocabulary",
+    "text": "Vocabulary",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
     "objectID": "index.html#useful-things-to-know",
     "href": "index.html#useful-things-to-know",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
