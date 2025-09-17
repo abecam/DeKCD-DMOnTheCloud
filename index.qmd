@@ -125,7 +125,30 @@ So for a quick set-up of an exposed application, a virtual machine might be a be
 A long term set-up should take a proper care of security in all case, and in this case there should be not benefit in using a virtual machine, aside of cybersecurity needs (like a honeypot).
 
 
-# Overview of Docker usage
+# Bare-Metal setup and Virtual Machines
+
+## Vocabulary
+
+**"Bare-Metal"** is a bit of a misnomer, as it means originally using a computer without operating system, directly on the hardware (so using a low-level language such as ASM or C). But a bare-metal setup means a direct installation on a machine *with* the operating system. 
+
+::: {.callout-note}
+Note that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e. difficulty of maintenance)
+:::
+
+A **Virtual Machine** is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.
+
+It can be an **emulation**, "imitating" a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.
+
+Or a **virtualization**, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used:
+* full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update.
+* Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals.
+* OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed **images** that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.
+
+::: {.callout-note}
+A main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).
+:::
+
+# Containers - Overview of Docker usage
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -138,6 +161,9 @@ Learning difficulty is easy, assuming you have some knowledge of Linux.
 A clear presentation of Docker is available [here](https://container.training/intro-selfpaced.yml.html#1) and the [official documentation](https://docs.docker.com/engine/) is good. The section you should consult is "Open Source", so about Docker Engine, Docker Build and Docker Compose. If running Docker on Windows, you might want to use Docker Desktop, which is also proposing a single node Kubernetes and is the simples way to use and test Docker and Kubernetes on Windows.
 
 If Docker is the *de facto* standard, there are other containers engines, such as [PodMan](https://podman.io/), [containerd ](https://containerd.io/), or [cri-o](https://cri-o.io/) and a standard, [Open Container Initiative (OCI)](https://opencontainers.org/) that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an [OCI exporter](https://docs.docker.com/build/exporters/oci-docker/) for the image builts.
+
+## Vocabulary
+
 
 ## Useful things to know
 
