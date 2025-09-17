@@ -15,7 +15,7 @@ We try to give a clear view on the cost and benefit of each solution so it is ea
 
 We will also compile advices and tips, and we welcome all contributions (and corrections).
 
-Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases. By Data Management Platforms we mean an online application with a data repository (database or other), such as those listed in our [Data Management Platforms registry](https://abecam.github.io/CloudForDM/)
+Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases. By Data Management Platforms we mean an online application with a data repository (database or other), such as those listed in our [Data Management Platforms registry](https://dekcd.github.io/FAIR-DMP-Registry/)
 
 # How to use
 
@@ -85,7 +85,7 @@ Ideally the pipe (|) should be well understood, as well as the I/O indirections 
 
 curl is also good to know.
 
-free/df/dh -> know how available resources
+free/df/dh -> know how many resources are available 
 
 command &, CTRL-Z + bg/fg -> running a command in the backgound
 
