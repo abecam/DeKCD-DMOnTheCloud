@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5df47603e3b75ee8f755543cdaab90e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-29a19b5acbeac218a8c860e48340d4df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -244,14 +244,21 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#terminology-main-elements" id="toc-terminology-main-elements" class="nav-link" data-scroll-target="#terminology-main-elements"><span class="header-section-number">3.2</span> Terminology &amp; main elements</a></li>
   <li><a href="#everything-decoupled" id="toc-everything-decoupled" class="nav-link" data-scroll-target="#everything-decoupled"><span class="header-section-number">3.3</span> Everything decoupled</a></li>
   <li><a href="#the-various-objects-for-your-application" id="toc-the-various-objects-for-your-application" class="nav-link" data-scroll-target="#the-various-objects-for-your-application"><span class="header-section-number">3.4</span> The various objects for your application</a></li>
-  <li><a href="#updating-an-application" id="toc-updating-an-application" class="nav-link" data-scroll-target="#updating-an-application"><span class="header-section-number">3.5</span> Updating an application</a></li>
-  <li><a href="#where-do-you-store-the-data" id="toc-where-do-you-store-the-data" class="nav-link" data-scroll-target="#where-do-you-store-the-data"><span class="header-section-number">3.6</span> Where do you store the data</a></li>
-  <li><a href="#configuration-values" id="toc-configuration-values" class="nav-link" data-scroll-target="#configuration-values"><span class="header-section-number">3.7</span> Configuration values</a></li>
-  <li><a href="#namespace" id="toc-namespace" class="nav-link" data-scroll-target="#namespace"><span class="header-section-number">3.8</span> Namespace</a></li>
-  <li><a href="#network-access" id="toc-network-access" class="nav-link" data-scroll-target="#network-access"><span class="header-section-number">3.9</span> Network access</a></li>
-  <li><a href="#loadbalancing" id="toc-loadbalancing" class="nav-link" data-scroll-target="#loadbalancing"><span class="header-section-number">3.10</span> LoadBalancing</a></li>
-  <li><a href="#several-deployments" id="toc-several-deployments" class="nav-link" data-scroll-target="#several-deployments"><span class="header-section-number">3.11</span> Several Deployments</a></li>
-  <li><a href="#sec-affinities" id="toc-sec-affinities" class="nav-link" data-scroll-target="#sec-affinities"><span class="header-section-number">3.12</span> Affinities</a></li>
+  <li><a href="#visual-overview" id="toc-visual-overview" class="nav-link" data-scroll-target="#visual-overview"><span class="header-section-number">3.5</span> Visual overview</a></li>
+  <li><a href="#updating-an-application" id="toc-updating-an-application" class="nav-link" data-scroll-target="#updating-an-application"><span class="header-section-number">3.6</span> Updating an application</a></li>
+  <li><a href="#where-do-you-store-the-data" id="toc-where-do-you-store-the-data" class="nav-link" data-scroll-target="#where-do-you-store-the-data"><span class="header-section-number">3.7</span> Where do you store the data</a>
+  <ul class="collapse">
+  <li><a href="#a-note-about-automatic-storage-storageclass" id="toc-a-note-about-automatic-storage-storageclass" class="nav-link" data-scroll-target="#a-note-about-automatic-storage-storageclass"><span class="header-section-number">3.7.1</span> A note about automatic storage (StorageClass)</a></li>
+  <li><a href="#visual-overview-of-automatic-storage-provisioning" id="toc-visual-overview-of-automatic-storage-provisioning" class="nav-link" data-scroll-target="#visual-overview-of-automatic-storage-provisioning"><span class="header-section-number">3.7.2</span> Visual overview of automatic storage provisioning</a></li>
+  <li><a href="#visual-overview-of-storage" id="toc-visual-overview-of-storage" class="nav-link" data-scroll-target="#visual-overview-of-storage"><span class="header-section-number">3.7.3</span> Visual overview of storage</a></li>
+  </ul></li>
+  <li><a href="#how-kubernetes-keeps-things-running" id="toc-how-kubernetes-keeps-things-running" class="nav-link" data-scroll-target="#how-kubernetes-keeps-things-running"><span class="header-section-number">3.8</span> How Kubernetes keeps things running</a></li>
+  <li><a href="#configuration-values" id="toc-configuration-values" class="nav-link" data-scroll-target="#configuration-values"><span class="header-section-number">3.9</span> Configuration values</a></li>
+  <li><a href="#namespace" id="toc-namespace" class="nav-link" data-scroll-target="#namespace"><span class="header-section-number">3.10</span> Namespace</a></li>
+  <li><a href="#network-access" id="toc-network-access" class="nav-link" data-scroll-target="#network-access"><span class="header-section-number">3.11</span> Network access</a></li>
+  <li><a href="#loadbalancing" id="toc-loadbalancing" class="nav-link" data-scroll-target="#loadbalancing"><span class="header-section-number">3.12</span> LoadBalancing</a></li>
+  <li><a href="#several-deployments" id="toc-several-deployments" class="nav-link" data-scroll-target="#several-deployments"><span class="header-section-number">3.13</span> Several Deployments</a></li>
+  <li><a href="#sec-affinities" id="toc-sec-affinities" class="nav-link" data-scroll-target="#sec-affinities"><span class="header-section-number">3.14</span> Affinities</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -342,23 +349,23 @@ Warning
 <p>A full list of terms can be found on the <a href="https://kubernetes.io/docs/reference/glossary/?fundamental=true">official documentation</a>.</p>
 <p>The maim terms/elements you should know are:</p>
 <ul>
-<li>Cluster: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.</li>
-<li>Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.</li>
-<li>Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.</li>
-<li>Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).</li>
-<li>Label: labels are used for Kubernetes to find the different elements.</li>
-<li>Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them…</li>
-<li>Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, …</li>
+<li><strong>Cluster</strong>: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.</li>
+<li><strong>Node</strong>: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.</li>
+<li><strong>Pod</strong>: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.</li>
+<li><strong>Service</strong>: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).</li>
+<li><strong>Label</strong>: labels are used for Kubernetes to find the different elements.</li>
+<li><strong>Kubectl</strong>: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them…</li>
+<li><strong>Manifest</strong>: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, …</li>
 </ul>
 <p>And generally, the applications are deployed as:</p>
 <ul>
-<li><p>ReplicatSet: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn’t enough resources typically). It is possible to influence on which node the pods will run using affinities, see <a href="#sec-affinities" class="quarto-xref">Section&nbsp;3.12</a></p></li>
-<li><p>Deployment:</p></li>
-<li><p>DaemonSet:</p></li>
-<li><p>StatefulSet:</p></li>
-<li><p>Job:</p></li>
-<li><p>ConfigMap:</p></li>
-<li><p>Secret:</p></li>
+<li><strong>ReplicatSet</strong>: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn’t enough resources typically). It is possible to influence on which node the pods will run using affinities, see <a href="#sec-affinities" class="quarto-xref">Section&nbsp;3.14</a></li>
+<li><strong>Deployment:</strong> manages a ReplicaSet and provides rolling updates. It allows you to update an application without downtime by gradually replacing old Pods with new ones. If something goes wrong, you can roll back to a previous version.</li>
+<li><strong>DaemonSet:</strong> ensures that one Pod runs on each (or some) node. It is typically used for system-level services such as monitoring agents, log collectors, or networking tools that need to run everywhere.</li>
+<li><strong>StatefulSet:</strong> manages Pods that need stable, unique identities and persistent storage. It is used for stateful applications such as databases or distributed systems that need predictable network names or data persistence.</li>
+<li><strong>Job:</strong> runs Pods to completion. It is used for tasks that need to run once or a fixed number of times, such as batch processing or data import. When the Job finishes successfully, the Pods are not restarted.</li>
+<li><strong>ConfigMap:</strong> stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.</li>
+<li><strong>Secret:</strong> similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.</li>
 </ul>
 </section>
 <section id="everything-decoupled" class="level2" data-number="3.3">
@@ -368,38 +375,136 @@ Warning
 <section id="the-various-objects-for-your-application" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-various-objects-for-your-application"><span class="header-section-number">3.4</span> The various objects for your application</h2>
 <p>Deployment, Job, ReplicaSet, DaemonSet, StatefulSet</p>
-<p>While the Pod is the smallest element in Kubernetes, it is directly started <em>only</em> for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.</p>
-<p>A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one.</p>
+<p>While the <strong>Pod</strong> is the smallest element in Kubernetes, it is directly started <em>only</em> for testing. If you define a pod or create it using <code>kubectl</code>, it will only run once and will not be restarted if something fails. As such, it is like <code>docker run</code> if started manually, or <code>docker compose</code> if started using a manifest, and offers no benefit — just the added complexity of the Kubernetes setup.</p>
+<p>A <strong>ReplicaSet</strong> asks for a set number of pods, and Kubernetes will ensure that these pods are always running. If one pod becomes unhealthy or crashes, Kubernetes automatically removes it and creates a new one.</p>
+<p>A <strong>Deployment</strong> is what you usually use for applications. It manages ReplicaSets and provides updates and rollbacks. You can think of it as “the normal way” to run an app on Kubernetes — one that should always be available and easy to update.</p>
+<p>A <strong>Job</strong> is used for tasks that need to run once and then stop, for example, a script that imports some data or cleans up files. Kubernetes ensures that the job runs successfully to completion.</p>
+<p>A <strong>DaemonSet</strong> runs one pod per machine (node). This is often used for background services such as system monitoring or log collection that must run everywhere.</p>
+<p>A <strong>StatefulSet</strong> is like a Deployment but for applications that need to keep their identity and data across restarts — such as databases. Each pod in a StatefulSet has a fixed name and can have its own storage attached.</p>
 </section>
-<section id="updating-an-application" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="updating-an-application"><span class="header-section-number">3.5</span> Updating an application</h2>
-<p>Applications are still running in container, so updating consists in updating the image. If deployment are used, the update is managed by kubernetes: it will follow an update strategy to run the new containers while stopping and removing the old ones.</p>
+<section id="visual-overview" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="visual-overview"><span class="header-section-number">3.5</span> Visual overview</h2>
+<p>Here’s a simple way to picture how Kubernetes manages your applications: +—————————————————-+ | Deployment | | (defines the app, version, and update strategy) | | | | +——————————————–+ | | | ReplicaSet | | | | (keeps the right number of Pods running) | | | | | | | | +———–+ +———–+ +——-+| | | | | Pod 1 | | Pod 2 | | Pod 3 || | | | | (runs app)| | (runs app)| |(app) || | | | +———–+ +———–+ +——-+| | | +——————————————–+ | +—————————————————-+ * Deployment: Defines what you want to run and how to update it. * ReplicaSet: Ensures the right number of pods are running. * Pods: Run the actual container (your app).</p>
+<p>If a pod fails, the ReplicaSet creates a new one. If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly. —</p>
 </section>
-<section id="where-do-you-store-the-data" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="where-do-you-store-the-data"><span class="header-section-number">3.6</span> Where do you store the data</h2>
-<p>Volumes, …</p>
+<section id="updating-an-application" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="updating-an-application"><span class="header-section-number">3.6</span> Updating an application</h2>
+<p>Applications are still running in containers, so updating means updating the container image. If <strong>Deployments</strong> are used, the update is managed automatically by Kubernetes: it follows an update strategy to start new containers while stopping and removing the old ones. This allows smooth, gradual updates with no downtime.</p>
+<p>You can also roll back easily if something goes wrong, as Kubernetes keeps the previous version ready.</p>
+<hr>
 </section>
-<section id="configuration-values" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="configuration-values"><span class="header-section-number">3.7</span> Configuration values</h2>
+<section id="where-do-you-store-the-data" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="where-do-you-store-the-data"><span class="header-section-number">3.7</span> Where do you store the data</h2>
+<p>Containers are temporary — when they stop, everything inside disappears. For most applications, you need to keep data somewhere safe and separate from the containers. The common way to store data in Kubernetes is in <strong>volumes</strong>.</p>
+<p>A <strong>Volume</strong> is a piece of storage that can be attached to a pod. It can be on the same machine, on a network drive, or in the cloud. Kubernetes makes sure that your pods can access this storage whenever they run.</p>
+<p>If you need data that must stay linked to a specific pod (for example, for a database), you can use a <strong>PersistentVolume</strong> and a <strong>PersistentVolumeClaim</strong>. These ensure that even if your pods are restarted or moved to another machine, your data stays available and safe.</p>
+<p>In short:</p>
+<ul>
+<li>Pods are temporary.</li>
+<li>Data should live in Volumes or PersistentVolumes.</li>
+<li>Kubernetes handles the connection between the app and its data storage.</li>
+</ul>
+<p><em>For review:</em> But you can also store your data in a <strong>database</strong> or an <strong>object storage</strong> (such as an S3 implementations). They might be part of the Kubernetes cluster, in another Kubernetes cluster, or fully external. Their access and usage will generally be the same in all cases. When within a Kubernetes cluster, they use volumes of their own and their setup could involve setting-up the volumes (see the note below). Some data storage (such as Postgresql) might be managed by an <strong>operator</strong>. <em>Operators</em> are software extensions of Kubernetes, that can define, as their name implies, operations on the cluster. In that case, you generally set-up the database and the operator as instructed by the operator documentation, and you will then have the database managed by the operator. They could take care of data replication, failure management, …, and are generally the prefered way to set-up a data storage on Kubernetes when something more than a simple volume is needed.</p>
+<hr>
+<section id="a-note-about-automatic-storage-storageclass" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="a-note-about-automatic-storage-storageclass"><span class="header-section-number">3.7.1</span> A note about automatic storage (StorageClass)</h3>
+<p>Kubernetes can automatically create persistent storage for you — but <strong>only if the cluster has been set up with a storage backend</strong>.</p>
+<p>When you create a <strong>PersistentVolumeClaim (PVC)</strong>, Kubernetes checks if there is a <strong>StorageClass</strong> available. The StorageClass defines <em>how</em> to create the actual storage — for example, on cloud disks, local drives, or network storage. If one is available, Kubernetes provisions the storage automatically and attaches it to your pod.</p>
+<p>If no StorageClass or backend is configured, the claim will just wait forever (in <em>Pending</em> state), and your pod won’t start. So persistence only works if the cluster administrator configured it in advance.</p>
+<p>In short:</p>
+<ul>
+<li>Cloud clusters (AWS, Google, Azure) usually have a StorageClass ready by default.</li>
+<li>Local or on-premise clusters might need to install one manually (for example, a <strong>local-path-provisioner</strong> or <strong>NFS</strong>).</li>
+</ul>
+<hr>
+</section>
+<section id="visual-overview-of-automatic-storage-provisioning" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="visual-overview-of-automatic-storage-provisioning"><span class="header-section-number">3.7.2</span> Visual overview of automatic storage provisioning</h3>
+<pre><code>+-----------------------------------------------+
+|                 Your Pod                      |
+|        (requests storage via PVC)             |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| PersistentVolumeClaim (PVC)                   |
+| "I need 10 GB of storage, please."            |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| StorageClass (defines how to create storage)  |
+| Example: AWS EBS, Google PD, NFS, Local Path  |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| PersistentVolume (PV)                         |
+| Actual disk or network storage created        |
+| automatically by the provisioner              |
++-----------------------------------------------+</code></pre>
+<p>If a suitable <strong>StorageClass</strong> is present, the system automatically creates a <strong>PersistentVolume</strong> and binds it to your claim. Otherwise, the claim just stays pending until an administrator provides a volume manually.</p>
+<hr>
+</section>
+<section id="visual-overview-of-storage" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="visual-overview-of-storage"><span class="header-section-number">3.7.3</span> Visual overview of storage</h3>
+<pre><code>+----------------------------+
+|          Pod               |
+|  (runs your container app) |
+|          |                 |
+|          | uses            |
+|          v                 |
+|      +--------+            |
+|      | Volume |------------+--------------+
+|      +--------+                           |
++-------------------------------------------|
+                                            |
+                           +--------------------------------+
+                           | PersistentVolumeClaim (PVC)    |
+                           |  (requests storage from pool)  |
+                           +--------------------------------+
+                                            |
+                           +--------------------------------+
+                           | PersistentVolume (PV)          |
+                           | (actual disk / network storage)|
+                           +--------------------------------+</code></pre>
+<ul>
+<li><strong>Pod</strong>: The running container that needs to read or write data.</li>
+<li><strong>Volume</strong>: The connection point between the app and the storage.</li>
+<li><strong>PersistentVolumeClaim (PVC)</strong>: A request for storage.</li>
+<li><strong>PersistentVolume (PV)</strong>: The real storage space (disk, cloud volume, etc.).</li>
+</ul>
+<p>This structure lets you move or restart pods without losing any data — Kubernetes will reconnect the storage automatically.</p>
+<hr>
+</section>
+</section>
+<section id="how-kubernetes-keeps-things-running" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="how-kubernetes-keeps-things-running"><span class="header-section-number">3.8</span> How Kubernetes keeps things running</h2>
+<p>Kubernetes is designed to make sure your applications stay up and running, even if something fails. It constantly watches all your pods and checks if they are healthy.</p>
+<p>If a pod crashes, Kubernetes automatically restarts it or creates a new one. If a whole machine (called a <em>node</em>) goes down, Kubernetes moves your pods to another available machine.</p>
+<p>You don’t need to manually restart or move anything — Kubernetes takes care of it. This is one of its biggest advantages compared to running containers manually: you describe <em>what you want to run</em>, and Kubernetes makes sure it <em>stays</em> that way.</p>
+</section>
+<section id="configuration-values" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="configuration-values"><span class="header-section-number">3.9</span> Configuration values</h2>
 <p>ConfigMap and Secrets</p>
 <p>Regular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values <strong>out</strong> of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool).</p>
 </section>
-<section id="namespace" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="namespace"><span class="header-section-number">3.8</span> Namespace</h2>
+<section id="namespace" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="namespace"><span class="header-section-number">3.10</span> Namespace</h2>
 </section>
-<section id="network-access" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="network-access"><span class="header-section-number">3.9</span> Network access</h2>
+<section id="network-access" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="network-access"><span class="header-section-number">3.11</span> Network access</h2>
 </section>
-<section id="loadbalancing" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="loadbalancing"><span class="header-section-number">3.10</span> LoadBalancing</h2>
+<section id="loadbalancing" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="loadbalancing"><span class="header-section-number">3.12</span> LoadBalancing</h2>
 </section>
-<section id="several-deployments" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="several-deployments"><span class="header-section-number">3.11</span> Several Deployments</h2>
+<section id="several-deployments" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="several-deployments"><span class="header-section-number">3.13</span> Several Deployments</h2>
 <p>kustomize</p>
 <p>helm</p>
 </section>
-<section id="sec-affinities" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="sec-affinities"><span class="header-section-number">3.12</span> Affinities</h2>
+<section id="sec-affinities" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="sec-affinities"><span class="header-section-number">3.14</span> Affinities</h2>
 
 
 </section>
