@@ -384,7 +384,26 @@ Warning
 </section>
 <section id="visual-overview" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="visual-overview"><span class="header-section-number">3.5</span> Visual overview</h2>
-<p>Here’s a simple way to picture how Kubernetes manages your applications: +—————————————————-+ | Deployment | | (defines the app, version, and update strategy) | | | | +——————————————–+ | | | ReplicaSet | | | | (keeps the right number of Pods running) | | | | | | | | +———–+ +———–+ +——-+| | | | | Pod 1 | | Pod 2 | | Pod 3 || | | | | (runs app)| | (runs app)| |(app) || | | | +———–+ +———–+ +——-+| | | +——————————————–+ | +—————————————————-+ * Deployment: Defines what you want to run and how to update it. * ReplicaSet: Ensures the right number of pods are running. * Pods: Run the actual container (your app).</p>
+<p>Here’s a simple way to picture how Kubernetes manages your applications:</p>
+<pre><code>+----------------------------------------------------+
+|                    Deployment                      |
+|  (defines the app, version, and update strategy)   |
+|                                                    |
+|   +--------------------------------------------+   |
+|   |                 ReplicaSet                 |   |
+|   |  (keeps the right number of Pods running)  |   |
+|   |                                            |   |
+|   |   +-----------+   +-----------+   +-------+|   |
+|   |   |   Pod 1   |   |   Pod 2   |   | Pod 3 ||   |
+|   |   | (runs app)|   | (runs app)|   |(app)  ||   |
+|   |   +-----------+   +-----------+   +-------+|   |
+|   +--------------------------------------------+   |
++----------------------------------------------------+</code></pre>
+<ul>
+<li>Deployment: Defines what you want to run and how to update it.</li>
+<li>ReplicaSet: Ensures the right number of pods are running.</li>
+<li>Pods: Run the actual container (your app).</li>
+</ul>
 <p>If a pod fails, the ReplicaSet creates a new one. If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly. —</p>
 </section>
 <section id="updating-an-application" class="level2" data-number="3.6">
