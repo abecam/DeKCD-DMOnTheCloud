@@ -56,24 +56,23 @@ A full list of terms can be found on the [official documentation](https://kubern
 
 The maim terms/elements you should know are:
 
-* Cluster: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.
-* Node: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
-* Pod: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
-* Service: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
-* Label: labels are used for Kubernetes to find the different elements.
-* Kubectl: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
-* Manifest: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
+* **Cluster**: the whole Kubernetes setup composed of several worker machines, called nodes. Some managed Kubernetes can support several clusters, so for instance give a cluster for one user.
+* **Node**: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.
+* **Pod**: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.
+* **Service**: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).
+* **Label**: labels are used for Kubernetes to find the different elements.
+* **Kubectl**: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them...
+* **Manifest**: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, ...
 
 And generally, the applications are deployed as:
 
-* ReplicatSet: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn't enough resources typically). It is possible to influence on which node the pods will run using affinities, see @sec-affinities
-* Deployment:
-* DaemonSet:
-* StatefulSet:
-* Job:
-
-* ConfigMap:
-* Secret:
+* **ReplicatSet**: ask for a set numbers of Pods. Kubernetes will try to have the set number of pods running, and will restore this which might become unhealthy. The pods can be on any node and it is not guaranteed that Kubernetes will be able to get the right number of pods (if there isn't enough resources typically). It is possible to influence on which node the pods will run using affinities, see @sec-affinities
+* **Deployment:** manages a ReplicaSet and provides rolling updates. It allows you to update an application without downtime by gradually replacing old Pods with new ones. If something goes wrong, you can roll back to a previous version.
+* **DaemonSet:** ensures that one Pod runs on each (or some) node. It is typically used for system-level services such as monitoring agents, log collectors, or networking tools that need to run everywhere.
+* **StatefulSet:** manages Pods that need stable, unique identities and persistent storage. It is used for stateful applications such as databases or distributed systems that need predictable network names or data persistence.
+* **Job:** runs Pods to completion. It is used for tasks that need to run once or a fixed number of times, such as batch processing or data import. When the Job finishes successfully, the Pods are not restarted.
+* **ConfigMap:** stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.
+* **Secret:** similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.
 
 ## Everything decoupled
 
@@ -84,17 +83,178 @@ Why there is so many extra layers compared to docker compose -> full decoupling.
 
 Deployment, Job, ReplicaSet, DaemonSet, StatefulSet
 
-While the Pod is the smallest element in Kubernetes, it is directly started *only* for testing. If you define a pod or create it using kubectl, it will only run once and will not be restarted if something fails. As such it is like docker run, if started using kubectl, or docker compose, if started using a manifest, and offer no benefice, just the added complexity of the setup.
+While the **Pod** is the smallest element in Kubernetes, it is directly started *only* for testing.
+If you define a pod or create it using `kubectl`, it will only run once and will not be restarted if something fails.
+As such, it is like `docker run` if started manually, or `docker compose` if started using a manifest, and offers no benefit — just the added complexity of the Kubernetes setup.
 
-A ReplicaSet ask for a set number of pods and Kubernetes will ensure that there are running. If one pod is not healthy anymore, Kubernetes will remove it and create a new one.
+A **ReplicaSet** asks for a set number of pods, and Kubernetes will ensure that these pods are always running.
+If one pod becomes unhealthy or crashes, Kubernetes automatically removes it and creates a new one.
+
+A **Deployment** is what you usually use for applications. It manages ReplicaSets and provides updates and rollbacks.
+You can think of it as “the normal way” to run an app on Kubernetes — one that should always be available and easy to update.
+
+A **Job** is used for tasks that need to run once and then stop, for example, a script that imports some data or cleans up files.
+Kubernetes ensures that the job runs successfully to completion.
+
+A **DaemonSet** runs one pod per machine (node). This is often used for background services such as system monitoring or log collection that must run everywhere.
+
+A **StatefulSet** is like a Deployment but for applications that need to keep their identity and data across restarts — such as databases.
+Each pod in a StatefulSet has a fixed name and can have its own storage attached.
+
+## Visual overview
+
+Here’s a simple way to picture how Kubernetes manages your applications:
++----------------------------------------------------+
+|                    Deployment                      |
+|  (defines the app, version, and update strategy)   |
+|                                                    |
+|   +--------------------------------------------+   |
+|   |                 ReplicaSet                 |   |
+|   |  (keeps the right number of Pods running)  |   |
+|   |                                            |   |
+|   |   +-----------+   +-----------+   +-------+|   |
+|   |   |   Pod 1   |   |   Pod 2   |   | Pod 3 ||   |
+|   |   | (runs app)|   | (runs app)|   |(app)  ||   |
+|   |   +-----------+   +-----------+   +-------+|   |
+|   +--------------------------------------------+   |
++----------------------------------------------------+
+* Deployment: Defines what you want to run and how to update it.
+* ReplicaSet: Ensures the right number of pods are running.
+* Pods: Run the actual container (your app).
+
+If a pod fails, the ReplicaSet creates a new one.
+If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly.
+---
 
 ## Updating an application
 
-Applications are still running in container, so updating consists in updating the image. If deployment are used, the update is managed by kubernetes: it will follow an update strategy to run the new containers while stopping and removing the old ones.
+Applications are still running in containers, so updating means updating the container image.
+If **Deployments** are used, the update is managed automatically by Kubernetes: it follows an update strategy to start new containers while stopping and removing the old ones.
+This allows smooth, gradual updates with no downtime.
+
+You can also roll back easily if something goes wrong, as Kubernetes keeps the previous version ready.
+
+---
 
 ## Where do you store the data
 
-Volumes, ...
+Containers are temporary — when they stop, everything inside disappears.
+For most applications, you need to keep data somewhere safe and separate from the containers.
+The common way to store data in Kubernetes is in **volumes**.
+
+A **Volume** is a piece of storage that can be attached to a pod. It can be on the same machine, on a network drive, or in the cloud.
+Kubernetes makes sure that your pods can access this storage whenever they run.
+
+If you need data that must stay linked to a specific pod (for example, for a database), you can use a **PersistentVolume** and a **PersistentVolumeClaim**.
+These ensure that even if your pods are restarted or moved to another machine, your data stays available and safe.
+
+In short:
+
+* Pods are temporary.
+* Data should live in Volumes or PersistentVolumes.
+* Kubernetes handles the connection between the app and its data storage.
+
+*For review:* But you can also store your data in a **database** or an **object storage** (such as an S3 implementations). They might be part of the Kubernetes cluster, in another Kubernetes cluster, or fully external. Their access and usage will generally be the same in all cases. When within a Kubernetes cluster, they use volumes of their own and their setup could involve setting-up the volumes (see the note below).
+Some data storage (such as Postgresql) might be managed by an **operator**. *Operators* are software extensions of Kubernetes, that can define, as their name implies, operations on the cluster. In that case, you generally set-up the database and the operator as instructed by the operator documentation, and you will then have the database managed by the operator. They could take care of data replication, failure management, ..., and are generally the prefered way to set-up a data storage on Kubernetes when something more than a simple volume is needed.
+
+---
+
+### A note about automatic storage (StorageClass)
+
+Kubernetes can automatically create persistent storage for you — but **only if the cluster has been set up with a storage backend**.
+
+When you create a **PersistentVolumeClaim (PVC)**, Kubernetes checks if there is a **StorageClass** available.
+The StorageClass defines *how* to create the actual storage — for example, on cloud disks, local drives, or network storage.
+If one is available, Kubernetes provisions the storage automatically and attaches it to your pod.
+
+If no StorageClass or backend is configured, the claim will just wait forever (in *Pending* state), and your pod won’t start.
+So persistence only works if the cluster administrator configured it in advance.
+
+In short:
+
+* Cloud clusters (AWS, Google, Azure) usually have a StorageClass ready by default.
+* Local or on-premise clusters might need to install one manually (for example, a **local-path-provisioner** or **NFS**).
+
+---
+
+### Visual overview of automatic storage provisioning
+
+```
++-----------------------------------------------+
+|                 Your Pod                      |
+|        (requests storage via PVC)             |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| PersistentVolumeClaim (PVC)                   |
+| "I need 10 GB of storage, please."            |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| StorageClass (defines how to create storage)  |
+| Example: AWS EBS, Google PD, NFS, Local Path  |
++-----------------------------------------------+
+                      |
+                      v
++-----------------------------------------------+
+| PersistentVolume (PV)                         |
+| Actual disk or network storage created        |
+| automatically by the provisioner              |
++-----------------------------------------------+
+```
+
+If a suitable **StorageClass** is present, the system automatically creates a **PersistentVolume** and binds it to your claim.
+Otherwise, the claim just stays pending until an administrator provides a volume manually.
+
+---
+
+### Visual overview of storage
+
+```
++----------------------------+
+|          Pod               |
+|  (runs your container app) |
+|          |                 |
+|          | uses            |
+|          v                 |
+|      +--------+            |
+|      | Volume |------------+--------------+
+|      +--------+                           |
++-------------------------------------------|
+                                            |
+                           +--------------------------------+
+                           | PersistentVolumeClaim (PVC)    |
+                           |  (requests storage from pool)  |
+                           +--------------------------------+
+                                            |
+                           +--------------------------------+
+                           | PersistentVolume (PV)          |
+                           | (actual disk / network storage)|
+                           +--------------------------------+
+```
+
+* **Pod**: The running container that needs to read or write data.
+* **Volume**: The connection point between the app and the storage.
+* **PersistentVolumeClaim (PVC)**: A request for storage.
+* **PersistentVolume (PV)**: The real storage space (disk, cloud volume, etc.).
+
+This structure lets you move or restart pods without losing any data — Kubernetes will reconnect the storage automatically.
+
+---
+
+## How Kubernetes keeps things running
+
+Kubernetes is designed to make sure your applications stay up and running, even if something fails.
+It constantly watches all your pods and checks if they are healthy.
+
+If a pod crashes, Kubernetes automatically restarts it or creates a new one.
+If a whole machine (called a *node*) goes down, Kubernetes moves your pods to another available machine.
+
+You don’t need to manually restart or move anything — Kubernetes takes care of it.
+This is one of its biggest advantages compared to running containers manually:
+you describe *what you want to run*, and Kubernetes makes sure it *stays* that way.
 
 ## Configuration values
 
