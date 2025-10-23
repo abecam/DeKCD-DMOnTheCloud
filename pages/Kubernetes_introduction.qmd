@@ -104,6 +104,7 @@ Each pod in a StatefulSet has a fixed name and can have its own storage attached
 ## Visual overview
 
 Here’s a simple way to picture how Kubernetes manages your applications:
+```
 +----------------------------------------------------+
 |                    Deployment                      |
 |  (defines the app, version, and update strategy)   |
@@ -118,6 +119,7 @@ Here’s a simple way to picture how Kubernetes manages your applications:
 |   |   +-----------+   +-----------+   +-------+|   |
 |   +--------------------------------------------+   |
 +----------------------------------------------------+
+```
 * Deployment: Defines what you want to run and how to update it.
 * ReplicaSet: Ensures the right number of pods are running.
 * Pods: Run the actual container (your app).
