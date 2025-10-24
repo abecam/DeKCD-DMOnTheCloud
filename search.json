@@ -195,7 +195,7 @@
     "href": "index.html#vocabulary-1",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Vocabulary",
-    "text": "Vocabulary",
+    "text": "Vocabulary\n\nAn Image\nA container\nA volume\nDocker compose",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
