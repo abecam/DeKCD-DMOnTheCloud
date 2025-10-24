@@ -164,6 +164,10 @@ If Docker is the *de facto* standard, there are other containers engines, such a
 
 ## Vocabulary
 
+* An **Image**
+* A **container**
+* A **volume**
+* **Docker compose**
 
 ## Useful things to know
 
