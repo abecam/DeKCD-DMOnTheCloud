@@ -182,8 +182,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Volumes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Volumes</span></a>
+  <a href="../pages/Data_storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Storage</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -237,6 +237,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a>
   <ul class="collapse">
   <li><a href="#defence-need-to-be-always-a-success-attack-need-only-one" id="toc-defence-need-to-be-always-a-success-attack-need-only-one" class="nav-link" data-scroll-target="#defence-need-to-be-always-a-success-attack-need-only-one">Defence need to be always a success, attack need only one</a></li>
+  <li><a href="#aspects-of-security" id="toc-aspects-of-security" class="nav-link" data-scroll-target="#aspects-of-security">Aspects of security</a></li>
+  <li><a href="#limits-of-security" id="toc-limits-of-security" class="nav-link" data-scroll-target="#limits-of-security">Limits of security</a></li>
   <li><a href="#general-dispositions" id="toc-general-dispositions" class="nav-link" data-scroll-target="#general-dispositions">General dispositions</a></li>
   <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall">Firewall</a></li>
   <li><a href="#protections-against-attacks" id="toc-protections-against-attacks" class="nav-link" data-scroll-target="#protections-against-attacks">Protections against attacks</a></li>
@@ -323,6 +325,14 @@ Note
 <section id="defence-need-to-be-always-a-success-attack-need-only-one" class="level2">
 <h2 class="anchored" data-anchor-id="defence-need-to-be-always-a-success-attack-need-only-one">Defence need to be always a success, attack need only one</h2>
 <p>One very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.</p>
+</section>
+<section id="aspects-of-security" class="level2">
+<h2 class="anchored" data-anchor-id="aspects-of-security">Aspects of security</h2>
+<p>By security in an information system, we consider every aspect allowing the right use of the information system (including, but not only, the protection of data): Availability, integrity, confidentiality, trustworthiness, access control. It is important to know which of these aspects are needed in the system to build. The possible threats are then coming from: - the system users, not willingly doing any damage, - malicious persons, who want to access data or program, to damage the infrastructure, to cheat, to annoy, - malicious software, a software which will give a nuisance to other or abuse the resources (that can be unintentional), open the system to intrusions, - one disaster, a simple electric break, one bad manipulation, a fire, … It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one way to fight against this kind of problem.</p>
+</section>
+<section id="limits-of-security" class="level2">
+<h2 class="anchored" data-anchor-id="limits-of-security">Limits of security</h2>
+<p>Security in computer software is very much alike security in the real-life: if you want your house to be totally secure, you have to push a 3 meter high concrete wall around with automatic machine guns. Not fun, not neighbour-friendly and not inhabitant-friendly too. The same rule applies in software development: you just cannot have a totally secured system, as nothing will be usable then (or with much difficulties). The fact is that, like in the real life, the user must show some respect to other users and to the software architecture, and we must protect the system mostly from deviant users. The problem is that, in computer world, all users are potentially deviant! You have to see the interface of the software as the public area of it: naturally, with many users, you can assume that they will try all, so you have to ensure that no dangerous parts are left in it. Doing so (part of the security by design), you remove the major part of potential thread from the users.</p>
 </section>
 <section id="general-dispositions" class="level2">
 <h2 class="anchored" data-anchor-id="general-dispositions">General dispositions</h2>
