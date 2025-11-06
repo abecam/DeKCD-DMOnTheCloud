@@ -39,6 +39,23 @@ Backups tools -> versioning, monitoring, differential and incremental backups an
 
 One very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.
 
+## Aspects of security
+
+By security in an information system, we consider every aspect allowing the right use of the information system (including, but not only, the protection of data):
+Availability, integrity, confidentiality, trustworthiness, access control.
+It is important to know which of these aspects are needed in the system to build. The possible threats are then coming from:
+- the system users, not willingly doing any damage,
+- malicious persons, who want to access data or program, to damage the infrastructure, to cheat, to annoy,
+- malicious software, a software which will give a nuisance to other or abuse the resources (that can be unintentional), open the system to intrusions,
+- one disaster, a simple electric break, one bad manipulation, a fire, …
+It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one
+way to fight against this kind of problem.
+
+## Limits of security
+
+Security in computer software is very much alike security in the real-life: if you want your house to be totally secure, you have to push a 3 meter high concrete wall around with automatic machine guns. Not fun, not neighbour-friendly and not inhabitant-friendly too. The same rule applies in software development: you just cannot have a totally secured system, as nothing will be usable then (or with much difficulties). The fact is that, like in the real life, the user must show some respect to other users and to the software architecture, and we must protect the system mostly from deviant users.
+The problem is that, in computer world, all users are potentially deviant! You have to see the interface of the software as the public area of it: naturally, with many users, you can assume that they will try all, so you have to ensure that no dangerous parts are left in it. Doing so (part of the security by design), you remove the major part of potential thread from the users.
+
 ## General dispositions
 
 Default user not root (or super user if Windows)

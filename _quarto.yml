@@ -24,7 +24,7 @@ website:
         - section: "Kubernetes"
           contents:
             - pages/Kubernetes_introduction.qmd
-            - pages/Volumes.qmd
+            - pages/Data_storage.qmd
             - pages/Backups_and_security.qmd
         - section: "Scrap pages"
           contents:
