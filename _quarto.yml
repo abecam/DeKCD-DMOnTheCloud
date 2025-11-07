@@ -21,6 +21,7 @@ website:
         - section: "Data Management Principles"
           contents:
             - pages/DM_planning.qmd
+            - pages/Pseudonymization.qmd
         - section: "Kubernetes"
           contents:
             - pages/Kubernetes_introduction.qmd
