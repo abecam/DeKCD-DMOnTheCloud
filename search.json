@@ -25,11 +25,273 @@
     ]
   },
   {
-    "objectID": "pages/Costs_Limits_Troubleshooting.html",
-    "href": "pages/Costs_Limits_Troubleshooting.html",
-    "title": "Kubernetes - costs, limits and troubleshooting",
+    "objectID": "pages/Data_storage.html",
+    "href": "pages/Data_storage.html",
+    "title": "Data Storage",
     "section": "",
-    "text": "1 The cost of Kubernetes\nHigh complexity of some setup with less clarity than normal installation (complex Helm chart or operator).\n\n\n2 When an image does not work\nOne common issue with Docker and Kubernetes, or any other technologies using containers, is that the used images must work. Generally, with popular and well-maintained tools it isn’t an issue, but there could still be popular tools where the containerisation is an after-thought, and not always up-to-date, or older tools or less popular without an image or with an obsolete image. Or it could be a specific issue that makes this image breaks on your set-up.\nIn these cases, fixing the issue might be a high-cost operation, and a bare-metal or virtual-machine installation might help figure out the problem and fix it, or at the very last choice, be used instead."
+    "text": "Evidently, an important part of Data Management is the storage of data.\n\nVolumes\nFrom container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Data Storage"
+    ]
+  },
+  {
+    "objectID": "pages/DM_planning.html",
+    "href": "pages/DM_planning.html",
+    "title": "DataManagement - Planning",
+    "section": "",
+    "text": "A great introduction for Data Management can be found here and a cookbook (with examples for Life Science) here",
+    "crumbs": [
+      "Home",
+      "Data Management Principles",
+      "DataManagement - Planning"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html",
+    "href": "pages/Backups_and_security.html",
+    "title": "Backups and Security",
+    "section": "",
+    "text": "One generally important aspect of Data Management and data usage is to know which data to store and how to store it.\n\n\nIn many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#personal-data",
+    "href": "pages/Backups_and_security.html#personal-data",
+    "title": "Backups and Security",
+    "section": "",
+    "text": "In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
+    "href": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
+    "title": "Backups and Security",
+    "section": "Defence need to be always a success, attack need only one",
+    "text": "Defence need to be always a success, attack need only one\nOne very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#aspects-of-security",
+    "href": "pages/Backups_and_security.html#aspects-of-security",
+    "title": "Backups and Security",
+    "section": "Aspects of security",
+    "text": "Aspects of security\nBy security in an information system, we consider every aspect allowing the right use of the information system (including, but not only, the protection of data): Availability, integrity, confidentiality, trustworthiness, access control. It is important to know which of these aspects are needed in the system to build. The possible threats are then coming from: - the system users, not willingly doing any damage, - malicious persons, who want to access data or program, to damage the infrastructure, to cheat, to annoy, - malicious software, a software which will give a nuisance to other or abuse the resources (that can be unintentional), open the system to intrusions, - one disaster, a simple electric break, one bad manipulation, a fire, … It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one way to fight against this kind of problem.",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#limits-of-security",
+    "href": "pages/Backups_and_security.html#limits-of-security",
+    "title": "Backups and Security",
+    "section": "Limits of security",
+    "text": "Limits of security\nSecurity in computer software is very much alike security in the real-life: if you want your house to be totally secure, you have to push a 3 meter high concrete wall around with automatic machine guns. Not fun, not neighbour-friendly and not inhabitant-friendly too. The same rule applies in software development: you just cannot have a totally secured system, as nothing will be usable then (or with much difficulties). The fact is that, like in the real life, the user must show some respect to other users and to the software architecture, and we must protect the system mostly from deviant users. The problem is that, in computer world, all users are potentially deviant! You have to see the interface of the software as the public area of it: naturally, with many users, you can assume that they will try all, so you have to ensure that no dangerous parts are left in it. Doing so (part of the security by design), you remove the major part of potential thread from the users.",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#general-dispositions",
+    "href": "pages/Backups_and_security.html#general-dispositions",
+    "title": "Backups and Security",
+    "section": "General dispositions",
+    "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#firewall",
+    "href": "pages/Backups_and_security.html#firewall",
+    "title": "Backups and Security",
+    "section": "Firewall",
+    "text": "Firewall",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#protections-against-attacks",
+    "href": "pages/Backups_and_security.html#protections-against-attacks",
+    "title": "Backups and Security",
+    "section": "Protections against attacks",
+    "text": "Protections against attacks",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#passwords-and-keys",
+    "href": "pages/Backups_and_security.html#passwords-and-keys",
+    "title": "Backups and Security",
+    "section": "Passwords and keys",
+    "text": "Passwords and keys",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-log-log-levels",
+    "href": "pages/Backups_and_security.html#what-to-never-log-log-levels",
+    "title": "Backups and Security",
+    "section": "What to never log, log levels",
+    "text": "What to never log, log levels\nLog are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).\nFor instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e. the attacker hoping that a mechanism in the code will execute a payload. A simple example would be executing raw SQL queries: * The URL subpath is /users/[name] where [name] is the name you want to look for. * The code will then simply execute “SELECT * FROM users WHERE name=[name];” * The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“. * The code will execute”SELECT * FROM users WHERE name=“name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error. * If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it should not work).\nThis is a really well known and simple example and no modern web framework or API should allow such attacks nowadays. But the actual issue is with unknow vulnerability. Going back to this example, the web application should log something like:\n“2025-11-23_2:32:22 - Warning - incorrect characters in path:”/users/name”;DROP%20TABLE%20admin;%20 –”\nAnd that would allow to check what was attempted.\nBut logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:\n\nusername, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
+    "title": "Backups and Security",
+    "section": "What to never store (or never in “reversible” format)",
+    "text": "What to never store (or never in “reversible” format)",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#know-your-infrastructure",
+    "href": "pages/Backups_and_security.html#know-your-infrastructure",
+    "title": "Backups and Security",
+    "section": "Know your infrastructure",
+    "text": "Know your infrastructure",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "pages/Backups_and_security.html#deleting-data",
+    "href": "pages/Backups_and_security.html#deleting-data",
+    "title": "Backups and Security",
+    "section": "Deleting data",
+    "text": "Deleting data",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
+    "objectID": "roadblocks.html",
+    "href": "roadblocks.html",
+    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
+    "section": "",
+    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security? (keys)\nAssembly on the cloud, Assembly between clouds (or cloud/servers) -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility? (GDPR, simple privacy concern, data theft, data loss, data leaks, data corruption)\nDaemonSet for monitoring and other tasks.",
+    "crumbs": [
+      "Home",
+      "Scrap pages",
+      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "",
+    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#vocabulary",
+    "href": "index.html#vocabulary",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Vocabulary",
+    "text": "Vocabulary\n“Bare-Metal” is a bit of a misnomer, as it means originally using a computer without operating system, directly on the hardware (so using a low-level language such as ASM or C). But a bare-metal setup means a direct installation on a machine with the operating system.\n\n\n\n\n\n\nNote\n\n\n\nNote that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e. difficulty of maintenance)\n\n\nA Virtual Machine is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.\nIt can be an emulation, “imitating” a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.\nOr a virtualization, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used: * full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update. * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals. * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed images that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.\n\n\n\n\n\n\nNote\n\n\n\nA main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#vocabulary-1",
+    "href": "index.html#vocabulary-1",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Vocabulary",
+    "text": "Vocabulary\n\nAn Image\nA container\nA volume\nDocker compose",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#useful-things-to-know",
+    "href": "index.html#useful-things-to-know",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Useful things to know",
+    "text": "Useful things to know\nA docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using docker inspect &lt;image id&gt;, but also individually by using docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt; and docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about cmd and Entrypoint, the official Docker documentation offer a great overview.\nChanging something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#advantages",
+    "href": "index.html#advantages",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Advantages",
+    "text": "Advantages",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#things-to-take-into-account",
+    "href": "index.html#things-to-take-into-account",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Things to take into account",
+    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#namespaces-and-namespaces-collisions",
+    "href": "index.html#namespaces-and-namespaces-collisions",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Namespaces and namespaces collisions",
+    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
   },
   {
     "objectID": "pages/Kubernetes_introduction.html",
@@ -248,273 +510,18 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "objectID": "pages/Costs_Limits_Troubleshooting.html",
+    "href": "pages/Costs_Limits_Troubleshooting.html",
+    "title": "Kubernetes - costs, limits and troubleshooting",
     "section": "",
-    "text": "Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
+    "text": "1 The cost of Kubernetes\nHigh complexity of some setup with less clarity than normal installation (complex Helm chart or operator).\n\n\n2 When an image does not work\nOne common issue with Docker and Kubernetes, or any other technologies using containers, is that the used images must work. Generally, with popular and well-maintained tools it isn’t an issue, but there could still be popular tools where the containerisation is an after-thought, and not always up-to-date, or older tools or less popular without an image or with an obsolete image. Or it could be a specific issue that makes this image breaks on your set-up.\nIn these cases, fixing the issue might be a high-cost operation, and a bare-metal or virtual-machine installation might help figure out the problem and fix it, or at the very last choice, be used instead."
   },
   {
-    "objectID": "index.html#vocabulary",
-    "href": "index.html#vocabulary",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Vocabulary",
-    "text": "Vocabulary\n“Bare-Metal” is a bit of a misnomer, as it means originally using a computer without operating system, directly on the hardware (so using a low-level language such as ASM or C). But a bare-metal setup means a direct installation on a machine with the operating system.\n\n\n\n\n\n\nNote\n\n\n\nNote that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e. difficulty of maintenance)\n\n\nA Virtual Machine is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.\nIt can be an emulation, “imitating” a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.\nOr a virtualization, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used: * full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update. * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals. * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed images that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.\n\n\n\n\n\n\nNote\n\n\n\nA main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#vocabulary-1",
-    "href": "index.html#vocabulary-1",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Vocabulary",
-    "text": "Vocabulary\n\nAn Image\nA container\nA volume\nDocker compose",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#useful-things-to-know",
-    "href": "index.html#useful-things-to-know",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Useful things to know",
-    "text": "Useful things to know\nA docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using docker inspect &lt;image id&gt;, but also individually by using docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt; and docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about cmd and Entrypoint, the official Docker documentation offer a great overview.\nChanging something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#advantages",
-    "href": "index.html#advantages",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Advantages",
-    "text": "Advantages",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#things-to-take-into-account",
-    "href": "index.html#things-to-take-into-account",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Things to take into account",
-    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#namespaces-and-namespaces-collisions",
-    "href": "index.html#namespaces-and-namespaces-collisions",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Namespaces and namespaces collisions",
-    "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "roadblocks.html",
-    "href": "roadblocks.html",
-    "title": "Scrap page: roadblocks, difficulties to remove or solutions to issues",
+    "objectID": "pages/Pseudonymization.html",
+    "href": "pages/Pseudonymization.html",
+    "title": "Pseudonymization",
     "section": "",
-    "text": "StatefulSet for temporary data (like a cache)\nBackup, K8s cronjob for backup, where to backup\nGitHub CI/CD to a cloud -&gt; security? (keys)\nAssembly on the cloud, Assembly between clouds (or cloud/servers) -&gt; security of set-up and exchange, who is monitoring (and how), where lies the responsibility? (GDPR, simple privacy concern, data theft, data loss, data leaks, data corruption)\nDaemonSet for monitoring and other tasks.",
-    "crumbs": [
-      "Home",
-      "Scrap pages",
-      "Scrap page: roadblocks, difficulties to remove or solutions to issues"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html",
-    "href": "pages/Backups_and_security.html",
-    "title": "Backups and Security",
-    "section": "",
-    "text": "One generally important aspect of Data Management and data usage is to know which data to store and how to store it.\n\n\nIn many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#personal-data",
-    "href": "pages/Backups_and_security.html#personal-data",
-    "title": "Backups and Security",
-    "section": "",
-    "text": "In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.\nTODO: Add links\nWhen some research data is linked to person, it is advised to pseudonymize or to anonymize the data.\n\n\n\n\n\n\nImportant\n\n\n\nThe limitation of data storage for personal information includes backups",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
-    "href": "pages/Backups_and_security.html#defence-need-to-be-always-a-success-attack-need-only-one",
-    "title": "Backups and Security",
-    "section": "Defence need to be always a success, attack need only one",
-    "text": "Defence need to be always a success, attack need only one\nOne very important rule of security is that the attacker needs only one success. So it does not matter if many attempts are unsuccessful. They only need to try again. Thus defenders must adapt and monitor. It should be avoiding known vulnerabilies while trying to care for unknown ones.",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#aspects-of-security",
-    "href": "pages/Backups_and_security.html#aspects-of-security",
-    "title": "Backups and Security",
-    "section": "Aspects of security",
-    "text": "Aspects of security\nBy security in an information system, we consider every aspect allowing the right use of the information system (including, but not only, the protection of data): Availability, integrity, confidentiality, trustworthiness, access control. It is important to know which of these aspects are needed in the system to build. The possible threats are then coming from: - the system users, not willingly doing any damage, - malicious persons, who want to access data or program, to damage the infrastructure, to cheat, to annoy, - malicious software, a software which will give a nuisance to other or abuse the resources (that can be unintentional), open the system to intrusions, - one disaster, a simple electric break, one bad manipulation, a fire, … It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one way to fight against this kind of problem.",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#limits-of-security",
-    "href": "pages/Backups_and_security.html#limits-of-security",
-    "title": "Backups and Security",
-    "section": "Limits of security",
-    "text": "Limits of security\nSecurity in computer software is very much alike security in the real-life: if you want your house to be totally secure, you have to push a 3 meter high concrete wall around with automatic machine guns. Not fun, not neighbour-friendly and not inhabitant-friendly too. The same rule applies in software development: you just cannot have a totally secured system, as nothing will be usable then (or with much difficulties). The fact is that, like in the real life, the user must show some respect to other users and to the software architecture, and we must protect the system mostly from deviant users. The problem is that, in computer world, all users are potentially deviant! You have to see the interface of the software as the public area of it: naturally, with many users, you can assume that they will try all, so you have to ensure that no dangerous parts are left in it. Doing so (part of the security by design), you remove the major part of potential thread from the users.",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#general-dispositions",
-    "href": "pages/Backups_and_security.html#general-dispositions",
-    "title": "Backups and Security",
-    "section": "General dispositions",
-    "text": "General dispositions\nDefault user not root (or super user if Windows)\nCareful with the paths and their access rights\nSymbolic links\nDatabase user, schema protections\ndifficult configurations and their possible issues (such as .htaccess or apache configuration in general)\n???",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#firewall",
-    "href": "pages/Backups_and_security.html#firewall",
-    "title": "Backups and Security",
-    "section": "Firewall",
-    "text": "Firewall",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#protections-against-attacks",
-    "href": "pages/Backups_and_security.html#protections-against-attacks",
-    "title": "Backups and Security",
-    "section": "Protections against attacks",
-    "text": "Protections against attacks",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#passwords-and-keys",
-    "href": "pages/Backups_and_security.html#passwords-and-keys",
-    "title": "Backups and Security",
-    "section": "Passwords and keys",
-    "text": "Passwords and keys",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#what-to-never-log-log-levels",
-    "href": "pages/Backups_and_security.html#what-to-never-log-log-levels",
-    "title": "Backups and Security",
-    "section": "What to never log, log levels",
-    "text": "What to never log, log levels\nLog are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).\nFor instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e. the attacker hoping that a mechanism in the code will execute a payload. A simple example would be executing raw SQL queries: * The URL subpath is /users/[name] where [name] is the name you want to look for. * The code will then simply execute “SELECT * FROM users WHERE name=[name];” * The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“. * The code will execute”SELECT * FROM users WHERE name=“name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error. * If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it should not work).\nThis is a really well known and simple example and no modern web framework or API should allow such attacks nowadays. But the actual issue is with unknow vulnerability. Going back to this example, the web application should log something like:\n“2025-11-23_2:32:22 - Warning - incorrect characters in path:”/users/name”;DROP%20TABLE%20admin;%20 –”\nAnd that would allow to check what was attempted.\nBut logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:\n\nusername, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
-    "href": "pages/Backups_and_security.html#what-to-never-store-or-never-in-reversible-format",
-    "title": "Backups and Security",
-    "section": "What to never store (or never in “reversible” format)",
-    "text": "What to never store (or never in “reversible” format)",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#know-your-infrastructure",
-    "href": "pages/Backups_and_security.html#know-your-infrastructure",
-    "title": "Backups and Security",
-    "section": "Know your infrastructure",
-    "text": "Know your infrastructure",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/Backups_and_security.html#deleting-data",
-    "href": "pages/Backups_and_security.html#deleting-data",
-    "title": "Backups and Security",
-    "section": "Deleting data",
-    "text": "Deleting data",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Backups and Security"
-    ]
-  },
-  {
-    "objectID": "pages/DM_planning.html",
-    "href": "pages/DM_planning.html",
-    "title": "DataManagement - Planning",
-    "section": "",
-    "text": "A great introduction for Data Management can be found here and a cookbook (with examples for Life Science) here",
-    "crumbs": [
-      "Home",
-      "Data Management Principles",
-      "DataManagement - Planning"
-    ]
-  },
-  {
-    "objectID": "pages/Data_storage.html",
-    "href": "pages/Data_storage.html",
-    "title": "Data Storage",
-    "section": "",
-    "text": "Evidently, an important part of Data Management is the storage of data.\n\nVolumes\nFrom container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.\nSome more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.",
-    "crumbs": [
-      "Home",
-      "Kubernetes",
-      "Data Storage"
-    ]
+    "text": "Document originally written as part of the LiSyM Cancer project.\n\n1 Introduction\nPseudonymization of data is both vital for confidentiality reasons, and as a requirement of the GDPR.\nIt allows linking back the data to the initial record, but only through a separated, protected information.\nBut, as well as for anonymization, it also consists of voluntarily removing some other data that could co-relate to the patient: social data such as date of birth, address, that will not give access to the original record but could allow to find the person it concerns. Such data should be removed, degraded or masked.\n\n\n2 What should be pseudonymized?\nEvery field that acts as an identifier and needs to be kept should be pseudonymised. It could be the main identifier of a record, or the identifiers of a sub-record.\nFor instance, if a record is concerning patients and relates to another category by using personal information (such as names or date of birth). The main ID of the patient record will be mapped to a pseudonym (generally a randomly chosen ID), all fields not needed should be removed, even if they act also as ID (sur as full name). The related record is linked by a pseudonym and, if the original ID is of importance, the relevant information will be extracted:\nIf the ID to the related record was firstname-lastname_date of birth, and the age is of importance:\n\nThe mapping will be done using a pseudonym instead,\n\nThe age will be extracted from the ID and kept as a field of the record. The amount of information should be reduced as much as possible: for instance “between 40 and 45” instead of “43 years and 3 months”.\n\nThe relation could also be removed on the exported data, with the related data pseudonymized to be related only to the original record.\nWarning: exposed public data should be anonymised instead (no possibility of linking back to the original record, no possibility to co-relate to the concerned person).\n\n\n3 Removing the possibilities to co-relate\nIn the previous example, the date of birth is personal information that does not link directly to the patient. But it could together with other information.\nAs such, all personal information, and be extension all data that could expose a person should be masked:\n\nPreferably be removed,\n\nBe degraded (remove the day and month of birth),\n\nOr eventually be masked by other means (see Wikipedia for a complete description).\n\n\n\n4 How to\nA pseudonymization allows a link between the original record (containing private information) and the pseudonymized record (that is open to more or different) persons only through another separated information - protected evidently.\nSo the data should ideally not be pseudonymized on the destination server, but prior to the export here. It could still be pseudonymized there if the mapping information - from the original data ID to the pseudonym - is not kept.\nThe external information to support the mapping can be the tuple original record’s identifier and pseudonym securely kept, or a key to decrypt the pseudonym which is mapped to the original record’s identifier on the same platform as the original record. If different persons need different access, it is possible to use several keys.\nMapping\nFor security reasons, it would be better to give a new ID for the exported records, independent of the pseudonym, and use the pseudonym only for linking with the original record: in that case, if the mapping data has been compromised, it is easy to rebuild the mapping without breaking the exported data and their use. It might also help re-exporting the data with a new mapping if this last is lost.\nData masking can be done either by the migrating script, by the exporting system or on the system to export to. It will probably be done by the migrating script in most cases, but could be complemented. In NextCloud we could develop an app (plugin for NextCloud) for doing so.\n\n\n5 Existing technical solutions\nFor the pseudonymization of record in itself, there aren’t many existing solutions, especially from OpenSource projects. Fortunately there is a very mature web-based tool available called gPAS (and on GitHub), already used in several institutions in Germany. Other OpenSource projects include Kodex, also very complete but offering a web-interface only for the commercial version, a Rest-based API solution called Amnesia, which would need to be run locally only or behind some authentication, and an desktop tool: OpenPseudonymiser. There exists also commercial solutions, such as Viacryp.\nData masking is supported by PIMO that supports most method and work on JSon. It is also something we could implement. There is nothing difficult in doing it, but the difficulty resides on how much to remove/degrade so we comply with the need of data protection without rendering the data useless.\n\n\n6 Things to be careful of\nSecurity of the controller application: the controller application is the key to link the exported data with the original record. As such it needs to be accessible for authorised users, eventually with different accesses based on roles (though anyone without access to the initial records have no interest in the mapping, so roles are not very important as long as the initial records are private), and well secured. It also needs to be backed-up regularly.\nAccess right: there will be 3 different access rights between the original platform, the controller application and the destination platform. The controller application might be the most closed one.\nIn case of breach: as long as the original data has not been compromised as well, a quick recreation of the mapping should be enough.\n\n\n7 Addendum\nThis document covers anonymisation and pseudonymisation in great detail together with examples."
   },
   {
     "objectID": "about.html",
