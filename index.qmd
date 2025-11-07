@@ -91,6 +91,10 @@ command &, CTRL-Z + bg/fg -> running a command in the backgound
 
 kill command -> signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)
 
+systemctl graceful
+
+rsync
+
 ? Which other 
 
 ### Folders you should know
