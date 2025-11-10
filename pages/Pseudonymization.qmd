@@ -44,7 +44,7 @@ So the data should ideally not be pseudonymized on the destination server, but p
 
 The external information to support the mapping can be the tuple original record’s identifier and pseudonym securely kept, or a key to decrypt the pseudonym which is mapped to the original record’s identifier on the same platform as the original record. If different persons need different access, it is possible to use several keys.
 
-[Mapping](../images/Mapping.svg)
+![Mapping](../images/Mapping.svg)
 
 For security reasons, it would be better to give a new ID for the exported records, independent of the pseudonym, and use the pseudonym only for linking with the original record: in that case, if the mapping data has been compromised, it is easy to rebuild the mapping without breaking the exported data and their use. It might also help re-exporting the data with a new mapping if this last is lost. 
 
