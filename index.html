@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,7 +37,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-29a19b5acbeac218a8c860e48340d4df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -80,8 +80,6 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">De.KCD - Data Management Platform on the Cloud - Quickstart</span>
     </a>
@@ -125,10 +123,6 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -344,11 +338,24 @@ ul.task-list li input[type="checkbox"] {
 <p>ln -&gt; create a symbolic link and know the difference between: * a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file * and a symbolic link: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</p>
 <p>For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.</p>
 <p>chown/chmod -&gt; change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x——-, 755, chmod o+r filename, chmod -R username filename</p>
-<p>grep -&gt; search for the presence of a string in files, often used combined with another command with a |</p>
-<p>mount</p>
-<p>pwd/whoami</p>
-<p>eval</p>
 <p>Ideally the pipe (|) should be well understood, as well as the I/O indirections (&gt;, &gt;&gt;, &lt;).</p>
+<p>grep -&gt; search for the presence of a string in files, often used combined with another command with a |</p>
+<p>mount -&gt; allow to use a file system. For instance, a USB key needs to be mounted before it can be accessed. The root folder to temporary file system is often /mnd/. Modern Unix system will automount some medias.</p>
+<p>pwd/whoami</p>
+<p>eval -&gt; is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Knowing eval is important for security reason. The presence of an eval in a suspicious script calls for caution.</p>
+</div>
+</div>
 <p>curl is also good to know.</p>
 <p>free/df/dh -&gt; know how many resources are available</p>
 <p>command &amp;, CTRL-Z + bg/fg -&gt; running a command in the backgound</p>
