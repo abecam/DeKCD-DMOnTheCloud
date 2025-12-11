@@ -87,6 +87,8 @@ While the **Pod** is the smallest element in Kubernetes, it is directly started 
 If you define a pod or create it using `kubectl`, it will only run once and will not be restarted if something fails.
 As such, it is like `docker run` if started manually, or `docker compose` if started using a manifest, and offers no benefit — just the added complexity of the Kubernetes setup.
 
+A pod is using a container engine, which does not have to be docker.
+
 A **ReplicaSet** asks for a set number of pods, and Kubernetes will ensure that these pods are always running.
 If one pod becomes unhealthy or crashes, Kubernetes automatically removes it and creates a new one.
 

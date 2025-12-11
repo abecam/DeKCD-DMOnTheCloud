@@ -73,15 +73,19 @@ For setting-up an application, we generally use symbolic links, mostly as a way 
 
 chown/chmod -> change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x-------, 755, chmod o+r filename, chmod -R username filename
 
+Ideally the pipe (|) should be well understood, as well as the I/O indirections (>, >>, <).
+
 grep -> search for the presence of a string in files, often used combined with another command with a |
 
-mount
+mount -> allow to use a file system. For instance, a USB key needs to be mounted before it can be accessed. The root folder to temporary file system is often /mnd/. Modern Unix system will automount some medias.
 
 pwd/whoami
 
-eval
+eval -> is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.
 
-Ideally the pipe (|) should be well understood, as well as the I/O indirections (>, >>, <).
+::: {.callout-note}
+Knowing eval is important for security reason. The presence of an eval in a suspicious script calls for caution.
+:::
 
 curl is also good to know.
 
