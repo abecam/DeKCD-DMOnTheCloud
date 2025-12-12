@@ -79,7 +79,13 @@ grep -> search for the presence of a string in files, often used combined with a
 
 mount -> allow to use a file system. For instance, a USB key needs to be mounted before it can be accessed. The root folder to temporary file system is often /mnd/. Modern Unix system will automount some medias.
 
-pwd/whoami
+pwd/whoami -> **pwd** return the current path, **whoami** the current user.
+
+kill -> kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for  SIGKILL (**kill -KILL processId**) and SIGSTOP (**kill -STOP processId**), to respectivelly forcefully kill or stop a process. The default signal (i.e. no argument) for **kill** is SIGTERM (**kill -TERM processId**), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only **kill -KILL processId** will kill the application.
+
+The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.
+
+The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.
 
 eval -> is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.
 
@@ -95,7 +101,9 @@ command &, CTRL-Z + bg/fg -> running a command in the backgound
 
 kill command -> signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)
 
-systemctl graceful
+systemctl graceful ->  **systemctl** is part of **systemd**, where the 'd' stands for 'daemons'.*Daemons* are Unix's background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. **systemctl graceful** ask for a clean restart of a service -> finish the existing "transaction" before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).
+
+apachectl configtest / nginx -t -> allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.
 
 rsync
 
