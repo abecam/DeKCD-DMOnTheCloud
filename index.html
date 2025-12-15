@@ -326,9 +326,9 @@ ul.task-list li input[type="checkbox"] {
 <p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.</p>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
-<p>ls ls -al -&gt; list the content of a directory</p>
+<p>ls -&gt; list the content of a directory, <strong>ls -al</strong> -&gt; include all file (so including hidden files (starting by “.”)) and as a detailed list.</p>
 <p>cd -&gt; go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)</p>
-<p>ps ps -edf ps -aux -&gt; list the running processes and their owner</p>
+<p>ps -&gt; list the running processes, <strong>ps -edf</strong> or <strong>ps -aux</strong> -&gt; list the running processes and their owner</p>
 <p>top -&gt; show the current running processes and their memory/cpu usage (CTRL-C to end)</p>
 <p>cp/mv/mkdir</p>
 <p>more, less, cat</p>
@@ -365,7 +365,7 @@ Note
 <p>kill command -&gt; signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)</p>
 <p>systemctl graceful -&gt; <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl graceful</strong> ask for a clean restart of a service -&gt; finish the existing “transaction” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).</p>
 <p>apachectl configtest / nginx -t -&gt; allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.</p>
-<p>rsync</p>
+<p>rsync -&gt; remote synchronizing of files and directories. It allows to save several defined files and/or directories on another host without a dedicated backup tool. Together with a database dump it could serve as a backup solution. In that case it is important to have a monitoring of the process to ensure it is working.</p>
 <p>? Which other</p>
 </section>
 <section id="folders-you-should-know" class="level3">
