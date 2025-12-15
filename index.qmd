@@ -47,11 +47,11 @@ Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative
 
 ### Commands that should be known
 
-ls    ls -al -> list the content of a directory
+ls -> list the content of a directory, **ls -al** -> include all file (so including hidden files (starting by ".")) and as a detailed list.
 
 cd -> go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)
 
-ps ps -edf ps -aux -> list the running processes and their owner
+ps -> list the running processes, **ps -edf** or **ps -aux** -> list the running processes and their owner
 
 top -> show the current running processes and their memory/cpu usage (CTRL-C to end)
 
@@ -105,7 +105,7 @@ systemctl graceful ->  **systemctl** is part of **systemd**, where the 'd' stand
 
 apachectl configtest / nginx -t -> allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.
 
-rsync
+rsync -> remote synchronizing of files and directories. It allows to save several defined files and/or directories on another host without a dedicated backup tool. Together with a database dump it could serve as a backup solution. In that case it is important to have a monitoring of the process to ensure it is working.
 
 ? Which other 
 
