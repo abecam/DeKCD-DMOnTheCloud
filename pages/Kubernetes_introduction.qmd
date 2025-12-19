@@ -9,7 +9,7 @@ Try to explain clearly what the Kubernetes elements translate to and repeat it o
 Explain everything: so start from a simple (and stupid) solution and add to it.
 Do not drown: keep things structured so things are not confusing.
 
-# Our showcase application: [FAIRDOM Seek]
+# Our showcase application: [FAIRDOM Seek](https://seek4science.org/)
 
 Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bar metal to full cloud setup as (1) it is already available as container and bare-metal installation, with a complete Docker compose which is still easy to understand,(2) it generally relies on several containers (4 with the default docker compose), several volumes, workers (i.e. side process that run regularly for doing batch works), a comprehensive search using Solr, and object storage and (3) it can be run with the unique Seek container (using a sqlite database within the container) so can go from really simple (for discovery or tutorials) to rather large (with load balancing, external DB, backups) which will allow us to go from a simple and stupid (in a Kubernetes context) case to full setups with most of the cases suitable for production.
 
@@ -37,7 +37,7 @@ On Windows, the simplest way to run Kubernetes is probably using Docker Desktop.
 On Linux, there are lightweight setup using various approached. The main ones are:
 
 * [kubeadm, the official setup](https://kubernetes.io/docs/reference/setup-tools/kubeadm/),
-* [k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL](https://k3s.io/),
+* [k3s, a binary distribution, not available as a Windows executable, can be installed through WSL](https://k3s.io/),
 * [k0s, another binary distribution, for Linux and Docker](https://k0sproject.io/), 
 * [RKE2, another binary distribution that also works on Windows](https://docs.rke2.io/),
 * [Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker](https://www.talos.dev/),
@@ -141,6 +141,8 @@ You can also roll back easily if something goes wrong, as Kubernetes keeps the p
 ---
 
 ## Where do you store the data
+
+TODO: Note about etcd
 
 Containers are temporary — when they stop, everything inside disappears.
 For most applications, you need to keep data somewhere safe and separate from the containers.
