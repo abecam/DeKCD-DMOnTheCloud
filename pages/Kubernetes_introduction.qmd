@@ -74,6 +74,42 @@ And generally, the applications are deployed as:
 * **ConfigMap:** stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.
 * **Secret:** similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.
 
+```{mermaid}
+graph TD
+  %% Infrastructure
+  Cluster --> Node --> Pod --> Container
+
+  %% Workload controllers
+  Deployment --> ReplicaSet --> Pod
+  DaemonSet --> Pod
+  StatefulSet --> Pod
+  Job --> Pod
+
+  %% Networking & config
+  Service --> Pod
+  ConfigMap --> Pod
+  Secret --> Pod
+  Label --> Pod
+
+  %% Tooling
+  Manifest --> Deployment
+  Manifest --> Service
+  Manifest --> ConfigMap
+  Manifest --> Secret
+  kubectl --> Cluster
+
+  %% Styles
+  classDef infra fill:#326ce5,color:#fff,stroke:#1b3c87
+  classDef workload fill:#4f8cff,color:#fff,stroke:#1b3c87
+  classDef config fill:#5bb974,color:#fff,stroke:#2f6f44
+  classDef tool fill:#7b6cf6,color:#fff,stroke:#3b2fa3
+
+  class Cluster,Node infra
+  class Deployment,ReplicaSet,DaemonSet,StatefulSet,Job,Pod workload
+  class Service,ConfigMap,Secret,Label config
+  class Manifest,kubectl tool
+```
+
 ## Everything decoupled
 
 How Kubernetes makes everything through API and labels
