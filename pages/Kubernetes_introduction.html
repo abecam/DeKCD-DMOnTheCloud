@@ -68,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -367,6 +370,50 @@ Warning
 <li><strong>ConfigMap:</strong> stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.</li>
 <li><strong>Secret:</strong> similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.</li>
 </ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+  %% Infrastructure
+  Cluster --&gt; Node --&gt; Pod --&gt; Container
+
+  %% Workload controllers
+  Deployment --&gt; ReplicaSet --&gt; Pod
+  DaemonSet --&gt; Pod
+  StatefulSet --&gt; Pod
+  Job --&gt; Pod
+
+  %% Networking &amp; config
+  Service --&gt; Pod
+  ConfigMap --&gt; Pod
+  Secret --&gt; Pod
+  Label --&gt; Pod
+
+  %% Tooling
+  Manifest --&gt; Deployment
+  Manifest --&gt; Service
+  Manifest --&gt; ConfigMap
+  Manifest --&gt; Secret
+  kubectl --&gt; Cluster
+
+  %% Styles
+  classDef infra fill:#326ce5,color:#fff,stroke:#1b3c87
+  classDef workload fill:#4f8cff,color:#fff,stroke:#1b3c87
+  classDef config fill:#5bb974,color:#fff,stroke:#2f6f44
+  classDef tool fill:#7b6cf6,color:#fff,stroke:#3b2fa3
+
+  class Cluster,Node infra
+  class Deployment,ReplicaSet,DaemonSet,StatefulSet,Job,Pod workload
+  class Service,ConfigMap,Secret,Label config
+  class Manifest,kubectl tool
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="everything-decoupled" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="everything-decoupled"><span class="header-section-number">3.3</span> Everything decoupled</h2>
