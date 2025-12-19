@@ -228,7 +228,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#working-progress" id="toc-working-progress" class="nav-link active" data-scroll-target="#working-progress"><span class="header-section-number">1</span> Working progress</a></li>
-  <li><a href="#our-showcase-application-fairdom-seek" id="toc-our-showcase-application-fairdom-seek" class="nav-link" data-scroll-target="#our-showcase-application-fairdom-seek"><span class="header-section-number">2</span> Our showcase application: [FAIRDOM Seek]</a>
+  <li><a href="#our-showcase-application-fairdom-seek" id="toc-our-showcase-application-fairdom-seek" class="nav-link" data-scroll-target="#our-showcase-application-fairdom-seek"><span class="header-section-number">2</span> Our showcase application: FAIRDOM Seek</a>
   <ul class="collapse">
   <li><a href="#seek-and-his-components" id="toc-seek-and-his-components" class="nav-link" data-scroll-target="#seek-and-his-components"><span class="header-section-number">2.1</span> Seek and his components</a></li>
   <li><a href="#the-default-docker-compose" id="toc-the-default-docker-compose" class="nav-link" data-scroll-target="#the-default-docker-compose"><span class="header-section-number">2.2</span> The default Docker Compose</a></li>
@@ -290,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible. Explain everything: so start from a simple (and stupid) solution and add to it. Do not drown: keep things structured so things are not confusing.</p>
 </section>
 <section id="our-showcase-application-fairdom-seek" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Our showcase application: [FAIRDOM Seek]</h1>
+<h1 data-number="2"><span class="header-section-number">2</span> Our showcase application: <a href="https://seek4science.org/">FAIRDOM Seek</a></h1>
 <p>Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bar metal to full cloud setup as (1) it is already available as container and bare-metal installation, with a complete Docker compose which is still easy to understand,(2) it generally relies on several containers (4 with the default docker compose), several volumes, workers (i.e.&nbsp;side process that run regularly for doing batch works), a comprehensive search using Solr, and object storage and (3) it can be run with the unique Seek container (using a sqlite database within the container) so can go from really simple (for discovery or tutorials) to rather large (with load balancing, external DB, backups) which will allow us to go from a simple and stupid (in a Kubernetes context) case to full setups with most of the cases suitable for production.</p>
 <section id="seek-and-his-components" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="seek-and-his-components"><span class="header-section-number">2.1</span> Seek and his components</h2>
@@ -321,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
 <p>On Linux, there are lightweight setup using various approached. The main ones are:</p>
 <ul>
 <li><a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">kubeadm, the official setup</a>,</li>
-<li><a href="https://k3s.io/">k3s, a binary distribution, not availabe as a Windows executable, can be installed through WSL</a>,</li>
+<li><a href="https://k3s.io/">k3s, a binary distribution, not available as a Windows executable, can be installed through WSL</a>,</li>
 <li><a href="https://k0sproject.io/">k0s, another binary distribution, for Linux and Docker</a>,</li>
 <li><a href="https://docs.rke2.io/">RKE2, another binary distribution that also works on Windows</a>,</li>
 <li><a href="https://www.talos.dev/">Talos, a light Linux distribution with an integrated Kubernetes setup, can also be set-up quickly using Docker</a>,</li>
@@ -415,6 +415,7 @@ Warning
 </section>
 <section id="where-do-you-store-the-data" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="where-do-you-store-the-data"><span class="header-section-number">3.7</span> Where do you store the data</h2>
+<p>TODO: Note about etcd</p>
 <p>Containers are temporary — when they stop, everything inside disappears. For most applications, you need to keep data somewhere safe and separate from the containers. The common way to store data in Kubernetes is in <strong>volumes</strong>.</p>
 <p>A <strong>Volume</strong> is a piece of storage that can be attached to a pod. It can be on the same machine, on a network drive, or in the cloud. Kubernetes makes sure that your pods can access this storage whenever they run.</p>
 <p>If you need data that must stay linked to a specific pod (for example, for a database), you can use a <strong>PersistentVolume</strong> and a <strong>PersistentVolumeClaim</strong>. These ensure that even if your pods are restarted or moved to another machine, your data stays available and safe.</p>
