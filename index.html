@@ -323,29 +323,68 @@ ul.task-list li input[type="checkbox"] {
 <li>Check Galaxy/NFDI training for deeper knowledge</li>
 </ul>
 <p>For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.</p>
-<p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.</p>
+<p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.</p>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
-<p>ls -&gt; list the content of a directory, <strong>ls -al</strong> -&gt; include all file (so including hidden files (starting by “.”)) and as a detailed list.</p>
-<p>cd -&gt; go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)</p>
-<p>ps -&gt; list the running processes, <strong>ps -edf</strong> or <strong>ps -aux</strong> -&gt; list the running processes and their owner</p>
-<p>top -&gt; show the current running processes and their memory/cpu usage (CTRL-C to end)</p>
-<p>cp/mv/mkdir</p>
-<p>more, less, cat</p>
-<p>tail, tail -f</p>
-<p>vi/vim/emacs/nano -&gt; most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).</p>
-<p>man -&gt; show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p>
-<p>ln -&gt; create a symbolic link and know the difference between: * a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file * and a symbolic link: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</p>
+<ul>
+<li><p><strong>ls</strong> → list the content of a directory <strong>ls -al</strong> → include all files (including hidden files starting with <code>.</code>) and show a detailed list</p></li>
+<li><p><strong>cd</strong> → go to a directory</p>
+<ul>
+<li><code>cd ..</code> → parent directory</li>
+<li><code>cd /</code> → root directory</li>
+<li><code>cd ~</code> → user home directory</li>
+</ul></li>
+<li><p><strong>ps</strong> → list running processes <strong>ps -edf</strong> or <strong>ps -aux</strong> → list running processes and their owner</p></li>
+<li><p><strong>top</strong> → show running processes and their memory/CPU usage <em>(CTRL-C to exit)</em></p></li>
+<li><p><strong>cp / mv / mkdir / rm</strong> → copy, move/rename, create directories, remove files or directories</p>
+<ul>
+<li><code>rm -r</code> → recursive removal</li>
+<li><code>rm -rf</code> → <strong>dangerous</strong>, use with extreme caution, the force means that it will delete everything (force remove).</li>
+</ul></li>
+<li><p><strong>more / less / cat</strong> → display file content <strong>less</strong> is usually preferred (scrolling, searching)</p></li>
+<li><p><strong>tail</strong>, <strong>tail -f</strong> → show the end of a file, -f to follow it live (very useful for logs)</p></li>
+<li><p><strong>vi / vim / emacs / nano</strong> → most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs).</p></li>
+</ul>
+<p>Even if vi might seem very hard to use and strange at first glance, it is quick to learn the basics and very convenient.</p>
+<p>Emacs has a very different approach but is much more powerful, which can be useful for more complex work (if needed).</p>
+<p>If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.</p>
+<ul>
+<li><p><strong>man</strong> → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p></li>
+<li><p><strong>ln</strong> → create links (that points to a file); understand the difference between:</p>
+<ul>
+<li><strong>Hard link</strong>: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file</li>
+<li><strong>Symbolic link (symlink)</strong>: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</li>
+</ul></li>
+</ul>
 <p>For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.</p>
-<p>chown/chmod -&gt; change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x——-, 755, chmod o+r filename, chmod -R username filename</p>
-<p>Ideally the pipe (|) should be well understood, as well as the I/O indirections (&gt;, &gt;&gt;, &lt;).</p>
-<p>grep -&gt; search for the presence of a string in files, often used combined with another command with a |</p>
-<p>mount -&gt; allow to use a file system. For instance, a USB key needs to be mounted before it can be accessed. The root folder to temporary file system is often /mnd/. Modern Unix system will automount some medias.</p>
-<p>pwd/whoami -&gt; <strong>pwd</strong> return the current path, <strong>whoami</strong> the current user.</p>
-<p>kill -&gt; kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for SIGKILL (<strong>kill -KILL processId</strong>) and SIGSTOP (<strong>kill -STOP processId</strong>), to respectivelly forcefully kill or stop a process. The default signal (i.e.&nbsp;no argument) for <strong>kill</strong> is SIGTERM (<strong>kill -TERM processId</strong>), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only <strong>kill -KILL processId</strong> will kill the application.</p>
+<ul>
+<li><p><strong>chown / chmod</strong> → change the owner of a file or folder, change the permissions of a file or a folder. Be familiar with:</p>
+<ul>
+<li><p>symbolic permissions: <code>rwxrwxrwx</code>, <code>r-x------</code></p></li>
+<li><p>numeric modes: <code>755</code>, <code>644</code></p></li>
+<li><p>examples:</p>
+<ul>
+<li><code>chmod o+r filename</code></li>
+<li><code>chmod -R 755 directory</code></li>
+<li><code>chown -R user:group directory</code></li>
+</ul></li>
+</ul></li>
+<li><p>Ideally the <strong>pipe (|)</strong> should be well understood, as well as the <strong>I/O indirections (&gt;, &gt;&gt;, &lt;)</strong>. If this is unclear, look for “Unix pipes and redirection” — it is a core concept.</p></li>
+<li><p><strong>grep</strong> → search for the presence of a string in files, often used combined with another command using a pipe (|)</p></li>
+<li><p><strong>find</strong> → search for files by name, type, size, or date; often combined with <strong>grep</strong> or <strong>xargs</strong></p></li>
+<li><p><strong>mount / umount</strong> → attach or detach filesystems Removable media must be mounted before access. For instance, a USB key must be mounted before use. Temporary mount points are often under <code>/mnt</code> or <code>/media</code>. Modern systems often automount removable media.</p></li>
+<li><p><strong>pwd / whoami</strong> →</p>
+<ul>
+<li><strong>pwd</strong> → print current directory</li>
+<li><strong>whoami</strong> → show current user</li>
+</ul></li>
+<li><p><strong>kill</strong> → kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for SIGKILL (<strong>kill -KILL processId</strong>) and SIGSTOP (<strong>kill -STOP processId</strong>), to respectivelly forcefully kill or stop a process. The default signal (i.e.&nbsp;no argument) for <strong>kill</strong> is SIGTERM (<strong>kill -TERM processId</strong>), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only <strong>kill -KILL processId</strong> will kill the application.</p></li>
+</ul>
 <p>The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.</p>
 <p>The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.</p>
-<p>eval -&gt; is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.</p>
+<ul>
+<li><strong>eval</strong> → is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -356,21 +395,83 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Knowing eval is important for security reason. The presence of an eval in a suspicious script calls for caution.</p>
+<p>Knowing eval is important for security reason. The presence of eval in a suspicious script calls for caution.</p>
 </div>
 </div>
-<p>curl is also good to know.</p>
-<p>free/df/dh -&gt; know how many resources are available</p>
-<p>command &amp;, CTRL-Z + bg/fg -&gt; running a command in the backgound</p>
-<p>kill command -&gt; signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)</p>
-<p>systemctl graceful -&gt; <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl graceful</strong> ask for a clean restart of a service -&gt; finish the existing “transaction” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).</p>
-<p>apachectl configtest / nginx -t -&gt; allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.</p>
-<p>rsync -&gt; remote synchronizing of files and directories. It allows to save several defined files and/or directories on another host without a dedicated backup tool. Together with a database dump it could serve as a backup solution. In that case it is important to have a monitoring of the process to ensure it is working.</p>
-<p>? Which other</p>
+<ul>
+<li><p><strong>xargs</strong> → build and execute a command from standard input<br>
+Very useful when a command produces a list of items (files, process IDs, etc.) that must be passed as arguments to another command.</p>
+<p>Typical usage combines <strong>find</strong>, <strong>grep</strong>, or pipes:</p>
+<ul>
+<li><code>find . -name "*.log" | xargs rm</code></li>
+<li><code>grep -l "ERROR" *.log | xargs less</code></li>
+</ul>
+<p>This is needed because many commands do <strong>not</strong> accept input directly from stdin, but only as command-line arguments.</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be careful: <code>xargs</code> will execute the command on <em>all</em> received items.<br>
+Prefer using <code>xargs -n 1</code> (one argument at a time) or test first with <code>echo</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As opposite to <strong>eval</strong>, <strong>xargs</strong> does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like <strong>eval</strong></p>
+</div>
+</div>
+<p><em>If unfamiliar, search for “xargs explained” — understanding it greatly improves command-line efficiency.</em></p>
+<ul>
+<li><p><strong>curl / wget</strong> → interact with HTTP/HTTPS services from the command line Useful for testing APIs, services, or downloading files</p></li>
+<li><p><strong>free / df / du</strong> → check system resources</p>
+<ul>
+<li><strong>free</strong> → memory usage</li>
+<li><strong>df</strong> → disk usage per filesystem</li>
+<li><strong>du</strong> → disk usage per directory</li>
+</ul></li>
+<li><p><strong>command &amp; / CTRL-Z + bg / fg</strong> → run a command in the background, suspend it, or bring it back to foreground</p></li>
+<li><p><strong>ssh / scp</strong> → connect to remote servers and copy files securely Essential for working with remote machines <em>If unfamiliar, search for “SSH basics”.</em></p></li>
+<li><p><strong>systemctl graceful</strong> → <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl graceful</strong> ask for a clean restart of a service -&gt; finish the existing “transaction” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed). Common commands:</p>
+<ul>
+<li><code>systemctl status service</code></li>
+<li><code>systemctl start|stop|restart service</code></li>
+<li><code>systemctl reload service</code> (graceful reload when supported)</li>
+</ul></li>
+<li><p><strong>apachectl configtest / nginx -t</strong> → allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.</p></li>
+<li><p><strong>rsync</strong> → efficient synchronization of files and directories Often used for backups or deployments. Combined with database dumps, it can form a simple backup strategy. In that case it is important to have a monitoring of the process to ensure it is working.</p></li>
+</ul>
 </section>
 <section id="folders-you-should-know" class="level3">
 <h3 class="anchored" data-anchor-id="folders-you-should-know">Folders you should know</h3>
-<p>/usr /usr/bin /var /var/log /etc /root /bin /home /mnt /opt</p>
+<ul>
+<li><strong>/</strong> → filesystem root</li>
+<li><strong>/bin</strong> → essential system binaries</li>
+<li><strong>/usr</strong> → user-space applications and libraries</li>
+<li><strong>/usr/bin</strong> → most user commands</li>
+<li><strong>/etc</strong> → system-wide configuration files (<strong>very important</strong>)</li>
+<li><strong>/var</strong> → variable data</li>
+<li><strong>/var/log</strong> → system and application logs (first place to check on errors)</li>
+<li><strong>/home</strong> → user home directories</li>
+<li><strong>/root</strong> → root user’s home directory</li>
+<li><strong>/tmp</strong> → temporary files (often auto-cleaned)</li>
+<li><strong>/mnt</strong> → temporary mount points</li>
+<li><strong>/opt</strong> → optional or third-party software</li>
+</ul>
 </section>
 <section id="online-resources" class="level3">
 <h3 class="anchored" data-anchor-id="online-resources">Online resources</h3>
