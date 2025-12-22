@@ -115,6 +115,8 @@ graph TD
 How Kubernetes makes everything through API and labels
 Why there is so many extra layers compared to docker compose -> full decoupling.
 
+## Most configuration is declarative
+
 ## The various objects for your application
 
 Deployment, Job, ReplicaSet, DaemonSet, StatefulSet

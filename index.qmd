@@ -43,84 +43,154 @@ For most set-up, Linux is the operating system of choice. Due to security concer
 
 
 We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
-Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm or yum) and Ubuntu-based Linux (apt-get), to list the main ones.
+Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.
 
 ### Commands that should be known
 
-ls -> list the content of a directory, **ls -al** -> include all file (so including hidden files (starting by ".")) and as a detailed list.
+* **ls** → list the content of a directory
+  **ls -al** → include all files (including hidden files starting with `.`) and show a detailed list
 
-cd -> go to a directory (cd .. to go to the parent folder, cd / for the root folder, cd ~ for the user home folder)
+* **cd** → go to a directory
 
-ps -> list the running processes, **ps -edf** or **ps -aux** -> list the running processes and their owner
+  * `cd ..` → parent directory
+  * `cd /` → root directory
+  * `cd ~` → user home directory
 
-top -> show the current running processes and their memory/cpu usage (CTRL-C to end)
+* **ps** → list running processes
+  **ps -edf** or **ps -aux** → list running processes and their owner
 
-cp/mv/mkdir
+* **top** → show running processes and their memory/CPU usage
+  *(CTRL-C to exit)*
 
-more, less, cat
+* **cp / mv / mkdir / rm** → copy, move/rename, create directories, remove files or directories
 
-tail, tail -f
+  * `rm -r` → recursive removal
+  * `rm -rf` → **dangerous**, use with extreme caution, the force means that it will delete everything (force remove).
 
-vi/vim/emacs/nano -> most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs). Even if vi might seem very hard to use and strange at first glance, it is quick to learn it and very convenient. Emacs has a very different approach but is also much more powerful than vi/vim, which might be useful for more difficult work (if needed so).
+* **more / less / cat** → display file content
+  **less** is usually preferred (scrolling, searching)
 
-man -> show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
+* **tail**, **tail -f** → show the end of a file, -f to follow it live (very useful for logs)
 
-ln -> create a symbolic link and know the difference between:
-* a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file
-* and a symbolic link: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions
+* **vi / vim / emacs / nano** → most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs).
 
-For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.
+ Even if vi might seem very hard to use and strange at first glance, it is quick to learn the basics and very convenient.
+ 
+ Emacs has a very different approach but is much more powerful, which can be useful for more complex work (if needed).
+ 
+ If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.
 
-chown/chmod -> change the owner of a file or folder, change the permissions of a file or a folder, be familiar with things like rwxrwxrwx, r-x-------, 755, chmod o+r filename, chmod -R username filename
+* **man** → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases.
+ *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
 
-Ideally the pipe (|) should be well understood, as well as the I/O indirections (>, >>, <).
+* **ln** → create links (that points to a file); understand the difference between:
+  * **Hard link**: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file
+  * **Symbolic link (symlink)**: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions
 
-grep -> search for the presence of a string in files, often used combined with another command with a |
+ For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.
 
-mount -> allow to use a file system. For instance, a USB key needs to be mounted before it can be accessed. The root folder to temporary file system is often /mnd/. Modern Unix system will automount some medias.
+* **chown / chmod** → change the owner of a file or folder, change the permissions of a file or a folder.
+  Be familiar with:
 
-pwd/whoami -> **pwd** return the current path, **whoami** the current user.
+  * symbolic permissions: `rwxrwxrwx`, `r-x------`
+  * numeric modes: `755`, `644`
+  * examples:
 
-kill -> kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for  SIGKILL (**kill -KILL processId**) and SIGSTOP (**kill -STOP processId**), to respectivelly forcefully kill or stop a process. The default signal (i.e. no argument) for **kill** is SIGTERM (**kill -TERM processId**), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only **kill -KILL processId** will kill the application.
+    * `chmod o+r filename`
+    * `chmod -R 755 directory`
+    * `chown -R user:group directory`
 
-The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.
+* Ideally the **pipe (|)** should be well understood, as well as the **I/O indirections (>, >>, <)**.
+If this is unclear, look for “Unix pipes and redirection” — it is a core concept.
 
-The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.
+* **grep** → search for the presence of a string in files, often used combined with another command using a pipe (|)
 
-eval -> is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.
+* **find** → search for files by name, type, size, or date; often combined with **grep** or **xargs**
+
+* **mount / umount** → attach or detach filesystems
+  Removable media must be mounted before access. For instance, a USB key must be mounted before use.
+  Temporary mount points are often under `/mnt` or `/media`.
+  Modern systems often automount removable media.
+
+* **pwd / whoami** →
+
+  * **pwd** → print current directory
+  * **whoami** → show current user
+
+* **kill** → kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for  SIGKILL (**kill -KILL processId**) and SIGSTOP (**kill -STOP processId**), to respectivelly forcefully kill or stop a process. The default signal (i.e. no argument) for **kill** is SIGTERM (**kill -TERM processId**), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only **kill -KILL processId** will kill the application.
+
+ The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.
+
+ The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.
+
+* **eval** → is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.
 
 ::: {.callout-note}
-Knowing eval is important for security reason. The presence of an eval in a suspicious script calls for caution.
+Knowing eval is important for security reason. The presence of eval in a suspicious script calls for caution.
 :::
 
-curl is also good to know.
+- **xargs** → build and execute a command from standard input  
+  Very useful when a command produces a list of items (files, process IDs, etc.) that must be passed as arguments to another command.
 
-free/df/dh -> know how many resources are available 
+  Typical usage combines **find**, **grep**, or pipes:
+  - `find . -name "*.log" | xargs rm`
+  - `grep -l "ERROR" *.log | xargs less`
 
-command &, CTRL-Z + bg/fg -> running a command in the backgound
+  This is needed because many commands do **not** accept input directly from stdin, but only as command-line arguments.
 
-kill command -> signal communication, SIGNTERM (kill process_id), SIGNKILL (kill -9 process_id)
+::: {.callout-note}
+Be careful: `xargs` will execute the command on *all* received items.  
+Prefer using `xargs -n 1` (one argument at a time) or test first with `echo`.
+:::
 
-systemctl graceful ->  **systemctl** is part of **systemd**, where the 'd' stands for 'daemons'.*Daemons* are Unix's background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. **systemctl graceful** ask for a clean restart of a service -> finish the existing "transaction" before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).
+::: {.callout-note}
+As opposite to **eval**, **xargs** does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like **eval**
+:::
 
-apachectl configtest / nginx -t -> allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.
+  *If unfamiliar, search for “xargs explained” — understanding it greatly improves command-line efficiency.*
 
-rsync -> remote synchronizing of files and directories. It allows to save several defined files and/or directories on another host without a dedicated backup tool. Together with a database dump it could serve as a backup solution. In that case it is important to have a monitoring of the process to ensure it is working.
+* **curl / wget** → interact with HTTP/HTTPS services from the command line
+  Useful for testing APIs, services, or downloading files
 
-? Which other 
+* **free / df / du** → check system resources
+
+  * **free** → memory usage
+  * **df** → disk usage per filesystem
+  * **du** → disk usage per directory
+
+* **command & / CTRL-Z + bg / fg** → run a command in the background, suspend it, or bring it back to foreground
+
+* **ssh / scp** → connect to remote servers and copy files securely
+  Essential for working with remote machines
+  *If unfamiliar, search for “SSH basics”.*
+
+* **systemctl graceful** →  **systemctl** is part of **systemd**, where the 'd' stands for 'daemons'.*Daemons* are Unix's background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. **systemctl graceful** ask for a clean restart of a service -> finish the existing "transaction" before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).
+  Common commands:
+  * `systemctl status service`
+  * `systemctl start|stop|restart service`
+  * `systemctl reload service` (graceful reload when supported)
+
+* **apachectl configtest / nginx -t** →  allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.
+
+* **rsync** → efficient synchronization of files and directories
+  Often used for backups or deployments.
+  Combined with database dumps, it can form a simple backup strategy.
+  In that case it is important to have a monitoring of the process to ensure it is working.
 
 ### Folders you should know
 
-/usr
-/usr/bin
-/var
-/var/log
-/etc
-/root
-/bin
-/home
-/mnt
-/opt
+* **/** → filesystem root
+* **/bin** → essential system binaries
+* **/usr** → user-space applications and libraries
+* **/usr/bin** → most user commands
+* **/etc** → system-wide configuration files (**very important**)
+* **/var** → variable data
+* **/var/log** → system and application logs (first place to check on errors)
+* **/home** → user home directories
+* **/root** → root user’s home directory
+* **/tmp** → temporary files (often auto-cleaned)
+* **/mnt** → temporary mount points
+* **/opt** → optional or third-party software
 
 
 ### Online resources

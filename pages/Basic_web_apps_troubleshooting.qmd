@@ -1,0 +1,323 @@
+## What to check when something is broken
+
+### 1. Is the service running?
+
+```bash
+systemctl status apache2
+systemctl status nginx
+systemctl status docker
+```
+
+also (and mandatory if not run using systemd):
+
+```bash
+ps -edf
+ps -edf | grep name_of_the_application
+```
+
+grep filters the lines of *ps -edf* where it finds name_of_the_application (actually of the process, so it might differ from what you might expect)
+
+If not:
+
+```bash
+systemctl start service
+```
+
+or, if not using systemd, check the documentation for the proper startup sequence.
+
+---
+
+### 2. Check the logs (always)
+
+Logs are **the most important diagnostic tool**.
+They usually explain *why* something failed, not just *that* it failed.
+
+#### Logs location may vary
+
+While common default locations exist, **log paths depend on the setup**:
+
+* distribution (Debian, Ubuntu, RedHat, Alpine…)
+* application configuration
+* containerization (Docker)
+* logging system (files vs journald)
+
+Typical locations:
+
+* `/var/log/`
+* `/var/log/nginx/`
+* `/var/log/apache2/`
+* `/var/log/syslog`
+* `/var/log/messages`
+* application-specific folders (e.g. `/opt/app/logs/`)
+
+If unsure:
+
+```bash
+ls /var/log
+```
+
+For **systemd-managed services**, logs may not be in files at all:
+
+```bash
+journalctl -u service_name
+journalctl -xe
+```
+
+---
+
+#### Follow logs live
+
+To observe what happens when an error occurs:
+
+```bash
+tail -f /var/log/nginx/error.log
+tail -f /var/log/apache2/error.log
+docker logs -f container_name
+```
+
+This is extremely useful while restarting a service or reproducing an issue.
+
+---
+
+#### Log rotation
+
+Logs are **rotated** to prevent unlimited growth.
+Rotated logs usually appear as:
+
+* `error.log.1`
+* `error.log.2`
+* `error.log.3.gz`
+
+Older logs are often **compressed (`.gz`)**.
+
+::: {.callout-tip}
+## Log rotation
+When investigating an issue that happened *yesterday or earlier*, always check rotated logs — the current log may no longer contain the relevant lines.
+:::
+
+To list rotated logs:
+
+```bash
+ls -lh /var/log/nginx/
+```
+
+---
+
+#### Reading long logs efficiently
+
+Use **less** (preferred over more):
+
+```bash
+less /var/log/nginx/error.log
+```
+
+Inside `less`:
+
+* `/text` → search forward
+* `n` / `N` (shift + N) → next / previous match
+* `G` → go to end of file
+* `g` → go to beginning
+* `q` → quit
+
+To jump directly to recent entries:
+
+```bash
+less +G /var/log/nginx/error.log
+```
+
+---
+
+#### Searching logs with grep
+
+To find relevant lines:
+
+```bash
+grep "error" /var/log/nginx/error.log
+grep -i "warning" /var/log/syslog
+```
+
+Useful options:
+
+* `-i` → case-insensitive
+* `-n` → show line numbers
+* `-C 3` → show context (3 lines before and after)
+
+Example:
+
+```bash
+grep -i -n -C 2 "timeout" error.log
+```
+
+---
+
+#### Searching across rotated logs
+
+Include rotated (non-compressed) logs:
+
+```bash
+grep "error" /var/log/nginx/error.log*
+```
+
+For **compressed logs (`.gz`)**, use `zgrep`:
+
+```bash
+zgrep "error" /var/log/nginx/error.log*.gz
+```
+
+You can also combine both:
+
+```bash
+grep "error" /var/log/nginx/error.log*
+zgrep "error" /var/log/nginx/error.log*.gz
+```
+
+---
+
+#### Combining tools (very common)
+
+Search and then inspect results interactively:
+
+```bash
+grep -i "error" /var/log/nginx/error.log | less
+zgrep -i "error" /var/log/nginx/error.log*.gz | less
+```
+
+Count occurrences:
+
+```bash
+grep -i "error" error.log | wc -l
+```
+
+---
+
+#### Container logs
+
+If using Docker:
+
+```bash
+docker logs container_name
+docker logs --since 1h container_name
+docker logs container_name | grep error
+```
+
+Remember: container logs may not persist unless explicitly configured.
+
+---
+
+#### What to look for first in logs
+
+Focus on:
+
+* `error`
+* `exception`
+* `permission denied`
+* `timeout`
+* `connection refused`
+* `no such file`
+* `out of memory`
+* `segfault`
+
+---
+
+> **Rule of thumb**
+> If something breaks, **read the logs before changing anything**.
+> Most fixes become obvious once the correct log line is found.
+
+### 3. Test the configuration
+
+Before restarting a web server:
+
+```bash
+apachectl configtest
+nginx -t
+```
+
+Never restart blindly.
+
+---
+
+### 4. Is the port listening?
+
+```bash
+ss -tulpn
+netstat -tulpn   # older systems
+```
+
+Check if the expected port (80, 443, 8080…) is open.
+
+---
+
+### 5. Check permissions
+
+Most deployment issues are permission issues.
+
+```bash
+ls -l
+whoami
+```
+
+Check:
+
+* owner of files
+* execution rights
+* read access for the web server user
+
+---
+
+### 6. Disk full?
+
+A full disk breaks everything.
+
+```bash
+df -h
+du -sh /var/*
+```
+
+---
+
+### 7. Memory exhausted?
+
+OOM kills are silent but deadly.
+
+```bash
+free -h
+dmesg | tail
+```
+
+---
+
+### 8. Test locally
+
+From the server itself:
+
+```bash
+curl http://localhost
+curl http://127.0.0.1:port
+```
+
+If it fails locally, it will fail remotely.
+
+---
+
+### 9. Containers involved?
+
+```bash
+docker ps
+docker logs container
+docker inspect container
+```
+
+Check:
+
+* exposed ports
+* mounted volumes
+* environment variables
+
+---
+
+### 10. Last resort checklist
+
+* Restart only **after** checking logs
+* Restart one component at a time
+* Document what you changed
+* If unsure: **stop and read logs again**
