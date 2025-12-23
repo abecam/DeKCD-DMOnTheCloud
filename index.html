@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -243,7 +278,10 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#containers---overview-of-docker-usage" id="toc-containers---overview-of-docker-usage" class="nav-link" data-scroll-target="#containers---overview-of-docker-usage">Containers - Overview of Docker usage</a>
   <ul class="collapse">
-  <li><a href="#vocabulary-1" id="toc-vocabulary-1" class="nav-link" data-scroll-target="#vocabulary-1">Vocabulary</a></li>
+  <li><a href="#vocabulary-1" id="toc-vocabulary-1" class="nav-link" data-scroll-target="#vocabulary-1">Vocabulary</a>
+  <ul class="collapse">
+  <li><a href="#minimal-mental-model" id="toc-minimal-mental-model" class="nav-link" data-scroll-target="#minimal-mental-model">Minimal mental model</a></li>
+  </ul></li>
   <li><a href="#useful-things-to-know" id="toc-useful-things-to-know" class="nav-link" data-scroll-target="#useful-things-to-know">Useful things to know</a></li>
   </ul></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a></li>
@@ -542,11 +580,64 @@ Note
 <section id="vocabulary-1" class="level2">
 <h2 class="anchored" data-anchor-id="vocabulary-1">Vocabulary</h2>
 <ul>
-<li>An <strong>Image</strong></li>
-<li>A <strong>container</strong></li>
-<li>A <strong>volume</strong></li>
-<li><strong>Docker compose</strong></li>
+<li><strong>An image</strong> is a <strong>template</strong> used to create containers. It contains:
+<ul>
+<li>an operating system base (often minimal Linux),</li>
+<li>the application,</li>
+<li>its dependencies,</li>
+<li>default configuration.</li>
 </ul>
+An image is <strong>immutable</strong>: you do not modify it while it is running. Images are usually downloaded from a registry (e.g.&nbsp;Docker Hub).</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>A container</strong> is a <strong>running instance of an image</strong>. It:</p>
+<ul>
+<li>runs processes,</li>
+<li>listens on ports,</li>
+<li>can be started, stopped, or restarted.</li>
+</ul>
+<p>Note that the desired application needs to be started (entrypoint), or only the operating system will run.</p>
+<p>Containers are <strong>ephemeral</strong>:</p>
+<ul>
+<li>if a container is deleted, everything inside it is lost</li>
+<li>unless data is stored in a <strong>volume</strong></li>
+</ul></li>
+<li><p><strong>A volume</strong> is a <strong>persistent storage area</strong> outside the container. It is used to store all data that must survive container restarts or upgrades.</p>
+<p>Volumes are:</p>
+<ul>
+<li>mounted inside containers</li>
+<li>independent of the container lifecycle</li>
+</ul></li>
+<li><p><strong>Docker Compose</strong> is a tool to <strong>define and run multiple containers together</strong> using a single configuration file (<code>docker-compose.yml</code>).</p>
+<p>It is used to describe:</p>
+<ul>
+<li>which images to run,</li>
+<li>how containers are connected,</li>
+<li>ports,</li>
+<li>volumes,</li>
+<li>environment variables.</li>
+</ul>
+<p>With Docker Compose, you typically manage an entire application stack:</p>
+<ul>
+<li>web server</li>
+<li>application</li>
+<li>database</li>
+<li>cache</li>
+</ul>
+<p>All started with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+<section id="minimal-mental-model" class="level3">
+<h3 class="anchored" data-anchor-id="minimal-mental-model">Minimal mental model</h3>
+<ul>
+<li><strong>Image</strong> → what to run</li>
+<li><strong>Container</strong> → the running application</li>
+<li><strong>Volume</strong> → persistent data</li>
+<li><strong>Docker Compose</strong> → a complete setup of multiple images and volumes.</li>
+</ul>
+<p>If you keep this model in mind, most Docker-related documentation will start to make sense.</p>
+</section>
 </section>
 <section id="useful-things-to-know" class="level2">
 <h2 class="anchored" data-anchor-id="useful-things-to-know">Useful things to know</h2>
@@ -597,7 +688,10 @@ Note
 </section>
 <section id="namespaces-and-namespaces-collisions" class="level2">
 <h2 class="anchored" data-anchor-id="namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</h2>
-<p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.</p>
+<p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, <strong>testApp</strong>, that uses a MySQL database. The database is defined in the docker-compose and used by the <strong>testApp</strong>. The set-up is the following:</p>
+<pre><code>application1/testApp/docker-compose.yml
+application2/testApp/docker-compose.yml</code></pre>
+<p>It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)</p>
 </section>
 </section>
 <section id="from-docker-compose-to-kubernetes" class="level1">
@@ -624,6 +718,7 @@ Note
 </section>
 <section id="other-solutions" class="level1">
 <h1>Other solutions</h1>
+<p>Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter,</p>
 </section>
 <section id="scalability" class="level1">
 <h1>Scalability</h1>
