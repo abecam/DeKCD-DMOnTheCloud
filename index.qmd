@@ -250,10 +250,70 @@ If Docker is the *de facto* standard, there are other containers engines, such a
 
 ## Vocabulary
 
-* An **Image**
-* A **container**
-* A **volume**
-* **Docker compose**
+* **An image** is a **template** used to create containers.
+  It contains:
+  * an operating system base (often minimal Linux),
+  * the application,
+  * its dependencies,
+  * default configuration.
+
+  An image is **immutable**: you do not modify it while it is running.
+  Images are usually downloaded from a registry (e.g. Docker Hub).
+
+---
+
+* **A container** is a **running instance of an image**.
+  It:
+  * runs processes,
+  * listens on ports,
+  * can be started, stopped, or restarted.
+
+  Note that the desired application needs to be started (entrypoint), or only the operating system will run.
+
+  Containers are **ephemeral**:
+  * if a container is deleted, everything inside it is lost
+  * unless data is stored in a **volume**
+
+
+* **A volume** is a **persistent storage area** outside the container.
+  It is used to store all data that must survive container restarts or upgrades.
+
+
+  Volumes are:
+
+  * mounted inside containers
+  * independent of the container lifecycle
+
+
+* **Docker Compose** is a tool to **define and run multiple containers together** using a single configuration file (`docker-compose.yml`).
+
+  It is used to describe:
+  * which images to run,
+  * how containers are connected,
+  * ports,
+  * volumes,
+  * environment variables.
+
+  With Docker Compose, you typically manage an entire application stack:
+  * web server
+  * application
+  * database
+  * cache
+
+  All started with:
+
+  ```bash
+  docker-compose up
+  ```
+
+### Minimal mental model
+
+* **Image** → what to run
+* **Container** → the running application
+* **Volume** → persistent data
+* **Docker Compose** → a complete setup of multiple images and volumes.
+
+If you keep this model in mind, most Docker-related documentation will start to make sense.
 
 ## Useful things to know
 
@@ -293,7 +353,14 @@ The different types of volumes
 
 ## Namespaces and namespaces collisions
 
-Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.
+Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
+For instance, you want 2 instances of the same application, **testApp**, that uses a MySQL database. The database is defined in the docker-compose and used by the **testApp**. The set-up is the following:
+```
+application1/testApp/docker-compose.yml
+application2/testApp/docker-compose.yml
+```
+
+It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)
 
 
 # From Docker compose to Kubernetes
@@ -318,6 +385,8 @@ Quick overview
 -> Kubernetes section
 
 # Other solutions
+
+Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter, 
 
 # Scalability
 

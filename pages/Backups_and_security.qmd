@@ -68,6 +68,8 @@ Database user, schema protections
 
 difficult configurations and their possible issues (such as .htaccess or apache configuration in general)
 
+Fail fast -> difference between errors where the application needs to/can contine and when it needs to stop.
+
 ???
 
 ## Firewall
