@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -145,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">De.KCD - Data Management Platform on the Cloud, step by step</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">De.KCD - Data Management Platform on the Cloud, step by step</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">De.KCD - Data Management Platform on the Cloud, step by step</span></a>
   </div>
 </li>
@@ -267,11 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#when-to" id="toc-when-to" class="nav-link" data-scroll-target="#when-to">When to…</a></li>
   <li><a href="#quick-introduction-to-linuxunix" id="toc-quick-introduction-to-linuxunix" class="nav-link" data-scroll-target="#quick-introduction-to-linuxunix">Quick introduction to Linux/Unix</a>
   <ul class="collapse">
-  <li><a href="#viewing-a-web-page-in-a-linux-shell" id="toc-viewing-a-web-page-in-a-linux-shell" class="nav-link" data-scroll-target="#viewing-a-web-page-in-a-linux-shell">Viewing a web page in a Linux shell</a></li>
-  <li><a href="#export-display-with-x11" id="toc-export-display-with-x11" class="nav-link" data-scroll-target="#export-display-with-x11">Export display with X11</a></li>
-  <li><a href="#remote-desktop" id="toc-remote-desktop" class="nav-link" data-scroll-target="#remote-desktop">Remote desktop</a></li>
   <li><a href="#commands-that-should-be-known" id="toc-commands-that-should-be-known" class="nav-link" data-scroll-target="#commands-that-should-be-known">Commands that should be known</a></li>
-  <li><a href="#folders-you-should-know" id="toc-folders-you-should-know" class="nav-link" data-scroll-target="#folders-you-should-know">Folders you should know</a></li>
   <li><a href="#online-resources" id="toc-online-resources" class="nav-link" data-scroll-target="#online-resources">Online resources</a></li>
   <li><a href="#what-makes-the-containers-possible-cgroups" id="toc-what-makes-the-containers-possible-cgroups" class="nav-link" data-scroll-target="#what-makes-the-containers-possible-cgroups">What makes the containers possible: cgroups</a></li>
   </ul></li>
@@ -281,10 +242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#containers---overview-of-docker-usage" id="toc-containers---overview-of-docker-usage" class="nav-link" data-scroll-target="#containers---overview-of-docker-usage">Containers - Overview of Docker usage</a>
   <ul class="collapse">
-  <li><a href="#vocabulary-1" id="toc-vocabulary-1" class="nav-link" data-scroll-target="#vocabulary-1">Vocabulary</a>
-  <ul class="collapse">
-  <li><a href="#minimal-mental-model" id="toc-minimal-mental-model" class="nav-link" data-scroll-target="#minimal-mental-model">Minimal mental model</a></li>
-  </ul></li>
+  <li><a href="#vocabulary-1" id="toc-vocabulary-1" class="nav-link" data-scroll-target="#vocabulary-1">Vocabulary</a></li>
   <li><a href="#useful-things-to-know" id="toc-useful-things-to-know" class="nav-link" data-scroll-target="#useful-things-to-know">Useful things to know</a></li>
   </ul></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a></li>
@@ -364,80 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Check Galaxy/NFDI training for deeper knowledge</li>
 </ul>
 <p>For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.</p>
-<p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.</p>
-<section id="viewing-a-web-page-in-a-linux-shell" class="level3">
-<h3 class="anchored" data-anchor-id="viewing-a-web-page-in-a-linux-shell">Viewing a web page in a Linux shell</h3>
-<p>One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it’s also possible to access most web applications using a command line browser. Some fancy web pages won’t be displayed in any useful way, but a Data Management Platform is rarely in that category.</p>
-<ul>
-<li><p>lynx, the best friend of old server-side developers, is the oldest web-browser still maintained</p>
-<ul>
-<li><p>Open a page:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lynx</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Navigation:</p>
-<ul>
-<li>Arrow keys: move between links</li>
-<li><strong>Enter</strong>: follow link</li>
-<li><strong>G</strong>: open a new URL</li>
-</ul></li>
-<li><p>Quit:</p>
-<ul>
-<li><strong>Q</strong>, then <strong>Y</strong> to confirm</li>
-</ul></li>
-</ul></li>
-<li><p><strong>w3m</strong> Slightly more modern than lynx, with optional image support in some terminals.</p>
-<ul>
-<li><p>Open a page:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">w3m</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Navigation:</p>
-<ul>
-<li>Arrow keys: move</li>
-<li><strong>Enter</strong>: follow link</li>
-<li><strong>U</strong>: open a new URL</li>
-</ul></li>
-<li><p>Quit:</p>
-<ul>
-<li><strong>Q</strong></li>
-</ul></li>
-</ul></li>
-<li><p><strong>links / links2</strong> Similar to lynx, with better table rendering and optional graphics support.</p>
-<ul>
-<li><p>Open a page:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">links</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Menu:</p>
-<ul>
-<li><strong>Esc</strong>: open menu</li>
-</ul></li>
-<li><p>Quit:</p>
-<ul>
-<li><strong>Q</strong></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="export-display-with-x11" class="level3">
-<h3 class="anchored" data-anchor-id="export-display-with-x11">Export display with X11</h3>
-<p>The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally.It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI.</p>
-<ul>
-<li><p>On your <strong>local machine</strong>, allow X connections (example):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xhost</span> +local:</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Over SSH (recommended):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-X</span> user@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>or, if needed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> user@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Test:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xclock</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul>
-<p>This works reliably with:</p>
-<ul>
-<li>Firefox</li>
-<li>Chromium</li>
-<li>Most legacy GUI tools</li>
-</ul>
-</section>
-<section id="remote-desktop" class="level3">
-<h3 class="anchored" data-anchor-id="remote-desktop">Remote desktop</h3>
-</section>
+<p>We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics. Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.</p>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
 <ul>
@@ -457,48 +342,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p><strong>more / less / cat</strong> → display file content <strong>less</strong> is usually preferred (scrolling, searching)</p></li>
 <li><p><strong>tail</strong>, <strong>tail -f</strong> → show the end of a file, -f to follow it live (very useful for logs)</p></li>
-<li><p><strong>vi / vim / emacs / nano</strong> → most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs).</p></li>
+<li><p><strong>vi / vim / emacs / nano</strong> -&gt; most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editors present on most Linux distributions, though minimal container images might only provide vi.</p></li>
 </ul>
 <p>Even if vi might seem very hard to use and strange at first glance, it is quick to learn the basics and very convenient.</p>
 <p>Emacs has a very different approach but is much more powerful, which can be useful for more complex work (if needed).</p>
 <p>If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.</p>
-<ul>
-<li><p><strong>man</strong> → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p></li>
-<li><p><strong>ln</strong> → create links (that points to a file); understand the difference between:</p>
-<ul>
-<li><strong>Hard link</strong>: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file</li>
-<li><strong>Symbolic link (symlink)</strong>: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions</li>
-</ul></li>
-</ul>
-<p>For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.</p>
-<ul>
-<li><p><strong>chown / chmod</strong> → change the owner of a file or folder, change the permissions of a file or a folder. Be familiar with:</p>
-<ul>
-<li><p>symbolic permissions: <code>rwxrwxrwx</code>, <code>r-x------</code></p></li>
-<li><p>numeric modes: <code>755</code>, <code>644</code></p></li>
-<li><p>examples:</p>
-<ul>
-<li><code>chmod o+r filename</code></li>
-<li><code>chmod -R 755 directory</code></li>
-<li><code>chown -R user:group directory</code></li>
-</ul></li>
-</ul></li>
-<li><p>Ideally the <strong>pipe (|)</strong> should be well understood, as well as the <strong>I/O indirections (&gt;, &gt;&gt;, &lt;)</strong>. If this is unclear, look for “Unix pipes and redirection” — it is a core concept.</p></li>
-<li><p><strong>grep</strong> → search for the presence of a string in files, often used combined with another command using a pipe (|)</p></li>
-<li><p><strong>find</strong> → search for files by name, type, size, or date; often combined with <strong>grep</strong> or <strong>xargs</strong></p></li>
-<li><p><strong>mount / umount</strong> → attach or detach filesystems Removable media must be mounted before access. For instance, a USB key must be mounted before use. Temporary mount points are often under <code>/mnt</code> or <code>/media</code>. Modern systems often automount removable media.</p></li>
-<li><p><strong>pwd / whoami</strong> →</p>
-<ul>
-<li><strong>pwd</strong> → print current directory</li>
-<li><strong>whoami</strong> → show current user</li>
-</ul></li>
-<li><p><strong>kill</strong> → kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for SIGKILL (<strong>kill -KILL processId</strong>) and SIGSTOP (<strong>kill -STOP processId</strong>), to respectivelly forcefully kill or stop a process. The default signal (i.e.&nbsp;no argument) for <strong>kill</strong> is SIGTERM (<strong>kill -TERM processId</strong>), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only <strong>kill -KILL processId</strong> will kill the application.</p></li>
-</ul>
-<p>The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.</p>
-<p>The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.</p>
-<ul>
-<li><strong>eval</strong> → is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.</li>
-</ul>
+<p>man -&gt; show the manual for a command. man should be an automatic reflex for any less-known usage. It is absolutely normal to forget options or syntax. If you forget a command name, keep a Linux cheat sheet around. A quick internet search will find many good one-page PDFs.</p>
+<p>ln -&gt; create a link and know the difference between:</p>
+<p>a hard link: direct link to the file, removed when the file is removed, shares permissions</p>
+<p>a symbolic link (symlink): independent object pointing to a path, survives file moves/removal, has its own permissions</p>
+<p>For setting up applications, we generally use symbolic links, often to control permissions or switch versions/configurations easily.</p>
+<p>chown / chmod -&gt; change the owner of a file or folder, change permissions. Be familiar with:</p>
+<p>rwxrwxrwx, r-x——</p>
+<p>numeric modes like 755, 644</p>
+<p>examples: chmod o+r filename, chmod -R 755 directory, chown -R user:group directory</p>
+<p>The pipe (|) should be well understood, as well as I/O redirections (&gt;, &gt;&gt;, &lt;). If this is unclear, look for “Unix pipes and redirection” — it is a core concept.</p>
+<p>grep -&gt; search for a string in files, often combined with another command using a pipe (|)</p>
+<p>find -&gt; search for files by name, type, size, or date. Often combined with grep or xargs</p>
+<p>mount / umount -&gt; attach a filesystem so it can be accessed. For instance, a USB key must be mounted before use. Temporary mount points are often under /mnt or /media. Modern systems often automount removable media.</p>
+<p>pwd / whoami -&gt; pwd returns the current path, whoami returns the current user</p>
+<p>kill -&gt; kill sends a signal to a process. The default signal is SIGTERM (kill -TERM pid or simply kill pid), which asks the process to terminate cleanly. If the process does not respond (hung, infinite loop), SIGKILL (kill -KILL pid or kill -9 pid) will force termination.</p>
+<p>SIGKILL is unsafe and should only be used after SIGTERM has failed.</p>
+<p>Signals have numeric values (POSIX), e.g.&nbsp;-15 for SIGTERM, -9 for SIGKILL.</p>
+<p>eval -&gt; powerful and dangerous command that executes its arguments as a shell command. It allows building commands dynamically in scripts, but can easily introduce security vulnerabilities.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -509,84 +375,35 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Knowing eval is important for security reason. The presence of eval in a suspicious script calls for caution.</p>
+<p>Knowing eval is important for security reasons. The presence of eval in a suspicious script calls for caution.</p>
 </div>
 </div>
-<ul>
-<li><p><strong>xargs</strong> → build and execute a command from standard input<br>
-Very useful when a command produces a list of items (files, process IDs, etc.) that must be passed as arguments to another command.</p>
-<p>Typical usage combines <strong>find</strong>, <strong>grep</strong>, or pipes:</p>
-<ul>
-<li><code>find . -name "*.log" | xargs rm</code></li>
-<li><code>grep -l "ERROR" *.log | xargs less</code></li>
-</ul>
-<p>This is needed because many commands do <strong>not</strong> accept input directly from stdin, but only as command-line arguments.</p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Be careful: <code>xargs</code> will execute the command on <em>all</em> received items.<br>
-Prefer using <code>xargs -n 1</code> (one argument at a time) or test first with <code>echo</code>.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>As opposite to <strong>eval</strong>, <strong>xargs</strong> does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like <strong>eval</strong></p>
-</div>
-</div>
-<p><em>If unfamiliar, search for “xargs explained” — understanding it greatly improves command-line efficiency.</em></p>
-<ul>
-<li><p><strong>curl / wget</strong> → interact with HTTP/HTTPS services from the command line Useful for testing APIs, services, or downloading files</p></li>
-<li><p><strong>free / df / du</strong> → check system resources</p>
-<ul>
-<li><strong>free</strong> → memory usage</li>
-<li><strong>df</strong> → disk usage per filesystem</li>
-<li><strong>du</strong> → disk usage per directory</li>
-</ul></li>
-<li><p><strong>command &amp; / CTRL-Z + bg / fg</strong> → run a command in the background, suspend it, or bring it back to foreground</p></li>
-<li><p><strong>ssh / scp</strong> → connect to remote servers and copy files securely Essential for working with remote machines <em>If unfamiliar, search for “SSH basics”.</em></p></li>
-<li><p><strong>systemctl graceful</strong> → <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl graceful</strong> ask for a clean restart of a service -&gt; finish the existing “transaction” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed). Common commands:</p>
-<ul>
-<li><code>systemctl status service</code></li>
-<li><code>systemctl start|stop|restart service</code></li>
-<li><code>systemctl reload service</code> (graceful reload when supported)</li>
-</ul></li>
-<li><p><strong>apachectl configtest / nginx -t</strong> → allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.</p></li>
-<li><p><strong>rsync</strong> → efficient synchronization of files and directories Often used for backups or deployments. Combined with database dumps, it can form a simple backup strategy. In that case it is important to have a monitoring of the process to ensure it is working.</p></li>
-</ul>
-</section>
-<section id="folders-you-should-know" class="level3">
-<h3 class="anchored" data-anchor-id="folders-you-should-know">Folders you should know</h3>
-<ul>
-<li><strong>/</strong> → filesystem root</li>
-<li><strong>/bin</strong> → essential system binaries</li>
-<li><strong>/usr</strong> → user-space applications and libraries</li>
-<li><strong>/usr/bin</strong> → most user commands</li>
-<li><strong>/etc</strong> → system-wide configuration files (<strong>very important</strong>)</li>
-<li><strong>/var</strong> → variable data</li>
-<li><strong>/var/log</strong> → system and application logs (first place to check on errors)</li>
-<li><strong>/home</strong> → user home directories</li>
-<li><strong>/root</strong> → root user’s home directory</li>
-<li><strong>/tmp</strong> → temporary files (often auto-cleaned)</li>
-<li><strong>/mnt</strong> → mount points</li>
-<li><strong>/media</strong> -&gt; temporary mount points for external storage (optional)</li>
-<li><strong>/opt</strong> → optional or third-party software</li>
-</ul>
+<p>curl / wget -&gt; interact with HTTP/HTTPS services from the command line. Very useful to test APIs, web services, or download files.</p>
+<p>free / df / du -&gt; monitor resources:</p>
+<p>free: memory usage</p>
+<p>df: disk usage per filesystem</p>
+<p>du: disk usage per directory</p>
+<p>command &amp; / CTRL-Z + bg / fg -&gt; run a command in the background, suspend it, or bring it back to foreground</p>
+<p>ssh / scp -&gt; connect to a remote machine (ssh) and copy files over SSH (scp). Essential for remote servers. If unfamiliar, search for “SSH basics”.</p>
+<p>systemctl -&gt; part of systemd (daemon manager). Web servers (Apache, Nginx), databases, and applications usually run as daemons managed by systemctl. Commands to know:</p>
+<p>systemctl status service</p>
+<p>systemctl start|stop|restart service</p>
+<p>systemctl reload service (graceful reload when supported)</p>
+<p>A graceful reload allows existing connections to finish before restarting (important for web servers). Keep in mind that application-level sessions (CMS, APIs) may still be interrupted depending on design.</p>
+<p>apachectl configtest / nginx -t -&gt; test the configuration of Apache or Nginx before restarting. This reduces the risk of breaking a production service, but does not guarantee the configuration behaves as intended.</p>
+<p>rsync -&gt; efficient synchronization of files and directories, locally or remotely. Often used for backups or deployments. Combined with database dumps, it can form a simple backup strategy. Monitoring is important to ensure it actually runs.</p>
+<p>docker / docker-compose (if applicable) -&gt; many modern web applications are containerized. Even a basic understanding of docker ps, docker logs, docker restart is very useful. If this is new, look for a short “Docker for beginners” guide.</p>
+<p>Folders you should know</p>
+<p>/ -&gt; filesystem root</p>
+<p>/bin -&gt; essential system binaries (basic commands)</p>
+<p>/usr -&gt; user-space applications and libraries /usr/bin -&gt; most user commands and applications</p>
+<p>/etc -&gt; system-wide configuration files (very important for web servers, services, users)</p>
+<p>/var -&gt; variable data /var/log -&gt; system and application logs (first place to look when something fails)</p>
+<p>/home -&gt; user home directories</p>
+<p>/root -&gt; home directory of the root (administrator) user</p>
+<p>/tmp -&gt; temporary files (often cleaned automatically)</p>
+<p>/mnt -&gt; temporary mount points</p>
+<p>/opt -&gt; optional or third-party software (often used for manually installed applications)</p>
 </section>
 <section id="online-resources" class="level3">
 <h3 class="anchored" data-anchor-id="online-resources">Online resources</h3>
@@ -657,64 +474,11 @@ Note
 <section id="vocabulary-1" class="level2">
 <h2 class="anchored" data-anchor-id="vocabulary-1">Vocabulary</h2>
 <ul>
-<li><strong>An image</strong> is a <strong>template</strong> used to create containers. It contains:
-<ul>
-<li>an operating system base (often minimal Linux),</li>
-<li>the application,</li>
-<li>its dependencies,</li>
-<li>default configuration.</li>
+<li>An <strong>Image</strong></li>
+<li>A <strong>container</strong></li>
+<li>A <strong>volume</strong></li>
+<li><strong>Docker compose</strong></li>
 </ul>
-An image is <strong>immutable</strong>: you do not modify it while it is running. Images are usually downloaded from a registry (e.g.&nbsp;Docker Hub).</li>
-</ul>
-<hr>
-<ul>
-<li><p><strong>A container</strong> is a <strong>running instance of an image</strong>. It:</p>
-<ul>
-<li>runs processes,</li>
-<li>listens on ports,</li>
-<li>can be started, stopped, or restarted.</li>
-</ul>
-<p>Note that the desired application needs to be started (entrypoint), or only the operating system will run.</p>
-<p>Containers are <strong>ephemeral</strong>:</p>
-<ul>
-<li>if a container is deleted, everything inside it is lost</li>
-<li>unless data is stored in a <strong>volume</strong></li>
-</ul></li>
-<li><p><strong>A volume</strong> is a <strong>persistent storage area</strong> outside the container. It is used to store all data that must survive container restarts or upgrades.</p>
-<p>Volumes are:</p>
-<ul>
-<li>mounted inside containers</li>
-<li>independent of the container lifecycle</li>
-</ul></li>
-<li><p><strong>Docker Compose</strong> is a tool to <strong>define and run multiple containers together</strong> using a single configuration file (<code>docker-compose.yml</code>).</p>
-<p>It is used to describe:</p>
-<ul>
-<li>which images to run,</li>
-<li>how containers are connected,</li>
-<li>ports,</li>
-<li>volumes,</li>
-<li>environment variables.</li>
-</ul>
-<p>With Docker Compose, you typically manage an entire application stack:</p>
-<ul>
-<li>web server</li>
-<li>application</li>
-<li>database</li>
-<li>cache</li>
-</ul>
-<p>All started with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul>
-<section id="minimal-mental-model" class="level3">
-<h3 class="anchored" data-anchor-id="minimal-mental-model">Minimal mental model</h3>
-<ul>
-<li><strong>Image</strong> → what to run</li>
-<li><strong>Container</strong> → the running application</li>
-<li><strong>Volume</strong> → persistent data</li>
-<li><strong>Docker Compose</strong> → a complete setup of multiple images and volumes.</li>
-</ul>
-<p>If you keep this model in mind, most Docker-related documentation will start to make sense.</p>
-</section>
 </section>
 <section id="useful-things-to-know" class="level2">
 <h2 class="anchored" data-anchor-id="useful-things-to-know">Useful things to know</h2>
@@ -765,10 +529,7 @@ An image is <strong>immutable</strong>: you do not modify it while it is running
 </section>
 <section id="namespaces-and-namespaces-collisions" class="level2">
 <h2 class="anchored" data-anchor-id="namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</h2>
-<p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, <strong>testApp</strong>, that uses a MySQL database. The database is defined in the docker-compose and used by the <strong>testApp</strong>. The set-up is the following:</p>
-<pre><code>application1/testApp/docker-compose.yml
-application2/testApp/docker-compose.yml</code></pre>
-<p>It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)</p>
+<p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.</p>
 </section>
 </section>
 <section id="from-docker-compose-to-kubernetes" class="level1">
@@ -795,7 +556,6 @@ application2/testApp/docker-compose.yml</code></pre>
 </section>
 <section id="other-solutions" class="level1">
 <h1>Other solutions</h1>
-<p>Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter,</p>
 </section>
 <section id="scalability" class="level1">
 <h1>Scalability</h1>
