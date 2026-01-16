@@ -43,96 +43,7 @@ For most set-up, Linux is the operating system of choice. Due to security concer
 
 
 We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
-Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.
-
-### Viewing a web page in a Linux shell
-
-One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it's also possible to access most web applications using a command line browser. Some fancy web pages won't be displayed in any useful way, but a Data Management Platform is rarely in that category.
-
-* lynx, the best friend of old server-side developers, is the oldest web-browser still maintained
-
-  * Open a page:
-
-    ```bash
-    lynx http://localhost:8080
-    ```
-  * Navigation:
-
-    * Arrow keys: move between links
-    * **Enter**: follow link
-    * **G**: open a new URL
-  * Quit:
-
-    * **Q**, then **Y** to confirm
-
-* **w3m**
-  Slightly more modern than lynx, with optional image support in some terminals.
-
-  * Open a page:
-
-    ```bash
-    w3m http://localhost:8080
-    ```
-  * Navigation:
-
-    * Arrow keys: move
-    * **Enter**: follow link
-    * **U**: open a new URL
-  * Quit:
-
-    * **Q**
-
-* **links / links2**
-  Similar to lynx, with better table rendering and optional graphics support.
-
-  * Open a page:
-
-    ```bash
-    links http://localhost:8080
-    ```
-  * Menu:
-
-    * **Esc**: open menu
-  * Quit:
-
-    * **Q**
-
-### Export display with X11
-
-The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally.It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI.
-
-* On your **local machine**, allow X connections (example):
-
-  ```bash
-  xhost +local:
-  ```
-
-* Over SSH (recommended):
-
-  ```bash
-  ssh -X user@server
-  ```
-
-  or, if needed:
-
-  ```bash
-  ssh -Y user@server
-  ```
-
-* Test:
-
-  ```bash
-  xclock
-  firefox http://localhost:8080
-  ```
-
-This works reliably with:
-
-* Firefox
-* Chromium
-* Most legacy GUI tools
-
-### Remote desktop
+Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ a lot, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.
 
 ### Commands that should be known
 
@@ -161,126 +72,114 @@ This works reliably with:
 
 * **tail**, **tail -f** → show the end of a file, -f to follow it live (very useful for logs)
 
-* **vi / vim / emacs / nano** → most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editor that are present on most linux distribution, though the lightest linux distribution for container images might have the minimum (such as vi only, instead or the extended vim or emacs).
-
+* **vi / vim / emacs / nano** -> most of the time we work on servers/containers with a text terminal. Being able to edit a file is often needed. Vi, nano or Emacs are powerful text-based editors present on most Linux distributions, though minimal container images might only provide vi.
+ 
  Even if vi might seem very hard to use and strange at first glance, it is quick to learn the basics and very convenient.
  
  Emacs has a very different approach but is much more powerful, which can be useful for more complex work (if needed).
  
  If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.
 
-* **man** → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases.
- *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
+man -> show the manual for a command. man should be an automatic reflex for any less-known usage. It is absolutely normal to forget options or syntax.
+If you forget a command name, keep a Linux cheat sheet around. A quick internet search will find many good one-page PDFs.
 
-* **ln** → create links (that points to a file); understand the difference between:
-  * **Hard link**: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file
-  * **Symbolic link (symlink)**: exist independently of the linked file and will stay behind of the linked file is removed or moved, has its own permissions
+ln -> create a link and know the difference between:
 
- For setting-up an application, we generally use symbolic links, mostly as a way to change the permissions independently of the target file.
+a hard link: direct link to the file, removed when the file is removed, shares permissions
 
-* **chown / chmod** → change the owner of a file or folder, change the permissions of a file or a folder.
-  Be familiar with:
+a symbolic link (symlink): independent object pointing to a path, survives file moves/removal, has its own permissions
 
-  * symbolic permissions: `rwxrwxrwx`, `r-x------`
-  * numeric modes: `755`, `644`
-  * examples:
+For setting up applications, we generally use symbolic links, often to control permissions or switch versions/configurations easily.
 
-    * `chmod o+r filename`
-    * `chmod -R 755 directory`
-    * `chown -R user:group directory`
+chown / chmod -> change the owner of a file or folder, change permissions. Be familiar with:
 
-* Ideally the **pipe (|)** should be well understood, as well as the **I/O indirections (>, >>, <)**.
+rwxrwxrwx, r-x------
+
+numeric modes like 755, 644
+
+examples: chmod o+r filename, chmod -R 755 directory, chown -R user:group directory
+
+The pipe (|) should be well understood, as well as I/O redirections (>, >>, <).
 If this is unclear, look for “Unix pipes and redirection” — it is a core concept.
 
-* **grep** → search for the presence of a string in files, often used combined with another command using a pipe (|)
+grep -> search for a string in files, often combined with another command using a pipe (|)
 
-* **find** → search for files by name, type, size, or date; often combined with **grep** or **xargs**
+find -> search for files by name, type, size, or date. Often combined with grep or xargs
 
-* **mount / umount** → attach or detach filesystems
-  Removable media must be mounted before access. For instance, a USB key must be mounted before use.
-  Temporary mount points are often under `/mnt` or `/media`.
-  Modern systems often automount removable media.
+mount / umount -> attach a filesystem so it can be accessed. For instance, a USB key must be mounted before use. Temporary mount points are often under /mnt or /media. Modern systems often automount removable media.
 
-* **pwd / whoami** →
+pwd / whoami -> pwd returns the current path, whoami returns the current user
 
-  * **pwd** → print current directory
-  * **whoami** → show current user
+kill -> kill sends a signal to a process.
+The default signal is SIGTERM (kill -TERM pid or simply kill pid), which asks the process to terminate cleanly.
+If the process does not respond (hung, infinite loop), SIGKILL (kill -KILL pid or kill -9 pid) will force termination.
 
-* **kill** → kill does not only kill a process. It actually send a signal, which is most of the time to terminate a process: to the given process for most signals, ot to the kernel for  SIGKILL (**kill -KILL processId**) and SIGSTOP (**kill -STOP processId**), to respectivelly forcefully kill or stop a process. The default signal (i.e. no argument) for **kill** is SIGTERM (**kill -TERM processId**), which should be dealt by the process to terminate properly. If the signal is not processed by the corresponding application, by not being coded in or for being in a state where it cannot deal with it (for instance an infinite loop), nothing will happen. In that case, only **kill -KILL processId** will kill the application.
+SIGKILL is unsafe and should only be used after SIGTERM has failed.
 
- The SIGKILL termination is considered unsafe and should only be used on hanged process, after using SIGTERM.
+Signals have numeric values (POSIX), e.g. -15 for SIGTERM, -9 for SIGKILL.
 
- The signals have an integer value, with some defined in the POSIX standard, such as kill -9 for SIGKILL, or kill -15 for SIGTERM.
-
-* **eval** → is a powerful and dangerous command that execute its arguments as a shell command. So it is possible to build a command in a shell script and execute it using eval, making possible very advanced operations.
+eval -> powerful and dangerous command that executes its arguments as a shell command. It allows building commands dynamically in scripts, but can easily introduce security vulnerabilities.
 
 ::: {.callout-note}
-Knowing eval is important for security reason. The presence of eval in a suspicious script calls for caution.
+Knowing eval is important for security reasons. The presence of eval in a suspicious script calls for caution.
 :::
 
-- **xargs** → build and execute a command from standard input  
-  Very useful when a command produces a list of items (files, process IDs, etc.) that must be passed as arguments to another command.
+curl / wget -> interact with HTTP/HTTPS services from the command line. Very useful to test APIs, web services, or download files.
 
-  Typical usage combines **find**, **grep**, or pipes:
-  - `find . -name "*.log" | xargs rm`
-  - `grep -l "ERROR" *.log | xargs less`
+free / df / du -> monitor resources:
 
-  This is needed because many commands do **not** accept input directly from stdin, but only as command-line arguments.
+free: memory usage
 
-::: {.callout-note}
-Be careful: `xargs` will execute the command on *all* received items.  
-Prefer using `xargs -n 1` (one argument at a time) or test first with `echo`.
-:::
+df: disk usage per filesystem
 
-::: {.callout-note}
-As opposite to **eval**, **xargs** does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like **eval**
-:::
+du: disk usage per directory
 
-  *If unfamiliar, search for “xargs explained” — understanding it greatly improves command-line efficiency.*
+command & / CTRL-Z + bg / fg -> run a command in the background, suspend it, or bring it back to foreground
 
-* **curl / wget** → interact with HTTP/HTTPS services from the command line
-  Useful for testing APIs, services, or downloading files
+ssh / scp -> connect to a remote machine (ssh) and copy files over SSH (scp). Essential for remote servers.
+If unfamiliar, search for “SSH basics”.
 
-* **free / df / du** → check system resources
+systemctl -> part of systemd (daemon manager). Web servers (Apache, Nginx), databases, and applications usually run as daemons managed by systemctl.
+Commands to know:
 
-  * **free** → memory usage
-  * **df** → disk usage per filesystem
-  * **du** → disk usage per directory
+systemctl status service
 
-* **command & / CTRL-Z + bg / fg** → run a command in the background, suspend it, or bring it back to foreground
+systemctl start|stop|restart service
 
-* **ssh / scp** → connect to remote servers and copy files securely
-  Essential for working with remote machines
-  *If unfamiliar, search for “SSH basics”.*
+systemctl reload service (graceful reload when supported)
 
-* **systemctl graceful** →  **systemctl** is part of **systemd**, where the 'd' stands for 'daemons'.*Daemons* are Unix's background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. **systemctl graceful** ask for a clean restart of a service -> finish the existing "transaction" before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).
-  Common commands:
-  * `systemctl status service`
-  * `systemctl start|stop|restart service`
-  * `systemctl reload service` (graceful reload when supported)
+A graceful reload allows existing connections to finish before restarting (important for web servers). Keep in mind that application-level sessions (CMS, APIs) may still be interrupted depending on design.
 
-* **apachectl configtest / nginx -t** →  allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.
+apachectl configtest / nginx -t -> test the configuration of Apache or Nginx before restarting. This reduces the risk of breaking a production service, but does not guarantee the configuration behaves as intended.
 
-* **rsync** → efficient synchronization of files and directories
-  Often used for backups or deployments.
-  Combined with database dumps, it can form a simple backup strategy.
-  In that case it is important to have a monitoring of the process to ensure it is working.
+rsync -> efficient synchronization of files and directories, locally or remotely. Often used for backups or deployments. Combined with database dumps, it can form a simple backup strategy. Monitoring is important to ensure it actually runs.
 
-### Folders you should know
+docker / docker-compose (if applicable) -> many modern web applications are containerized. Even a basic understanding of docker ps, docker logs, docker restart is very useful.
+If this is new, look for a short “Docker for beginners” guide.
 
-* **/** → filesystem root
-* **/bin** → essential system binaries
-* **/usr** → user-space applications and libraries
-* **/usr/bin** → most user commands
-* **/etc** → system-wide configuration files (**very important**)
-* **/var** → variable data
-* **/var/log** → system and application logs (first place to check on errors)
-* **/home** → user home directories
-* **/root** → root user’s home directory
-* **/tmp** → temporary files (often auto-cleaned)
-* **/mnt** → mount points
-* **/media** -> temporary mount points for external storage (optional)
-* **/opt** → optional or third-party software
+Folders you should know
+
+/ -> filesystem root
+
+/bin -> essential system binaries (basic commands)
+
+/usr -> user-space applications and libraries
+/usr/bin -> most user commands and applications
+
+/etc -> system-wide configuration files (very important for web servers, services, users)
+
+/var -> variable data
+/var/log -> system and application logs (first place to look when something fails)
+
+/home -> user home directories
+
+/root -> home directory of the root (administrator) user
+
+/tmp -> temporary files (often cleaned automatically)
+
+/mnt -> temporary mount points
+
+/opt -> optional or third-party software (often used for manually installed applications)
 
 
 ### Online resources
@@ -340,70 +239,10 @@ If Docker is the *de facto* standard, there are other containers engines, such a
 
 ## Vocabulary
 
-* **An image** is a **template** used to create containers.
-  It contains:
-  * an operating system base (often minimal Linux),
-  * the application,
-  * its dependencies,
-  * default configuration.
-
-  An image is **immutable**: you do not modify it while it is running.
-  Images are usually downloaded from a registry (e.g. Docker Hub).
-
----
-
-* **A container** is a **running instance of an image**.
-  It:
-  * runs processes,
-  * listens on ports,
-  * can be started, stopped, or restarted.
-
-  Note that the desired application needs to be started (entrypoint), or only the operating system will run.
-
-  Containers are **ephemeral**:
-  * if a container is deleted, everything inside it is lost
-  * unless data is stored in a **volume**
-
-
-* **A volume** is a **persistent storage area** outside the container.
-  It is used to store all data that must survive container restarts or upgrades.
-
-
-  Volumes are:
-
-  * mounted inside containers
-  * independent of the container lifecycle
-
-
-* **Docker Compose** is a tool to **define and run multiple containers together** using a single configuration file (`docker-compose.yml`).
-
-  It is used to describe:
-  * which images to run,
-  * how containers are connected,
-  * ports,
-  * volumes,
-  * environment variables.
-
-  With Docker Compose, you typically manage an entire application stack:
-  * web server
-  * application
-  * database
-  * cache
-
-  All started with:
-
-  ```bash
-  docker-compose up
-  ```
-
-### Minimal mental model
-
-* **Image** → what to run
-* **Container** → the running application
-* **Volume** → persistent data
-* **Docker Compose** → a complete setup of multiple images and volumes.
-
-If you keep this model in mind, most Docker-related documentation will start to make sense.
+* An **Image**
+* A **container**
+* A **volume**
+* **Docker compose**
 
 ## Useful things to know
 
@@ -443,14 +282,7 @@ The different types of volumes
 
 ## Namespaces and namespaces collisions
 
-Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
-For instance, you want 2 instances of the same application, **testApp**, that uses a MySQL database. The database is defined in the docker-compose and used by the **testApp**. The set-up is the following:
-```
-application1/testApp/docker-compose.yml
-application2/testApp/docker-compose.yml
-```
-
-It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)
+Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace.
 
 
 # From Docker compose to Kubernetes
@@ -475,8 +307,6 @@ Quick overview
 -> Kubernetes section
 
 # Other solutions
-
-Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter, 
 
 # Scalability
 
