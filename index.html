@@ -268,6 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#quick-introduction-to-linuxunix" id="toc-quick-introduction-to-linuxunix" class="nav-link" data-scroll-target="#quick-introduction-to-linuxunix">Quick introduction to Linux/Unix</a>
   <ul class="collapse">
   <li><a href="#viewing-a-web-page-in-a-linux-shell" id="toc-viewing-a-web-page-in-a-linux-shell" class="nav-link" data-scroll-target="#viewing-a-web-page-in-a-linux-shell">Viewing a web page in a Linux shell</a></li>
+  <li><a href="#firewall-ssh-and-vpn" id="toc-firewall-ssh-and-vpn" class="nav-link" data-scroll-target="#firewall-ssh-and-vpn">Firewall, SSH and VPN</a></li>
   <li><a href="#export-display-with-x11" id="toc-export-display-with-x11" class="nav-link" data-scroll-target="#export-display-with-x11">Export display with X11</a></li>
   <li><a href="#remote-desktop" id="toc-remote-desktop" class="nav-link" data-scroll-target="#remote-desktop">Remote desktop</a></li>
   <li><a href="#commands-that-should-be-known" id="toc-commands-that-should-be-known" class="nav-link" data-scroll-target="#commands-that-should-be-known">Commands that should be known</a></li>
@@ -414,29 +415,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
+<section id="firewall-ssh-and-vpn" class="level3">
+<h3 class="anchored" data-anchor-id="firewall-ssh-and-vpn">Firewall, SSH and VPN</h3>
+</section>
 <section id="export-display-with-x11" class="level3">
 <h3 class="anchored" data-anchor-id="export-display-with-x11">Export display with X11</h3>
-<p>The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally.It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI.</p>
-<ul>
-<li><p>On your <strong>local machine</strong>, allow X connections (example):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xhost</span> +local:</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Over SSH (recommended):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-X</span> user@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>or, if needed:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-Y</span> user@server</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Test:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xclock</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">firefox</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ul>
-<p>This works reliably with:</p>
-<ul>
-<li>Firefox</li>
-<li>Chromium</li>
-<li>Most legacy GUI tools</li>
-</ul>
+<p>The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally. It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI. The communication will be ensured by SSH tunneling, thus encrypted.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The remote host must allow the local host, which might create a security risk (<strong>xhost+</strong> instead of <strong>.XAuthority</strong>).</p>
+</div>
+</div>
+<p>It is seldom needed to do so but very useful to know it is possible for some very specific need.</p>
 </section>
 <section id="remote-desktop" class="level3">
 <h3 class="anchored" data-anchor-id="remote-desktop">Remote desktop</h3>
+<p>A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Due to security issue, remote desktop (as well as remote X11) might not be usable. Generally, a properly configured firewall will block almost all ports to-from external access.</p>
+<p>If a SSH access is allowed, a remote desktop relying on SSH tunneling will be possible (such as X11).</p>
+<p>Otherwise it is possible that a VPN connection is needed first.</p>
+<p>It is always better to have an extra constraint (using the VPN in this case) than potentially add a vulnerability (see surface of attack in the <a href="./pages/Backups_and_security.html">Backups and Security page</a>)</p>
+</div>
+</div>
+<p>Common tools:</p>
+<ul>
+<li><p><strong>RDP</strong></p>
+<ul>
+<li>Server: <code>xrdp</code></li>
+<li>Client: Remmina, Windows Remote Desktop</li>
+<li>Works well over networks</li>
+</ul></li>
+<li><p><strong>VNC</strong></p>
+<ul>
+<li>Servers: <code>tigervnc</code>, <code>tightvnc</code></li>
+<li>Clients: <code>vncviewer</code>, Remmina</li>
+<li>Simple and widely supported</li>
+</ul></li>
+<li><p><strong>Wayland-friendly options</strong></p>
+<ul>
+<li>GNOME Remote Desktop (RDP)</li>
+<li>KDE Remote Desktop</li>
+<li><code>weston</code> (Wayland reference compositor)</li>
+</ul></li>
+</ul>
 </section>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
@@ -703,7 +742,7 @@ An image is <strong>immutable</strong>: you do not modify it while it is running
 <li>cache</li>
 </ul>
 <p>All started with:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker-compose</span> up</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 <section id="minimal-mental-model" class="level3">
 <h3 class="anchored" data-anchor-id="minimal-mental-model">Minimal mental model</h3>

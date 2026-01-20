@@ -459,6 +459,18 @@
     ]
   },
   {
+    "objectID": "pages/Backups_and_security.html#surface-of-attack",
+    "href": "pages/Backups_and_security.html#surface-of-attack",
+    "title": "Backups and Security",
+    "section": "Surface of attack",
+    "text": "Surface of attack",
+    "crumbs": [
+      "Home",
+      "Kubernetes",
+      "Backups and Security"
+    ]
+  },
+  {
     "objectID": "pages/Backups_and_security.html#firewall",
     "href": "pages/Backups_and_security.html#firewall",
     "title": "Backups and Security",
