@@ -72,6 +72,8 @@ Fail fast -> difference between errors where the application needs to/can contin
 
 ???
 
+## Surface of attack
+
 ## Firewall
 
 ## Protections against attacks

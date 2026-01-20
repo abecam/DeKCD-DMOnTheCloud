@@ -97,42 +97,52 @@ One very useful capability while setting-up a web application is to access it di
 
     * **Q**
 
+### Firewall, SSH and VPN
+
+
 ### Export display with X11
 
-The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally.It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI.
+The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally. It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI. The communication will be ensured by SSH tunneling, thus encrypted.
 
-* On your **local machine**, allow X connections (example):
+::: {.callout-warning}
+The remote host must allow the local host, which might create a security risk (**xhost+** instead of **.XAuthority**).
+:::
 
-  ```bash
-  xhost +local:
-  ```
-
-* Over SSH (recommended):
-
-  ```bash
-  ssh -X user@server
-  ```
-
-  or, if needed:
-
-  ```bash
-  ssh -Y user@server
-  ```
-
-* Test:
-
-  ```bash
-  xclock
-  firefox http://localhost:8080
-  ```
-
-This works reliably with:
-
-* Firefox
-* Chromium
-* Most legacy GUI tools
+It is seldom needed to do so but very useful to know it is possible for some very specific need.
 
 ### Remote desktop
+
+A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.
+
+::: {.callout-note}
+Due to security issue, remote desktop (as well as remote X11) might not be usable. Generally, a properly configured firewall will block almost all ports to-from external access.
+
+If a SSH access is allowed, a remote desktop relying on SSH tunneling will be possible (such as X11).
+
+Otherwise it is possible that a VPN connection is needed first.
+
+It is always better to have an extra constraint (using the VPN in this case) than potentially add a vulnerability (see surface of attack in the [Backups and Security page](pages/Backups_and_security.qmd))
+:::
+
+Common tools:
+
+* **RDP**
+
+  * Server: `xrdp`
+  * Client: Remmina, Windows Remote Desktop
+  * Works well over networks
+
+* **VNC**
+
+  * Servers: `tigervnc`, `tightvnc`
+  * Clients: `vncviewer`, Remmina
+  * Simple and widely supported
+
+* **Wayland-friendly options**
+
+  * GNOME Remote Desktop (RDP)
+  * KDE Remote Desktop
+  * `weston` (Wayland reference compositor)
 
 ### Commands that should be known
 
