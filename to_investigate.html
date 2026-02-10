@@ -335,6 +335,10 @@ ul.task-list li input[type="checkbox"] {
 <p>[1]+ Killed bundle exec puma -C docker/puma.rb</p>
 <p>Do the simplest setup-&gt; from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.</p>
 <p>Using kompose probably a good idea to remove env variable then extract them later (to check more)</p>
+<p>Object storage: REST, no specific port or protocol Minio mimic folder structure (others ?) RClone S3: encrypt data</p>
+<p>Fake bucket locks? Admin cannot (force) delete locked object?</p>
+<p>Monitoring needed even with object lock Limit of # versions</p>
+<p>OpenStack: Swift or Ceph using a Gateway (also supporting Swift) Swift: integrate with Keystone Better to avoid Swift Objects have meta-data</p>
 
 
 </section>

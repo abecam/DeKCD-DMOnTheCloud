@@ -68,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -247,7 +250,78 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Here we will provide a decision tree on when to use which solution. It will try to take most factors into account (as in the availability of technical support, if a Cloud is already available…).</p>
+<p>TODO: Extend the Kubernetes section. Having a K8s cluster is not enough to take the decision to use it (complexity).</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A["Start: You need to set up&lt;br/&gt;Research Data Management (RDM)"] --&gt; B
+    
+    B{"Does your institution/consortium offers a suitable hosted service (check for backup, data retention, GDPR, access and security"}
+
+    B -- Yes --&gt; C["Use this service. Eventually check for an API access if another platform needs to be connected"]
+
+    BA{"Does your institution provides a managed environment for virtual servers"}
+    
+    BB{"Use this virtual server/servers, check if they provide backups, snapshots and a load-balancing facility/possibility. The virtual server can otherwise be used as a physical one"}
+    
+    BC{"Is there a need for high availability and no load-balancing possibility"}
+    
+    CA{"Are you familiar with Docker/Docker Compose and can your selected platform be setup using it?"}
+    
+    D{"Can you create and manage&lt;br/&gt;virtual machines (VMs)?"}
+    
+    H{"Can you install software&lt;br/&gt;on a dedicated physical server?"}
+    
+    I{"Is it possible to install&lt;br/&gt;a pre-built system image?"}
+    
+    F{"Do you need a 24/7 availability?"}
+    
+    B -- No --&gt; BA
+    
+    BA -- Yes --&gt; BB
+    
+    BA -- No --&gt; F
+    
+    BB --&gt; BC
+    
+    BC -- Yes --&gt; M
+    
+    BC -- No --&gt; CA
+    
+    F -- Yes --&gt; M
+    
+    F -- No --&gt; CA
+
+    M{"Does your institution/consortium provide&lt;br/&gt;a managed Kubernetes cluster?"}
+
+    M -- Yes, already running &amp; supported --&gt; N["Use a Kubernetes-based RDM stack&lt;br/&gt;(e.g., iRODS, Dataverse, Rucio, Nextcloud,&lt;br/&gt;or custom services deployed on K8s)"]
+
+    M -- No --&gt; CA
+    
+    CA -- Yes --&gt; CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
+    
+    CA -- No --&gt; D
+
+    D -- Yes --&gt; E["Use a single VM with&lt;br/&gt;a preconfigured RDM image&lt;br/&gt;(if available) or install&lt;br/&gt;software manually within the VM"]
+
+    D -- No --&gt; H
+
+    H -- Yes --&gt; I
+
+    I -- Yes --&gt; J["Use a ready-made bare-metal image&lt;br/&gt;(e.g., institution-provided RDM stack)"]
+
+    I -- No --&gt; K["Install RDM software manually&lt;br/&gt;on bare metal&lt;br/&gt;(highest effort &amp; risk)"]
+
+    H -- No --&gt; L["Use an external service instead&lt;br/&gt;(institutional or cloud SaaS)"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 

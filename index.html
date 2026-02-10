@@ -270,6 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#viewing-a-web-page-in-a-linux-shell" id="toc-viewing-a-web-page-in-a-linux-shell" class="nav-link" data-scroll-target="#viewing-a-web-page-in-a-linux-shell">Viewing a web page in a Linux shell</a></li>
   <li><a href="#firewall-ssh-and-vpn" id="toc-firewall-ssh-and-vpn" class="nav-link" data-scroll-target="#firewall-ssh-and-vpn">Firewall, SSH and VPN</a></li>
   <li><a href="#export-display-with-x11" id="toc-export-display-with-x11" class="nav-link" data-scroll-target="#export-display-with-x11">Export display with X11</a></li>
+  <li><a href="#linux-with-wayland-waypipe" id="toc-linux-with-wayland-waypipe" class="nav-link" data-scroll-target="#linux-with-wayland-waypipe">Linux with Wayland: Waypipe</a></li>
   <li><a href="#remote-desktop" id="toc-remote-desktop" class="nav-link" data-scroll-target="#remote-desktop">Remote desktop</a></li>
   <li><a href="#commands-that-should-be-known" id="toc-commands-that-should-be-known" class="nav-link" data-scroll-target="#commands-that-should-be-known">Commands that should be known</a></li>
   <li><a href="#folders-you-should-know" id="toc-folders-you-should-know" class="nav-link" data-scroll-target="#folders-you-should-know">Folders you should know</a></li>
@@ -369,8 +370,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="viewing-a-web-page-in-a-linux-shell" class="level3">
 <h3 class="anchored" data-anchor-id="viewing-a-web-page-in-a-linux-shell">Viewing a web page in a Linux shell</h3>
 <p>One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it’s also possible to access most web applications using a command line browser. Some fancy web pages won’t be displayed in any useful way, but a Data Management Platform is rarely in that category.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A text-only browser is also a good way to check if a web-site is accessible - mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.</p>
+</div>
+</div>
 <ul>
-<li><p>lynx, the best friend of old server-side developers, is the oldest web-browser still maintained</p>
+<li><p><strong>lynx</strong>, the best friend of old server-side developers, the oldest web-browser still maintained, with an easy to remember name, is a quick way to check a web-site.</p>
 <ul>
 <li><p>Open a page:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lynx</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
@@ -436,6 +450,10 @@ Warning
 </div>
 <p>It is seldom needed to do so but very useful to know it is possible for some very specific need.</p>
 </section>
+<section id="linux-with-wayland-waypipe" class="level3">
+<h3 class="anchored" data-anchor-id="linux-with-wayland-waypipe">Linux with Wayland: Waypipe</h3>
+<p>If the same functionality is needed for a distribution using the newer Wayland display server, it is possible using <a href="https://gitlab.freedesktop.org/mstoeckl/waypipe/">Waypipe</a>.</p>
+</section>
 <section id="remote-desktop" class="level3">
 <h3 class="anchored" data-anchor-id="remote-desktop">Remote desktop</h3>
 <p>A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.</p>
@@ -476,6 +494,11 @@ Note
 <li><code>weston</code> (Wayland reference compositor)</li>
 </ul></li>
 </ul>
+<p>::: Which option should I use?</p>
+<p>I just want to check that a web service is running -&gt; Use a text-based browser (lynx, w3m, or links) Fast, simple, works everywhere.</p>
+<p>I need a feature that exists only in a graphical interface -&gt; Try export display with X11 (if available). Useful for configuration tools or admin interfaces.</p>
+<p>If too difficult to set-up or not available (on newer Linux or other OS) -&gt; Use remote desktop.</p>
+<p>I am not sure which option to choose -&gt; Use remote desktop. It is the most reliable and behaves like a normal desktop. :::</p>
 </section>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
@@ -503,6 +526,7 @@ Note
 <p>If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.</p>
 <ul>
 <li><p><strong>man</strong> → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p></li>
+<li><p><strong>tldr</strong> -&gt; a simplified <strong>man</strong>, that needs to be installed first but can also be consulted <a href="https://tldr.sh/">online or in a general PDF</a></p></li>
 <li><p><strong>ln</strong> → create links (that points to a file); understand the difference between:</p>
 <ul>
 <li><strong>Hard link</strong>: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file</li>

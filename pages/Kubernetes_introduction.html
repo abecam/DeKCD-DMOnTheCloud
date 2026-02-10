@@ -236,6 +236,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#seek-and-his-components" id="toc-seek-and-his-components" class="nav-link" data-scroll-target="#seek-and-his-components"><span class="header-section-number">2.1</span> Seek and his components</a></li>
   <li><a href="#the-default-docker-compose" id="toc-the-default-docker-compose" class="nav-link" data-scroll-target="#the-default-docker-compose"><span class="header-section-number">2.2</span> The default Docker Compose</a></li>
   <li><a href="#what-could-benefit-from-a-cloud-setup" id="toc-what-could-benefit-from-a-cloud-setup" class="nav-link" data-scroll-target="#what-could-benefit-from-a-cloud-setup"><span class="header-section-number">2.3</span> What could benefit from a cloud setup</a></li>
+  <li><a href="#a-pragmatic-approach-of-cloud-setup" id="toc-a-pragmatic-approach-of-cloud-setup" class="nav-link" data-scroll-target="#a-pragmatic-approach-of-cloud-setup"><span class="header-section-number">2.4</span> A pragmatic approach of Cloud setup</a></li>
   </ul></li>
   <li><a href="#a-quick-overview-of-kubernetes" id="toc-a-quick-overview-of-kubernetes" class="nav-link" data-scroll-target="#a-quick-overview-of-kubernetes"><span class="header-section-number">3</span> A quick overview of Kubernetes</a>
   <ul class="collapse">
@@ -304,6 +305,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="what-could-benefit-from-a-cloud-setup" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="what-could-benefit-from-a-cloud-setup"><span class="header-section-number">2.3</span> What could benefit from a cloud setup</h2>
+</section>
+<section id="a-pragmatic-approach-of-cloud-setup" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="a-pragmatic-approach-of-cloud-setup"><span class="header-section-number">2.4</span> A pragmatic approach of Cloud setup</h2>
+<p>The main question of which setup to choose is a matter or benefit/cost: * How much time will be needed for the training, the setup, the maintenance, * How secure is the setup, what solution is available for backup, * Which complexity can be managed, as a high complexity can also give a security risk.</p>
+<p>As such, it is often not beneficial to use the whole capability of a Cloud setup, but to pick what will be a real benefit and what need to be ignored in order to keep things manageable. It is also important to consider which level of availability, security and scalibility is really needed. Going from a 99% uptime (the platform need to be available 99% of the time) to 99.9% might involve a very high cost, needing several instance behind a load balancer, using a distributed database with automatic replication of data, having a redundant identity server… Going from 99.9% to 99.99% will have an even greater cost.</p>
 </section>
 </section>
 <section id="a-quick-overview-of-kubernetes" class="level1" data-number="3">
