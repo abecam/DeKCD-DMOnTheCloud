@@ -19,6 +19,15 @@ Seek is an extensive Data Management platform mostly aimed at Life Sciences but 
 
 ## What could benefit from a cloud setup
 
+## A pragmatic approach of Cloud setup
+
+The main question of which setup to choose is a matter or benefit/cost:
+* How much time will be needed for the training, the setup, the maintenance,
+* How secure is the setup, what solution is available for backup,
+* Which complexity can be managed, as a high complexity can also give a security risk.
+
+As such, it is often not beneficial to use the whole capability of a Cloud setup, but to pick what will be a real benefit and what need to be ignored in order to keep things manageable. It is also important to consider which level of availability, security and scalibility is really needed. Going from a 99% uptime (the platform need to be available 99% of the time) to 99.9% might involve a very high cost, needing several instance behind a load balancer, using a distributed database with automatic replication of data, having a redundant identity server... Going from 99.9% to 99.99% will have an even greater cost.
+
 # A quick overview of Kubernetes
 
 ## Good free instructory resources

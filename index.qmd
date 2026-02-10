@@ -49,7 +49,11 @@ Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative
 
 One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it's also possible to access most web applications using a command line browser. Some fancy web pages won't be displayed in any useful way, but a Data Management Platform is rarely in that category.
 
-* lynx, the best friend of old server-side developers, is the oldest web-browser still maintained
+::: {.callout-tip}
+A text-only browser is also a good way to check if a web-site is accessible - mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.
+:::
+
+* **lynx**, the best friend of old server-side developers, the oldest web-browser still maintained, with an easy to remember name, is a quick way to check a web-site.
 
   * Open a page:
 
@@ -110,6 +114,10 @@ The remote host must allow the local host, which might create a security risk (*
 
 It is seldom needed to do so but very useful to know it is possible for some very specific need.
 
+### Linux with Wayland: Waypipe
+
+If the same functionality is needed for a distribution using the newer Wayland display server, it is possible using [Waypipe](https://gitlab.freedesktop.org/mstoeckl/waypipe/).
+
 ### Remote desktop
 
 A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.
@@ -143,6 +151,25 @@ Common tools:
   * GNOME Remote Desktop (RDP)
   * KDE Remote Desktop
   * `weston` (Wayland reference compositor)
+
+:::
+Which option should I use?
+
+I just want to check that a web service is running
+-> Use a text-based browser (lynx, w3m, or links)
+Fast, simple, works everywhere.
+
+I need a feature that exists only in a graphical interface
+-> Try export display with X11 (if available).
+Useful for configuration tools or admin interfaces.
+
+If too difficult to set-up or not available (on newer Linux or other OS)
+-> Use remote desktop.
+
+I am not sure which option to choose
+-> Use remote desktop.
+It is the most reliable and behaves like a normal desktop.
+:::
 
 ### Commands that should be known
 
@@ -181,6 +208,8 @@ Common tools:
 
 * **man** → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases.
  *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
+
+ * **tldr** -> a simplified **man**, that needs to be installed first but can also be consulted [online or in a general PDF](https://tldr.sh/)
 
 * **ln** → create links (that points to a file); understand the difference between:
   * **Hard link**: a hard link: direct link to the file, will be removed if the file is removed, get its permissions from the target file

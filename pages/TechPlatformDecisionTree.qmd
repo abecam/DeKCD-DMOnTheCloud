@@ -3,4 +3,67 @@ title: "Technical Platform decision tree for Data Management Platforms"
 number-sections: true
 ---
 
-Here we will provide a decision tree on when to use which solution. It will try to take most factors into account (as in the availability of technical support, if a Cloud is already available...).
+TODO: Extend the Kubernetes section. Having a K8s cluster is not enough to take the decision to use it (complexity).
+
+```{mermaid}
+flowchart TD
+	A["Start: You need to set up<br/>Research Data Management (RDM)"] --> B
+	
+	B{"Does your institution/consortium offers a suitable hosted service (check for backup, data retention, GDPR, access and security"}
+
+	B -- Yes --> C["Use this service. Eventually check for an API access if another platform needs to be connected"]
+
+	BA{"Does your institution provides a managed environment for virtual servers"}
+	
+	BB{"Use this virtual server/servers, check if they provide backups, snapshots and a load-balancing facility/possibility. The virtual server can otherwise be used as a physical one"}
+	
+	BC{"Is there a need for high availability and no load-balancing possibility"}
+	
+	CA{"Are you familiar with Docker/Docker Compose and can your selected platform be setup using it?"}
+	
+    D{"Can you create and manage<br/>virtual machines (VMs)?"}
+	
+	H{"Can you install software<br/>on a dedicated physical server?"}
+	
+	I{"Is it possible to install<br/>a pre-built system image?"}
+	
+	F{"Do you need a 24/7 availability?"}
+	
+	B -- No --> BA
+	
+	BA -- Yes --> BB
+	
+	BA -- No --> F
+	
+	BB --> BC
+	
+	BC -- Yes --> M
+	
+	BC -- No --> CA
+	
+	F -- Yes --> M
+	
+	F -- No --> CA
+
+	M{"Does your institution/consortium provide<br/>a managed Kubernetes cluster?"}
+
+	M -- Yes, already running & supported --> N["Use a Kubernetes-based RDM stack<br/>(e.g., iRODS, Dataverse, Rucio, Nextcloud,<br/>or custom services deployed on K8s)"]
+
+	M -- No --> CA
+	
+	CA -- Yes --> CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
+	
+	CA -- No --> D
+
+    D -- Yes --> E["Use a single VM with<br/>a preconfigured RDM image<br/>(if available) or install<br/>software manually within the VM"]
+
+    D -- No --> H
+
+    H -- Yes --> I
+
+    I -- Yes --> J["Use a ready-made bare-metal image<br/>(e.g., institution-provided RDM stack)"]
+
+    I -- No --> K["Install RDM software manually<br/>on bare metal<br/>(highest effort & risk)"]
+
+    H -- No --> L["Use an external service instead<br/>(institutional or cloud SaaS)"]
+```

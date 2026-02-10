@@ -113,3 +113,19 @@ Not enough ressources allocated: one of the application process can be killed by
 Do the simplest setup-> from a docker command line use docker to docker-compose. If possible it is better than to try from a complex docker compose. Then kompose.
 
 Using kompose probably a good idea to remove env variable then extract them later (to check more)
+
+Object storage: REST, no specific port or protocol
+Minio mimic folder structure (others ?)
+RClone
+S3: encrypt data
+
+Fake bucket locks?
+Admin cannot (force) delete locked object?
+
+Monitoring needed even with object lock
+Limit of # versions
+
+OpenStack: Swift or Ceph using a Gateway (also supporting Swift)
+Swift: integrate with Keystone
+Better to avoid Swift
+Objects have meta-data
