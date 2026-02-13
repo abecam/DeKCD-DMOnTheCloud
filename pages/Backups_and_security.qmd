@@ -51,6 +51,8 @@ It is important to know which of these aspects are needed in the system to build
 It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one
 way to fight against this kind of problem.
 
+A very wide overview of possible outrages and how to mitigate them is part of [Business Continuity Planning](https://en.wikipedia.org/wiki/Business_continuity_planning).
+
 ## Limits of security
 
 Security in computer software is very much alike security in the real-life: if you want your house to be totally secure, you have to push a 3 meter high concrete wall around with automatic machine guns. Not fun, not neighbour-friendly and not inhabitant-friendly too. The same rule applies in software development: you just cannot have a totally secured system, as nothing will be usable then (or with much difficulties). The fact is that, like in the real life, the user must show some respect to other users and to the software architecture, and we must protect the system mostly from deviant users.
