@@ -206,6 +206,10 @@ It is the most reliable and behaves like a normal desktop.
  
  If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.
 
+ The absolute minimum knowledge you need of vi/vim is that you need to press "i" to edit the text, then escape to return to "command mode". In the "command mode", wq saves and quits (write and quit), q quits if there is no changes, q! saves without saving the change.
+
+ These editor are also used for editing crontab (crontab -e), with the editor chosen at the first use, but it can be changed later. Crontab is determining how cronjobs are running (regular jobs) and, if not *needed* for running an application (and so not part of this list), can be really useful.
+
 * **man** → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases.
  *If* you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs. 
 

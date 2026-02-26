@@ -84,39 +84,117 @@ And generally, the applications are deployed as:
 * **Secret:** similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.
 
 ```{mermaid}
-graph TD
-  %% Infrastructure
-  Cluster --> Node --> Pod --> Container
+flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[ReplicaSet Controller]
+end
+subgraph NodeA[Node A]
+P1[Pod v1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1]
+end
+subgraph NodeC[Node C]
+P3[Pod v1]
+end
 
-  %% Workload controllers
-  Deployment --> ReplicaSet --> Pod
-  DaemonSet --> Pod
-  StatefulSet --> Pod
-  Job --> Pod
 
-  %% Networking & config
-  Service --> Pod
-  ConfigMap --> Pod
-  Secret --> Pod
-  Label --> Pod
+RS1[ReplicaSet v1 replicas=3] --> P1
+RS1 --> P2
+RS1 --> P3
+```
 
-  %% Tooling
-  Manifest --> Deployment
-  Manifest --> Service
-  Manifest --> ConfigMap
-  Manifest --> Secret
-  kubectl --> Cluster
+```{mermaid}
+flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[ReplicaSet Controller]
+D1[Deployment w/o ReplicatSet]
+end
+subgraph NodeA[Node A]
+P1[Pod v1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1]
+P3[Pod v1]
+end
+subgraph NodeC[Node C]
+P4[Pod 2 v1]
+end
 
-  %% Styles
-  classDef infra fill:#326ce5,color:#fff,stroke:#1b3c87
-  classDef workload fill:#4f8cff,color:#fff,stroke:#1b3c87
-  classDef config fill:#5bb974,color:#fff,stroke:#2f6f44
-  classDef tool fill:#7b6cf6,color:#fff,stroke:#3b2fa3
 
-  class Cluster,Node infra
-  class Deployment,ReplicaSet,DaemonSet,StatefulSet,Job,Pod workload
-  class Service,ConfigMap,Secret,Label config
-  class Manifest,kubectl tool
+RS1[ReplicaSet v1 replicas=3] --> P1
+RS1 --> P2
+RS1 --> P3
+
+D1 --> P4
+```
+
+Stateful Sets
+```{mermaid}
+flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[StatefulSet Controller]
+end
+subgraph NodeA[Node A]
+P1[Pod v1 Example-1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1 Example-2]
+end
+subgraph NodeC[Node C]
+P3[Pod v1 Example-3]
+end
+
+RS1[StatefulSet v1 replicas=3
+Name=Example] --> P1
+RS1 --> P2
+RS1 --> P3
+```
+
+DaemonSets with Log
+
+```{mermaid}
+flowchart TB
+    User --> Load_Balancer --> Service
+
+    subgraph K8s_Cluster[Kubernetes Cluster]
+
+        %% Application layer
+        Service --> Deployment
+        Deployment --> ReplicaSet
+
+        ReplicaSet --> AppPod1
+        ReplicaSet --> AppPod2
+
+        LogAgent1_def["DaemonSet Manifest"]
+
+        %% Nodes
+        subgraph Node1["Worker Node 1"]
+            AppPod1
+            LogAgent1
+        end
+
+        subgraph Node2["Worker Node 2"]
+            AppPod2
+            LogAgent2
+        end
+
+        LogAgent1_def --> LogAgent1
+        LogAgent1_def --> LogAgent2
+
+        %% Log collection
+        LogAgent1 --> AppPod1
+        LogAgent2 --> AppPod2
+    end
+
+    %% Centralized logging
+    subgraph Logging_Backend[Logging Backend]
+        Graylog["Graylog"]
+    end
+
+    %% Log shipping
+    LogAgent1 --> Graylog
+    LogAgent2 --> Graylog
 ```
 
 ## Everything decoupled
@@ -127,8 +205,6 @@ Why there is so many extra layers compared to docker compose -> full decoupling.
 ## Most configuration is declarative
 
 ## The various objects for your application
-
-Deployment, Job, ReplicaSet, DaemonSet, StatefulSet
 
 While the **Pod** is the smallest element in Kubernetes, it is directly started *only* for testing.
 If you define a pod or create it using `kubectl`, it will only run once and will not be restarted if something fails.
@@ -150,24 +226,26 @@ A **DaemonSet** runs one pod per machine (node). This is often used for backgrou
 A **StatefulSet** is like a Deployment but for applications that need to keep their identity and data across restarts — such as databases.
 Each pod in a StatefulSet has a fixed name and can have its own storage attached.
 
+A **CronJob** is a definition of jobs that will run periodically following a cron format. When needed they are well explained in the [official documentation](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+
 ## Visual overview
 
 Here’s a simple way to picture how Kubernetes manages your applications:
 ```
-+----------------------------------------------------+
-|                    Deployment                      |
-|  (defines the app, version, and update strategy)   |
-|                                                    |
-|   +--------------------------------------------+   |
-|   |                 ReplicaSet                 |   |
-|   |  (keeps the right number of Pods running)  |   |
-|   |                                            |   |
-|   |   +-----------+   +-----------+   +-------+|   |
-|   |   |   Pod 1   |   |   Pod 2   |   | Pod 3 ||   |
-|   |   | (runs app)|   | (runs app)|   |(app)  ||   |
-|   |   +-----------+   +-----------+   +-------+|   |
-|   +--------------------------------------------+   |
-+----------------------------------------------------+
++-------------------------------------------------------------------------------------------------+
+|                                            Deployment                                           |
+|                        (defines the app, version, and update strategy)                          |
+|                                                                                                 |
+|   +-----------------------------------------------------------------------------------------+   |
+|   |                                        ReplicaSet                                       |   |
+|   |                       (keeps the right number of Pods running)                          |   |
+|   |                                                                                         |   |
+|   |   +------------------------+   +------------------------+   +-------------------------+ |   |
+|   |   |          Pod 1         |   |          Pod 2         |   |         Pod 3           | |   |
+|   |   | (runs app in container)|   | (runs app in container)|   | (runs app in container) | |   |
+|   |   +------------------------+   +------------------------+   +-------------------------+ |   |
+|   +-----------------------------------------------------------------------------------------+   |
++-------------------------------------------------------------------------------------------------+
 ```
 * Deployment: Defines what you want to run and how to update it.
 * ReplicaSet: Ensures the right number of pods are running.
@@ -175,6 +253,8 @@ Here’s a simple way to picture how Kubernetes manages your applications:
 
 If a pod fails, the ReplicaSet creates a new one.
 If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly.
+
+
 ---
 
 ## Updating an application
@@ -274,8 +354,8 @@ Otherwise, the claim just stays pending until an administrator provides a volume
 |          v                 |
 |      +--------+            |
 |      | Volume |------------+--------------+
-|      +--------+                           |
-+-------------------------------------------|
+|      +--------+            |              |
++----------------------------+              |
                                             |
                            +--------------------------------+
                            | PersistentVolumeClaim (PVC)    |
