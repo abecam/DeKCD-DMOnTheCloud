@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -103,6 +105,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 
 
 <link rel="stylesheet" href="styles.css">
@@ -327,7 +347,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-
+<script type="text/plain" cookie-consent="tracking"> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]); _paq.push(["setCookieDomain", "*.dekcd.github.io"]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); _paq.push(['enableHeartBeatTimer', 15]); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '38']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
+</script>
 <p>Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.</p>
 <section id="goals-and-scope" class="level1">
 <h1>Goals and scope</h1>
@@ -524,6 +545,8 @@ Note
 <p>Even if vi might seem very hard to use and strange at first glance, it is quick to learn the basics and very convenient.</p>
 <p>Emacs has a very different approach but is much more powerful, which can be useful for more complex work (if needed).</p>
 <p>If you never used a terminal editor, search for a short “vi basics” or “nano basics” introduction.</p>
+<p>The absolute minimum knowledge you need of vi/vim is that you need to press “i” to edit the text, then escape to return to “command mode”. In the “command mode”, wq saves and quits (write and quit), q quits if there is no changes, q! saves without saving the change.</p>
+<p>These editor are also used for editing crontab (crontab -e), with the editor chosen at the first use, but it can be changed later. Crontab is determining how cronjobs are running (regular jobs) and, if not <em>needed</em> for running an application (and so not part of this list), can be really useful.</p>
 <ul>
 <li><p><strong>man</strong> → show the manual for a command. man should be an automatic reflex for any less known usage. It is absolutely normal to forget how such option or command work if they are not used very often. man is there for such cases. <em>If</em> you forget a command name, it is a good idea to keep a linux cheat sheet around. A quick internet search should find many good one page pdfs.</p></li>
 <li><p><strong>tldr</strong> -&gt; a simplified <strong>man</strong>, that needs to be installed first but can also be consulted <a href="https://tldr.sh/">online or in a general PDF</a></p></li>
@@ -1284,6 +1307,19 @@ application2/testApp/docker-compose.yml</code></pre>
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

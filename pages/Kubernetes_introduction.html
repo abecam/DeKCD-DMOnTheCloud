@@ -30,6 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -68,6 +70,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"implied",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
 <script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
 <script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
 <link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
@@ -289,7 +309,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-
+<script type="text/plain" cookie-consent="tracking"> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]); _paq.push(["setCookieDomain", "*.dekcd.github.io"]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); _paq.push(['enableHeartBeatTimer', 15]); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '38']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
+</script>
 <section id="working-progress" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Working progress</h1>
 <p>Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible. Explain everything: so start from a simple (and stupid) solution and add to it. Do not drown: keep things structured so things are not confusing.</p>
@@ -382,39 +403,140 @@ Warning
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">graph TD
-  %% Infrastructure
-  Cluster --&gt; Node --&gt; Pod --&gt; Container
+<pre class="mermaid mermaid-js">flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[ReplicaSet Controller]
+end
+subgraph NodeA[Node A]
+P1[Pod v1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1]
+end
+subgraph NodeC[Node C]
+P3[Pod v1]
+end
 
-  %% Workload controllers
-  Deployment --&gt; ReplicaSet --&gt; Pod
-  DaemonSet --&gt; Pod
-  StatefulSet --&gt; Pod
-  Job --&gt; Pod
 
-  %% Networking &amp; config
-  Service --&gt; Pod
-  ConfigMap --&gt; Pod
-  Secret --&gt; Pod
-  Label --&gt; Pod
+RS1[ReplicaSet v1 replicas=3] --&gt; P1
+RS1 --&gt; P2
+RS1 --&gt; P3
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[ReplicaSet Controller]
+D1[Deployment w/o ReplicatSet]
+end
+subgraph NodeA[Node A]
+P1[Pod v1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1]
+P3[Pod v1]
+end
+subgraph NodeC[Node C]
+P4[Pod 2 v1]
+end
 
-  %% Tooling
-  Manifest --&gt; Deployment
-  Manifest --&gt; Service
-  Manifest --&gt; ConfigMap
-  Manifest --&gt; Secret
-  kubectl --&gt; Cluster
 
-  %% Styles
-  classDef infra fill:#326ce5,color:#fff,stroke:#1b3c87
-  classDef workload fill:#4f8cff,color:#fff,stroke:#1b3c87
-  classDef config fill:#5bb974,color:#fff,stroke:#2f6f44
-  classDef tool fill:#7b6cf6,color:#fff,stroke:#3b2fa3
+RS1[ReplicaSet v1 replicas=3] --&gt; P1
+RS1 --&gt; P2
+RS1 --&gt; P3
 
-  class Cluster,Node infra
-  class Deployment,ReplicaSet,DaemonSet,StatefulSet,Job,Pod workload
-  class Service,ConfigMap,Secret,Label config
-  class Manifest,kubectl tool
+D1 --&gt; P4
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Stateful Sets</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+subgraph ControlPlane[Control Plane]
+RS1[StatefulSet Controller]
+end
+subgraph NodeA[Node A]
+P1[Pod v1 Example-1]
+end
+subgraph NodeB[Node B]
+P2[Pod v1 Example-2]
+end
+subgraph NodeC[Node C]
+P3[Pod v1 Example-3]
+end
+
+RS1[StatefulSet v1 replicas=3
+Name=Example] --&gt; P1
+RS1 --&gt; P2
+RS1 --&gt; P3
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>DaemonSets with Log</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+    User --&gt; Load_Balancer --&gt; Service
+
+    subgraph K8s_Cluster[Kubernetes Cluster]
+
+        %% Application layer
+        Service --&gt; Deployment
+        Deployment --&gt; ReplicaSet
+
+        ReplicaSet --&gt; AppPod1
+        ReplicaSet --&gt; AppPod2
+
+        LogAgent1_def["DaemonSet Manifest"]
+
+        %% Nodes
+        subgraph Node1["Worker Node 1"]
+            AppPod1
+            LogAgent1
+        end
+
+        subgraph Node2["Worker Node 2"]
+            AppPod2
+            LogAgent2
+        end
+
+        LogAgent1_def --&gt; LogAgent1
+        LogAgent1_def --&gt; LogAgent2
+
+        %% Log collection
+        LogAgent1 --&gt; AppPod1
+        LogAgent2 --&gt; AppPod2
+    end
+
+    %% Centralized logging
+    subgraph Logging_Backend[Logging Backend]
+        Graylog["Graylog"]
+    end
+
+    %% Log shipping
+    LogAgent1 --&gt; Graylog
+    LogAgent2 --&gt; Graylog
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -431,7 +553,6 @@ Warning
 </section>
 <section id="the-various-objects-for-your-application" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="the-various-objects-for-your-application"><span class="header-section-number">3.5</span> The various objects for your application</h2>
-<p>Deployment, Job, ReplicaSet, DaemonSet, StatefulSet</p>
 <p>While the <strong>Pod</strong> is the smallest element in Kubernetes, it is directly started <em>only</em> for testing. If you define a pod or create it using <code>kubectl</code>, it will only run once and will not be restarted if something fails. As such, it is like <code>docker run</code> if started manually, or <code>docker compose</code> if started using a manifest, and offers no benefit — just the added complexity of the Kubernetes setup.</p>
 <p>A pod is using a container engine, which does not have to be docker.</p>
 <p>A <strong>ReplicaSet</strong> asks for a set number of pods, and Kubernetes will ensure that these pods are always running. If one pod becomes unhealthy or crashes, Kubernetes automatically removes it and creates a new one.</p>
@@ -439,30 +560,32 @@ Warning
 <p>A <strong>Job</strong> is used for tasks that need to run once and then stop, for example, a script that imports some data or cleans up files. Kubernetes ensures that the job runs successfully to completion.</p>
 <p>A <strong>DaemonSet</strong> runs one pod per machine (node). This is often used for background services such as system monitoring or log collection that must run everywhere.</p>
 <p>A <strong>StatefulSet</strong> is like a Deployment but for applications that need to keep their identity and data across restarts — such as databases. Each pod in a StatefulSet has a fixed name and can have its own storage attached.</p>
+<p>A <strong>CronJob</strong> is a definition of jobs that will run periodically following a cron format. When needed they are well explained in the <a href="https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/">official documentation</a></p>
 </section>
 <section id="visual-overview" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="visual-overview"><span class="header-section-number">3.6</span> Visual overview</h2>
 <p>Here’s a simple way to picture how Kubernetes manages your applications:</p>
-<pre><code>+----------------------------------------------------+
-|                    Deployment                      |
-|  (defines the app, version, and update strategy)   |
-|                                                    |
-|   +--------------------------------------------+   |
-|   |                 ReplicaSet                 |   |
-|   |  (keeps the right number of Pods running)  |   |
-|   |                                            |   |
-|   |   +-----------+   +-----------+   +-------+|   |
-|   |   |   Pod 1   |   |   Pod 2   |   | Pod 3 ||   |
-|   |   | (runs app)|   | (runs app)|   |(app)  ||   |
-|   |   +-----------+   +-----------+   +-------+|   |
-|   +--------------------------------------------+   |
-+----------------------------------------------------+</code></pre>
+<pre><code>+-------------------------------------------------------------------------------------------------+
+|                                            Deployment                                           |
+|                        (defines the app, version, and update strategy)                          |
+|                                                                                                 |
+|   +-----------------------------------------------------------------------------------------+   |
+|   |                                        ReplicaSet                                       |   |
+|   |                       (keeps the right number of Pods running)                          |   |
+|   |                                                                                         |   |
+|   |   +------------------------+   +------------------------+   +-------------------------+ |   |
+|   |   |          Pod 1         |   |          Pod 2         |   |         Pod 3           | |   |
+|   |   | (runs app in container)|   | (runs app in container)|   | (runs app in container) | |   |
+|   |   +------------------------+   +------------------------+   +-------------------------+ |   |
+|   +-----------------------------------------------------------------------------------------+   |
++-------------------------------------------------------------------------------------------------+</code></pre>
 <ul>
 <li>Deployment: Defines what you want to run and how to update it.</li>
 <li>ReplicaSet: Ensures the right number of pods are running.</li>
 <li>Pods: Run the actual container (your app).</li>
 </ul>
-<p>If a pod fails, the ReplicaSet creates a new one. If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly. —</p>
+<p>If a pod fails, the ReplicaSet creates a new one. If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly.</p>
+<hr>
 </section>
 <section id="updating-an-application" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="updating-an-application"><span class="header-section-number">3.7</span> Updating an application</h2>
@@ -534,8 +657,8 @@ Warning
 |          v                 |
 |      +--------+            |
 |      | Volume |------------+--------------+
-|      +--------+                           |
-+-------------------------------------------|
+|      +--------+            |              |
++----------------------------+              |
                                             |
                            +--------------------------------+
                            | PersistentVolumeClaim (PVC)    |
@@ -990,6 +1113,19 @@ Warning
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
