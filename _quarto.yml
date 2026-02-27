@@ -3,7 +3,6 @@ project:
 
 website:
   title: "De.KCD - Data Management Platform on the Cloud - Quickstart"
-  cookie-consent: true
   navbar:
     left:
       - href: index.qmd
@@ -61,6 +60,9 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
-
+    mermaid:
+      theme: default
+    include-in-header:
+      - file: CookieConsent.html
 
 

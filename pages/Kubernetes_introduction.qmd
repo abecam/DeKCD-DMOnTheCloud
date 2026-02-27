@@ -145,8 +145,7 @@ subgraph NodeC[Node C]
 P3[Pod v1 Example-3]
 end
 
-RS1[StatefulSet v1 replicas=3
-Name=Example] --> P1
+RS1[StatefulSet v1 replicas=3 Name=Example] --> P1
 RS1 --> P2
 RS1 --> P3
 ```
