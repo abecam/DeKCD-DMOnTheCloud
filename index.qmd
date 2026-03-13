@@ -393,8 +393,6 @@ If Docker is the *de facto* standard, there are other containers engines, such a
   An image is **immutable**: you do not modify it while it is running.
   Images are usually downloaded from a registry (e.g. Docker Hub).
 
----
-
 * **A container** is a **running instance of an image**.
   It:
   * runs processes,
@@ -564,16 +562,6 @@ Ansible & Terraform -> short introduction, links to documentation/
 
 CI/CD/GitOps (Flux CD & others) -> also short introduction and links. Maybe a short tutorial for GitHub
 
-Here are the two sections as Quarto-friendly markdown:
-
----
-
-## Ansible & Terraform
-
-Here's the updated Ansible & Terraform section:
-
----
-
 ## Puppet, Ansible & Terraform
 
 ::: {.callout-tip}
@@ -625,8 +613,6 @@ Puppet and Ansible are Open Source while Terraform is a product of HashiCorp wit
 - [Ansible Documentation](https://docs.ansible.com)
 - [Ansible Getting Started Guide](https://docs.ansible.com/ansible/latest/getting_started/index.html)
 - [Puppet Documentation](https://www.puppet.com/docs)
-
----
 
 ## CI/CD and GitOps
 
