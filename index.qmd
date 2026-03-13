@@ -50,7 +50,7 @@ Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative
 One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it's also possible to access most web applications using a command line browser. Some fancy web pages won't be displayed in any useful way, but a Data Management Platform is rarely in that category.
 
 ::: {.callout-tip}
-A text-only browser is also a good way to check if a web-site is accessible - mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.
+A text-only browser is also a good way to check if a web-site is accessible, mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.
 :::
 
 * **lynx**, the best friend of old server-side developers, the oldest web-browser still maintained, with an easy to remember name, is a quick way to check a web-site.
@@ -233,7 +233,7 @@ It is the most reliable and behaves like a normal desktop.
     * `chown -R user:group directory`
 
 * Ideally the **pipe (|)** should be well understood, as well as the **I/O indirections (>, >>, <)**.
-If this is unclear, look for “Unix pipes and redirection” - it is a core concept.
+If this is unclear, look for “Unix pipes and redirection”, it is a core concept.
 
 * **grep** → search for the presence of a string in files, often used combined with another command using a pipe (|)
 
@@ -279,7 +279,7 @@ Prefer using `xargs -n 1` (one argument at a time) or test first with `echo`.
 As opposite to **eval**, **xargs** does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like **eval**
 :::
 
-  *If unfamiliar, search for “xargs explained” - understanding it greatly improves command-line efficiency.*
+  *If unfamiliar, search for “xargs explained”, understanding it greatly improves command-line efficiency.*
 
 * **curl / wget** → interact with HTTP/HTTPS services from the command line
   Useful for testing APIs, services, or downloading files
@@ -354,20 +354,20 @@ A long term set-up should take a proper care of security in all case, and in thi
 Note that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e. difficulty of maintenance)
 :::
 
-A **Virtual Machine** is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.
+A **Virtual Machine** is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it. Most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.
 
-It can be an **emulation**, "imitating" a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.
+It can be an **emulation**, "imitating" a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure and exploit are fixable by software update.
 
 Or a **virtualization**, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used:
-* full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update.
+* full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security. Exploit are also fixable by software update.
 * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals.
 * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed **images** that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.
 
 ::: {.callout-note}
-A main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).
+A main protection against threat is being up-to-date: a recent or LTS, Long-Term-Support: that is supported for a long time, Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).
 :::
 
-# Containers - Overview of Docker usage
+# Containers,  Overview of Docker usage
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -586,9 +586,9 @@ Books are still recommended for a quicker start.
 
 When you have more than a handful of servers or services to manage, doing everything by hand stops being practical. Tools like **Puppet**, **Ansible**, and **Terraform** exist to automate that work.
 
-**Puppet** was one of the first widely adopted tools for managing server configuration at scale, and many large organizations still use it. You describe the desired state of your systems in Puppet's own language, and a Puppet agent running on each machine enforces that state continuously. It works well for large, stable fleets - but it requires installing and maintaining that agent on every machine you manage, setting up a central Puppet server, and learning a configuration language that has a steep initial curve.
+**Puppet** was one of the first widely adopted tools for managing server configuration at scale, and many large organizations still use it. You describe the desired state of your systems in Puppet's own language, and a Puppet agent running on each machine enforces that state continuously. It works well for large, stable fleets but it requires installing and maintaining that agent on every machine you manage, setting up a central Puppet server, and learning a configuration language that has a steep initial curve.
 
-**Ansible** emerged as a simpler alternative for configuration management. It does much of what Puppet does - installing packages, writing config files, managing services - but works over plain SSH with no agent to install. The desired state of a system is written in *playbooks*, written in YAML, which most developers already know. The tradeoff is that Ansible is not continuously enforcing state the way Puppet does: you run it when you want changes applied, rather than having it run automatically in the background. For smaller setups or teams without dedicated ops staff, this is often the right balance.
+**Ansible** emerged as a simpler alternative for configuration management. It does much of what Puppet does: installing packages, writing config files, managing services. But it works over plain SSH with no agent to install. The desired state of a system is written in *playbooks*, written in YAML, which most developers already know. The tradeoff is that Ansible is not continuously enforcing state the way Puppet does: you run it when you want changes applied, rather than having it run automatically in the background. For smaller setups or teams without dedicated ops staff, this is often the right balance.
 
 Example playbook
 ```yaml
@@ -607,7 +607,7 @@ Running this playbook installs nginx on all hosts in the webservers group.
 Ansible can be used to set-up a bare-metal installation, but also for complementing a Docker Compose setup, typically for configuring the application.
 
 
-**Terraform** solves a different problem: not configuring machines, but *creating* the infrastructure in the first place. It talks to cloud providers (or your local virtualization layer) and sets up virtual machines, networks, storage, DNS entries, and so on. You describe what you want, and Terraform tracks what already exists so it only makes the changes needed. Puppet and Ansible assume the machines are already there - Terraform gets them there.
+**Terraform** solves a different problem: not configuring machines, but *creating* the infrastructure in the first place. It talks to cloud providers (or your local virtualization layer) and sets up virtual machines, networks, storage, DNS entries, and so on. You describe what you want, and Terraform tracks what already exists so it only makes the changes needed. Puppet and Ansible assume the machines are already there, Terraform prepares the virtual machines.
 
 Terraform is generally supported by most Virtualisation platforms: OpenStack, Proxmox, Kubernetes, ...
 
@@ -642,9 +642,9 @@ CI/CD is an important aspect for modern online platforms, when you develop them.
 For CI/CD pipelines, the most common options are:
 
 - **GitHub Actions** - built into GitHub, easy to get started, large ecosystem of pre-built actions
-- **GitLab CI** - similar, built into GitLab
-- **Forgejo/Gitea Actions** - self-hostable alternative compatible with GitHub Actions syntax
-- **Jenkins** - older, very flexible, but more complex to set up
+- **GitLab CI**: similar, built into GitLab
+- **Forgejo/Gitea Actions**: self-hostable alternative compatible with GitHub Actions syntax
+- **Jenkins**: older, very flexible, but more complex to set up
 
 - [Flux CD Documentation](https://fluxcd.io/flux/)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
@@ -681,7 +681,7 @@ jobs:
           publish_dir: ./_site
 ```
 
-This file lives in your repo at `.github/workflows/deploy.yml`. GitHub picks it up automatically - no extra configuration needed. Every push to `main` triggers a fresh build and deploy.
+This file lives in your repo at `.github/workflows/deploy.yml`. GitHub picks it up automatically, no extra configuration needed. Every push to `main` triggers a fresh build and deploy.
 
 This is a Quarto website.
 
