@@ -322,7 +322,6 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#going-to-an-assembly" id="toc-going-to-an-assembly" class="nav-link" data-scroll-target="#going-to-an-assembly">Going to an assembly</a></li>
   <li><a href="#automatize-the-setup" id="toc-automatize-the-setup" class="nav-link" data-scroll-target="#automatize-the-setup">Automatize the setup</a>
   <ul class="collapse">
-  <li><a href="#ansible-terraform" id="toc-ansible-terraform" class="nav-link" data-scroll-target="#ansible-terraform">Ansible &amp; Terraform</a></li>
   <li><a href="#puppet-ansible-terraform" id="toc-puppet-ansible-terraform" class="nav-link" data-scroll-target="#puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</a></li>
   <li><a href="#cicd-and-gitops" id="toc-cicd-and-gitops" class="nav-link" data-scroll-target="#cicd-and-gitops">CI/CD and GitOps</a>
   <ul class="collapse">
@@ -749,17 +748,14 @@ Note
 <section id="vocabulary-1" class="level2">
 <h2 class="anchored" data-anchor-id="vocabulary-1">Vocabulary</h2>
 <ul>
-<li><strong>An image</strong> is a <strong>template</strong> used to create containers. It contains:
+<li><p><strong>An image</strong> is a <strong>template</strong> used to create containers. It contains:</p>
 <ul>
 <li>an operating system base (often minimal Linux),</li>
 <li>the application,</li>
 <li>its dependencies,</li>
 <li>default configuration.</li>
 </ul>
-An image is <strong>immutable</strong>: you do not modify it while it is running. Images are usually downloaded from a registry (e.g.&nbsp;Docker Hub).</li>
-</ul>
-<hr>
-<ul>
+<p>An image is <strong>immutable</strong>: you do not modify it while it is running. Images are usually downloaded from a registry (e.g.&nbsp;Docker Hub).</p></li>
 <li><p><strong>A container</strong> is a <strong>running instance of an image</strong>. It:</p>
 <ul>
 <li>runs processes,</li>
@@ -913,13 +909,6 @@ An image is <strong>immutable</strong>: you do not modify it while it is running
 <h1>Automatize the setup</h1>
 <p>Ansible &amp; Terraform -&gt; short introduction, links to documentation/</p>
 <p>CI/CD/GitOps (Flux CD &amp; others) -&gt; also short introduction and links. Maybe a short tutorial for GitHub</p>
-<p>Here are the two sections as Quarto-friendly markdown:</p>
-<hr>
-<section id="ansible-terraform" class="level2">
-<h2 class="anchored" data-anchor-id="ansible-terraform">Ansible &amp; Terraform</h2>
-<p>Here’s the updated Ansible &amp; Terraform section:</p>
-<hr>
-</section>
 <section id="puppet-ansible-terraform" class="level2">
 <h2 class="anchored" data-anchor-id="puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -963,7 +952,6 @@ An image is <strong>immutable</strong>: you do not modify it while it is running
 <li><a href="https://docs.ansible.com/ansible/latest/getting_started/index.html">Ansible Getting Started Guide</a></li>
 <li><a href="https://www.puppet.com/docs">Puppet Documentation</a></li>
 </ul>
-<hr>
 </section>
 <section id="cicd-and-gitops" class="level2">
 <h2 class="anchored" data-anchor-id="cicd-and-gitops">CI/CD and GitOps</h2>

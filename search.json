@@ -502,7 +502,7 @@
     "href": "index.html#vocabulary-1",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Vocabulary",
-    "text": "Vocabulary\n\nAn image is a template used to create containers. It contains:\n\nan operating system base (often minimal Linux),\nthe application,\nits dependencies,\ndefault configuration.\n\nAn image is immutable: you do not modify it while it is running. Images are usually downloaded from a registry (e.g. Docker Hub).\n\n\n\nA container is a running instance of an image. It:\n\nruns processes,\nlistens on ports,\ncan be started, stopped, or restarted.\n\nNote that the desired application needs to be started (entrypoint), or only the operating system will run.\nContainers are ephemeral:\n\nif a container is deleted, everything inside it is lost\nunless data is stored in a volume\n\nA volume is a persistent storage area outside the container. It is used to store all data that must survive container restarts or upgrades.\nVolumes are:\n\nmounted inside containers\nindependent of the container lifecycle\n\nDocker Compose is a tool to define and run multiple containers together using a single configuration file (docker-compose.yml).\nIt is used to describe:\n\nwhich images to run,\nhow containers are connected,\nports,\nvolumes,\nenvironment variables.\n\nWith Docker Compose, you typically manage an entire application stack:\n\nweb server\napplication\ndatabase\ncache\n\nAll started with:\ndocker-compose up\n\n\nMinimal mental model\n\nImage → what to run\nContainer → the running application\nVolume → persistent data\nDocker Compose → a complete setup of multiple images and volumes.\n\nIf you keep this model in mind, most Docker-related documentation will start to make sense.",
+    "text": "Vocabulary\n\nAn image is a template used to create containers. It contains:\n\nan operating system base (often minimal Linux),\nthe application,\nits dependencies,\ndefault configuration.\n\nAn image is immutable: you do not modify it while it is running. Images are usually downloaded from a registry (e.g. Docker Hub).\nA container is a running instance of an image. It:\n\nruns processes,\nlistens on ports,\ncan be started, stopped, or restarted.\n\nNote that the desired application needs to be started (entrypoint), or only the operating system will run.\nContainers are ephemeral:\n\nif a container is deleted, everything inside it is lost\nunless data is stored in a volume\n\nA volume is a persistent storage area outside the container. It is used to store all data that must survive container restarts or upgrades.\nVolumes are:\n\nmounted inside containers\nindependent of the container lifecycle\n\nDocker Compose is a tool to define and run multiple containers together using a single configuration file (docker-compose.yml).\nIt is used to describe:\n\nwhich images to run,\nhow containers are connected,\nports,\nvolumes,\nenvironment variables.\n\nWith Docker Compose, you typically manage an entire application stack:\n\nweb server\napplication\ndatabase\ncache\n\nAll started with:\ndocker-compose up\n\n\nMinimal mental model\n\nImage → what to run\nContainer → the running application\nVolume → persistent data\nDocker Compose → a complete setup of multiple images and volumes.\n\nIf you keep this model in mind, most Docker-related documentation will start to make sense.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
@@ -547,17 +547,6 @@
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Namespaces and namespaces collisions",
     "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, testApp, that uses a MySQL database. The database is defined in the docker-compose and used by the testApp. The set-up is the following:\napplication1/testApp/docker-compose.yml\napplication2/testApp/docker-compose.yml\nIt is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#ansible-terraform",
-    "href": "index.html#ansible-terraform",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Ansible & Terraform",
-    "text": "Ansible & Terraform\nHere’s the updated Ansible & Terraform section:",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
