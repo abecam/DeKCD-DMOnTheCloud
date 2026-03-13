@@ -532,7 +532,6 @@ An easy solution using vertical scalability is to separate what can be separated
 
 Horizontal scalability is the capability to adapt to more needs by using more resources (for instance more servers, virtual machines, containers). It is not always possible depending on the Data Management Platform. The simple solution is to use a load balancer to distribute the traffic between several instances of the application, but it can be more complex if the application needs to share data between the different instances (for instance a shared database or a shared file system). A simple example is having several users that need to edit the same elements. If one user start to work on an element, then the others start to work on it simultaneously, the change made by one user will be lost when the other user save their change. To avoid this, the application needs to be able to manage such situation, for instance by locking the element when a user is working on it, or by merging the changes made by different users. This is not always possible and can be a strong limitation for horizontal scalability.
 
----
 Kubernetes is designed for horizontal scalability, but it is not the only solution.
 
 # Databases
