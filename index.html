@@ -299,7 +299,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <ul class="collapse">
   <li><a href="#vocabulary" id="toc-vocabulary" class="nav-link" data-scroll-target="#vocabulary">Vocabulary</a></li>
   </ul></li>
-  <li><a href="#containers---overview-of-docker-usage" id="toc-containers---overview-of-docker-usage" class="nav-link" data-scroll-target="#containers---overview-of-docker-usage">Containers - Overview of Docker usage</a>
+  <li><a href="#containers-overview-of-docker-usage" id="toc-containers-overview-of-docker-usage" class="nav-link" data-scroll-target="#containers-overview-of-docker-usage">Containers, Overview of Docker usage</a>
   <ul class="collapse">
   <li><a href="#vocabulary-1" id="toc-vocabulary-1" class="nav-link" data-scroll-target="#vocabulary-1">Vocabulary</a>
   <ul class="collapse">
@@ -320,7 +320,15 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
   <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a></li>
   <li><a href="#going-to-an-assembly" id="toc-going-to-an-assembly" class="nav-link" data-scroll-target="#going-to-an-assembly">Going to an assembly</a></li>
-  <li><a href="#automatize-the-setup" id="toc-automatize-the-setup" class="nav-link" data-scroll-target="#automatize-the-setup">Automatize the setup</a></li>
+  <li><a href="#automatize-the-setup" id="toc-automatize-the-setup" class="nav-link" data-scroll-target="#automatize-the-setup">Automatize the setup</a>
+  <ul class="collapse">
+  <li><a href="#ansible-terraform" id="toc-ansible-terraform" class="nav-link" data-scroll-target="#ansible-terraform">Ansible &amp; Terraform</a></li>
+  <li><a href="#puppet-ansible-terraform" id="toc-puppet-ansible-terraform" class="nav-link" data-scroll-target="#puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</a></li>
+  <li><a href="#cicd-and-gitops" id="toc-cicd-and-gitops" class="nav-link" data-scroll-target="#cicd-and-gitops">CI/CD and GitOps</a>
+  <ul class="collapse">
+  <li><a href="#a-minimal-github-actions-example" id="toc-a-minimal-github-actions-example" class="nav-link" data-scroll-target="#a-minimal-github-actions-example">A minimal GitHub Actions example</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -399,7 +407,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A text-only browser is also a good way to check if a web-site is accessible - mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.</p>
+<p>A text-only browser is also a good way to check if a web-site is accessible, mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.</p>
 </div>
 </div>
 <ul>
@@ -567,7 +575,7 @@ Note
 <li><code>chown -R user:group directory</code></li>
 </ul></li>
 </ul></li>
-<li><p>Ideally the <strong>pipe (|)</strong> should be well understood, as well as the <strong>I/O indirections (&gt;, &gt;&gt;, &lt;)</strong>. If this is unclear, look for “Unix pipes and redirection” — it is a core concept.</p></li>
+<li><p>Ideally the <strong>pipe (|)</strong> should be well understood, as well as the <strong>I/O indirections (&gt;, &gt;&gt;, &lt;)</strong>. If this is unclear, look for “Unix pipes and redirection”, it is a core concept.</p></li>
 <li><p><strong>grep</strong> → search for the presence of a string in files, often used combined with another command using a pipe (|)</p></li>
 <li><p><strong>find</strong> → search for files by name, type, size, or date; often combined with <strong>grep</strong> or <strong>xargs</strong></p></li>
 <li><p><strong>mount / umount</strong> → attach or detach filesystems Removable media must be mounted before access. For instance, a USB key must be mounted before use. Temporary mount points are often under <code>/mnt</code> or <code>/media</code>. Modern systems often automount removable media.</p></li>
@@ -633,7 +641,7 @@ Note
 <p>As opposite to <strong>eval</strong>, <strong>xargs</strong> does not transform a string into a command (the command needs to be given and will receive parameters from xargs). As such it is not dangerous like <strong>eval</strong></p>
 </div>
 </div>
-<p><em>If unfamiliar, search for “xargs explained” — understanding it greatly improves command-line efficiency.</em></p>
+<p><em>If unfamiliar, search for “xargs explained”, understanding it greatly improves command-line efficiency.</em></p>
 <ul>
 <li><p><strong>curl / wget</strong> → interact with HTTP/HTTPS services from the command line Useful for testing APIs, services, or downloading files</p></li>
 <li><p><strong>free / df / du</strong> → check system resources</p>
@@ -702,9 +710,9 @@ Note
 <p>Note that an actual bare-metal setup could still be a viable option for specialised tasks: if it needs to be embedded (for a cheaper/more efficient solution on an specialised piece of hardware), if it needs to be highly performant, but in the later case it might be a better option to move the processing to the GPU (which is also a kind of bare-metal implementation). To choose to do so if out of scope for this document, but it is important to do so knowlingly as it could have a high cost (i.e.&nbsp;difficulty of maintenance)</p>
 </div>
 </div>
-<p>A <strong>Virtual Machine</strong> is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it - most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.</p>
-<p>It can be an <strong>emulation</strong>, “imitating” a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure - and exploit are fixable by software update.</p>
-<p>Or a <strong>virtualization</strong>, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used: * full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security - and exploit are fixable by software update. * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals. * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed <strong>images</strong> that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.</p>
+<p>A <strong>Virtual Machine</strong> is a software solution that provide the functionality of a physical computer. It is possible (and generally needed) to install an operating system on it. Most Virtual Machines will provide an easy way to do so, and using it is akin to using an actual computer.</p>
+<p>It can be an <strong>emulation</strong>, “imitating” a computer enough to run its software, generally used for specific usages such as running deprecated operating systems. Qemu is one of the main ones. An emulation provides a full encapsulation so is in theory more secure and exploit are fixable by software update.</p>
+<p>Or a <strong>virtualization</strong>, where the hosted machine is running directly or semi-directly on the physical hardware though an hypervisor that manages how the ressources are used: * full virtualization (simulate enough of the computer hardware to run a guest OS), and will need significant more resource than an actual physical computer, while providing a full encapsulation so in theory more security. Exploit are also fixable by software update. * Hardware-assisted virtualization, where the hardware helps with the virtualization. Exploits using the hardware support might be difficult or impossible to fix, though exceptionals. * OS-level virtualization, where the operating system is sharing the resource for the guest OS. Docker and other container engines are using such virtualisation. The reason containers are called containers and not virtual machine is from the usage: instead of creating a virtual machine and setting it up with an operating system and subsequent pieces of software, they rely on fixed <strong>images</strong> that have an bare-minimal operating system (ideally) and layers of software to support the desired container. Once running, they are actually a virtual machine.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -715,13 +723,13 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A main protection against threat is being up-to-date: a recent or LTS - Long-Term-Support: that is supported for a long time - Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).</p>
+<p>A main protection against threat is being up-to-date: a recent or LTS, Long-Term-Support: that is supported for a long time, Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).</p>
 </div>
 </div>
 </section>
 </section>
-<section id="containers---overview-of-docker-usage" class="level1">
-<h1>Containers - Overview of Docker usage</h1>
+<section id="containers-overview-of-docker-usage" class="level1">
+<h1>Containers, Overview of Docker usage</h1>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -850,8 +858,8 @@ An image is <strong>immutable</strong>: you do not modify it while it is running
 <section id="namespaces-and-namespaces-collisions" class="level2">
 <h2 class="anchored" data-anchor-id="namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</h2>
 <p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, <strong>testApp</strong>, that uses a MySQL database. The database is defined in the docker-compose and used by the <strong>testApp</strong>. The set-up is the following:</p>
-<pre><code>application1/testApp/docker-compose.yml
-application2/testApp/docker-compose.yml</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">application1/testApp/docker-compose.yml</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">application2/testApp/docker-compose.yml</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)</p>
 </section>
 </section>
@@ -886,7 +894,6 @@ application2/testApp/docker-compose.yml</code></pre>
 <p>Scalability is the capability to adapt for more needs: more simultaneous users, more data to save, more processing power needed, more storage (bigger files), more network traffic. It is generally not needed to have a scalable solution at the beginning, but it is good to have an idea of what it means and how to do it, as it can be a problem if you need to change your solution later on. It can have strong consequences on the technical aspects, but also on the costs.</p>
 <p>Vertical scalability is the capability to adapt to more needs by using more powerful resources (for instance a more powerful server, with more CPU, RAM, storage). It is generally the simplest solution, but it has a limit: there is only so much you can add to a single machine/virtual machine. An easy solution using vertical scalability is to separate what can be separated on different machines: for instance, the database on a different machine than the web application. It is generally a good idea to separate the database from the web application, even if they are on the same machine, as it allows to easily move the database to a more powerful machine if needed, and also to have a better security by isolating the database from the web application.</p>
 <p>Horizontal scalability is the capability to adapt to more needs by using more resources (for instance more servers, virtual machines, containers). It is not always possible depending on the Data Management Platform. The simple solution is to use a load balancer to distribute the traffic between several instances of the application, but it can be more complex if the application needs to share data between the different instances (for instance a shared database or a shared file system). A simple example is having several users that need to edit the same elements. If one user start to work on an element, then the others start to work on it simultaneously, the change made by one user will be lost when the other user save their change. To avoid this, the application needs to be able to manage such situation, for instance by locking the element when a user is working on it, or by merging the changes made by different users. This is not always possible and can be a strong limitation for horizontal scalability.</p>
-<hr>
 <p>Kubernetes is designed for horizontal scalability, but it is not the only solution.</p>
 </section>
 <section id="databases" class="level1">
@@ -906,10 +913,108 @@ application2/testApp/docker-compose.yml</code></pre>
 <h1>Automatize the setup</h1>
 <p>Ansible &amp; Terraform -&gt; short introduction, links to documentation/</p>
 <p>CI/CD/GitOps (Flux CD &amp; others) -&gt; also short introduction and links. Maybe a short tutorial for GitHub</p>
+<p>Here are the two sections as Quarto-friendly markdown:</p>
+<hr>
+<section id="ansible-terraform" class="level2">
+<h2 class="anchored" data-anchor-id="ansible-terraform">Ansible &amp; Terraform</h2>
+<p>Here’s the updated Ansible &amp; Terraform section:</p>
+<hr>
+</section>
+<section id="puppet-ansible-terraform" class="level2">
+<h2 class="anchored" data-anchor-id="puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Recommended learning path
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Their official Online documentations are good and complete. Online tutorials should be enough as a complement. Books are still recommended for a quicker start.</p>
+</div>
+</div>
+<p>When you have more than a handful of servers or services to manage, doing everything by hand stops being practical. Tools like <strong>Puppet</strong>, <strong>Ansible</strong>, and <strong>Terraform</strong> exist to automate that work.</p>
+<p><strong>Puppet</strong> was one of the first widely adopted tools for managing server configuration at scale, and many large organizations still use it. You describe the desired state of your systems in Puppet’s own language, and a Puppet agent running on each machine enforces that state continuously. It works well for large, stable fleets but it requires installing and maintaining that agent on every machine you manage, setting up a central Puppet server, and learning a configuration language that has a steep initial curve.</p>
+<p><strong>Ansible</strong> emerged as a simpler alternative for configuration management. It does much of what Puppet does: installing packages, writing config files, managing services. But it works over plain SSH with no agent to install. The desired state of a system is written in <em>playbooks</em>, written in YAML, which most developers already know. The tradeoff is that Ansible is not continuously enforcing state the way Puppet does: you run it when you want changes applied, rather than having it run automatically in the background. For smaller setups or teams without dedicated ops staff, this is often the right balance.</p>
+<p>Example playbook</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> webservers</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">become</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install nginx</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">apt</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">state</span><span class="kw">:</span><span class="at"> present</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running this playbook installs nginx on all hosts in the webservers group.</p>
+<p>Ansible can be used to set-up a bare-metal installation, but also for complementing a Docker Compose setup, typically for configuring the application.</p>
+<p><strong>Terraform</strong> solves a different problem: not configuring machines, but <em>creating</em> the infrastructure in the first place. It talks to cloud providers (or your local virtualization layer) and sets up virtual machines, networks, storage, DNS entries, and so on. You describe what you want, and Terraform tracks what already exists so it only makes the changes needed. Puppet and Ansible assume the machines are already there, Terraform prepares the virtual machines.</p>
+<p>Terraform is generally supported by most Virtualisation platforms: OpenStack, Proxmox, Kubernetes, …</p>
+<p>Howeverm, in most cases Terraform will be used by your SysAdmin.</p>
+<pre><code>resource "aws_instance" "example" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+}</code></pre>
+<p>Puppet and Ansible are Open Source while Terraform is a product of HashiCorp with a Community Edition.</p>
+<ul>
+<li><a href="https://developer.hashicorp.com/terraform/docs">Terraform Documentation</a></li>
+<li><a href="https://docs.ansible.com">Ansible Documentation</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/getting_started/index.html">Ansible Getting Started Guide</a></li>
+<li><a href="https://www.puppet.com/docs">Puppet Documentation</a></li>
+</ul>
+<hr>
+</section>
+<section id="cicd-and-gitops" class="level2">
+<h2 class="anchored" data-anchor-id="cicd-and-gitops">CI/CD and GitOps</h2>
+<p>CI/CD is an important aspect for modern online platforms, when you develop them. It allows to ensure your deployed application is up-to-date (Continous Deployment) and free of issues (Continous Integration).</p>
+<p><strong>CI/CD</strong> stands for <em>Continuous Integration / Continuous Delivery</em> (or Deployment). The idea is simple: every time you push code or config changes to a repository, an automated pipeline picks them up, tests them, and - if everything looks good - deploys them. No more manually copying files to servers or running scripts by hand.</p>
+<p><strong>GitOps</strong> takes this further by making Git the single source of truth for your entire system state. Your infrastructure configuration lives in a repo, and a tool running in your cluster constantly watches that repo. When you push a change, the tool detects it and applies it automatically. If someone makes a manual change on the server that drifts from what’s in Git, the tool corrects it. Your Git history becomes a full audit trail of every change ever made.</p>
+<p><strong>Flux CD</strong> is a popular GitOps tool for Kubernetes environments. It runs inside your cluster and syncs it to one or more Git repositories, handling updates to apps and infrastructure alike.</p>
+<p>For CI/CD pipelines, the most common options are:</p>
+<ul>
+<li><p><strong>GitHub Actions</strong> - built into GitHub, easy to get started, large ecosystem of pre-built actions</p></li>
+<li><p><strong>GitLab CI</strong>: similar, built into GitLab</p></li>
+<li><p><strong>Forgejo/Gitea Actions</strong>: self-hostable alternative compatible with GitHub Actions syntax</p></li>
+<li><p><strong>Jenkins</strong>: older, very flexible, but more complex to set up</p></li>
+<li><p><a href="https://fluxcd.io/flux/">Flux CD Documentation</a></p></li>
+<li><p><a href="https://docs.github.com/en/actions">GitHub Actions Documentation</a></p></li>
+<li><p><a href="https://docs.gitlab.com/ee/ci/">GitLab CI Documentation</a></p></li>
+</ul>
+<section id="a-minimal-github-actions-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-minimal-github-actions-example">A minimal GitHub Actions example</h3>
+<p>Here’s a simple workflow that automatically deploys your Quarto site to GitHub Pages whenever you push to <code>main</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/deploy.yml</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy site</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to GitHub Pages</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This file lives in your repo at <code>.github/workflows/deploy.yml</code>. GitHub picks it up automatically, no extra configuration needed. Every push to <code>main</code> triggers a fresh build and deploy.</p>
 <p>This is a Quarto website.</p>
 <p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

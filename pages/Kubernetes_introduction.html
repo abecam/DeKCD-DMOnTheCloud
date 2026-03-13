@@ -383,6 +383,8 @@ Warning
 <li><strong>Node</strong>: one worker machine in Kubernetes, like a server. Can be a physical machine or a virtual machine.</li>
 <li><strong>Pod</strong>: the smallest object in Kubernetes, that will run one or several containers. The containers can be run by docker or other container engines.</li>
 <li><strong>Service</strong>: a fixed network endpoint to a container in Kubernetes. It allows to connect to an application in a Pod, without having this connection defined into the pod. Kubernetes often has one extra layer of access (compared to Docker Compose for instance) allowing a full decoupling of all elements. That makes it easier to change the configuration later on (automatically due to the need or from an user update).</li>
+<li><strong>Ingress</strong>: HTTP/HTTPS entry point that routes external traffic to Services (usually via hostnames/paths).</li>
+<li><strong>Gateway</strong>: newer, more flexible API to control traffic entering the cluster (successor-style model to Ingress).</li>
 <li><strong>Label</strong>: labels are used for Kubernetes to find the different elements.</li>
 <li><strong>Kubectl</strong>: the command line tool to communicate with the Kubernetes control center. With it you can create the object, update them, list them…</li>
 <li><strong>Manifest</strong>: the JSON or YAML file that define a Kubernetes object. Objects are all elements of Kubernetes: Deployments, Services, ReplicaSet, DaemonSet, …</li>
@@ -397,6 +399,43 @@ Warning
 <li><strong>ConfigMap:</strong> stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.</li>
 <li><strong>Secret:</strong> similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.</li>
 </ul>
+<p>The main elements are represented below, without the network element (Service and Ingres/Gateway)</p>
+<pre><code>Pod controllers (manage Pods)
+├─ Deployment
+│  └─ ReplicaSet
+│     └─ Pod(s) - Container(s), generally only one
+├─ DaemonSet
+│  └─ Pod (one per Node) - Container(s), generally only one
+├─ StatefulSet
+│  └─ Pod(s) with identity + storage - Container(s), generally only one
+└─ Job
+   └─ Pod(s) until completion - Container(s), generally only one</code></pre>
+<p>Or with a graph:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TD
+  Cluster --&gt; Node
+  Node --&gt; Pod
+  Pod --&gt; Container
+
+  Deployment --&gt; ReplicaSet --&gt; Pod
+  DaemonSet --&gt; Pod
+  StatefulSet --&gt; Pod
+  Job --&gt; Pod
+
+  Service --&gt; Pod
+  ConfigMap --&gt; Pod
+  Secret --&gt; Pod
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A very simple setup will be an application with 3 replicas that will be distributed on 3 nodes:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -426,6 +465,7 @@ RS1 --&gt; P3
 </div>
 </div>
 </div>
+<p>But Kubernetes does not guarantee where your replicas will be, so several pods might be on the same node. If a deployment does not define a ReplicaSet, then only one Pod is created.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -459,7 +499,7 @@ D1 --&gt; P4
 </div>
 </div>
 </div>
-<p>Stateful Sets</p>
+<p>Stateful Sets are used when it is needed to know which pod is where. For instance a replicated database might want to know which is the main pod (generally the first one) and all the others so it can manage them and select the next valid pod if the main is down:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -488,7 +528,7 @@ RS1 --&gt; P3
 </div>
 </div>
 </div>
-<p>DaemonSets with Log</p>
+<p>DaemonSets are for defining a Pod that need to be once on each Node. A common used is with centralised Log monitoring, i.e.&nbsp;reading the local log to populate a central log database to have a clear overview, as we want to monitor each nodes but do not want to have several agents (which will compete to read the local log file):</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
