@@ -83,6 +83,38 @@ And generally, the applications are deployed as:
 * **ConfigMap:** stores non-confidential configuration data as key-value pairs. Applications can use ConfigMaps to configure themselves without having to rebuild their containers.
 * **Secret:** similar to ConfigMap, but used to store sensitive information such as passwords, tokens, or SSH keys. Secrets are stored in base64-encoded form and can be mounted into Pods or used as environment variables. Be aware that they are not an encrypted, only encoded, so the security is ensured by having the secret saved in a private place. As such it is only moderately secured.
 
+The main elements are represented below, without the network element (Service and Ingres/Gateway)
+```
+Pod controllers (manage Pods)
+├─ Deployment
+│  └─ ReplicaSet
+│     └─ Pod(s) - Container(s), generally only one
+├─ DaemonSet
+│  └─ Pod (one per Node) - Container(s), generally only one
+├─ StatefulSet
+│  └─ Pod(s) with identity + storage - Container(s), generally only one
+└─ Job
+   └─ Pod(s) until completion - Container(s), generally only one
+```
+
+Or with a graph:
+```{mermaid}
+graph TD
+  Cluster --> Node
+  Node --> Pod
+  Pod --> Container
+
+  Deployment --> ReplicaSet --> Pod
+  DaemonSet --> Pod
+  StatefulSet --> Pod
+  Job --> Pod
+
+  Service --> Pod
+  ConfigMap --> Pod
+  Secret --> Pod
+```
+
+A very simple setup will be an application with 3 replicas that will be distributed on 3 nodes:
 ```{mermaid}
 flowchart LR
 subgraph ControlPlane[Control Plane]
@@ -104,6 +136,7 @@ RS1 --> P2
 RS1 --> P3
 ```
 
+But Kubernetes does not guarantee where your replicas will be, so several pods might be on the same node. If a deployment does not define a ReplicaSet, then only one Pod is created.
 ```{mermaid}
 flowchart LR
 subgraph ControlPlane[Control Plane]
@@ -129,7 +162,8 @@ RS1 --> P3
 D1 --> P4
 ```
 
-Stateful Sets
+
+Stateful Sets are used when it is needed to know which pod is where. For instance a replicated database might want to know which is the main pod (generally the first one) and all the others so it can manage them and select the next valid pod if the main is down:
 ```{mermaid}
 flowchart LR
 subgraph ControlPlane[Control Plane]
@@ -150,8 +184,7 @@ RS1 --> P2
 RS1 --> P3
 ```
 
-DaemonSets with Log
-
+DaemonSets are for defining a Pod that need to be once on each Node. A common used is with centralised Log monitoring, i.e. reading the local log to populate a central log database to have a clear overview, as we want to monitor each nodes but do not want to have several agents (which will compete to read the local log file):
 ```{mermaid}
 flowchart TB
     User --> Load_Balancer --> Service
