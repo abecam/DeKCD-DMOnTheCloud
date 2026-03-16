@@ -444,10 +444,7 @@ Tip
 <ul>
 <li><p>Open a page:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">links</span> http://localhost:8080</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Menu:</p>
-<ul>
-<li><strong>Esc</strong>: open menu</li>
-</ul></li>
+<li><p><strong>Esc</strong>: open menu</p></li>
 <li><p>Quit:</p>
 <ul>
 <li><strong>Q</strong></li>
@@ -681,7 +678,7 @@ Note
 </section>
 <section id="online-resources" class="level3">
 <h3 class="anchored" data-anchor-id="online-resources">Online resources</h3>
-<p>The Unix command line is well explained <a href="https://swcarpentry.github.io/shell-novice/index.html">here</a>. It is probably useful to know about the main principle of Unix, and a good course if available <a href="https://www.doc.ic.ac.uk/~wjk/UnixIntro/">here</a> and Wikipedia has a <a href="https://en.wikipedia.org/wiki/Unix_filesystem">good overview of the Unix filesystem and its layout</a>.</p>
+<p>The Unix command line is well explained <a href="https://swcarpentry.github.io/shell-novice/index.html">here</a>. It is probably useful to know about the main principle of Unix, and a good course is available <a href="https://www.doc.ic.ac.uk/~wjk/UnixIntro/">here</a> and Wikipedia has a <a href="https://en.wikipedia.org/wiki/Unix_filesystem">good overview of the Unix filesystem and its layout</a>.</p>
 <p><a href="https://github.com/deNBI/unix-course?tab=readme-ov-file">DeNBI Unix course</a> -&gt; TBD, adapt using a light Linux image (or public online VM)</p>
 </section>
 <section id="what-makes-the-containers-possible-cgroups" class="level3">
@@ -750,7 +747,7 @@ Note
 <ul>
 <li><p><strong>An image</strong> is a <strong>template</strong> used to create containers. It contains:</p>
 <ul>
-<li>an operating system base (often minimal Linux),</li>
+<li>an operating system base (often minimal Linux), which is not mandatory on Linux as it can use the host operating system, but is generally included for compatibility (be sure that the version of Linux is the right one, or if not running on a Linux host).</li>
 <li>the application,</li>
 <li>its dependencies,</li>
 <li>default configuration.</li>
@@ -796,10 +793,10 @@ Note
 <section id="minimal-mental-model" class="level3">
 <h3 class="anchored" data-anchor-id="minimal-mental-model">Minimal mental model</h3>
 <ul>
-<li><strong>Image</strong> → what to run</li>
-<li><strong>Container</strong> → the running application</li>
-<li><strong>Volume</strong> → persistent data</li>
-<li><strong>Docker Compose</strong> → a complete setup of multiple images and volumes.</li>
+<li><strong>Image</strong>:→ what to run</li>
+<li><strong>Container</strong>: the running application</li>
+<li><strong>Volume</strong>: persistent data</li>
+<li><strong>Docker Compose</strong>: a complete setup of multiple images and volumes.</li>
 </ul>
 <p>If you keep this model in mind, most Docker-related documentation will start to make sense.</p>
 </section>
@@ -826,6 +823,23 @@ Note
 <p>Learning difficulty is medium, assuming you have some knowledge of Linux. There is nothing really difficult but there are a lot of aspects to take into account.</p>
 </div>
 </div>
+<p>A Dockerfile defines layers from a base images (<code>FROM image_name:version</code>) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.</p>
+<p>An image is always immutable, and a new image from a base one with modification will also be immutable. In case we need several application with the same base image, it is a good idea to build a custom base image with the common dependencies, and then build the different application images from this custom base image, so the common layers will be shared between the different images.</p>
+<p>A shorcoming is that if a change add dependencies which are again added on the next step, both layers will still be added to the image. It is not always avoidable, but it is good to be aware of it as it can lead to a bigger image than expected, and thus a longer build time and a longer time to start the container.</p>
+<p>A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As the image are immutable, updating is always done by fetching a new base image and building a new image on top of it. It is important to keep an eye on the base image, as it can have security vulnerabilities that are fixed in newer versions. It is a good idea to use a specific version of the base image (for instance <code>python:3.9.13-slim</code> instead of <code>python:3.9-slim</code>), so you know exactly which version you are using and can update it when needed.</p>
+</div>
+</div>
 </section>
 <section id="moving-to-docker-compose" class="level1">
 <h1>Moving to Docker compose</h1>
@@ -845,6 +859,9 @@ Note
 </div>
 <section id="advantages" class="level2">
 <h2 class="anchored" data-anchor-id="advantages">Advantages</h2>
+<p>Docker compose is both a tool to setup a docker-based application or set of applications, and the file, written in YAML, that describes the setup. It is a powerful tool to manage a complex application with several components, such as a web server, an application, a database, and a cache. It allows to define the different components of the application and how they are connected together, as well as the volumes and environment variables needed for each component. It also allows to easily start and stop the application with a single command, and to manage the different components of the application in a consistent way.</p>
+<p>Docker compose is quite simple to learn and use, and it is a good way to start with container-based applications. With a coherent docker-compose file, it is a good solution for running a web application, with a database and a cache, on a single machine, with a simple set-up and a good performance.</p>
+<p>To access the web-application, it is generally needed to use a reverse proxy, such as Nginx or Apache, to forward the traffic from the host to the container. It is also possible to use a load balancer, such as HAProxy, to distribute the traffic between several instances of the application.</p>
 </section>
 <section id="things-to-take-into-account" class="level2">
 <h2 class="anchored" data-anchor-id="things-to-take-into-account">Things to take into account</h2>
@@ -875,7 +892,7 @@ Note
 <p>Learning difficulty is medium/hard, assuming you have some knowledge of containers. Using Kubernetes is still much easier than to set-up a production cluster. As software developers, we recommend that you set-up a cluster only as a testbed and rely on sysadmins for a production cluster.</p>
 </div>
 </div>
-<p>Kubernetes is not more complex than docker compose, but it is much more than docker compose, with many elements. It is an orchestration engine: where docker compose can ask for these containers to be restarted when stopped, on the same machine, Kubernetes can choose on which machine the containers will run, can duplicate them, can kill them if they seem unhealthy to create some healthy ones, can create services out of these containers so they can be used by other clients, which could be other containers within Kubernets, can create network access of these containers, without knowing where they run.</p>
+<p>Kubernetes elements and concepts are not more complex than docker compose, but there are many more elements than docker compose, so the overall complexity is very high. It is an orchestration engine: where docker compose can ask for these containers to be restarted when stopped, on the same machine, Kubernetes can choose on which machine the containers will run, can duplicate them, can kill them if they seem unhealthy to create some healthy ones, can create services out of these containers so they can be used by other clients, which could be other containers within Kubernets, can create network access of these containers, without knowing where they run.</p>
 <p>For simplest application it could be a full overkill, then the more complex your application is (in term of size and elements), the more to gain from Kubernetes. If you need an application that needs to run 24/7, with transparent updates and that can scale from hundred of clients to several thousands, Kubernetes will make things much easier, and in a well thought way.</p>
 <p>But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is made by and aimed at non-sys-admin persons.</p>
 <p>Quick overview</p>
@@ -899,16 +916,17 @@ Note
 </section>
 <section id="security" class="level1">
 <h1>Security</h1>
-<p>Security in Data Management is an important topic, as the data is often sensitive and valuable. It is important to have a basic knowledge of security principles and practices, and to apply them to your Data Management Platform. This includes: * Keeping the software up-to-date with security patches, * Using strong passwords and changing them regularly, though it is better to have strong passwords that do not need to be changed regularly, as changing them regularly can lead to bad practices such as writing them down or using weak passwords, * Limiting access to the data and the application to only those who need it, * Eventually using encryption for data at rest and in transit, * Regularly backing up the data and testing the restore process, * Monitoring the system for suspicious activity and responding to incidents promptly, It is also important to be aware of the specific security risks associated with the technologies you are using, such as containers, virtual machines, or cloud services, and to take appropriate measures to mitigate those risks.</p>
+<p>Security in Data Management is an important topic, as the data is often sensitive and valuable. It is important to have a basic knowledge of security principles and practices, and to apply them to your Data Management Platform. This includes: * Keeping the software up-to-date with security patches, * Using strong passwords and changing them regularly, though it is better to have strong passwords that do not need to be changed regularly, as changing them regularly can lead to bad practices such as writing them down or using weak passwords, * Limiting access to the data and the application to only those who need it, * Eventually using encryption for data at rest and in transit, * Regularly backing up the data and testing the restore process, * Monitoring the system for suspicious activity and responding to incidents promptly, * Ensuring that the connections are secure, using HTTPS for web applications and SSH for remote access. If the internal network is secure and only the necessary ports and IP addresses are allowed to access the application, it is possible to use HTTP for internal communication. Using HTTPS need to be done with a proper certificate, which can be obtained for free from <a href="https://letsencrypt.org/">Let’s Encrypt</a>, which is a nonprofit organization giving free certificates. Several tools, such as <a href="https://certbot.eff.org/">Certbot</a>, can help with obtaining and renewing certificates from Let’s Encrypt. It is also important to be aware of the specific security risks associated with the technologies you are using, such as containers, virtual machines, or cloud services, and to take appropriate measures to mitigate those risks.</p>
 <p>We will explore these topics in more details in the <a href="./pages/Backups_and_security.html">Backups and Security page</a>.</p>
 </section>
 <section id="going-to-an-assembly" class="level1">
 <h1>Going to an assembly</h1>
+<p>An assembly is when several Data Management Platforms are interconnected to provide a more complete solution. For instance, a Data Management Platform for a research group might need to be connected to a storage solution, to a computing cluster, to a data visualization tool, and to a data analysis tool. It is generally better to have a basic knowledge of the different components of the assembly, and of how they work together, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations.</p>
+<p>They are generally connected via APIs, which can be at a programmatic level (for instance a Python API), or at a higher level (for instance a REST API). It is important to have a basic knowledge of how to use these APIs, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations. It is also important to be aware of the security implications of using APIs, and to take appropriate measures to secure them.</p>
+<p>The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the <a href="pages/Data_Anonymisation_and_Pseudonymisation.qmd">Data Anonymisation and Pseudonymisation page</a>.</p>
 </section>
 <section id="automatize-the-setup" class="level1">
 <h1>Automatize the setup</h1>
-<p>Ansible &amp; Terraform -&gt; short introduction, links to documentation/</p>
-<p>CI/CD/GitOps (Flux CD &amp; others) -&gt; also short introduction and links. Maybe a short tutorial for GitHub</p>
 <section id="puppet-ansible-terraform" class="level2">
 <h2 class="anchored" data-anchor-id="puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
