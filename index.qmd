@@ -150,7 +150,7 @@ Common tools:
   * KDE Remote Desktop
   * `weston` (Wayland reference compositor)
 
-:::
+:::{.callout-tip}
 Which option should I use?
 
 I just want to check that a web service is running
@@ -684,6 +684,22 @@ jobs:
 ```
 
 This file lives in your repo at `.github/workflows/deploy.yml`. GitHub picks it up automatically, no extra configuration needed. Every push to `main` triggers a fresh build and deploy.
+
+# Many choices: tools, solutions and platforms
+
+Aside the obvious choices, which are generally for the most complex problems (databases, orchestration, Virtual Machines, LDAP) or accepted as de facto standard (Docker, Kubernetes (which is also in the previous category), S3), there are many other tools, solutions and platforms:
+* tools might be to help with some platforms, like a full ecosystem around Kubernetes to containers (visualising, managing, ...) or doing something independant (analysing something, transforming, ...),
+* solutions and platforms might be some alternative to the most well-know platforms or solution, for instance a simpler orchestration platfrom than Kubernetes, an already set-up cluster for Proxmox or Kubernetes that is partially managed for you...
+
+They can all give a benefit but could also give problems:
+* solutions such as managed clusters are most of the time commercial. There might be a free tier but with some limitation. Using this solution might lock you in, and a new functionality might be needed which is out of the free tier,
+* alternative platform might also be commercial, with the same issue as above. But an open-source platform might stop being maintained if there wasn't enough support behind. Even without this risk, a platform that is not used so much can have more bugs (simply because nobody found them) or missing important functionalities (again because nobody asked for them).
+Note that if a platform is a very good match for your institution/consortium and you can work on it for a long term, it could be interesting to adopt it and become a part of the development team.
+* tools need to be carefully checked, especially if they are to be installed locally. They can give a great help (such as k9s to visualise a Kubernetes cluster), so shouldn't be ignored.
+
+But one of the big issue that these choices can give is the choice by itself. Looking for a tool for a specific solution might return a discussion where several are discussed, then searching for one might return another discussion where a "better" alternative is proposed. It is where it might be beneficial to look for highly popular items, with presence in Wikipedia, with many stars in GitHub, coming from a known source (a big company, an Open Source Foundation such as Apache)... And keep the less popular items only for specific needs and while being careful
+
+The use of AI and "Vibe coding" will probably make these problems even worse.
 
 This is a Quarto website.
 
