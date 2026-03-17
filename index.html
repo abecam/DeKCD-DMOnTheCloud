@@ -328,6 +328,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#a-minimal-github-actions-example" id="toc-a-minimal-github-actions-example" class="nav-link" data-scroll-target="#a-minimal-github-actions-example">A minimal GitHub Actions example</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#many-choices-tools-solutions-and-platforms" id="toc-many-choices-tools-solutions-and-platforms" class="nav-link" data-scroll-target="#many-choices-tools-solutions-and-platforms">Many choices: tools, solutions and platforms</a></li>
   </ul>
 </nav>
     </div>
@@ -517,11 +518,23 @@ Note
 <li><code>weston</code> (Wayland reference compositor)</li>
 </ul></li>
 </ul>
-<p>::: Which option should I use?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which option should I use?</p>
 <p>I just want to check that a web service is running -&gt; Use a text-based browser (lynx, w3m, or links) Fast, simple, works everywhere.</p>
 <p>I need a feature that exists only in a graphical interface -&gt; Try export display with X11 (if available). Useful for configuration tools or admin interfaces.</p>
 <p>If too difficult to set-up or not available (on newer Linux or other OS) -&gt; Use remote desktop.</p>
-<p>I am not sure which option to choose -&gt; Use remote desktop. It is the most reliable and behaves like a normal desktop. :::</p>
+<p>I am not sure which option to choose -&gt; Use remote desktop. It is the most reliable and behaves like a normal desktop.</p>
+</div>
+</div>
 </section>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
@@ -1015,12 +1028,19 @@ Note
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This file lives in your repo at <code>.github/workflows/deploy.yml</code>. GitHub picks it up automatically, no extra configuration needed. Every push to <code>main</code> triggers a fresh build and deploy.</p>
+</section>
+</section>
+</section>
+<section id="many-choices-tools-solutions-and-platforms" class="level1">
+<h1>Many choices: tools, solutions and platforms</h1>
+<p>Aside the obvious choices, which are generally for the most complex problems (databases, orchestration, Virtual Machines, LDAP) or accepted as de facto standard (Docker, Kubernetes (which is also in the previous category), S3), there are many other tools, solutions and platforms: * tools might be to help with some platforms, like a full ecosystem around Kubernetes to containers (visualising, managing, …) or doing something independant (analysing something, transforming, …), * solutions and platforms might be some alternative to the most well-know platforms or solution, for instance a simpler orchestration platfrom than Kubernetes, an already set-up cluster for Proxmox or Kubernetes that is partially managed for you…</p>
+<p>They can all give a benefit but could also give problems: * solutions such as managed clusters are most of the time commercial. There might be a free tier but with some limitation. Using this solution might lock you in, and a new functionality might be needed which is out of the free tier, * alternative platform might also be commercial, with the same issue as above. But an open-source platform might stop being maintained if there wasn’t enough support behind. Even without this risk, a platform that is not used so much can have more bugs (simply because nobody found them) or missing important functionalities (again because nobody asked for them). Note that if a platform is a very good match for your institution/consortium and you can work on it for a long term, it could be interesting to adopt it and become a part of the development team. * tools need to be carefully checked, especially if they are to be installed locally. They can give a great help (such as k9s to visualise a Kubernetes cluster), so shouldn’t be ignored.</p>
+<p>But one of the big issue that these choices can give is the choice by itself. Looking for a tool for a specific solution might return a discussion where several are discussed, then searching for one might return another discussion where a “better” alternative is proposed. It is where it might be beneficial to look for highly popular items, with presence in Wikipedia, with many stars in GitHub, coming from a known source (a big company, an Open Source Foundation such as Apache)… And keep the less popular items only for specific needs and while being careful</p>
+<p>The use of AI and “Vibe coding” will probably make these problems even worse.</p>
 <p>This is a Quarto website.</p>
 <p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
