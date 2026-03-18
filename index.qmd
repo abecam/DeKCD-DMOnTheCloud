@@ -701,6 +701,20 @@ But one of the big issue that these choices can give is the choice by itself. Lo
 
 The use of AI and "Vibe coding" will probably make these problems even worse.
 
+::: {.callout-note}
+Some companies, notably Google, create whole new languages for some new products and/or new frameworks. That is a fundamental issue as consolidation is a key aspect of security. A new language might have some critical issue that will impact all products written with it.
+
+The new "cool kid" might also be quickly adopted by some developers and the resulting applications have a great chance of being fragile, from the lack of experience and from the immaturity of the language/framework. As such, the benefit must be carefuly considered before adopting such language/product/application.
+:::
+
+Depending on the usage, it might still be beneficial to adopt a brand new product, if:
+
+* there is no security risk, for instance only doing some transformation on public data, 
+* it cannot break the Data Management Platform, for instance a Database is critical for most platforms and should probably always be one the well-known ones (Posgres, MySQL, MariaDB, Oracle, SQLite, Ingres...),
+* the gain is major, for example the new product is significantly faster, very simple to use for an usually complex task, offer a new functionality with no equivalent.
+
+
+
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
