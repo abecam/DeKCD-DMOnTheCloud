@@ -530,9 +530,670 @@ Quick overview
 
 -> Kubernetes section
 
-# Other solutions
+# Other Solutions {#sec-other-solutions}
 
-Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter, 
+###
+
+## Linux Packaging/Bare metal setup {#sec-packaging}
+
+In some cases, it can be better to install directly on the host system or the only option aside using a virtual machine, if the application is not containerizable.
+
+It could be for some specific hardware or security needs, because the application has a very complex setup, because the application hasn't been maintained for a long time and does not offer an image (or the image is not of the last version...).
+
+Most of the time it is possible to set it up in a virtual machine with some extra effort, but some virtual machine hypervisor (that run the virtual machines) might have some restrictions on the hardware use (GPU for instance), or have some functionality locked as part as a commercial version.
+
+Containers could have a full access to the hardware if run on Linux, but the base image would probably be restricted on what it is allowed to do, or getting the access might be really difficult.
+
+In any case, the effort to virtualize or containerise the application will depend on the security risk and the estimate time of usage. If the application present a risk and will be run for several years, it makes sense to spend some effort isolating it. To do so, it is simply a matter of removing obstacles one by one:
+* try to make it run,
+* identify what is the issue,
+* look for solutions:
+	- check the official documentation,
+	- if possible ask a colleague that might have had the same issue,
+	- LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question,
+	- doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit,
+	- ask online,
+	- try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won't be touched, and iterating on copies.
+* if this issue has been fixed and the software still have issue, reiterate.
+
+::: {.callout-note}
+One big caveat of preparing an application that has not been developped in-house is the risk that one or several functionalities will not be encountered while doing the setup and might not work, and so the application will break later. To avoid so, it is important to test the application with realistic dummy data and try to use everything that might be used. As such, it might be better to stick to well-documented applications (even if not maintained anymore) that allow an quick overview of all capabilities.
+
+A maintained but undocumented application might seem a better option, but only if it is sure that it will be maintained for the long enough and/or that it will be fully documented.
+:::
+
+::: {.callout-note}
+If you provide a containization for a maintained application, it is a good idea to propose it as contribution of the project. You will have to see who would be in charge of updating it if needed.
+:::
+
+## Proxmox VE — Virtualisation Without VMware {#sec-proxmox}
+
+Proxmox Virtual Environment (Proxmox VE) is an open-source server virtualisation platform. It allow to manage several application on several servers using a Web Interface. It support virtual machines and Linux containers (LXC), which support OCI images which are very close to Docker Image (most Docker images should be compatible).
+
+It has gained significant traction in scientific and institutional settings as a cost-free replacement for VMware vSphere following Broadcom's acquisition of VMware in 2023 and the subsequent end of free ESXi licences.
+
+### What Proxmox can do
+
+**Virtual Machines (KVM/QEMU).**
+Proxmox uses the Kernel-based Virtual Machine (KVM) hypervisor combined with QEMU to run full operating system images. Each VM is completely isolated: it has its own virtual hardware, its own kernel, and its own network stack. You can run Windows, any Linux distribution, or BSD inside a VM.
+
+- Full hardware emulation, including GPU passthrough for GPU-accelerated workloads.
+- Live migration — move a running VM between cluster nodes with minimal downtime.
+- Snapshots — capture the entire state of a VM at any point in time.
+
+**Linux Containers (LXC).**
+Containers are faster to start and use less memory than full VMs.
+
+- Lower overhead than full VMs — near-native performance.
+- Suitable for running multiple isolated Linux environments on one host.
+- Not suitable for non-Linux guests.
+
+**Integrated Backup System.**
+Proxmox Backup Server (PBS) is a companion product that provides deduplicating, incremental backups of VMs and containers. Backups are stored efficiently - only changed data blocks are written after the first backup - and can be verified cryptographically.
+
+- Scheduled automatic backups with configurable retention policies.
+- Instant restore of a single file from a VM backup without restoring the whole image.
+- Offsite replication: backups can be replicated to a remote PBS instance.
+
+**High Availability Clustering.**
+Multiple Proxmox hosts can be joined into a cluster. The cluster shares a common configuration and can automatically restart VMs on another node if a host fails. This requires at least three nodes to achieve quorum: the next main node need to be elected using a vote.
+
+**Software-Defined Networking.**
+Proxmox VE allows administrators to define VLANs, virtual network zones, and routing policies from the web interface.
+
+### Proxmox vs. Kubernetes — when to use which
+
+::: {.callout-note}
+## Key distinction
+Proxmox **virtualises hardware** or run containers without the full orchestration that Kubernetes offers.
+Kubernetes **orchestrates containers**, running packaged applications across a pool of machines.
+
+They operate at different layers and can be combined: a Kubernetes cluster can run on VMs managed by Proxmox.
+:::
+
+| Dimension | Proxmox VE | Kubernetes |
+|---|---|---|
+| What it manages | Virtual machines & LXC containers | Application containers (Docker/OCI) |
+| Abstraction level | Infrastructure / OS level | Application / workload level |
+| Typical user | Sysadmin managing servers | DevOps/developer managing applications |
+| Scaling | Manual VM provisioning or scripted | Automatic horizontal pod scaling |
+| Self-healing | HA restarts VMs on node failure | Reschedules failed pods automatically |
+| Complexity | Moderate — manageable by a small team | High — significant learning curve |
+| Persistent storage | VM disk images, Ceph, NFS | Persistent Volume Claims, CSI drivers |
+| Networking | Bridges, VLANs, SDN | CNI plugins, Ingress controllers, Services |
+
+: Proxmox vs. Kubernetes: different layers, complementary roles {.striped .hover}
+
+A practical path for a research group: start with Proxmox to host virtual machines for different services (database, web server, backup). If the team grows and needs to manage many application deployments with automated scaling, consider running a Kubernetes cluster on top of Proxmox VMs.
+If the need might be higher, OpenStack offers a group of Cloud-oriented solutions, see below.
+
+### Resources
+
+- [Proxmox VE documentation](https://pve.proxmox.com/pve-docs/) — full installation and administration guide
+- [Proxmox Backup Server documentation](https://pbs.proxmox.com/docs/)
+- [Proxmox community forum](https://forum.proxmox.com) — active community with scientific HPC use cases
+- [Migrating to Proxmox from VMware](https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE) — official migration wiki
+
+## OpenStack — Open-Source Cloud Infrastructure {#sec-openstack}
+
+OpenStack is a large-scale, open-source cloud computing platform that allows organisations to build and operate their own Infrastructure-as-a-Service (IaaS) cloud — comparable in scope to Amazon Web Services or Microsoft Azure, but running entirely on hardware you control. It is widely used by national research infrastructures, universities, and supercomputing centres worldwide.
+
+::: {.callout-important}
+## Intended scale
+OpenStack is designed for managing tens to thousands of physical servers. For a single-server or small-team deployment, Proxmox is usually more appropriate. OpenStack becomes compelling when a research institute or facility needs to offer self-service cloud resources to many research groups simultaneously.
+:::
+
+### Architecture overview
+
+OpenStack is not a monolithic application — it is a collection of loosely coupled services that communicate via REST APIs. Each service manages one aspect of the infrastructure.
+
+| Service | Code name | Function |
+|---|---|---|
+| Compute | Nova | Manages the lifecycle of virtual machine instances |
+| Networking | Neutron | Software-defined networking: virtual networks, routers, floating IPs |
+| Block storage | Cinder | Persistent block volumes attached to VMs |
+| Object storage | Swift | Scalable object store (S3-compatible) |
+| Image service | Glance | Stores and retrieves VM disk images |
+| Identity | Keystone | Authentication and authorisation for all OpenStack services |
+| Dashboard | Horizon | Web-based graphical interface for all services |
+| Orchestration | Heat | Template-based infrastructure orchestration |
+| Telemetry | Ceilometer / Gnocchi | Usage metering and monitoring |
+| Bare metal | Ironic | Provision physical servers alongside VMs |
+| Container orchestration | Magnum | Provides Kubernetes clusters as a managed service |
+| Distributed storage | Ceph (integrated) | Block, object, and file storage for Nova/Cinder/Glance |
+
+: Core OpenStack services {.striped .hover}
+
+### Ceph — distributed storage
+
+Ceph is a software-defined distributed storage system tightly integrated with OpenStack. It is the recommended storage backend for production
+OpenStack deployments because it eliminates single points of failure and
+scales horizontally by adding storage nodes.
+
+**How Ceph works.**
+Ceph distributes data across a cluster of storage nodes (called OSDs —
+Object Storage Daemons). Each piece of data is replicated (typically three
+copies) or erasure-coded across different nodes, so the failure of any
+single disk or server does not cause data loss. The CRUSH algorithm ensures
+data is balanced and replicated without a central metadata bottleneck.
+
+The three main Ceph interfaces are:
+
+- **RADOS Block Device (RBD)** — presents distributed storage as a block
+  device. Used by Cinder for VM volumes and by Nova for VM boot disks.
+- **RADOS Gateway (RGW)** — provides an S3-compatible object storage API,
+  usable as a drop-in replacement for Amazon S3.
+- **CephFS** — a POSIX-compatible shared filesystem for applications that
+  need traditional file-path semantics.
+
+**Why Ceph with OpenStack.**
+Live migration of VMs is much simpler when all compute nodes access the
+same Ceph storage pool. Storage can also scale independently of compute —
+you add storage nodes without affecting running VMs.
+
+- [Ceph documentation](https://docs.ceph.com/en/latest/)
+- [Cinder with Ceph RBD — configuration guide](https://docs.openstack.org/cinder/latest/configuration/block-storage/drivers/ceph-rbd-volume-driver.html)
+
+### Magnum — Kubernetes as a service
+
+Magnum is the OpenStack service that provisions and manages container
+orchestration clusters — most commonly Kubernetes — on demand. Rather than
+manually installing and configuring Kubernetes, Magnum automates the entire
+process using Heat templates.
+
+Researchers request a cluster via the API or Horizon dashboard and receive
+a fully configured Kubernetes environment running on OpenStack VMs.
+Administrators define cluster templates specifying the node size, Kubernetes
+version, and networking plugin. Once created, the cluster is managed with
+standard Kubernetes tools (`kubectl`, Helm, etc.) and the OpenStack layer
+becomes invisible to the end user.
+
+::: {.callout-note}
+## Magnum and Kubernetes
+Magnum does not replace Kubernetes — it automates the deployment of
+Kubernetes on OpenStack infrastructure. From the researcher's perspective,
+they receive a standard Kubernetes cluster.
+:::
+
+- [Magnum documentation](https://docs.openstack.org/magnum/latest/)
+
+### Other notable OpenStack services
+
+**Neutron (Networking).**
+Neutron provides virtual networks, subnets, routers, security groups, and
+floating IPs. It supports multiple backend drivers and can integrate with
+physical network hardware via ML2 plugins. For research networks, Neutron
+can enforce quality-of-service rules and provide VLAN segmentation between
+research groups.
+
+**Heat (Orchestration).**
+Heat allows you to describe an entire cloud environment — VMs, networks,
+storage, security groups — in a YAML template and deploy it reproducibly
+with a single API call. This is the OpenStack equivalent of AWS
+CloudFormation and enables Infrastructure as Code workflows.
+
+**Ironic (Bare Metal Provisioning).**
+Ironic provisions physical servers in the same way Nova provisions VMs.
+This is useful for high-performance computing workloads where VM overhead
+is unacceptable — for example, MPI jobs requiring direct access to
+InfiniBand interconnects or specific GPU hardware.
+
+**Horizon (Web Dashboard).**
+Horizon is the web interface for OpenStack. It provides a graphical view
+of all resources: instances, volumes, networks, and images. For researchers
+who prefer not to use the command line or REST APIs, Horizon is the primary
+day-to-day interface.
+
+### Resources
+
+- [OpenStack documentation](https://docs.openstack.org) — official hub for all OpenStack projects
+- [DevStack](https://docs.openstack.org/devstack/latest/) — sets up a full OpenStack environment on a single machine for learning and testing
+- [Kolla-Ansible](https://docs.openstack.org/kolla-ansible/latest/) — deploys OpenStack services as containers for easier lifecycle management
+- [EGI Federated Cloud](https://www.egi.eu/service/cloud-compute/) — federated OpenStack infrastructure available to European researchers
+
+
+## Lightweight and Cloud-Native Container Orchestrators {#sec-orchestrators}
+
+Kubernetes is not the only way to schedule and manage containers at scale.
+Several lighter-weight or cloud-managed alternatives exist, each occupying
+a different point on the spectrum between simplicity and power.
+
+### HashiCorp Nomad {#sec-nomad}
+
+[Nomad](https://www.nomadproject.io) is a general-purpose workload
+orchestrator developed by HashiCorp. Unlike Kubernetes, which is
+specifically designed for containers, Nomad can schedule Docker containers,
+standalone executables (binaries), Java JAR files, virtual machines (via
+QEMU), and batch jobs — all using the same scheduler and configuration
+language.
+
+**Architecture.**
+Nomad uses a client/server model. A small number of server nodes (three or
+five, for quorum) handle scheduling decisions. Client nodes run the actual
+workloads. There is no dedicated etcd cluster, no separate controller
+manager, no separate scheduler process — all scheduling logic lives in the
+Nomad server binary.
+
+**Key characteristics:**
+
+- **Single binary deployment.** The entire Nomad agent (server or client
+  mode) is a single Go binary with no external runtime dependencies. This
+  makes installation trivial compared to a full Kubernetes cluster.
+- **Multi-workload.** Nomad schedules containers, batch jobs, system
+  daemons, and raw executables in a uniform way. This is useful in
+  scientific environments where some workloads are containerised and others
+  are legacy binaries.
+- **Native integration with Vault and Consul.** HashiCorp's secret
+  management tool (Vault) and service discovery tool (Consul) integrate
+  directly with Nomad, providing a coherent platform for secrets injection
+  and service mesh networking.
+- **Lighter operational footprint.** A minimal Nomad cluster requires
+  significantly fewer nodes and less memory than a comparable Kubernetes
+  cluster with all its components.
+
+**Limitations compared to Kubernetes:**
+
+- Smaller ecosystem — fewer pre-packaged applications (Helm charts do not
+  apply; Nomad uses its own job specification format HCL).
+- Less sophisticated networking — no native Ingress resource; traffic
+  routing requires Consul or an external load balancer.
+- Less mature support for stateful workloads (though Nomad CSI driver
+  support is improving).
+
+::: {.callout-note}
+## When to consider Nomad
+Nomad is a good fit when: you need to schedule a heterogeneous mix of
+containers and non-container workloads; your team is small and wants a
+simpler operational model than Kubernetes; or you are already using other
+HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain.
+:::
+
+- [Nomad documentation](https://developer.hashicorp.com/nomad/docs)
+- [Nomad vs. Kubernetes comparison](https://developer.hashicorp.com/nomad/docs/nomad-vs-kubernetes) — official comparison from HashiCorp
+
+### Docker Swarm {#sec-swarm}
+
+Docker Swarm is the native clustering and orchestration mode built into the
+Docker Engine itself. A group of Docker hosts can be joined into a Swarm
+cluster, turning them into a pool of nodes that can run and scale
+containerised services collectively.
+
+**Architecture.**
+Swarm uses a manager/worker node model. Manager nodes handle scheduling and
+cluster state (stored via the Raft consensus algorithm). Worker nodes run
+containers. Unlike Kubernetes, there are no separate etcd, API server, or
+controller manager processes — all Swarm logic is embedded in the Docker
+daemon.
+
+**Key characteristics:**
+
+- **Zero additional installation.** Any machine running Docker Engine can
+  join a Swarm with a single `docker swarm init` or `docker swarm join`
+  command. No separate binaries or configuration files are needed.
+- **Docker Compose compatibility.** Docker Compose files (with minor
+  additions for `deploy:` stanzas) can be deployed to Swarm as stacks
+  directly, making it easy to move from a local development setup to a
+  distributed deployment.
+- **Simplicity.** Swarm intentionally covers the 80% use case — service
+  scaling, rolling updates, health-based restarts, overlay networking,
+  and secrets management — without the conceptual complexity of Kubernetes.
+
+**Current status.**
+Docker Swarm is considered feature-stable rather than actively developed.
+Mirantis (which acquired Docker Enterprise in 2019) has committed to
+maintaining Swarm. For new projects, Docker's own documentation now
+recommends Kubernetes for complex production workloads. Swarm remains a
+sensible, low-overhead choice for small research groups that are already
+familiar with Docker Compose and do not need the full Kubernetes feature set.
+
+**Limitations:**
+
+- Limited ecosystem compared to Kubernetes — no Helm, no Operators, no
+  Custom Resource Definitions.
+- No built-in support for auto-scaling based on metrics.
+- Less active development; fewer new features.
+
+- [Docker Swarm documentation](https://docs.docker.com/engine/swarm/)
+- [Deploying stacks to Swarm](https://docs.docker.com/engine/swarm/stack-deploy/)
+
+### Amazon ECS — Elastic Container Service {#sec-ecs}
+
+Amazon ECS is AWS's proprietary container orchestration service. You define
+tasks (one or more containers that run together, similar to a Kubernetes
+Pod) and services (long-running groups of tasks with load balancing and
+auto-scaling). ECS handles scheduling, health checks, and replacement of
+failed tasks.
+
+**Two launch modes:**
+
+- **ECS on EC2.** You provision and manage a pool of EC2 virtual machines
+  that act as ECS container hosts. You are responsible for the underlying
+  instances (patching, scaling the instance fleet).
+- **ECS on Fargate.** AWS manages the underlying infrastructure entirely.
+  You specify CPU and memory requirements per task and pay per second of
+  task runtime — no instances to manage.
+
+**Key characteristics:**
+
+- Deep integration with the AWS ecosystem: IAM for per-task permissions,
+  CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for
+  container images, Secrets Manager for credentials.
+- Simpler mental model than Kubernetes for straightforward web application
+  or data pipeline deployments on AWS.
+- No control plane to operate — AWS manages the scheduler.
+
+**Limitations:**
+
+- Vendor lock-in: ECS task definitions, IAM roles, and networking are all
+  AWS-specific. Migrating to another cloud or on-premises later requires
+  significant rework.
+- Less flexible than Kubernetes for complex multi-service applications with
+  sophisticated networking or storage requirements.
+- No equivalent to Kubernetes Operators or CRDs for extending the platform.
+
+::: {.callout-tip}
+## ECS vs. EKS on AWS
+If your team is already comfortable with Kubernetes, AWS offers EKS
+(Elastic Kubernetes Service) which runs a managed Kubernetes control plane.
+ECS is simpler to start with; EKS gives portability and the full Kubernetes
+ecosystem. Both support Fargate for serverless compute.
+:::
+
+- [Amazon ECS documentation](https://docs.aws.amazon.com/ecs/)
+- [ECS on Fargate getting started](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-fargate.html)
+
+### Serverless Container Platforms {#sec-serverless}
+
+"Serverless containers" describe managed platforms where you provide a
+container image and the platform handles all infrastructure — no VMs, no
+clusters, no nodes to manage. You pay only for actual compute time.
+The trade-off is reduced control and potential cold-start latency.
+
+The term *serverless* can be confusing: servers still exist, but they are
+fully abstracted away from the user. From the researcher's perspective, you
+push a container image and the platform runs it on demand.
+
+**Common platforms:**
+
+| Platform | Provider | Notes |
+|---|---|---|
+| AWS Fargate | Amazon | Works with ECS or EKS; per-second billing |
+| Google Cloud Run | Google | HTTP-triggered; scales to zero; see below |
+| Azure Container Instances | Microsoft | Simple per-container billing; no orchestration layer |
+| Azure Container Apps | Microsoft | Higher-level; built on Kubernetes + KEDA for event-driven scaling |
+| Fly.io | Independent | Developer-friendly; global edge deployment |
+| Render | Independent | Simple deployment from Git; Docker or native buildpacks |
+
+**Scientific use cases:**
+
+- **On-demand analysis endpoints:** Deploy a container that runs a
+  computationally expensive analysis when an HTTP request arrives and shuts
+  down immediately afterwards. Costs nothing when idle.
+- **Batch processing pipelines:** Trigger container runs from object storage
+  events (a new file uploaded triggers a processing job).
+- **Reproducible environments:** Share a container image with reviewers so
+  they can reproduce an analysis without installing software.
+
+**Limitations to consider:**
+
+- Maximum execution time limits (e.g., Cloud Run has a 60-minute request
+  timeout; some platforms impose shorter limits).
+- Stateless by design — persistent storage must be external (object storage,
+  managed database).
+- Cold starts: the first request after a period of inactivity may take
+  several seconds while the container image is pulled and started.
+- Cost unpredictability for high-traffic or long-running workloads.
+
+### Google Cloud Run {#sec-cloudrun}
+
+Google Cloud Run is Google's fully managed serverless container platform.
+It is one of the most mature and widely used serverless container services,
+and is worth examining in detail as a representative example of the
+category.
+
+**How it works.**
+You package your application as a Docker/OCI container image, push it to a
+container registry (Google Artifact Registry, or any public registry), and
+deploy it with a single command or through the Cloud Console. Cloud Run
+starts one or more container instances to handle incoming HTTP/gRPC
+requests and scales the number of instances automatically — including
+scaling to zero when there is no traffic.
+
+```bash
+# Build and push a container, then deploy to Cloud Run
+gcloud builds submit --tag gcr.io/MY_PROJECT/my-app
+gcloud run deploy my-app \
+  --image gcr.io/MY_PROJECT/my-app \
+  --platform managed \
+  --region europe-west1 \
+  --allow-unauthenticated
+```
+
+**Key features:**
+
+- **Scale to zero.** When no requests are incoming, Cloud Run runs no
+  instances and incurs no compute cost. This makes it economical for
+  sporadic or unpredictable workloads typical in research.
+- **Concurrency.** A single Cloud Run instance can handle multiple
+  simultaneous requests (configurable up to 1000), which reduces cold
+  starts compared to function-as-a-service platforms.
+- **Any language, any framework.** Because you bring your own container
+  image, there are no language restrictions. Python, R, Julia, Java, or any
+  compiled binary can be deployed.
+- **Cloud Run Jobs.** In addition to HTTP services, Cloud Run Jobs run
+  containerised batch tasks to completion — useful for data processing
+  pipelines, periodic reports, or model training jobs.
+- **VPC connectivity.** Cloud Run services can connect to private VPC
+  networks, enabling access to Cloud SQL, Memorystore, or on-premises
+  systems via VPN or Interconnect.
+
+**Integration with Google Cloud:**
+
+- **BigQuery, Cloud Storage, Pub/Sub** — data can flow in and out through
+  standard Google Cloud services.
+- **Cloud Scheduler** — trigger Cloud Run Jobs on a cron schedule.
+- **Eventarc** — trigger services from Cloud Storage events, Pub/Sub
+  messages, or Audit Logs.
+- **Secret Manager** — inject secrets as environment variables at runtime
+  without embedding them in container images.
+
+**Limitations:**
+
+- Maximum request timeout of 60 minutes (sufficient for many analysis tasks;
+  longer jobs should use Cloud Run Jobs or Cloud Batch).
+- In-memory storage only during execution; persistent state must use Cloud
+  Storage or a database.
+- Compute is limited to CPU and memory per instance; GPU support is
+  available in preview but not generally available in all regions.
+- Full vendor lock-in to Google Cloud APIs and billing.
+
+::: {.callout-tip}
+## Cloud Run vs. Kubernetes (GKE)
+Cloud Run is ideal when you want to run containers without managing
+infrastructure. Google Kubernetes Engine (GKE) is better when you need
+full Kubernetes capabilities: stateful workloads, custom networking,
+complex multi-service applications, or specific hardware (GPUs, TPUs) that
+require persistent node pools. Cloud Run and GKE can coexist in the same
+project and share the same container registry.
+:::
+
+- [Google Cloud Run documentation](https://cloud.google.com/run/docs)
+- [Cloud Run Jobs documentation](https://cloud.google.com/run/docs/create-jobs)
+- [Cloud Run pricing](https://cloud.google.com/run/pricing) — first 2 million requests per month are free
+
+### Comparison of lightweight and cloud-native orchestrators
+
+| Platform | Managed by | Infrastructure | Vendor lock-in | Complexity | Best for |
+|---|---|:---:|:---:|:---:|---|
+| HashiCorp Nomad | Self-hosted | Your servers | None | Low–medium | Heterogeneous workloads, HashiCorp stack |
+| Docker Swarm | Self-hosted | Your servers | None | Low | Small teams already using Docker Compose |
+| Amazon ECS | AWS | AWS (EC2 or Fargate) | High (AWS) | Low–medium | AWS-native applications |
+| Google Cloud Run | Google | Fully managed | High (GCP) | Very low | HTTP services, sporadic workloads |
+| Azure Container Apps | Microsoft | Fully managed | High (Azure) | Low | Event-driven microservices on Azure |
+
+: Lightweight and cloud-native orchestrator comparison {.striped .hover}
+
+## Apache Software Foundation Solutions {#sec-apache}
+
+The Apache Software Foundation (ASF) hosts hundreds of open-source
+projects. For data management and scientific computing infrastructure,
+several Apache projects are particularly relevant. They are mature, widely
+deployed, and have large communities — making them safe long-term choices
+for research data platforms.
+
+### Apache HTTP Server
+
+The Apache HTTP Server (httpd) is one of the most widely deployed web
+servers in the world. It serves static files and acts as a reverse proxy
+in front of application servers.
+
+- **Virtual hosting.** Multiple websites or applications can be served from
+  one server using different domain names or paths.
+- **Modules.** Functionality is extended through modules: `mod_proxy` for
+  reverse proxying, `mod_ssl` for HTTPS, `mod_rewrite` for URL
+  manipulation, `mod_auth` for authentication.
+- **`.htaccess` files.** Per-directory configuration allows fine-grained
+  access control without restarting the server, which is useful in
+  multi-user research environments.
+
+For high-concurrency workloads (many simultaneous connections), Nginx is
+often preferred due to its event-driven architecture. Apache's
+process/thread model is simpler to configure and better supported by legacy
+applications. Both can coexist: Nginx at the front end proxies requests
+back to Apache.
+
+- [Apache HTTP Server documentation](https://httpd.apache.org/docs/)
+
+### Apache Tomcat
+
+Apache Tomcat is a Java Servlet container and web server. It runs Java web
+applications packaged as WAR (Web Application Archive) files. Many
+scientific data management platforms — including OMERO, certain LIMS
+systems, and institutional repository software — are Java-based and require
+Tomcat.
+
+- Implements the Java Servlet and JavaServer Pages (JSP) specifications.
+- Can be placed behind Apache HTTP Server (via `mod_proxy_ajp`) or Nginx
+  for SSL termination and load balancing.
+- The Manager web application allows deploying and undeploying WAR files
+  via a browser interface.
+
+- [Apache Tomcat documentation](https://tomcat.apache.org/tomcat-10.1-doc/index.html)
+
+### Apache Kafka
+
+Apache Kafka is a distributed event streaming platform. It acts as a
+high-throughput, fault-tolerant message broker: producers publish data
+events (messages) to named topics, and consumers read them independently
+and at their own pace. Kafka retains messages for a configurable period, so
+consumers can replay historical data.
+
+Scientific use cases:
+
+- Ingesting high-frequency sensor or instrument data in real time.
+- Decoupling data producers (instruments, simulations) from data consumers
+  (databases, analysis pipelines).
+- Building audit logs where every data change is recorded as an immutable
+  event.
+- Streaming data simultaneously to multiple downstream systems.
+
+- [Apache Kafka documentation](https://kafka.apache.org/documentation/)
+- [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)
+
+### Apache Spark
+
+Apache Spark is a unified analytics engine for large-scale data processing.
+It extends the MapReduce paradigm with in-memory computation, making
+iterative algorithms (common in machine learning and simulation analysis)
+far faster than disk-based approaches.
+
+Core capabilities:
+
+- **Spark SQL** — query structured data using SQL or a DataFrame API
+  (available in Python, R, Scala, and Java).
+- **Structured Streaming** — process data streams from Kafka or other
+  sources in near-real time.
+- **MLlib** — distributed machine learning for classification, regression,
+  clustering, and collaborative filtering.
+- **GraphX** — distributed graph computation for network analysis.
+
+- [Apache Spark documentation](https://spark.apache.org/docs/latest/)
+
+### Apache Airflow
+
+Apache Airflow is a workflow orchestration platform for scheduling and
+monitoring data pipelines. Workflows are defined as Python code in the form
+of Directed Acyclic Graphs (DAGs), where each node represents a task (e.g.,
+download data, run analysis, upload results) and edges define dependencies
+between tasks.
+
+Scientific use cases:
+
+- Automating recurring data processing pipelines (nightly ingestion, weekly
+  reports).
+- Orchestrating multi-step bioinformatics or image analysis workflows.
+- Managing dependencies between heterogeneous tasks: bash scripts, Python
+  functions, Kubernetes pods, SQL queries.
+
+::: {.callout-note}
+## Airflow vs. Nextflow / Snakemake
+Bioinformaticians often use Nextflow or Snakemake because they natively
+understand file-based workflows and integrate with HPC schedulers (SLURM,
+PBS). Airflow is more general-purpose and integrates better with cloud
+services and databases. Both approaches can coexist in one organisation.
+:::
+
+- [Apache Airflow documentation](https://airflow.apache.org/docs/)
+
+### Apache Solr
+
+Apache Solr is an enterprise search platform built on Apache Lucene. It
+provides full-text search, faceted search, filtering, and ranked retrieval
+over structured and unstructured data. It is useful for building search
+interfaces over scientific datasets, publications, or metadata catalogues.
+
+- Supports JSON, XML, and CSV indexing.
+- Runs standalone or in SolrCloud mode for distributed, fault-tolerant search.
+- Used by DSpace (institutional repositories) and CKAN (open data portals).
+
+- [Apache Solr documentation](https://solr.apache.org/guide/solr/latest/)
+
+### Apache Arrow and Parquet
+
+**Apache Arrow** defines a language-agnostic in-memory columnar data format.
+Libraries for Python, R, Java, C++, and others can share data through Arrow
+buffers without copying or serialisation — enabling zero-copy
+interoperability between Pandas, Spark, DuckDB, and other tools.
+
+- [Apache Arrow documentation](https://arrow.apache.org/docs/)
+
+**Apache Parquet** is a columnar storage file format optimised for
+analytics. Storing data column-by-column (rather than row-by-row as in CSV)
+allows efficient compression and selective column reads — you read only the
+columns needed for a query without scanning the whole file.
+
+- Widely supported: Spark, Pandas, DuckDB, BigQuery, Redshift, and Athena
+  all read Parquet natively.
+- Strongly typed schemas with nested data support.
+- Snappy and Zstandard compression significantly reduce storage footprint
+  compared to CSV.
+
+- [Apache Parquet documentation](https://parquet.apache.org/docs/)
+
+### Apache project summary
+
+| Project | Domain | Key use case in research |
+|---|---|---|
+| HTTP Server | Web serving | Serving applications, reverse proxy, access control |
+| Tomcat | Java applications | Hosting Java-based data management platforms |
+| Kafka | Event streaming | Real-time data ingestion from instruments |
+| Spark | Big data analytics | Large-scale data processing and machine learning |
+| Airflow | Workflow orchestration | Scheduling and monitoring data pipelines |
+| Solr | Search | Full-text search over datasets and metadata catalogues |
+| Arrow | Data interchange | Zero-copy data sharing between analysis tools |
+| Parquet | File format | Efficient columnar storage for analytical datasets |
+
+: Apache Software Foundation projects relevant to research data management {.striped .hover}
 
 # Scalability
 
@@ -578,6 +1239,8 @@ They are generally connected via APIs, which can be at a programmatic level (for
 The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the [Data Anonymisation and Pseudonymisation page](pages/Data_Anonymisation_and_Pseudonymisation.qmd).
 
 # Automatize the setup
+
+When you need to repeat a setup, or when you need to set-up a complex application, it is generally better to automate the setup, rather than doing it by hand. This can be done with tools such as Puppet, Ansible, and Terraform, which allow you to describe the desired state of your system in a declarative way, and then apply that state to your machines.
 
 ## Puppet, Ansible & Terraform
 
