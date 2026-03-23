@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>De.KCD - Data Management Platform on the Cloud, step by step – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -67,15 +70,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c2184ee79b4189700a07fecab5507ffb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6ebf626d957987a3094d36c3262c2f72.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -315,7 +317,45 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#namespaces-and-namespaces-collisions" id="toc-namespaces-and-namespaces-collisions" class="nav-link" data-scroll-target="#namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</a></li>
   </ul></li>
   <li><a href="#from-docker-compose-to-kubernetes" id="toc-from-docker-compose-to-kubernetes" class="nav-link" data-scroll-target="#from-docker-compose-to-kubernetes">From Docker compose to Kubernetes</a></li>
-  <li><a href="#other-solutions" id="toc-other-solutions" class="nav-link" data-scroll-target="#other-solutions">Other solutions</a></li>
+  <li><a href="#sec-other-solutions" id="toc-sec-other-solutions" class="nav-link" data-scroll-target="#sec-other-solutions">Other Solutions</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#sec-packaging" id="toc-sec-packaging" class="nav-link" data-scroll-target="#sec-packaging">Linux Packaging/Bare metal setup</a></li>
+  <li><a href="#sec-proxmox" id="toc-sec-proxmox" class="nav-link" data-scroll-target="#sec-proxmox">Proxmox VE — Virtualisation Without VMware</a>
+  <ul class="collapse">
+  <li><a href="#what-proxmox-can-do" id="toc-what-proxmox-can-do" class="nav-link" data-scroll-target="#what-proxmox-can-do">What Proxmox can do</a></li>
+  <li><a href="#proxmox-vs.-kubernetes-when-to-use-which" id="toc-proxmox-vs.-kubernetes-when-to-use-which" class="nav-link" data-scroll-target="#proxmox-vs.-kubernetes-when-to-use-which">Proxmox vs.&nbsp;Kubernetes — when to use which</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  </ul></li>
+  <li><a href="#sec-openstack" id="toc-sec-openstack" class="nav-link" data-scroll-target="#sec-openstack">OpenStack — Open-Source Cloud Infrastructure</a>
+  <ul class="collapse">
+  <li><a href="#architecture-overview" id="toc-architecture-overview" class="nav-link" data-scroll-target="#architecture-overview">Architecture overview</a></li>
+  <li><a href="#ceph-distributed-storage" id="toc-ceph-distributed-storage" class="nav-link" data-scroll-target="#ceph-distributed-storage">Ceph — distributed storage</a></li>
+  <li><a href="#magnum-kubernetes-as-a-service" id="toc-magnum-kubernetes-as-a-service" class="nav-link" data-scroll-target="#magnum-kubernetes-as-a-service">Magnum — Kubernetes as a service</a></li>
+  <li><a href="#other-notable-openstack-services" id="toc-other-notable-openstack-services" class="nav-link" data-scroll-target="#other-notable-openstack-services">Other notable OpenStack services</a></li>
+  <li><a href="#resources-1" id="toc-resources-1" class="nav-link" data-scroll-target="#resources-1">Resources</a></li>
+  </ul></li>
+  <li><a href="#sec-orchestrators" id="toc-sec-orchestrators" class="nav-link" data-scroll-target="#sec-orchestrators">Lightweight and Cloud-Native Container Orchestrators</a>
+  <ul class="collapse">
+  <li><a href="#sec-nomad" id="toc-sec-nomad" class="nav-link" data-scroll-target="#sec-nomad">HashiCorp Nomad</a></li>
+  <li><a href="#sec-swarm" id="toc-sec-swarm" class="nav-link" data-scroll-target="#sec-swarm">Docker Swarm</a></li>
+  <li><a href="#sec-ecs" id="toc-sec-ecs" class="nav-link" data-scroll-target="#sec-ecs">Amazon ECS — Elastic Container Service</a></li>
+  <li><a href="#sec-serverless" id="toc-sec-serverless" class="nav-link" data-scroll-target="#sec-serverless">Serverless Container Platforms</a></li>
+  <li><a href="#sec-cloudrun" id="toc-sec-cloudrun" class="nav-link" data-scroll-target="#sec-cloudrun">Google Cloud Run</a></li>
+  <li><a href="#comparison-of-lightweight-and-cloud-native-orchestrators" id="toc-comparison-of-lightweight-and-cloud-native-orchestrators" class="nav-link" data-scroll-target="#comparison-of-lightweight-and-cloud-native-orchestrators">Comparison of lightweight and cloud-native orchestrators</a></li>
+  </ul></li>
+  <li><a href="#sec-apache" id="toc-sec-apache" class="nav-link" data-scroll-target="#sec-apache">Apache Software Foundation Solutions</a>
+  <ul class="collapse">
+  <li><a href="#apache-http-server" id="toc-apache-http-server" class="nav-link" data-scroll-target="#apache-http-server">Apache HTTP Server</a></li>
+  <li><a href="#apache-tomcat" id="toc-apache-tomcat" class="nav-link" data-scroll-target="#apache-tomcat">Apache Tomcat</a></li>
+  <li><a href="#apache-kafka" id="toc-apache-kafka" class="nav-link" data-scroll-target="#apache-kafka">Apache Kafka</a></li>
+  <li><a href="#apache-spark" id="toc-apache-spark" class="nav-link" data-scroll-target="#apache-spark">Apache Spark</a></li>
+  <li><a href="#apache-airflow" id="toc-apache-airflow" class="nav-link" data-scroll-target="#apache-airflow">Apache Airflow</a></li>
+  <li><a href="#apache-solr" id="toc-apache-solr" class="nav-link" data-scroll-target="#apache-solr">Apache Solr</a></li>
+  <li><a href="#apache-arrow-and-parquet" id="toc-apache-arrow-and-parquet" class="nav-link" data-scroll-target="#apache-arrow-and-parquet">Apache Arrow and Parquet</a></li>
+  <li><a href="#apache-project-summary" id="toc-apache-project-summary" class="nav-link" data-scroll-target="#apache-project-summary">Apache project summary</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#scalability" id="toc-scalability" class="nav-link" data-scroll-target="#scalability">Scalability</a></li>
   <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
   <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a></li>
@@ -911,9 +951,751 @@ Note
 <p>Quick overview</p>
 <p>-&gt; Kubernetes section</p>
 </section>
-<section id="other-solutions" class="level1">
-<h1>Other solutions</h1>
-<p>Proxmox, HashiCorp Nomad, Docker Swarm (new), Apache solutions, Amazon ECS, Serverless Container Platforms, Humanitec, Porter,</p>
+<section id="sec-other-solutions" class="level1">
+<h1>Other Solutions</h1>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+</section>
+<section id="sec-packaging" class="level2">
+<h2 class="anchored" data-anchor-id="sec-packaging">Linux Packaging/Bare metal setup</h2>
+<p>In some cases, it can be better to install directly on the host system or the only option aside using a virtual machine, if the application is not containerizable.</p>
+<p>It could be for some specific hardware or security needs, because the application has a very complex setup, because the application hasn’t been maintained for a long time and does not offer an image (or the image is not of the last version…).</p>
+<p>Most of the time it is possible to set it up in a virtual machine with some extra effort, but some virtual machine hypervisor (that run the virtual machines) might have some restrictions on the hardware use (GPU for instance), or have some functionality locked as part as a commercial version.</p>
+<p>Containers could have a full access to the hardware if run on Linux, but the base image would probably be restricted on what it is allowed to do, or getting the access might be really difficult.</p>
+<p>In any case, the effort to virtualize or containerise the application will depend on the security risk and the estimate time of usage. If the application present a risk and will be run for several years, it makes sense to spend some effort isolating it. To do so, it is simply a matter of removing obstacles one by one: * try to make it run, * identify what is the issue, * look for solutions: - check the official documentation, - if possible ask a colleague that might have had the same issue, - LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question, - doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit, - ask online, - try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won’t be touched, and iterating on copies. * if this issue has been fixed and the software still have issue, reiterate.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One big caveat of preparing an application that has not been developped in-house is the risk that one or several functionalities will not be encountered while doing the setup and might not work, and so the application will break later. To avoid so, it is important to test the application with realistic dummy data and try to use everything that might be used. As such, it might be better to stick to well-documented applications (even if not maintained anymore) that allow an quick overview of all capabilities.</p>
+<p>A maintained but undocumented application might seem a better option, but only if it is sure that it will be maintained for the long enough and/or that it will be fully documented.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you provide a containization for a maintained application, it is a good idea to propose it as contribution of the project. You will have to see who would be in charge of updating it if needed.</p>
+</div>
+</div>
+</section>
+<section id="sec-proxmox" class="level2">
+<h2 class="anchored" data-anchor-id="sec-proxmox">Proxmox VE — Virtualisation Without VMware</h2>
+<p>Proxmox Virtual Environment (Proxmox VE) is an open-source server virtualisation platform. It allow to manage several application on several servers using a Web Interface. It support virtual machines and Linux containers (LXC), which support OCI images which are very close to Docker Image (most Docker images should be compatible).</p>
+<p>It has gained significant traction in scientific and institutional settings as a cost-free replacement for VMware vSphere following Broadcom’s acquisition of VMware in 2023 and the subsequent end of free ESXi licences.</p>
+<section id="what-proxmox-can-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-proxmox-can-do">What Proxmox can do</h3>
+<p><strong>Virtual Machines (KVM/QEMU).</strong> Proxmox uses the Kernel-based Virtual Machine (KVM) hypervisor combined with QEMU to run full operating system images. Each VM is completely isolated: it has its own virtual hardware, its own kernel, and its own network stack. You can run Windows, any Linux distribution, or BSD inside a VM.</p>
+<ul>
+<li>Full hardware emulation, including GPU passthrough for GPU-accelerated workloads.</li>
+<li>Live migration — move a running VM between cluster nodes with minimal downtime.</li>
+<li>Snapshots — capture the entire state of a VM at any point in time.</li>
+</ul>
+<p><strong>Linux Containers (LXC).</strong> Containers are faster to start and use less memory than full VMs.</p>
+<ul>
+<li>Lower overhead than full VMs — near-native performance.</li>
+<li>Suitable for running multiple isolated Linux environments on one host.</li>
+<li>Not suitable for non-Linux guests.</li>
+</ul>
+<p><strong>Integrated Backup System.</strong> Proxmox Backup Server (PBS) is a companion product that provides deduplicating, incremental backups of VMs and containers. Backups are stored efficiently - only changed data blocks are written after the first backup - and can be verified cryptographically.</p>
+<ul>
+<li>Scheduled automatic backups with configurable retention policies.</li>
+<li>Instant restore of a single file from a VM backup without restoring the whole image.</li>
+<li>Offsite replication: backups can be replicated to a remote PBS instance.</li>
+</ul>
+<p><strong>High Availability Clustering.</strong> Multiple Proxmox hosts can be joined into a cluster. The cluster shares a common configuration and can automatically restart VMs on another node if a host fails. This requires at least three nodes to achieve quorum: the next main node need to be elected using a vote.</p>
+<p><strong>Software-Defined Networking.</strong> Proxmox VE allows administrators to define VLANs, virtual network zones, and routing policies from the web interface.</p>
+</section>
+<section id="proxmox-vs.-kubernetes-when-to-use-which" class="level3">
+<h3 class="anchored" data-anchor-id="proxmox-vs.-kubernetes-when-to-use-which">Proxmox vs.&nbsp;Kubernetes — when to use which</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Key distinction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Proxmox <strong>virtualises hardware</strong> or run containers without the full orchestration that Kubernetes offers. Kubernetes <strong>orchestrates containers</strong>, running packaged applications across a pool of machines.</p>
+<p>They operate at different layers and can be combined: a Kubernetes cluster can run on VMs managed by Proxmox.</p>
+</div>
+</div>
+<table class="table-striped table-hover caption-top table">
+<caption>Proxmox vs.&nbsp;Kubernetes: different layers, complementary roles</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Proxmox VE</th>
+<th>Kubernetes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What it manages</td>
+<td>Virtual machines &amp; LXC containers</td>
+<td>Application containers (Docker/OCI)</td>
+</tr>
+<tr class="even">
+<td>Abstraction level</td>
+<td>Infrastructure / OS level</td>
+<td>Application / workload level</td>
+</tr>
+<tr class="odd">
+<td>Typical user</td>
+<td>Sysadmin managing servers</td>
+<td>DevOps/developer managing applications</td>
+</tr>
+<tr class="even">
+<td>Scaling</td>
+<td>Manual VM provisioning or scripted</td>
+<td>Automatic horizontal pod scaling</td>
+</tr>
+<tr class="odd">
+<td>Self-healing</td>
+<td>HA restarts VMs on node failure</td>
+<td>Reschedules failed pods automatically</td>
+</tr>
+<tr class="even">
+<td>Complexity</td>
+<td>Moderate — manageable by a small team</td>
+<td>High — significant learning curve</td>
+</tr>
+<tr class="odd">
+<td>Persistent storage</td>
+<td>VM disk images, Ceph, NFS</td>
+<td>Persistent Volume Claims, CSI drivers</td>
+</tr>
+<tr class="even">
+<td>Networking</td>
+<td>Bridges, VLANs, SDN</td>
+<td>CNI plugins, Ingress controllers, Services</td>
+</tr>
+</tbody>
+</table>
+<p>A practical path for a research group: start with Proxmox to host virtual machines for different services (database, web server, backup). If the team grows and needs to manage many application deployments with automated scaling, consider running a Kubernetes cluster on top of Proxmox VMs. If the need might be higher, OpenStack offers a group of Cloud-oriented solutions, see below.</p>
+</section>
+<section id="resources" class="level3">
+<h3 class="anchored" data-anchor-id="resources">Resources</h3>
+<ul>
+<li><a href="https://pve.proxmox.com/pve-docs/">Proxmox VE documentation</a> — full installation and administration guide</li>
+<li><a href="https://pbs.proxmox.com/docs/">Proxmox Backup Server documentation</a></li>
+<li><a href="https://forum.proxmox.com">Proxmox community forum</a> — active community with scientific HPC use cases</li>
+<li><a href="https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE">Migrating to Proxmox from VMware</a> — official migration wiki</li>
+</ul>
+</section>
+</section>
+<section id="sec-openstack" class="level2">
+<h2 class="anchored" data-anchor-id="sec-openstack">OpenStack — Open-Source Cloud Infrastructure</h2>
+<p>OpenStack is a large-scale, open-source cloud computing platform that allows organisations to build and operate their own Infrastructure-as-a-Service (IaaS) cloud — comparable in scope to Amazon Web Services or Microsoft Azure, but running entirely on hardware you control. It is widely used by national research infrastructures, universities, and supercomputing centres worldwide.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Intended scale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>OpenStack is designed for managing tens to thousands of physical servers. For a single-server or small-team deployment, Proxmox is usually more appropriate. OpenStack becomes compelling when a research institute or facility needs to offer self-service cloud resources to many research groups simultaneously.</p>
+</div>
+</div>
+<section id="architecture-overview" class="level3">
+<h3 class="anchored" data-anchor-id="architecture-overview">Architecture overview</h3>
+<p>OpenStack is not a monolithic application — it is a collection of loosely coupled services that communicate via REST APIs. Each service manages one aspect of the infrastructure.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Core OpenStack services</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>Code name</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compute</td>
+<td>Nova</td>
+<td>Manages the lifecycle of virtual machine instances</td>
+</tr>
+<tr class="even">
+<td>Networking</td>
+<td>Neutron</td>
+<td>Software-defined networking: virtual networks, routers, floating IPs</td>
+</tr>
+<tr class="odd">
+<td>Block storage</td>
+<td>Cinder</td>
+<td>Persistent block volumes attached to VMs</td>
+</tr>
+<tr class="even">
+<td>Object storage</td>
+<td>Swift</td>
+<td>Scalable object store (S3-compatible)</td>
+</tr>
+<tr class="odd">
+<td>Image service</td>
+<td>Glance</td>
+<td>Stores and retrieves VM disk images</td>
+</tr>
+<tr class="even">
+<td>Identity</td>
+<td>Keystone</td>
+<td>Authentication and authorisation for all OpenStack services</td>
+</tr>
+<tr class="odd">
+<td>Dashboard</td>
+<td>Horizon</td>
+<td>Web-based graphical interface for all services</td>
+</tr>
+<tr class="even">
+<td>Orchestration</td>
+<td>Heat</td>
+<td>Template-based infrastructure orchestration</td>
+</tr>
+<tr class="odd">
+<td>Telemetry</td>
+<td>Ceilometer / Gnocchi</td>
+<td>Usage metering and monitoring</td>
+</tr>
+<tr class="even">
+<td>Bare metal</td>
+<td>Ironic</td>
+<td>Provision physical servers alongside VMs</td>
+</tr>
+<tr class="odd">
+<td>Container orchestration</td>
+<td>Magnum</td>
+<td>Provides Kubernetes clusters as a managed service</td>
+</tr>
+<tr class="even">
+<td>Distributed storage</td>
+<td>Ceph (integrated)</td>
+<td>Block, object, and file storage for Nova/Cinder/Glance</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ceph-distributed-storage" class="level3">
+<h3 class="anchored" data-anchor-id="ceph-distributed-storage">Ceph — distributed storage</h3>
+<p>Ceph is a software-defined distributed storage system tightly integrated with OpenStack. It is the recommended storage backend for production OpenStack deployments because it eliminates single points of failure and scales horizontally by adding storage nodes.</p>
+<p><strong>How Ceph works.</strong> Ceph distributes data across a cluster of storage nodes (called OSDs — Object Storage Daemons). Each piece of data is replicated (typically three copies) or erasure-coded across different nodes, so the failure of any single disk or server does not cause data loss. The CRUSH algorithm ensures data is balanced and replicated without a central metadata bottleneck.</p>
+<p>The three main Ceph interfaces are:</p>
+<ul>
+<li><strong>RADOS Block Device (RBD)</strong> — presents distributed storage as a block device. Used by Cinder for VM volumes and by Nova for VM boot disks.</li>
+<li><strong>RADOS Gateway (RGW)</strong> — provides an S3-compatible object storage API, usable as a drop-in replacement for Amazon S3.</li>
+<li><strong>CephFS</strong> — a POSIX-compatible shared filesystem for applications that need traditional file-path semantics.</li>
+</ul>
+<p><strong>Why Ceph with OpenStack.</strong> Live migration of VMs is much simpler when all compute nodes access the same Ceph storage pool. Storage can also scale independently of compute — you add storage nodes without affecting running VMs.</p>
+<ul>
+<li><a href="https://docs.ceph.com/en/latest/">Ceph documentation</a></li>
+<li><a href="https://docs.openstack.org/cinder/latest/configuration/block-storage/drivers/ceph-rbd-volume-driver.html">Cinder with Ceph RBD — configuration guide</a></li>
+</ul>
+</section>
+<section id="magnum-kubernetes-as-a-service" class="level3">
+<h3 class="anchored" data-anchor-id="magnum-kubernetes-as-a-service">Magnum — Kubernetes as a service</h3>
+<p>Magnum is the OpenStack service that provisions and manages container orchestration clusters — most commonly Kubernetes — on demand. Rather than manually installing and configuring Kubernetes, Magnum automates the entire process using Heat templates.</p>
+<p>Researchers request a cluster via the API or Horizon dashboard and receive a fully configured Kubernetes environment running on OpenStack VMs. Administrators define cluster templates specifying the node size, Kubernetes version, and networking plugin. Once created, the cluster is managed with standard Kubernetes tools (<code>kubectl</code>, Helm, etc.) and the OpenStack layer becomes invisible to the end user.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Magnum and Kubernetes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Magnum does not replace Kubernetes — it automates the deployment of Kubernetes on OpenStack infrastructure. From the researcher’s perspective, they receive a standard Kubernetes cluster.</p>
+</div>
+</div>
+<ul>
+<li><a href="https://docs.openstack.org/magnum/latest/">Magnum documentation</a></li>
+</ul>
+</section>
+<section id="other-notable-openstack-services" class="level3">
+<h3 class="anchored" data-anchor-id="other-notable-openstack-services">Other notable OpenStack services</h3>
+<p><strong>Neutron (Networking).</strong> Neutron provides virtual networks, subnets, routers, security groups, and floating IPs. It supports multiple backend drivers and can integrate with physical network hardware via ML2 plugins. For research networks, Neutron can enforce quality-of-service rules and provide VLAN segmentation between research groups.</p>
+<p><strong>Heat (Orchestration).</strong> Heat allows you to describe an entire cloud environment — VMs, networks, storage, security groups — in a YAML template and deploy it reproducibly with a single API call. This is the OpenStack equivalent of AWS CloudFormation and enables Infrastructure as Code workflows.</p>
+<p><strong>Ironic (Bare Metal Provisioning).</strong> Ironic provisions physical servers in the same way Nova provisions VMs. This is useful for high-performance computing workloads where VM overhead is unacceptable — for example, MPI jobs requiring direct access to InfiniBand interconnects or specific GPU hardware.</p>
+<p><strong>Horizon (Web Dashboard).</strong> Horizon is the web interface for OpenStack. It provides a graphical view of all resources: instances, volumes, networks, and images. For researchers who prefer not to use the command line or REST APIs, Horizon is the primary day-to-day interface.</p>
+</section>
+<section id="resources-1" class="level3">
+<h3 class="anchored" data-anchor-id="resources-1">Resources</h3>
+<ul>
+<li><a href="https://docs.openstack.org">OpenStack documentation</a> — official hub for all OpenStack projects</li>
+<li><a href="https://docs.openstack.org/devstack/latest/">DevStack</a> — sets up a full OpenStack environment on a single machine for learning and testing</li>
+<li><a href="https://docs.openstack.org/kolla-ansible/latest/">Kolla-Ansible</a> — deploys OpenStack services as containers for easier lifecycle management</li>
+<li><a href="https://www.egi.eu/service/cloud-compute/">EGI Federated Cloud</a> — federated OpenStack infrastructure available to European researchers</li>
+</ul>
+</section>
+</section>
+<section id="sec-orchestrators" class="level2">
+<h2 class="anchored" data-anchor-id="sec-orchestrators">Lightweight and Cloud-Native Container Orchestrators</h2>
+<p>Kubernetes is not the only way to schedule and manage containers at scale. Several lighter-weight or cloud-managed alternatives exist, each occupying a different point on the spectrum between simplicity and power.</p>
+<section id="sec-nomad" class="level3">
+<h3 class="anchored" data-anchor-id="sec-nomad">HashiCorp Nomad</h3>
+<p><a href="https://www.nomadproject.io">Nomad</a> is a general-purpose workload orchestrator developed by HashiCorp. Unlike Kubernetes, which is specifically designed for containers, Nomad can schedule Docker containers, standalone executables (binaries), Java JAR files, virtual machines (via QEMU), and batch jobs — all using the same scheduler and configuration language.</p>
+<p><strong>Architecture.</strong> Nomad uses a client/server model. A small number of server nodes (three or five, for quorum) handle scheduling decisions. Client nodes run the actual workloads. There is no dedicated etcd cluster, no separate controller manager, no separate scheduler process — all scheduling logic lives in the Nomad server binary.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li><strong>Single binary deployment.</strong> The entire Nomad agent (server or client mode) is a single Go binary with no external runtime dependencies. This makes installation trivial compared to a full Kubernetes cluster.</li>
+<li><strong>Multi-workload.</strong> Nomad schedules containers, batch jobs, system daemons, and raw executables in a uniform way. This is useful in scientific environments where some workloads are containerised and others are legacy binaries.</li>
+<li><strong>Native integration with Vault and Consul.</strong> HashiCorp’s secret management tool (Vault) and service discovery tool (Consul) integrate directly with Nomad, providing a coherent platform for secrets injection and service mesh networking.</li>
+<li><strong>Lighter operational footprint.</strong> A minimal Nomad cluster requires significantly fewer nodes and less memory than a comparable Kubernetes cluster with all its components.</li>
+</ul>
+<p><strong>Limitations compared to Kubernetes:</strong></p>
+<ul>
+<li>Smaller ecosystem — fewer pre-packaged applications (Helm charts do not apply; Nomad uses its own job specification format HCL).</li>
+<li>Less sophisticated networking — no native Ingress resource; traffic routing requires Consul or an external load balancer.</li>
+<li>Less mature support for stateful workloads (though Nomad CSI driver support is improving).</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>When to consider Nomad
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nomad is a good fit when: you need to schedule a heterogeneous mix of containers and non-container workloads; your team is small and wants a simpler operational model than Kubernetes; or you are already using other HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain.</p>
+</div>
+</div>
+<ul>
+<li><a href="https://developer.hashicorp.com/nomad/docs">Nomad documentation</a></li>
+<li><a href="https://developer.hashicorp.com/nomad/docs/nomad-vs-kubernetes">Nomad vs.&nbsp;Kubernetes comparison</a> — official comparison from HashiCorp</li>
+</ul>
+</section>
+<section id="sec-swarm" class="level3">
+<h3 class="anchored" data-anchor-id="sec-swarm">Docker Swarm</h3>
+<p>Docker Swarm is the native clustering and orchestration mode built into the Docker Engine itself. A group of Docker hosts can be joined into a Swarm cluster, turning them into a pool of nodes that can run and scale containerised services collectively.</p>
+<p><strong>Architecture.</strong> Swarm uses a manager/worker node model. Manager nodes handle scheduling and cluster state (stored via the Raft consensus algorithm). Worker nodes run containers. Unlike Kubernetes, there are no separate etcd, API server, or controller manager processes — all Swarm logic is embedded in the Docker daemon.</p>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li><strong>Zero additional installation.</strong> Any machine running Docker Engine can join a Swarm with a single <code>docker swarm init</code> or <code>docker swarm join</code> command. No separate binaries or configuration files are needed.</li>
+<li><strong>Docker Compose compatibility.</strong> Docker Compose files (with minor additions for <code>deploy:</code> stanzas) can be deployed to Swarm as stacks directly, making it easy to move from a local development setup to a distributed deployment.</li>
+<li><strong>Simplicity.</strong> Swarm intentionally covers the 80% use case — service scaling, rolling updates, health-based restarts, overlay networking, and secrets management — without the conceptual complexity of Kubernetes.</li>
+</ul>
+<p><strong>Current status.</strong> Docker Swarm is considered feature-stable rather than actively developed. Mirantis (which acquired Docker Enterprise in 2019) has committed to maintaining Swarm. For new projects, Docker’s own documentation now recommends Kubernetes for complex production workloads. Swarm remains a sensible, low-overhead choice for small research groups that are already familiar with Docker Compose and do not need the full Kubernetes feature set.</p>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li><p>Limited ecosystem compared to Kubernetes — no Helm, no Operators, no Custom Resource Definitions.</p></li>
+<li><p>No built-in support for auto-scaling based on metrics.</p></li>
+<li><p>Less active development; fewer new features.</p></li>
+<li><p><a href="https://docs.docker.com/engine/swarm/">Docker Swarm documentation</a></p></li>
+<li><p><a href="https://docs.docker.com/engine/swarm/stack-deploy/">Deploying stacks to Swarm</a></p></li>
+</ul>
+</section>
+<section id="sec-ecs" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ecs">Amazon ECS — Elastic Container Service</h3>
+<p>Amazon ECS is AWS’s proprietary container orchestration service. You define tasks (one or more containers that run together, similar to a Kubernetes Pod) and services (long-running groups of tasks with load balancing and auto-scaling). ECS handles scheduling, health checks, and replacement of failed tasks.</p>
+<p><strong>Two launch modes:</strong></p>
+<ul>
+<li><strong>ECS on EC2.</strong> You provision and manage a pool of EC2 virtual machines that act as ECS container hosts. You are responsible for the underlying instances (patching, scaling the instance fleet).</li>
+<li><strong>ECS on Fargate.</strong> AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of task runtime — no instances to manage.</li>
+</ul>
+<p><strong>Key characteristics:</strong></p>
+<ul>
+<li>Deep integration with the AWS ecosystem: IAM for per-task permissions, CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for container images, Secrets Manager for credentials.</li>
+<li>Simpler mental model than Kubernetes for straightforward web application or data pipeline deployments on AWS.</li>
+<li>No control plane to operate — AWS manages the scheduler.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Vendor lock-in: ECS task definitions, IAM roles, and networking are all AWS-specific. Migrating to another cloud or on-premises later requires significant rework.</li>
+<li>Less flexible than Kubernetes for complex multi-service applications with sophisticated networking or storage requirements.</li>
+<li>No equivalent to Kubernetes Operators or CRDs for extending the platform.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>ECS vs.&nbsp;EKS on AWS
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your team is already comfortable with Kubernetes, AWS offers EKS (Elastic Kubernetes Service) which runs a managed Kubernetes control plane. ECS is simpler to start with; EKS gives portability and the full Kubernetes ecosystem. Both support Fargate for serverless compute.</p>
+</div>
+</div>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ecs/">Amazon ECS documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-fargate.html">ECS on Fargate getting started</a></li>
+</ul>
+</section>
+<section id="sec-serverless" class="level3">
+<h3 class="anchored" data-anchor-id="sec-serverless">Serverless Container Platforms</h3>
+<p>“Serverless containers” describe managed platforms where you provide a container image and the platform handles all infrastructure — no VMs, no clusters, no nodes to manage. You pay only for actual compute time. The trade-off is reduced control and potential cold-start latency.</p>
+<p>The term <em>serverless</em> can be confusing: servers still exist, but they are fully abstracted away from the user. From the researcher’s perspective, you push a container image and the platform runs it on demand.</p>
+<p><strong>Common platforms:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>Provider</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AWS Fargate</td>
+<td>Amazon</td>
+<td>Works with ECS or EKS; per-second billing</td>
+</tr>
+<tr class="even">
+<td>Google Cloud Run</td>
+<td>Google</td>
+<td>HTTP-triggered; scales to zero; see below</td>
+</tr>
+<tr class="odd">
+<td>Azure Container Instances</td>
+<td>Microsoft</td>
+<td>Simple per-container billing; no orchestration layer</td>
+</tr>
+<tr class="even">
+<td>Azure Container Apps</td>
+<td>Microsoft</td>
+<td>Higher-level; built on Kubernetes + KEDA for event-driven scaling</td>
+</tr>
+<tr class="odd">
+<td>Fly.io</td>
+<td>Independent</td>
+<td>Developer-friendly; global edge deployment</td>
+</tr>
+<tr class="even">
+<td>Render</td>
+<td>Independent</td>
+<td>Simple deployment from Git; Docker or native buildpacks</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scientific use cases:</strong></p>
+<ul>
+<li><strong>On-demand analysis endpoints:</strong> Deploy a container that runs a computationally expensive analysis when an HTTP request arrives and shuts down immediately afterwards. Costs nothing when idle.</li>
+<li><strong>Batch processing pipelines:</strong> Trigger container runs from object storage events (a new file uploaded triggers a processing job).</li>
+<li><strong>Reproducible environments:</strong> Share a container image with reviewers so they can reproduce an analysis without installing software.</li>
+</ul>
+<p><strong>Limitations to consider:</strong></p>
+<ul>
+<li>Maximum execution time limits (e.g., Cloud Run has a 60-minute request timeout; some platforms impose shorter limits).</li>
+<li>Stateless by design — persistent storage must be external (object storage, managed database).</li>
+<li>Cold starts: the first request after a period of inactivity may take several seconds while the container image is pulled and started.</li>
+<li>Cost unpredictability for high-traffic or long-running workloads.</li>
+</ul>
+</section>
+<section id="sec-cloudrun" class="level3">
+<h3 class="anchored" data-anchor-id="sec-cloudrun">Google Cloud Run</h3>
+<p>Google Cloud Run is Google’s fully managed serverless container platform. It is one of the most mature and widely used serverless container services, and is worth examining in detail as a representative example of the category.</p>
+<p><strong>How it works.</strong> You package your application as a Docker/OCI container image, push it to a container registry (Google Artifact Registry, or any public registry), and deploy it with a single command or through the Cloud Console. Cloud Run starts one or more container instances to handle incoming HTTP/gRPC requests and scales the number of instances automatically — including scaling to zero when there is no traffic.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and push a container, then deploy to Cloud Run</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> builds submit <span class="at">--tag</span> gcr.io/MY_PROJECT/my-app</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> run deploy my-app <span class="dt">\</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--image</span> gcr.io/MY_PROJECT/my-app <span class="dt">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> managed <span class="dt">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--region</span> europe-west1 <span class="dt">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--allow-unauthenticated</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Key features:</strong></p>
+<ul>
+<li><strong>Scale to zero.</strong> When no requests are incoming, Cloud Run runs no instances and incurs no compute cost. This makes it economical for sporadic or unpredictable workloads typical in research.</li>
+<li><strong>Concurrency.</strong> A single Cloud Run instance can handle multiple simultaneous requests (configurable up to 1000), which reduces cold starts compared to function-as-a-service platforms.</li>
+<li><strong>Any language, any framework.</strong> Because you bring your own container image, there are no language restrictions. Python, R, Julia, Java, or any compiled binary can be deployed.</li>
+<li><strong>Cloud Run Jobs.</strong> In addition to HTTP services, Cloud Run Jobs run containerised batch tasks to completion — useful for data processing pipelines, periodic reports, or model training jobs.</li>
+<li><strong>VPC connectivity.</strong> Cloud Run services can connect to private VPC networks, enabling access to Cloud SQL, Memorystore, or on-premises systems via VPN or Interconnect.</li>
+</ul>
+<p><strong>Integration with Google Cloud:</strong></p>
+<ul>
+<li><strong>BigQuery, Cloud Storage, Pub/Sub</strong> — data can flow in and out through standard Google Cloud services.</li>
+<li><strong>Cloud Scheduler</strong> — trigger Cloud Run Jobs on a cron schedule.</li>
+<li><strong>Eventarc</strong> — trigger services from Cloud Storage events, Pub/Sub messages, or Audit Logs.</li>
+<li><strong>Secret Manager</strong> — inject secrets as environment variables at runtime without embedding them in container images.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Maximum request timeout of 60 minutes (sufficient for many analysis tasks; longer jobs should use Cloud Run Jobs or Cloud Batch).</li>
+<li>In-memory storage only during execution; persistent state must use Cloud Storage or a database.</li>
+<li>Compute is limited to CPU and memory per instance; GPU support is available in preview but not generally available in all regions.</li>
+<li>Full vendor lock-in to Google Cloud APIs and billing.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cloud Run vs.&nbsp;Kubernetes (GKE)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cloud Run is ideal when you want to run containers without managing infrastructure. Google Kubernetes Engine (GKE) is better when you need full Kubernetes capabilities: stateful workloads, custom networking, complex multi-service applications, or specific hardware (GPUs, TPUs) that require persistent node pools. Cloud Run and GKE can coexist in the same project and share the same container registry.</p>
+</div>
+</div>
+<ul>
+<li><a href="https://cloud.google.com/run/docs">Google Cloud Run documentation</a></li>
+<li><a href="https://cloud.google.com/run/docs/create-jobs">Cloud Run Jobs documentation</a></li>
+<li><a href="https://cloud.google.com/run/pricing">Cloud Run pricing</a> — first 2 million requests per month are free</li>
+</ul>
+</section>
+<section id="comparison-of-lightweight-and-cloud-native-orchestrators" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-lightweight-and-cloud-native-orchestrators">Comparison of lightweight and cloud-native orchestrators</h3>
+<table class="table-striped table-hover caption-top table">
+<caption>Lightweight and cloud-native orchestrator comparison</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>Managed by</th>
+<th style="text-align: center;">Infrastructure</th>
+<th style="text-align: center;">Vendor lock-in</th>
+<th style="text-align: center;">Complexity</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HashiCorp Nomad</td>
+<td>Self-hosted</td>
+<td style="text-align: center;">Your servers</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">Low–medium</td>
+<td>Heterogeneous workloads, HashiCorp stack</td>
+</tr>
+<tr class="even">
+<td>Docker Swarm</td>
+<td>Self-hosted</td>
+<td style="text-align: center;">Your servers</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">Low</td>
+<td>Small teams already using Docker Compose</td>
+</tr>
+<tr class="odd">
+<td>Amazon ECS</td>
+<td>AWS</td>
+<td style="text-align: center;">AWS (EC2 or Fargate)</td>
+<td style="text-align: center;">High (AWS)</td>
+<td style="text-align: center;">Low–medium</td>
+<td>AWS-native applications</td>
+</tr>
+<tr class="even">
+<td>Google Cloud Run</td>
+<td>Google</td>
+<td style="text-align: center;">Fully managed</td>
+<td style="text-align: center;">High (GCP)</td>
+<td style="text-align: center;">Very low</td>
+<td>HTTP services, sporadic workloads</td>
+</tr>
+<tr class="odd">
+<td>Azure Container Apps</td>
+<td>Microsoft</td>
+<td style="text-align: center;">Fully managed</td>
+<td style="text-align: center;">High (Azure)</td>
+<td style="text-align: center;">Low</td>
+<td>Event-driven microservices on Azure</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sec-apache" class="level2">
+<h2 class="anchored" data-anchor-id="sec-apache">Apache Software Foundation Solutions</h2>
+<p>The Apache Software Foundation (ASF) hosts hundreds of open-source projects. For data management and scientific computing infrastructure, several Apache projects are particularly relevant. They are mature, widely deployed, and have large communities — making them safe long-term choices for research data platforms.</p>
+<section id="apache-http-server" class="level3">
+<h3 class="anchored" data-anchor-id="apache-http-server">Apache HTTP Server</h3>
+<p>The Apache HTTP Server (httpd) is one of the most widely deployed web servers in the world. It serves static files and acts as a reverse proxy in front of application servers.</p>
+<ul>
+<li><strong>Virtual hosting.</strong> Multiple websites or applications can be served from one server using different domain names or paths.</li>
+<li><strong>Modules.</strong> Functionality is extended through modules: <code>mod_proxy</code> for reverse proxying, <code>mod_ssl</code> for HTTPS, <code>mod_rewrite</code> for URL manipulation, <code>mod_auth</code> for authentication.</li>
+<li><strong><code>.htaccess</code> files.</strong> Per-directory configuration allows fine-grained access control without restarting the server, which is useful in multi-user research environments.</li>
+</ul>
+<p>For high-concurrency workloads (many simultaneous connections), Nginx is often preferred due to its event-driven architecture. Apache’s process/thread model is simpler to configure and better supported by legacy applications. Both can coexist: Nginx at the front end proxies requests back to Apache.</p>
+<ul>
+<li><a href="https://httpd.apache.org/docs/">Apache HTTP Server documentation</a></li>
+</ul>
+</section>
+<section id="apache-tomcat" class="level3">
+<h3 class="anchored" data-anchor-id="apache-tomcat">Apache Tomcat</h3>
+<p>Apache Tomcat is a Java Servlet container and web server. It runs Java web applications packaged as WAR (Web Application Archive) files. Many scientific data management platforms — including OMERO, certain LIMS systems, and institutional repository software — are Java-based and require Tomcat.</p>
+<ul>
+<li><p>Implements the Java Servlet and JavaServer Pages (JSP) specifications.</p></li>
+<li><p>Can be placed behind Apache HTTP Server (via <code>mod_proxy_ajp</code>) or Nginx for SSL termination and load balancing.</p></li>
+<li><p>The Manager web application allows deploying and undeploying WAR files via a browser interface.</p></li>
+<li><p><a href="https://tomcat.apache.org/tomcat-10.1-doc/index.html">Apache Tomcat documentation</a></p></li>
+</ul>
+</section>
+<section id="apache-kafka" class="level3">
+<h3 class="anchored" data-anchor-id="apache-kafka">Apache Kafka</h3>
+<p>Apache Kafka is a distributed event streaming platform. It acts as a high-throughput, fault-tolerant message broker: producers publish data events (messages) to named topics, and consumers read them independently and at their own pace. Kafka retains messages for a configurable period, so consumers can replay historical data.</p>
+<p>Scientific use cases:</p>
+<ul>
+<li><p>Ingesting high-frequency sensor or instrument data in real time.</p></li>
+<li><p>Decoupling data producers (instruments, simulations) from data consumers (databases, analysis pipelines).</p></li>
+<li><p>Building audit logs where every data change is recorded as an immutable event.</p></li>
+<li><p>Streaming data simultaneously to multiple downstream systems.</p></li>
+<li><p><a href="https://kafka.apache.org/documentation/">Apache Kafka documentation</a></p></li>
+<li><p><a href="https://developer.confluent.io/tutorials/">Confluent Kafka tutorials</a></p></li>
+</ul>
+</section>
+<section id="apache-spark" class="level3">
+<h3 class="anchored" data-anchor-id="apache-spark">Apache Spark</h3>
+<p>Apache Spark is a unified analytics engine for large-scale data processing. It extends the MapReduce paradigm with in-memory computation, making iterative algorithms (common in machine learning and simulation analysis) far faster than disk-based approaches.</p>
+<p>Core capabilities:</p>
+<ul>
+<li><p><strong>Spark SQL</strong> — query structured data using SQL or a DataFrame API (available in Python, R, Scala, and Java).</p></li>
+<li><p><strong>Structured Streaming</strong> — process data streams from Kafka or other sources in near-real time.</p></li>
+<li><p><strong>MLlib</strong> — distributed machine learning for classification, regression, clustering, and collaborative filtering.</p></li>
+<li><p><strong>GraphX</strong> — distributed graph computation for network analysis.</p></li>
+<li><p><a href="https://spark.apache.org/docs/latest/">Apache Spark documentation</a></p></li>
+</ul>
+</section>
+<section id="apache-airflow" class="level3">
+<h3 class="anchored" data-anchor-id="apache-airflow">Apache Airflow</h3>
+<p>Apache Airflow is a workflow orchestration platform for scheduling and monitoring data pipelines. Workflows are defined as Python code in the form of Directed Acyclic Graphs (DAGs), where each node represents a task (e.g., download data, run analysis, upload results) and edges define dependencies between tasks.</p>
+<p>Scientific use cases:</p>
+<ul>
+<li>Automating recurring data processing pipelines (nightly ingestion, weekly reports).</li>
+<li>Orchestrating multi-step bioinformatics or image analysis workflows.</li>
+<li>Managing dependencies between heterogeneous tasks: bash scripts, Python functions, Kubernetes pods, SQL queries.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Airflow vs.&nbsp;Nextflow / Snakemake
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bioinformaticians often use Nextflow or Snakemake because they natively understand file-based workflows and integrate with HPC schedulers (SLURM, PBS). Airflow is more general-purpose and integrates better with cloud services and databases. Both approaches can coexist in one organisation.</p>
+</div>
+</div>
+<ul>
+<li><a href="https://airflow.apache.org/docs/">Apache Airflow documentation</a></li>
+</ul>
+</section>
+<section id="apache-solr" class="level3">
+<h3 class="anchored" data-anchor-id="apache-solr">Apache Solr</h3>
+<p>Apache Solr is an enterprise search platform built on Apache Lucene. It provides full-text search, faceted search, filtering, and ranked retrieval over structured and unstructured data. It is useful for building search interfaces over scientific datasets, publications, or metadata catalogues.</p>
+<ul>
+<li><p>Supports JSON, XML, and CSV indexing.</p></li>
+<li><p>Runs standalone or in SolrCloud mode for distributed, fault-tolerant search.</p></li>
+<li><p>Used by DSpace (institutional repositories) and CKAN (open data portals).</p></li>
+<li><p><a href="https://solr.apache.org/guide/solr/latest/">Apache Solr documentation</a></p></li>
+</ul>
+</section>
+<section id="apache-arrow-and-parquet" class="level3">
+<h3 class="anchored" data-anchor-id="apache-arrow-and-parquet">Apache Arrow and Parquet</h3>
+<p><strong>Apache Arrow</strong> defines a language-agnostic in-memory columnar data format. Libraries for Python, R, Java, C++, and others can share data through Arrow buffers without copying or serialisation — enabling zero-copy interoperability between Pandas, Spark, DuckDB, and other tools.</p>
+<ul>
+<li><a href="https://arrow.apache.org/docs/">Apache Arrow documentation</a></li>
+</ul>
+<p><strong>Apache Parquet</strong> is a columnar storage file format optimised for analytics. Storing data column-by-column (rather than row-by-row as in CSV) allows efficient compression and selective column reads — you read only the columns needed for a query without scanning the whole file.</p>
+<ul>
+<li><p>Widely supported: Spark, Pandas, DuckDB, BigQuery, Redshift, and Athena all read Parquet natively.</p></li>
+<li><p>Strongly typed schemas with nested data support.</p></li>
+<li><p>Snappy and Zstandard compression significantly reduce storage footprint compared to CSV.</p></li>
+<li><p><a href="https://parquet.apache.org/docs/">Apache Parquet documentation</a></p></li>
+</ul>
+</section>
+<section id="apache-project-summary" class="level3">
+<h3 class="anchored" data-anchor-id="apache-project-summary">Apache project summary</h3>
+<table class="table-striped table-hover caption-top table">
+<caption>Apache Software Foundation projects relevant to research data management</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Project</th>
+<th>Domain</th>
+<th>Key use case in research</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HTTP Server</td>
+<td>Web serving</td>
+<td>Serving applications, reverse proxy, access control</td>
+</tr>
+<tr class="even">
+<td>Tomcat</td>
+<td>Java applications</td>
+<td>Hosting Java-based data management platforms</td>
+</tr>
+<tr class="odd">
+<td>Kafka</td>
+<td>Event streaming</td>
+<td>Real-time data ingestion from instruments</td>
+</tr>
+<tr class="even">
+<td>Spark</td>
+<td>Big data analytics</td>
+<td>Large-scale data processing and machine learning</td>
+</tr>
+<tr class="odd">
+<td>Airflow</td>
+<td>Workflow orchestration</td>
+<td>Scheduling and monitoring data pipelines</td>
+</tr>
+<tr class="even">
+<td>Solr</td>
+<td>Search</td>
+<td>Full-text search over datasets and metadata catalogues</td>
+</tr>
+<tr class="odd">
+<td>Arrow</td>
+<td>Data interchange</td>
+<td>Zero-copy data sharing between analysis tools</td>
+</tr>
+<tr class="even">
+<td>Parquet</td>
+<td>File format</td>
+<td>Efficient columnar storage for analytical datasets</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
 </section>
 <section id="scalability" class="level1">
 <h1>Scalability</h1>
@@ -940,6 +1722,7 @@ Note
 </section>
 <section id="automatize-the-setup" class="level1">
 <h1>Automatize the setup</h1>
+<p>When you need to repeat a setup, or when you need to set-up a complex application, it is generally better to automate the setup, rather than doing it by hand. This can be done with tools such as Puppet, Ansible, and Terraform, which allow you to describe the desired state of your system in a declarative way, and then apply that state to your machines.</p>
 <section id="puppet-ansible-terraform" class="level2">
 <h2 class="anchored" data-anchor-id="puppet-ansible-terraform">Puppet, Ansible &amp; Terraform</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -959,14 +1742,14 @@ Note
 <p><strong>Puppet</strong> was one of the first widely adopted tools for managing server configuration at scale, and many large organizations still use it. You describe the desired state of your systems in Puppet’s own language, and a Puppet agent running on each machine enforces that state continuously. It works well for large, stable fleets but it requires installing and maintaining that agent on every machine you manage, setting up a central Puppet server, and learning a configuration language that has a steep initial curve.</p>
 <p><strong>Ansible</strong> emerged as a simpler alternative for configuration management. It does much of what Puppet does: installing packages, writing config files, managing services. But it works over plain SSH with no agent to install. The desired state of a system is written in <em>playbooks</em>, written in YAML, which most developers already know. The tradeoff is that Ansible is not continuously enforcing state the way Puppet does: you run it when you want changes applied, rather than having it run automatically in the background. For smaller setups or teams without dedicated ops staff, this is often the right balance.</p>
 <p>Example playbook</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> webservers</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">become</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install nginx</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">apt</span><span class="kw">:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">state</span><span class="kw">:</span><span class="at"> present</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> webservers</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">become</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install nginx</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">apt</span><span class="kw">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">state</span><span class="kw">:</span><span class="at"> present</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Running this playbook installs nginx on all hosts in the webservers group.</p>
 <p>Ansible can be used to set-up a bare-metal installation, but also for complementing a Docker Compose setup, typically for configuring the application.</p>
 <p><strong>Terraform</strong> solves a different problem: not configuring machines, but <em>creating</em> the infrastructure in the first place. It talks to cloud providers (or your local virtualization layer) and sets up virtual machines, networks, storage, DNS entries, and so on. You describe what you want, and Terraform tracks what already exists so it only makes the changes needed. Puppet and Ansible assume the machines are already there, Terraform prepares the virtual machines.</p>
@@ -1003,30 +1786,30 @@ Note
 <section id="a-minimal-github-actions-example" class="level3">
 <h3 class="anchored" data-anchor-id="a-minimal-github-actions-example">A minimal GitHub Actions example</h3>
 <p>Here’s a simple workflow that automatically deploys your Quarto site to GitHub Pages whenever you push to <code>main</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/deploy.yml</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy site</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to GitHub Pages</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/deploy.yml</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy site</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to GitHub Pages</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This file lives in your repo at <code>.github/workflows/deploy.yml</code>. GitHub picks it up automatically, no extra configuration needed. Every push to <code>main</code> triggers a fresh build and deploy.</p>
 </section>
 </section>
