@@ -319,7 +319,6 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#from-docker-compose-to-kubernetes" id="toc-from-docker-compose-to-kubernetes" class="nav-link" data-scroll-target="#from-docker-compose-to-kubernetes">From Docker compose to Kubernetes</a></li>
   <li><a href="#sec-other-solutions" id="toc-sec-other-solutions" class="nav-link" data-scroll-target="#sec-other-solutions">Other Solutions</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#sec-packaging" id="toc-sec-packaging" class="nav-link" data-scroll-target="#sec-packaging">Linux Packaging/Bare metal setup</a></li>
   <li><a href="#sec-proxmox" id="toc-sec-proxmox" class="nav-link" data-scroll-target="#sec-proxmox">Proxmox VE — Virtualisation Without VMware</a>
   <ul class="collapse">
@@ -947,22 +946,19 @@ Note
 </div>
 <p>Kubernetes elements and concepts are not more complex than docker compose, but there are many more elements than docker compose, so the overall complexity is very high. It is an orchestration engine: where docker compose can ask for these containers to be restarted when stopped, on the same machine, Kubernetes can choose on which machine the containers will run, can duplicate them, can kill them if they seem unhealthy to create some healthy ones, can create services out of these containers so they can be used by other clients, which could be other containers within Kubernets, can create network access of these containers, without knowing where they run.</p>
 <p>For simplest application it could be a full overkill, then the more complex your application is (in term of size and elements), the more to gain from Kubernetes. If you need an application that needs to run 24/7, with transparent updates and that can scale from hundred of clients to several thousands, Kubernetes will make things much easier, and in a well thought way.</p>
-<p>But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is made by and aimed at non-sys-admin persons.</p>
+<p>But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is (mostly) made by and aimed at non-sys-admin persons.</p>
 <p>Quick overview</p>
 <p>-&gt; Kubernetes section</p>
 </section>
 <section id="sec-other-solutions" class="level1">
 <h1>Other Solutions</h1>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
-</section>
 <section id="sec-packaging" class="level2">
 <h2 class="anchored" data-anchor-id="sec-packaging">Linux Packaging/Bare metal setup</h2>
 <p>In some cases, it can be better to install directly on the host system or the only option aside using a virtual machine, if the application is not containerizable.</p>
 <p>It could be for some specific hardware or security needs, because the application has a very complex setup, because the application hasn’t been maintained for a long time and does not offer an image (or the image is not of the last version…).</p>
 <p>Most of the time it is possible to set it up in a virtual machine with some extra effort, but some virtual machine hypervisor (that run the virtual machines) might have some restrictions on the hardware use (GPU for instance), or have some functionality locked as part as a commercial version.</p>
 <p>Containers could have a full access to the hardware if run on Linux, but the base image would probably be restricted on what it is allowed to do, or getting the access might be really difficult.</p>
-<p>In any case, the effort to virtualize or containerise the application will depend on the security risk and the estimate time of usage. If the application present a risk and will be run for several years, it makes sense to spend some effort isolating it. To do so, it is simply a matter of removing obstacles one by one: * try to make it run, * identify what is the issue, * look for solutions: - check the official documentation, - if possible ask a colleague that might have had the same issue, - LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question, - doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit, - ask online, - try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won’t be touched, and iterating on copies. * if this issue has been fixed and the software still have issue, reiterate.</p>
+<p>In any case, the effort to virtualize or containerise the application will depend on the security risk and the estimate time of usage. If the application present a risk and will be run for several years, it makes sense to spend some effort isolating it. To do so, it is simply a matter of removing obstacles one by one: * try to make it run, * identify what is the issue, * look for solutions: + check the official documentation, + if possible ask a colleague that might have had the same issue, + LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question, + doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit, + ask online, + try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won’t be touched, and iterating on copies. * if this issue has been fixed and the software still have issue, reiterate.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
