@@ -339,7 +339,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <ul class="collapse">
   <li><a href="#sec-nomad" id="toc-sec-nomad" class="nav-link" data-scroll-target="#sec-nomad">HashiCorp Nomad</a></li>
   <li><a href="#sec-swarm" id="toc-sec-swarm" class="nav-link" data-scroll-target="#sec-swarm">Docker Swarm</a></li>
-  <li><a href="#sec-ecs" id="toc-sec-ecs" class="nav-link" data-scroll-target="#sec-ecs">Amazon ECS — Elastic Container Service</a></li>
+  <li><a href="#sec-ecs" id="toc-sec-ecs" class="nav-link" data-scroll-target="#sec-ecs">Amazon ECS - Elastic Container Service</a></li>
   <li><a href="#sec-serverless" id="toc-sec-serverless" class="nav-link" data-scroll-target="#sec-serverless">Serverless Container Platforms</a></li>
   <li><a href="#sec-cloudrun" id="toc-sec-cloudrun" class="nav-link" data-scroll-target="#sec-cloudrun">Google Cloud Run</a></li>
   <li><a href="#comparison-of-lightweight-and-cloud-native-orchestrators" id="toc-comparison-of-lightweight-and-cloud-native-orchestrators" class="nav-link" data-scroll-target="#comparison-of-lightweight-and-cloud-native-orchestrators">Comparison of lightweight and cloud-native orchestrators</a></li>
@@ -1203,14 +1203,14 @@ Note
 <section id="ceph-distributed-storage" class="level3">
 <h3 class="anchored" data-anchor-id="ceph-distributed-storage">Ceph — distributed storage</h3>
 <p>Ceph is a software-defined distributed storage system tightly integrated with OpenStack. It is the recommended storage backend for production OpenStack deployments because it eliminates single points of failure and scales horizontally by adding storage nodes.</p>
-<p><strong>How Ceph works.</strong> Ceph distributes data across a cluster of storage nodes (called OSDs — Object Storage Daemons). Each piece of data is replicated (typically three copies) or erasure-coded across different nodes, so the failure of any single disk or server does not cause data loss. The CRUSH algorithm ensures data is balanced and replicated without a central metadata bottleneck.</p>
+<p><strong>How Ceph works.</strong> Ceph distributes data across a cluster of storage nodes (called OSDs - Object Storage Daemons). Each piece of data is replicated (typically three copies) or erasure-coded across different nodes, so the failure of any single disk or server does not cause data loss.</p>
 <p>The three main Ceph interfaces are:</p>
 <ul>
 <li><strong>RADOS Block Device (RBD)</strong> — presents distributed storage as a block device. Used by Cinder for VM volumes and by Nova for VM boot disks.</li>
-<li><strong>RADOS Gateway (RGW)</strong> — provides an S3-compatible object storage API, usable as a drop-in replacement for Amazon S3.</li>
+<li><strong>RADOS Gateway (RGW)</strong> — provides an S3-compatible object storage API, usable as a drop-in replacement for Amazon S3. See more information about object storage in the <a href="pages/Data_storage">Data Storage page</a>.</li>
 <li><strong>CephFS</strong> — a POSIX-compatible shared filesystem for applications that need traditional file-path semantics.</li>
 </ul>
-<p><strong>Why Ceph with OpenStack.</strong> Live migration of VMs is much simpler when all compute nodes access the same Ceph storage pool. Storage can also scale independently of compute — you add storage nodes without affecting running VMs.</p>
+<p><strong>Why Ceph with OpenStack.</strong> Live migration of VMs is much simpler when all compute nodes access the same Ceph storage pool. Storage can also scale independently of compute by adding storage nodes without affecting running VMs.</p>
 <ul>
 <li><a href="https://docs.ceph.com/en/latest/">Ceph documentation</a></li>
 <li><a href="https://docs.openstack.org/cinder/latest/configuration/block-storage/drivers/ceph-rbd-volume-driver.html">Cinder with Ceph RBD — configuration guide</a></li>
@@ -1218,8 +1218,8 @@ Note
 </section>
 <section id="magnum-kubernetes-as-a-service" class="level3">
 <h3 class="anchored" data-anchor-id="magnum-kubernetes-as-a-service">Magnum — Kubernetes as a service</h3>
-<p>Magnum is the OpenStack service that provisions and manages container orchestration clusters — most commonly Kubernetes — on demand. Rather than manually installing and configuring Kubernetes, Magnum automates the entire process using Heat templates.</p>
-<p>Researchers request a cluster via the API or Horizon dashboard and receive a fully configured Kubernetes environment running on OpenStack VMs. Administrators define cluster templates specifying the node size, Kubernetes version, and networking plugin. Once created, the cluster is managed with standard Kubernetes tools (<code>kubectl</code>, Helm, etc.) and the OpenStack layer becomes invisible to the end user.</p>
+<p>Magnum is the OpenStack service that provisions and manages container orchestration clusters, most commonly Kubernetes, on demand. Rather than manually installing and configuring Kubernetes, Magnum automates the entire process using Heat templates (see below).</p>
+<p>Users request a cluster via the API or Horizon dashboard and receive a fully configured Kubernetes environment running on OpenStack VMs. Administrators define cluster templates specifying the node size, Kubernetes version, and networking plugin. Once created, the cluster is managed with standard Kubernetes tools (<code>kubectl</code>, Helm, etc.) and the OpenStack layer becomes invisible to the end user.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1230,7 +1230,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Magnum does not replace Kubernetes — it automates the deployment of Kubernetes on OpenStack infrastructure. From the researcher’s perspective, they receive a standard Kubernetes cluster.</p>
+<p>Magnum does not replace Kubernetes — it automates the deployment of Kubernetes on OpenStack infrastructure. From the user’s perspective, they receive a standard Kubernetes cluster.</p>
 </div>
 </div>
 <ul>
@@ -1239,10 +1239,10 @@ Note
 </section>
 <section id="other-notable-openstack-services" class="level3">
 <h3 class="anchored" data-anchor-id="other-notable-openstack-services">Other notable OpenStack services</h3>
-<p><strong>Neutron (Networking).</strong> Neutron provides virtual networks, subnets, routers, security groups, and floating IPs. It supports multiple backend drivers and can integrate with physical network hardware via ML2 plugins. For research networks, Neutron can enforce quality-of-service rules and provide VLAN segmentation between research groups.</p>
+<p><strong>Horizon (Web Dashboard).</strong> Horizon is the web interface for OpenStack. It provides a graphical view of all resources: instances, volumes, networks, and images. For users who prefer not to use the command line or REST APIs, Horizon is the primary day-to-day interface.</p>
+<p><strong>Neutron (Networking).</strong> Neutron provides virtual networks, subnets, routers, security groups, and floating IPs.</p>
 <p><strong>Heat (Orchestration).</strong> Heat allows you to describe an entire cloud environment — VMs, networks, storage, security groups — in a YAML template and deploy it reproducibly with a single API call. This is the OpenStack equivalent of AWS CloudFormation and enables Infrastructure as Code workflows.</p>
 <p><strong>Ironic (Bare Metal Provisioning).</strong> Ironic provisions physical servers in the same way Nova provisions VMs. This is useful for high-performance computing workloads where VM overhead is unacceptable — for example, MPI jobs requiring direct access to InfiniBand interconnects or specific GPU hardware.</p>
-<p><strong>Horizon (Web Dashboard).</strong> Horizon is the web interface for OpenStack. It provides a graphical view of all resources: instances, volumes, networks, and images. For researchers who prefer not to use the command line or REST APIs, Horizon is the primary day-to-day interface.</p>
 </section>
 <section id="resources-1" class="level3">
 <h3 class="anchored" data-anchor-id="resources-1">Resources</h3>
@@ -1260,7 +1260,8 @@ Note
 <section id="sec-nomad" class="level3">
 <h3 class="anchored" data-anchor-id="sec-nomad">HashiCorp Nomad</h3>
 <p><a href="https://www.nomadproject.io">Nomad</a> is a general-purpose workload orchestrator developed by HashiCorp. Unlike Kubernetes, which is specifically designed for containers, Nomad can schedule Docker containers, standalone executables (binaries), Java JAR files, virtual machines (via QEMU), and batch jobs — all using the same scheduler and configuration language.</p>
-<p><strong>Architecture.</strong> Nomad uses a client/server model. A small number of server nodes (three or five, for quorum) handle scheduling decisions. Client nodes run the actual workloads. There is no dedicated etcd cluster, no separate controller manager, no separate scheduler process — all scheduling logic lives in the Nomad server binary.</p>
+<p>Nomad share the same drawback with Docker Swarm, which is that they are not so popular. Thus there are less extrenal resources available, less discussion about it, and less pre-packaged applications (Helm charts do not apply; Nomad uses its own job specification format HCL). But they can still be a good solution for small teams that need to schedule a heterogeneous mix of workloads without the operational overhead of Kubernetes, while being well-aware of these limitations.</p>
+<p><strong>Architecture.</strong> Nomad uses a client/server model. A small number of server nodes (three or five, for quorum) handle scheduling decisions. Client nodes run the actual workloads. There is no dedicated etcd cluster, no separate controller manager, no separate scheduler process: all scheduling logic lives in the Nomad server binary.</p>
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li><strong>Single binary deployment.</strong> The entire Nomad agent (server or client mode) is a single Go binary with no external runtime dependencies. This makes installation trivial compared to a full Kubernetes cluster.</li>
@@ -1270,8 +1271,8 @@ Note
 </ul>
 <p><strong>Limitations compared to Kubernetes:</strong></p>
 <ul>
-<li>Smaller ecosystem — fewer pre-packaged applications (Helm charts do not apply; Nomad uses its own job specification format HCL).</li>
-<li>Less sophisticated networking — no native Ingress resource; traffic routing requires Consul or an external load balancer.</li>
+<li>Smaller ecosystem: fewer pre-packaged applications (Helm charts do not apply; Nomad uses its own job specification format HCL).</li>
+<li>Less sophisticated networking: traffic routing requires Consul or an external load balancer.</li>
 <li>Less mature support for stateful workloads (though Nomad CSI driver support is improving).</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1284,7 +1285,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Nomad is a good fit when: you need to schedule a heterogeneous mix of containers and non-container workloads; your team is small and wants a simpler operational model than Kubernetes; or you are already using other HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain.</p>
+<p>Nomad is a good fit when: you need to schedule a heterogeneous mix of containers and non-container workloads; your team is small and wants a simpler operational model than Kubernetes; or you are already using other HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain. (Terraform can also be used with Kubernetes).</p>
 </div>
 </div>
 <ul>
@@ -1300,7 +1301,7 @@ Note
 <ul>
 <li><strong>Zero additional installation.</strong> Any machine running Docker Engine can join a Swarm with a single <code>docker swarm init</code> or <code>docker swarm join</code> command. No separate binaries or configuration files are needed.</li>
 <li><strong>Docker Compose compatibility.</strong> Docker Compose files (with minor additions for <code>deploy:</code> stanzas) can be deployed to Swarm as stacks directly, making it easy to move from a local development setup to a distributed deployment.</li>
-<li><strong>Simplicity.</strong> Swarm intentionally covers the 80% use case — service scaling, rolling updates, health-based restarts, overlay networking, and secrets management — without the conceptual complexity of Kubernetes.</li>
+<li><strong>Simplicity.</strong> Swarm intentionally covers the 80% use case - service scaling, rolling updates, health-based restarts, overlay networking, and secrets management - without the conceptual complexity of Kubernetes.</li>
 </ul>
 <p><strong>Current status.</strong> Docker Swarm is considered feature-stable rather than actively developed. Mirantis (which acquired Docker Enterprise in 2019) has committed to maintaining Swarm. For new projects, Docker’s own documentation now recommends Kubernetes for complex production workloads. Swarm remains a sensible, low-overhead choice for small research groups that are already familiar with Docker Compose and do not need the full Kubernetes feature set.</p>
 <p><strong>Limitations:</strong></p>
@@ -1313,18 +1314,31 @@ Note
 </ul>
 </section>
 <section id="sec-ecs" class="level3">
-<h3 class="anchored" data-anchor-id="sec-ecs">Amazon ECS — Elastic Container Service</h3>
+<h3 class="anchored" data-anchor-id="sec-ecs">Amazon ECS - Elastic Container Service</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Amazon, Google and Microsof (Azure) solution are generally billed per use, so they can be more expensive than self-hosted solutions, especially if the workload is not well-optimized. It is important to monitor the cost and optimize the usage to avoid unexpected bills. The bill can grow very quickly if the usage grows: it could be a simple issue with another service calling the container more often than expected, or a change in the code that make the container run for a longer time. It is important to set up some alerts to be notified when the cost grows above a certain threshold, or to avoid such solution if the cost is not predictable or if the budget is not flexible enough. Self-hosting might initially be more expensive but will often offer a fixed cost and might become cheaper in the long run. Generally, a well managed self-hosted solution <em>should</em> be cheaper than a cloud solution.</p>
+</div>
+</div>
 <p>Amazon ECS is AWS’s proprietary container orchestration service. You define tasks (one or more containers that run together, similar to a Kubernetes Pod) and services (long-running groups of tasks with load balancing and auto-scaling). ECS handles scheduling, health checks, and replacement of failed tasks.</p>
 <p><strong>Two launch modes:</strong></p>
 <ul>
 <li><strong>ECS on EC2.</strong> You provision and manage a pool of EC2 virtual machines that act as ECS container hosts. You are responsible for the underlying instances (patching, scaling the instance fleet).</li>
-<li><strong>ECS on Fargate.</strong> AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of task runtime — no instances to manage.</li>
+<li><strong>ECS on Fargate.</strong> AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of task runtime with no instances to manage.</li>
 </ul>
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li>Deep integration with the AWS ecosystem: IAM for per-task permissions, CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for container images, Secrets Manager for credentials.</li>
 <li>Simpler mental model than Kubernetes for straightforward web application or data pipeline deployments on AWS.</li>
-<li>No control plane to operate — AWS manages the scheduler.</li>
+<li>No control plane to operate, AWS manages the scheduler.</li>
 </ul>
 <p><strong>Limitations:</strong></p>
 <ul>
@@ -1352,8 +1366,8 @@ Note
 </section>
 <section id="sec-serverless" class="level3">
 <h3 class="anchored" data-anchor-id="sec-serverless">Serverless Container Platforms</h3>
-<p>“Serverless containers” describe managed platforms where you provide a container image and the platform handles all infrastructure — no VMs, no clusters, no nodes to manage. You pay only for actual compute time. The trade-off is reduced control and potential cold-start latency.</p>
-<p>The term <em>serverless</em> can be confusing: servers still exist, but they are fully abstracted away from the user. From the researcher’s perspective, you push a container image and the platform runs it on demand.</p>
+<p>“Serverless containers” describe managed platforms where you provide a container image and the platform handles all infrastructure with no VMs, no clusters, no nodes to manage. You pay only for actual compute time. The trade-off is reduced control and potential cold-start latency.</p>
+<p>The term <em>serverless</em> can be confusing: servers still exist, but they are fully abstracted away from the user. From the user’s perspective, you push a container image and the platform runs it on demand.</p>
 <p><strong>Common platforms:</strong></p>
 <table class="caption-top table">
 <colgroup>
