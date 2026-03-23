@@ -524,15 +524,13 @@ Kubernetes elements and concepts are not more complex than docker compose, but t
 
 For simplest application it could be a full overkill, then the more complex your application is (in term of size and elements), the more to gain from Kubernetes. If you need an application that needs to run 24/7, with transparent updates and that can scale from hundred of clients to several thousands, Kubernetes will make things much easier, and in a well thought way.
 
-But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is made by and aimed at non-sys-admin persons.
+But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is (mostly) made by and aimed at non-sys-admin persons.
 
 Quick overview
 
 -> Kubernetes section
 
 # Other Solutions {#sec-other-solutions}
-
-###
 
 ## Linux Packaging/Bare metal setup {#sec-packaging}
 
@@ -548,12 +546,12 @@ In any case, the effort to virtualize or containerise the application will depen
 * try to make it run,
 * identify what is the issue,
 * look for solutions:
-	- check the official documentation,
-	- if possible ask a colleague that might have had the same issue,
-	- LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question,
-	- doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit,
-	- ask online,
-	- try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won't be touched, and iterating on copies.
+	+ check the official documentation,
+	+ if possible ask a colleague that might have had the same issue,
+	+ LLM might know the answer. If the given answer does not work after 2 or 3 clarification, it is generally better to stop trying as LLM will get easily confused and will happilly give wrong answers, or answers to the wrong question,
+	+ doing an internet search. Good answers come generally from IT-related forums, especially those focusing on such solution (either the software or the platform), StackOverflow and Reddit,
+	+ ask online,
+	+ try alone, by preparing a test-retrial workflow: an easy way to break and repeat, often by having a main version of the setup that won't be touched, and iterating on copies.
 * if this issue has been fixed and the software still have issue, reiterate.
 
 ::: {.callout-note}
