@@ -553,6 +553,17 @@
     ]
   },
   {
+    "objectID": "index.html#quick-overview",
+    "href": "index.html#quick-overview",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Quick overview",
+    "text": "Quick overview\nKubernetes is an orchestration platform: applications are in containers which run in a pod that are on a host system, called a node. There can be several containers in a pod (though only if the containers benefit from being strongly coupled), several pods in a node, and several nodes. There can be copies (replicas) of one application automatically managed by Kubernetes on several nodes.\nEverything is decoupled and work declaratively: manifests indicates the wishes, and Kubernetes works on satisfying these, even if a problem occurs. So if you ask for 4 copies of one application, with 4 copies of another that should avoid the first one and you have 8 nodes, Kubernetes might initially distribute these 8 applications on 8 nodes. If one node goes down, the application of this node will move to another node with the same application, thus still avoiding the other one. This avoidance (affinity, which work at node level) can be strict (no scheduling if the constraint is not met) or not (if no other choice still select this node).\nKubernetes is presented in more detail in the Kubernetes introduction page, which aims to accelerate learning it and give enough of an overview to understand clearly what it is, what it offers and what it costs.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
     "objectID": "index.html#sec-packaging",
     "href": "index.html#sec-packaging",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",

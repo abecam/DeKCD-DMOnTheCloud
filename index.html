@@ -316,7 +316,10 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#things-to-take-into-account" id="toc-things-to-take-into-account" class="nav-link" data-scroll-target="#things-to-take-into-account">Things to take into account</a></li>
   <li><a href="#namespaces-and-namespaces-collisions" id="toc-namespaces-and-namespaces-collisions" class="nav-link" data-scroll-target="#namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</a></li>
   </ul></li>
-  <li><a href="#from-docker-compose-to-kubernetes" id="toc-from-docker-compose-to-kubernetes" class="nav-link" data-scroll-target="#from-docker-compose-to-kubernetes">From Docker compose to Kubernetes</a></li>
+  <li><a href="#from-docker-compose-to-kubernetes" id="toc-from-docker-compose-to-kubernetes" class="nav-link" data-scroll-target="#from-docker-compose-to-kubernetes">From Docker compose to Kubernetes</a>
+  <ul class="collapse">
+  <li><a href="#quick-overview" id="toc-quick-overview" class="nav-link" data-scroll-target="#quick-overview">Quick overview</a></li>
+  </ul></li>
   <li><a href="#sec-other-solutions" id="toc-sec-other-solutions" class="nav-link" data-scroll-target="#sec-other-solutions">Other Solutions</a>
   <ul class="collapse">
   <li><a href="#sec-packaging" id="toc-sec-packaging" class="nav-link" data-scroll-target="#sec-packaging">Linux Packaging/Bare metal setup</a></li>
@@ -947,8 +950,12 @@ Note
 <p>Kubernetes elements and concepts are not more complex than docker compose, but there are many more elements than docker compose, so the overall complexity is very high. It is an orchestration engine: where docker compose can ask for these containers to be restarted when stopped, on the same machine, Kubernetes can choose on which machine the containers will run, can duplicate them, can kill them if they seem unhealthy to create some healthy ones, can create services out of these containers so they can be used by other clients, which could be other containers within Kubernets, can create network access of these containers, without knowing where they run.</p>
 <p>For simplest application it could be a full overkill, then the more complex your application is (in term of size and elements), the more to gain from Kubernetes. If you need an application that needs to run 24/7, with transparent updates and that can scale from hundred of clients to several thousands, Kubernetes will make things much easier, and in a well thought way.</p>
 <p>But this possibilities comes with difficulties to grasp it, especially if you are not a full sys-admin, and this documentation is (mostly) made by and aimed at non-sys-admin persons.</p>
-<p>Quick overview</p>
-<p>-&gt; Kubernetes section</p>
+<section id="quick-overview" class="level2">
+<h2 class="anchored" data-anchor-id="quick-overview">Quick overview</h2>
+<p>Kubernetes is an orchestration platform: applications are in containers which run in a <em>pod</em> that are on a host system, called a <em>node</em>. There can be several containers in a pod (though only if the containers benefit from being strongly coupled), several pods in a node, and several nodes. There can be copies (replicas) of one application automatically managed by Kubernetes on several nodes.</p>
+<p>Everything is decoupled and work declaratively: manifests indicates the wishes, and Kubernetes works on satisfying these, even if a problem occurs. So if you ask for 4 copies of one application, with 4 copies of another that should avoid the first one and you have 8 nodes, Kubernetes might initially distribute these 8 applications on 8 nodes. If one node goes down, the application of this node will move to another node with the same application, thus still avoiding the other one. This avoidance (affinity, which work at node level) can be strict (no scheduling if the constraint is not met) or not (if no other choice still select this node).</p>
+<p>Kubernetes is presented in more detail in the <a href="./pages/Kubernetes_introduction.html">Kubernetes introduction page</a>, which aims to accelerate learning it and give enough of an overview to understand clearly what it is, what it offers and what it costs.</p>
+</section>
 </section>
 <section id="sec-other-solutions" class="level1">
 <h1>Other Solutions</h1>
