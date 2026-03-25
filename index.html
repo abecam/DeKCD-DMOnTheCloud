@@ -292,6 +292,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#export-display-with-x11" id="toc-export-display-with-x11" class="nav-link" data-scroll-target="#export-display-with-x11">Export display with X11</a></li>
   <li><a href="#linux-with-wayland-waypipe" id="toc-linux-with-wayland-waypipe" class="nav-link" data-scroll-target="#linux-with-wayland-waypipe">Linux with Wayland: Waypipe</a></li>
   <li><a href="#remote-desktop" id="toc-remote-desktop" class="nav-link" data-scroll-target="#remote-desktop">Remote desktop</a></li>
+  <li><a href="#main-web-servers" id="toc-main-web-servers" class="nav-link" data-scroll-target="#main-web-servers">Main web-servers</a></li>
   <li><a href="#commands-that-should-be-known" id="toc-commands-that-should-be-known" class="nav-link" data-scroll-target="#commands-that-should-be-known">Commands that should be known</a></li>
   <li><a href="#folders-you-should-know" id="toc-folders-you-should-know" class="nav-link" data-scroll-target="#folders-you-should-know">Folders you should know</a></li>
   <li><a href="#online-resources" id="toc-online-resources" class="nav-link" data-scroll-target="#online-resources">Online resources</a></li>
@@ -573,10 +574,18 @@ Tip
 <p>Which option should I use?</p>
 <p>I just want to check that a web service is running -&gt; Use a text-based browser (lynx, w3m, or links) Fast, simple, works everywhere.</p>
 <p>I need a feature that exists only in a graphical interface -&gt; Try export display with X11 (if available). Useful for configuration tools or admin interfaces.</p>
-<p>If too difficult to set-up or not available (on newer Linux or other OS) -&gt; Use remote desktop.</p>
-<p>I am not sure which option to choose -&gt; Use remote desktop. It is the most reliable and behaves like a normal desktop.</p>
+<p>If too difficult to set-up or not available (on newer Linux or other OS) -&gt; Use a remote desktop.</p>
+<p>I am not sure which option to choose -&gt; Use a remote desktop. It is the most reliable and behaves like a normal desktop.</p>
 </div>
 </div>
+</section>
+<section id="main-web-servers" class="level3">
+<h3 class="anchored" data-anchor-id="main-web-servers">Main web-servers</h3>
+<p>Most Web applications will be running as CMS: Content Management System. It means that it is a program running on a server that generate the web pages depending on the user actions, using the data stored on the server-side (which are not necessarily on the same server). This program is either serving the web content by itself using functionalities of the used language (for Python, Ruby, Perl, … ) or within an application server (like Apache Tomcat for Java).</p>
+<p>But very often the web application, especially for production, will be accessed through a Web Server. This last will take care of accepting a secure connection (HTTPS) and forward all requests to the web application(s). It offers several benefits: * An extra layer for security, * A possibility to cache for static content (such as images), * Eventually load-balance between several instances of the web application, * Offer one central access for several web applications, even if they are not homogeneous.</p>
+<p>The main web servers are: * <strong>Nginx</strong>, * <strong>Apache</strong>, * <strong>Internet Information Services</strong> (<strong>IIS</strong>, Windows only, proprietary).</p>
+<p>Another web server gaining tracktion is <strong>Caddy</strong>, that try to integrate more aspects (like optaining a SSL certificate) while being easier to use. As always, the gain has to be weighted against the risk as the adoption as well as the ecosystem is smaller.</p>
+<p><strong>IIS</strong> is rarely use for Research project but can be the best choice if the application is built using Microsoft technologies.</p>
 </section>
 <section id="commands-that-should-be-known" class="level3">
 <h3 class="anchored" data-anchor-id="commands-that-should-be-known">Commands that should be known</h3>
@@ -703,12 +712,15 @@ Note
 </ul></li>
 <li><p><strong>command &amp; / CTRL-Z + bg / fg</strong> → run a command in the background, suspend it, or bring it back to foreground</p></li>
 <li><p><strong>ssh / scp</strong> → connect to remote servers and copy files securely Essential for working with remote machines <em>If unfamiliar, search for “SSH basics”.</em></p></li>
-<li><p><strong>systemctl graceful</strong> → <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl graceful</strong> ask for a clean restart of a service -&gt; finish the existing “transaction” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session serverd by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed). Common commands:</p>
+<li><p>Graceful restart: ask for a transparent restart of a service -&gt; finish the existing “transactions” before starting. For a web-server it means that it will keep the current opened http session before restarting, thus minimizing the impact of the restart for the end use. Keep in mind that it does not know about a CMS session served by the web-server (as generally the web-server is only a proxy to the web application), so CMS session might be forcefully closed anyway (depending on how the session is managed).</p></li>
+</ul>
+<p>There are several way to do so: + <strong>systemctl reload nginx/apache/caddy (graceful)</strong> (On most Linux distributions) → <strong>systemctl</strong> is part of <strong>systemd</strong>, where the ‘d’ stands for ‘daemons’.<em>Daemons</em> are Unix’s background process. What is important to know if that a web server, such as Apache or Nginx, will now be run as daemon and managed by systemctl. <strong>systemctl reload servicename</strong> will call a graceful restart of the service. Common commands: * <code>systemctl status service</code> * <code>systemctl start|stop|restart service</code> * <code>systemctl reload service</code> (graceful reload when supported)</p>
 <ul>
-<li><code>systemctl status service</code></li>
-<li><code>systemctl start|stop|restart service</code></li>
-<li><code>systemctl reload service</code> (graceful reload when supported)</li>
-</ul></li>
+<li><strong>/etc/init.d/nginx reload</strong> / <strong>/etc/init.d/apache2 reload</strong> (On some Linux distributions and Unix OS (FreeBSD, OpenBSD…)): <strong>systemd</strong> is a relatively new and controversial System and Service Manager, which is the first process to run (PID 1) and will start other elements of Linux and manage many elements using daemons. This monolithic aspect is quite opposed to the principles of Unix (“Do one thing, and do it well”) which is the main point of the controversy. As such some distributions still use the regular init (SysV-style).</li>
+</ul>
+<p>As there are no init.d script officially available for Caddy (at the time this document has been written), it might not be possible to use this command.</p>
+<ul>
+<li><p><strong>apachectl/apache2ctl graceful</strong> / <strong>nginx -s reload</strong> / <strong>caddy reload</strong>: the web servers also offer command lines to manage them. It is still useful to know the Operating System way as it does not change between web servers so a maintenance on a different web-server can still easily be done (a web-server might be part of a container for a Web application). Apache on Windows is managed by <strong>Http.exe</strong> and only offer a graceful restart.</p></li>
 <li><p><strong>apachectl configtest / nginx -t</strong> → allow to test the current configuration for Apache or Nginx. Configuring a web-server can quickly become complex, if there is a need for a reverse proxy on several virtual hosts (for instance for several web-application served via a docker instance for each). So these command will minimize the risk of a wrong configuration. But they still do not ensure that the configuration is doing what is expected.</p></li>
 <li><p><strong>rsync</strong> → efficient synchronization of files and directories Often used for backups or deployments. Combined with database dumps, it can form a simple backup strategy. In that case it is important to have a monitoring of the process to ensure it is working.</p></li>
 </ul>
