@@ -343,6 +343,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#sec-nomad" id="toc-sec-nomad" class="nav-link" data-scroll-target="#sec-nomad">HashiCorp Nomad</a></li>
   <li><a href="#sec-swarm" id="toc-sec-swarm" class="nav-link" data-scroll-target="#sec-swarm">Docker Swarm</a></li>
   <li><a href="#sec-ecs" id="toc-sec-ecs" class="nav-link" data-scroll-target="#sec-ecs">Amazon ECS - Elastic Container Service</a></li>
+  <li><a href="#sec-gke" id="toc-sec-gke" class="nav-link" data-scroll-target="#sec-gke">Google Kubernetes Engine</a></li>
   <li><a href="#sec-serverless" id="toc-sec-serverless" class="nav-link" data-scroll-target="#sec-serverless">Serverless Container Platforms</a></li>
   <li><a href="#sec-cloudrun" id="toc-sec-cloudrun" class="nav-link" data-scroll-target="#sec-cloudrun">Google Cloud Run</a></li>
   <li><a href="#comparison-of-lightweight-and-cloud-native-orchestrators" id="toc-comparison-of-lightweight-and-cloud-native-orchestrators" class="nav-link" data-scroll-target="#comparison-of-lightweight-and-cloud-native-orchestrators">Comparison of lightweight and cloud-native orchestrators</a></li>
@@ -1303,6 +1304,20 @@ Note
 <p>Nomad is a good fit when: you need to schedule a heterogeneous mix of containers and non-container workloads; your team is small and wants a simpler operational model than Kubernetes; or you are already using other HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain. (Terraform can also be used with Kubernetes).</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>HashiCorp is a commercial entity, part of IBM. So while their tools are free and “open-source”, there is always a risk that they could change their licensing model or discontinue free support for Nomad in the future. On the offer hand, if there is a budget for it, HashiCorp offers enterprise support. And as it is a commercial product, their products are generally well-maintained and have a good documentation.</p>
+<p>Their licence is not fully open-source, but source-available under the Business Source License (BSL). This means that while the source code is available for inspection and modification, there are restrictions on how it can be used in production without a commercial license.</p>
+</div>
+</div>
 <ul>
 <li><a href="https://developer.hashicorp.com/nomad/docs">Nomad documentation</a></li>
 <li><a href="https://developer.hashicorp.com/nomad/docs/nomad-vs-kubernetes">Nomad vs.&nbsp;Kubernetes comparison</a> — official comparison from HashiCorp</li>
@@ -1346,13 +1361,14 @@ Warning
 <p>Amazon ECS is AWS’s proprietary container orchestration service. You define tasks (one or more containers that run together, similar to a Kubernetes Pod) and services (long-running groups of tasks with load balancing and auto-scaling). ECS handles scheduling, health checks, and replacement of failed tasks.</p>
 <p><strong>Two launch modes:</strong></p>
 <ul>
-<li><strong>ECS on EC2.</strong> You provision and manage a pool of EC2 virtual machines that act as ECS container hosts. You are responsible for the underlying instances (patching, scaling the instance fleet).</li>
-<li><strong>ECS on Fargate.</strong> AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of task runtime with no instances to manage.</li>
+<li><strong>ECS on EC2 (Elastic Compute Cloud).</strong> You provision and manage a pool of EC2 virtual machines that act as ECS container hosts. You are responsible for the underlying instances (patching, scaling the instance fleet).</li>
+<li><strong>ECS on Fargate.</strong> AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of task runtime with no instances to manage. It is a serverless container platform within the AWS ecosystem (see below for more on serverless containers).</li>
 </ul>
+<p>If properly setup, EC2 should be cheaper than Fargate, but it requires more operational effort to manage the cluster of EC2 instances. Fargate is more expensive but offers a simpler, fully managed experience.</p>
 <p><strong>Key characteristics:</strong></p>
 <ul>
 <li>Deep integration with the AWS ecosystem: IAM for per-task permissions, CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for container images, Secrets Manager for credentials.</li>
-<li>Simpler mental model than Kubernetes for straightforward web application or data pipeline deployments on AWS.</li>
+<li>Simpler than Kubernetes for straightforward web application or data pipeline deployments on AWS.</li>
 <li>No control plane to operate, AWS manages the scheduler.</li>
 </ul>
 <p><strong>Limitations:</strong></p>
@@ -1371,13 +1387,17 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If your team is already comfortable with Kubernetes, AWS offers EKS (Elastic Kubernetes Service) which runs a managed Kubernetes control plane. ECS is simpler to start with; EKS gives portability and the full Kubernetes ecosystem. Both support Fargate for serverless compute.</p>
+<p>If your team is already comfortable with Kubernetes, AWS offers EKS(Elastic Kubernetes Service) which runs a managed Kubernetes control plane. ECS is simpler to start with; EKS gives portability and the full Kubernetes ecosystem. Both support Fargate for serverless compute.</p>
 </div>
 </div>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ecs/">Amazon ECS documentation</a></li>
 <li><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-fargate.html">ECS on Fargate getting started</a></li>
 </ul>
+</section>
+<section id="sec-gke" class="level3">
+<h3 class="anchored" data-anchor-id="sec-gke">Google Kubernetes Engine</h3>
+<p>Google Kubernetes Engine (GKE) is Google’s managed Kubernetes service. It provides a fully managed control plane and automates cluster provisioning, upgrades, scaling, and maintenance. GKE runs Kubernetes clusters on Google Cloud’s infrastructure, with deep integration into other Google Cloud services.</p>
 </section>
 <section id="sec-serverless" class="level3">
 <h3 class="anchored" data-anchor-id="sec-serverless">Serverless Container Platforms</h3>
@@ -1447,7 +1467,7 @@ Warning
 <section id="sec-cloudrun" class="level3">
 <h3 class="anchored" data-anchor-id="sec-cloudrun">Google Cloud Run</h3>
 <p>Google Cloud Run is Google’s fully managed serverless container platform. It is one of the most mature and widely used serverless container services, and is worth examining in detail as a representative example of the category.</p>
-<p><strong>How it works.</strong> You package your application as a Docker/OCI container image, push it to a container registry (Google Artifact Registry, or any public registry), and deploy it with a single command or through the Cloud Console. Cloud Run starts one or more container instances to handle incoming HTTP/gRPC requests and scales the number of instances automatically — including scaling to zero when there is no traffic.</p>
+<p><strong>How it works.</strong> You package your application as a Docker/OCI container image, push it to a container registry (Google Artifact Registry, or any public registry), and deploy it with a single command or through the Cloud Console. Cloud Run starts one or more container instances to handle incoming HTTP/gRPC (a Google remote procedure call framework by Google that allows, as the name implies, to call remote functions) requests and scales the number of instances automatically — including scaling to zero when there is no traffic.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and push a container, then deploy to Cloud Run</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> builds submit <span class="at">--tag</span> gcr.io/MY_PROJECT/my-app</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> run deploy my-app <span class="dt">\</span></span>
@@ -1459,7 +1479,7 @@ Warning
 <ul>
 <li><strong>Scale to zero.</strong> When no requests are incoming, Cloud Run runs no instances and incurs no compute cost. This makes it economical for sporadic or unpredictable workloads typical in research.</li>
 <li><strong>Concurrency.</strong> A single Cloud Run instance can handle multiple simultaneous requests (configurable up to 1000), which reduces cold starts compared to function-as-a-service platforms.</li>
-<li><strong>Any language, any framework.</strong> Because you bring your own container image, there are no language restrictions. Python, R, Julia, Java, or any compiled binary can be deployed.</li>
+<li><strong>Any language, any framework.</strong> Because you bring your own container image, there are no language restrictions. Python, R, Java, or any compiled binary can be deployed.</li>
 <li><strong>Cloud Run Jobs.</strong> In addition to HTTP services, Cloud Run Jobs run containerised batch tasks to completion — useful for data processing pipelines, periodic reports, or model training jobs.</li>
 <li><strong>VPC connectivity.</strong> Cloud Run services can connect to private VPC networks, enabling access to Cloud SQL, Memorystore, or on-premises systems via VPN or Interconnect.</li>
 </ul>
@@ -1467,7 +1487,7 @@ Warning
 <ul>
 <li><strong>BigQuery, Cloud Storage, Pub/Sub</strong> — data can flow in and out through standard Google Cloud services.</li>
 <li><strong>Cloud Scheduler</strong> — trigger Cloud Run Jobs on a cron schedule.</li>
-<li><strong>Eventarc</strong> — trigger services from Cloud Storage events, Pub/Sub messages, or Audit Logs.</li>
+<li><strong>Eventarc</strong> — trigger services from Cloud Storage events, Pub/Sub messages (Publish–subscribe -&gt; send messages (publish) to subscribed services asynchronously without being coupled), or Audit Logs.</li>
 <li><strong>Secret Manager</strong> — inject secrets as environment variables at runtime without embedding them in container images.</li>
 </ul>
 <p><strong>Limitations:</strong></p>
