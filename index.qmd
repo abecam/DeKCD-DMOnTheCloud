@@ -786,6 +786,13 @@ Nomad uses a client/server model. A small number of server nodes (three or five,
 Nomad is a good fit when: you need to schedule a heterogeneous mix of containers and non-container workloads; your team is small and wants a simpler operational model than Kubernetes; or you are already using other HashiCorp tools (Terraform, Vault, Consul) and want a consistent toolchain. (Terraform can also be used with Kubernetes).
 :::
 
+::: {.callout-caution}
+HashiCorp is a commercial entity, part of IBM. So while their tools are free and "open-source", there is always a risk that they could change their licensing model or discontinue free support for Nomad in the future.
+On the offer hand, if there is a budget for it, HashiCorp offers enterprise support. And as it is a commercial product, their products are generally well-maintained and have a good documentation.
+
+Their licence is not fully open-source, but source-available under the Business Source License (BSL). This means that while the source code is available for inspection and modification, there are restrictions on how it can be used in production without a commercial license.
+:::
+
 - [Nomad documentation](https://developer.hashicorp.com/nomad/docs)
 - [Nomad vs. Kubernetes comparison](https://developer.hashicorp.com/nomad/docs/nomad-vs-kubernetes) — official comparison from HashiCorp
 
@@ -825,41 +832,35 @@ Amazon ECS is AWS's proprietary container orchestration service. You define task
 
 **Two launch modes:**
 
-- **ECS on EC2.** You provision and manage a pool of EC2 virtual machines
-  that act as ECS container hosts. You are responsible for the underlying
-  instances (patching, scaling the instance fleet).
-- **ECS on Fargate.** AWS manages the underlying infrastructure entirely.
-  You specify CPU and memory requirements per task and pay per second of
-  task runtime with no instances to manage.
+- **ECS on EC2 (Elastic Compute Cloud).** You provision and manage a pool of EC2 virtual machines that act as ECS container hosts. You are responsible for the underlying instances (patching, scaling the instance fleet).
+- **ECS on Fargate.** AWS manages the underlying infrastructure entirely. You specify CPU and memory requirements per task and pay per second of  task runtime with no instances to manage. It is a serverless container platform within the AWS ecosystem (see below for more on serverless containers).
+
+If properly setup, EC2 should be cheaper than Fargate, but it requires more operational effort to manage the cluster of EC2 instances. Fargate is more expensive but offers a simpler, fully managed experience.
 
 **Key characteristics:**
 
-- Deep integration with the AWS ecosystem: IAM for per-task permissions,
-  CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for
-  container images, Secrets Manager for credentials.
-- Simpler mental model than Kubernetes for straightforward web application
-  or data pipeline deployments on AWS.
+- Deep integration with the AWS ecosystem: IAM for per-task permissions, CloudWatch for logs and metrics, ALB/NLB for load balancing, ECR for container images, Secrets Manager for credentials.
+- Simpler than Kubernetes for straightforward web application or data pipeline deployments on AWS.
 - No control plane to operate, AWS manages the scheduler.
 
 **Limitations:**
 
-- Vendor lock-in: ECS task definitions, IAM roles, and networking are all
-  AWS-specific. Migrating to another cloud or on-premises later requires
-  significant rework.
-- Less flexible than Kubernetes for complex multi-service applications with
-  sophisticated networking or storage requirements.
+- Vendor lock-in: ECS task definitions, IAM roles, and networking are all AWS-specific. Migrating to another cloud or on-premises later requires significant rework.
+- Less flexible than Kubernetes for complex multi-service applications with sophisticated networking or storage requirements.
 - No equivalent to Kubernetes Operators or CRDs for extending the platform.
 
 ::: {.callout-tip}
 ## ECS vs. EKS on AWS
-If your team is already comfortable with Kubernetes, AWS offers EKS
-(Elastic Kubernetes Service) which runs a managed Kubernetes control plane.
-ECS is simpler to start with; EKS gives portability and the full Kubernetes
-ecosystem. Both support Fargate for serverless compute.
+If your team is already comfortable with Kubernetes, AWS offers EKS(Elastic Kubernetes Service) which runs a managed Kubernetes control plane.
+ECS is simpler to start with; EKS gives portability and the full Kubernetes ecosystem. Both support Fargate for serverless compute.
 :::
 
 - [Amazon ECS documentation](https://docs.aws.amazon.com/ecs/)
 - [ECS on Fargate getting started](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-fargate.html)
+
+### Google Kubernetes Engine {#sec-gke}
+
+Google Kubernetes Engine (GKE) is Google's managed Kubernetes service. It provides a fully managed control plane and automates cluster provisioning, upgrades, scaling, and maintenance. GKE runs Kubernetes clusters on Google Cloud's infrastructure, with deep integration into other Google Cloud services.
 
 ### Serverless Container Platforms {#sec-serverless}
 
@@ -881,38 +882,24 @@ The term *serverless* can be confusing: servers still exist, but they are fully 
 
 **Scientific use cases:**
 
-- **On-demand analysis endpoints:** Deploy a container that runs a
-  computationally expensive analysis when an HTTP request arrives and shuts
-  down immediately afterwards. Costs nothing when idle.
-- **Batch processing pipelines:** Trigger container runs from object storage
-  events (a new file uploaded triggers a processing job).
-- **Reproducible environments:** Share a container image with reviewers so
-  they can reproduce an analysis without installing software.
+- **On-demand analysis endpoints:** Deploy a container that runs a computationally expensive analysis when an HTTP request arrives and shuts down immediately afterwards. Costs nothing when idle.
+- **Batch processing pipelines:** Trigger container runs from object storage events (a new file uploaded triggers a processing job).
+- **Reproducible environments:** Share a container image with reviewers so they can reproduce an analysis without installing software.
 
 **Limitations to consider:**
 
-- Maximum execution time limits (e.g., Cloud Run has a 60-minute request
-  timeout; some platforms impose shorter limits).
-- Stateless by design — persistent storage must be external (object storage,
-  managed database).
-- Cold starts: the first request after a period of inactivity may take
-  several seconds while the container image is pulled and started.
+- Maximum execution time limits (e.g., Cloud Run has a 60-minute request timeout; some platforms impose shorter limits).
+- Stateless by design — persistent storage must be external (object storage, managed database).
+- Cold starts: the first request after a period of inactivity may take several seconds while the container image is pulled and started.
 - Cost unpredictability for high-traffic or long-running workloads.
 
 ### Google Cloud Run {#sec-cloudrun}
 
 Google Cloud Run is Google's fully managed serverless container platform.
-It is one of the most mature and widely used serverless container services,
-and is worth examining in detail as a representative example of the
-category.
+It is one of the most mature and widely used serverless container services, and is worth examining in detail as a representative example of the category.
 
 **How it works.**
-You package your application as a Docker/OCI container image, push it to a
-container registry (Google Artifact Registry, or any public registry), and
-deploy it with a single command or through the Cloud Console. Cloud Run
-starts one or more container instances to handle incoming HTTP/gRPC
-requests and scales the number of instances automatically — including
-scaling to zero when there is no traffic.
+You package your application as a Docker/OCI container image, push it to a container registry (Google Artifact Registry, or any public registry), and deploy it with a single command or through the Cloud Console. Cloud Run starts one or more container instances to handle incoming HTTP/gRPC (a Google remote procedure call framework by Google that allows, as the name implies, to call remote functions) requests and scales the number of instances automatically — including scaling to zero when there is no traffic.
 
 ```bash
 # Build and push a container, then deploy to Cloud Run
@@ -926,50 +913,29 @@ gcloud run deploy my-app \
 
 **Key features:**
 
-- **Scale to zero.** When no requests are incoming, Cloud Run runs no
-  instances and incurs no compute cost. This makes it economical for
-  sporadic or unpredictable workloads typical in research.
-- **Concurrency.** A single Cloud Run instance can handle multiple
-  simultaneous requests (configurable up to 1000), which reduces cold
-  starts compared to function-as-a-service platforms.
-- **Any language, any framework.** Because you bring your own container
-  image, there are no language restrictions. Python, R, Julia, Java, or any
-  compiled binary can be deployed.
-- **Cloud Run Jobs.** In addition to HTTP services, Cloud Run Jobs run
-  containerised batch tasks to completion — useful for data processing
-  pipelines, periodic reports, or model training jobs.
-- **VPC connectivity.** Cloud Run services can connect to private VPC
-  networks, enabling access to Cloud SQL, Memorystore, or on-premises
-  systems via VPN or Interconnect.
+- **Scale to zero.** When no requests are incoming, Cloud Run runs no instances and incurs no compute cost. This makes it economical for sporadic or unpredictable workloads typical in research.
+- **Concurrency.** A single Cloud Run instance can handle multiple simultaneous requests (configurable up to 1000), which reduces cold starts compared to function-as-a-service platforms.
+- **Any language, any framework.** Because you bring your own container image, there are no language restrictions. Python, R, Java, or any compiled binary can be deployed.
+- **Cloud Run Jobs.** In addition to HTTP services, Cloud Run Jobs run containerised batch tasks to completion — useful for data processing pipelines, periodic reports, or model training jobs.
+- **VPC connectivity.** Cloud Run services can connect to private VPC networks, enabling access to Cloud SQL, Memorystore, or on-premises systems via VPN or Interconnect.
 
 **Integration with Google Cloud:**
 
-- **BigQuery, Cloud Storage, Pub/Sub** — data can flow in and out through
-  standard Google Cloud services.
+- **BigQuery, Cloud Storage, Pub/Sub** — data can flow in and out through standard Google Cloud services.
 - **Cloud Scheduler** — trigger Cloud Run Jobs on a cron schedule.
-- **Eventarc** — trigger services from Cloud Storage events, Pub/Sub
-  messages, or Audit Logs.
-- **Secret Manager** — inject secrets as environment variables at runtime
-  without embedding them in container images.
+- **Eventarc** — trigger services from Cloud Storage events, Pub/Sub messages (Publish–subscribe -> send messages (publish) to subscribed services asynchronously without being coupled), or Audit Logs.
+- **Secret Manager** — inject secrets as environment variables at runtime without embedding them in container images.
 
 **Limitations:**
 
-- Maximum request timeout of 60 minutes (sufficient for many analysis tasks;
-  longer jobs should use Cloud Run Jobs or Cloud Batch).
-- In-memory storage only during execution; persistent state must use Cloud
-  Storage or a database.
-- Compute is limited to CPU and memory per instance; GPU support is
-  available in preview but not generally available in all regions.
+- Maximum request timeout of 60 minutes (sufficient for many analysis tasks; longer jobs should use Cloud Run Jobs or Cloud Batch).
+- In-memory storage only during execution; persistent state must use Cloud Storage or a database.
+- Compute is limited to CPU and memory per instance; GPU support is available in preview but not generally available in all regions.
 - Full vendor lock-in to Google Cloud APIs and billing.
 
 ::: {.callout-tip}
 ## Cloud Run vs. Kubernetes (GKE)
-Cloud Run is ideal when you want to run containers without managing
-infrastructure. Google Kubernetes Engine (GKE) is better when you need
-full Kubernetes capabilities: stateful workloads, custom networking,
-complex multi-service applications, or specific hardware (GPUs, TPUs) that
-require persistent node pools. Cloud Run and GKE can coexist in the same
-project and share the same container registry.
+Cloud Run is ideal when you want to run containers without managing infrastructure. Google Kubernetes Engine (GKE) is better when you need full Kubernetes capabilities: stateful workloads, custom networking, complex multi-service applications, or specific hardware (GPUs, TPUs) that require persistent node pools. Cloud Run and GKE can coexist in the same project and share the same container registry.
 :::
 
 - [Google Cloud Run documentation](https://cloud.google.com/run/docs)
