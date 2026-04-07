@@ -496,11 +496,28 @@ An image is always immutable, and a new image from a base one with modification 
 
 A shorcoming is that if a change add dependencies which are again added on the next step, both layers will still be added to the image. It is not always avoidable, but it is good to be aware of it as it can lead to a bigger image than expected, and thus a longer build time and a longer time to start the container.
 
-A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications.
+A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications. It also allow frequent changes in the second stage without having to rebuild the first stage, which can save a lot of time during development.
+
+Multi-stage build can be difficult, but most frameworks and languages have good documentation and examples on how to do it, so it is a good idea to look for them when needed.
 
 ::: {.callout-note}
 As the image are immutable, updating is always done by fetching a new base image and building a new image on top of it. It is important to keep an eye on the base image, as it can have security vulnerabilities that are fixed in newer versions. It is a good idea to use a specific version of the base image (for instance `python:3.9.13-slim` instead of `python:3.9-slim`), so you know exactly which version you are using and can update it when needed.
 :::
+
+## Testing/Development vs Production
+
+Unfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source). 
+
+But it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.
+
+## When containerization is not possible
+
+If you plan to containerize an existing application, depending on how it is built and the functionality it offers, it might be difficult or even impossible to containerize it. Particularly, the following cases can be problematic:
+* The application needs to run as root, which is generally not recommended for security reason and thus not allowed in most container engines.
+* The application needs to run on a specific operating system, which is not available as a base image.
+* The application needs to run on a specific hardware, which is not available in a container. Not that for GPU usage there are some solutions, such as NVIDIA Container Toolkit, but it is not always possible to use them.
+* The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later.
+* The application needs to run with a specific network configuration, which is not available in a container
 
 # Moving to Docker compose
 
@@ -956,150 +973,88 @@ Cloud Run is ideal when you want to run containers without managing infrastructu
 
 ## Apache Software Foundation Solutions {#sec-apache}
 
-The Apache Software Foundation (ASF) hosts hundreds of open-source
-projects. For data management and scientific computing infrastructure,
-several Apache projects are particularly relevant. They are mature, widely
-deployed, and have large communities — making them safe long-term choices
-for research data platforms.
+The Apache Software Foundation (ASF) hosts hundreds of open-source projects. For data management and scientific computing infrastructure, several Apache projects are particularly relevant. They are mature, widely deployed, and have large communities — making them safe long-term choices for research data platforms.
 
 ### Apache HTTP Server
 
-The Apache HTTP Server (httpd) is one of the most widely deployed web
-servers in the world. It serves static files and acts as a reverse proxy
-in front of application servers.
+The Apache HTTP Server (httpd) is one of the most widely deployed web servers in the world. It serves static files and acts as a reverse proxy in front of application servers.
 
-- **Virtual hosting.** Multiple websites or applications can be served from
-  one server using different domain names or paths.
-- **Modules.** Functionality is extended through modules: `mod_proxy` for
-  reverse proxying, `mod_ssl` for HTTPS, `mod_rewrite` for URL
-  manipulation, `mod_auth` for authentication.
-- **`.htaccess` files.** Per-directory configuration allows fine-grained
-  access control without restarting the server, which is useful in
-  multi-user research environments.
+- **Virtual hosting.** Multiple websites or applications can be served from one server using different domain names or paths.
+- **Modules.** Functionality is extended through modules: `mod_proxy` for reverse proxying, `mod_ssl` for HTTPS, `mod_rewrite` for URL manipulation, `mod_auth` for authentication.
+- **`.htaccess` files.** Per-directory configuration allows fine-grained access control without restarting the server, which is useful in multi-user research environments.
 
-For high-concurrency workloads (many simultaneous connections), Nginx is
-often preferred due to its event-driven architecture. Apache's
-process/thread model is simpler to configure and better supported by legacy
-applications. Both can coexist: Nginx at the front end proxies requests
-back to Apache.
+Apache has been the main http server for decades and is still widely used. It can be very complex to configure, and is often replaced by Nginx nowadays, or more recently by Caddy, which are more modern and easier to configure. In some cases, Apache can still be preferred as it support many modules and offers a lot of flexibility, but it is important to be aware that it might require more effort to maintain and secure than more modern alternatives. 
 
 - [Apache HTTP Server documentation](https://httpd.apache.org/docs/)
 
 ### Apache Tomcat
 
-Apache Tomcat is a Java Servlet container and web server. It runs Java web
-applications packaged as WAR (Web Application Archive) files. Many
-scientific data management platforms — including OMERO, certain LIMS
-systems, and institutional repository software — are Java-based and require
-Tomcat.
+Apache Tomcat is a Java Servlet container and web server. It runs Java web applications packaged as WAR (Web Application Archive) files. 
 
 - Implements the Java Servlet and JavaServer Pages (JSP) specifications.
-- Can be placed behind Apache HTTP Server (via `mod_proxy_ajp`) or Nginx
-  for SSL termination and load balancing.
-- The Manager web application allows deploying and undeploying WAR files
-  via a browser interface.
+- Can be placed behind Apache HTTP Server (via `mod_proxy_ajp`) or Nginx for SSL termination and load balancing.
+- The Manager web application allows deploying and undeploying WAR files via a browser interface.
 
 - [Apache Tomcat documentation](https://tomcat.apache.org/tomcat-10.1-doc/index.html)
 
 ### Apache Kafka
 
-Apache Kafka is a distributed event streaming platform. It acts as a
-high-throughput, fault-tolerant message broker: producers publish data
-events (messages) to named topics, and consumers read them independently
-and at their own pace. Kafka retains messages for a configurable period, so
-consumers can replay historical data.
+Apache Kafka is a distributed event streaming platform. It acts as a high-throughput, fault-tolerant message broker: producers publish data events (messages) to named topics, and consumers read them independently and at their own pace. Kafka retains messages for a configurable period, so consumers can replay historical data.
 
 Scientific use cases:
 
 - Ingesting high-frequency sensor or instrument data in real time.
-- Decoupling data producers (instruments, simulations) from data consumers
-  (databases, analysis pipelines).
-- Building audit logs where every data change is recorded as an immutable
-  event.
+- Decoupling data producers (instruments, simulations) from data consumers (databases, analysis pipelines).
+- Building audit logs where every data change is recorded as an immutable event.
 - Streaming data simultaneously to multiple downstream systems.
+
+A popular alternative to Kafka is RabbitMQ, which is a more traditional message queue with different semantics (e.g., messages are removed once consumed). Kafka's design for high-throughput and durability makes it better suited for large-scale data pipelines, while RabbitMQ may be simpler for smaller applications or those requiring complex routing.
+
+Both are not used directly, but components of the data management infrastructure (e.g., Spark Structured Streaming, Airflow). But if supported by a data management platform, they might allow to build producer or consumer applications that can be easily integrated with the rest of the infrastructure, and that can scale as needed.
 
 - [Apache Kafka documentation](https://kafka.apache.org/documentation/)
 - [Confluent Kafka tutorials](https://developer.confluent.io/tutorials/)
 
 ### Apache Spark
 
-Apache Spark is a unified analytics engine for large-scale data processing.
-It extends the MapReduce paradigm with in-memory computation, making
-iterative algorithms (common in machine learning and simulation analysis)
-far faster than disk-based approaches.
+Apache Spark is a unified analytics engine for large-scale data processing. Using Spark SQL, it is possible to easily work on large datasets.
 
 Core capabilities:
 
-- **Spark SQL** — query structured data using SQL or a DataFrame API
-  (available in Python, R, Scala, and Java).
-- **Structured Streaming** — process data streams from Kafka or other
-  sources in near-real time.
-- **MLlib** — distributed machine learning for classification, regression,
-  clustering, and collaborative filtering.
+- **Spark SQL** — query structured data using SQL or a DataFrame API (available in Python, R, Scala, and Java).
+- **Structured Streaming** — process data streams from Kafka or other sources in near-real time.
+- **MLlib** — distributed machine learning for classification, regression, clustering, and collaborative filtering.
 - **GraphX** — distributed graph computation for network analysis.
 
 - [Apache Spark documentation](https://spark.apache.org/docs/latest/)
 
 ### Apache Airflow
 
-Apache Airflow is a workflow orchestration platform for scheduling and
-monitoring data pipelines. Workflows are defined as Python code in the form
-of Directed Acyclic Graphs (DAGs), where each node represents a task (e.g.,
-download data, run analysis, upload results) and edges define dependencies
-between tasks.
+Apache Airflow is a workflow orchestration platform for scheduling and monitoring data pipelines. Workflows are defined as Python code in the form of Directed Acyclic Graphs (DAGs), where each node represents a task (e.g., download data, run analysis, upload results) and edges define dependencies between tasks.
 
 Scientific use cases:
 
-- Automating recurring data processing pipelines (nightly ingestion, weekly
-  reports).
+- Automating recurring data processing pipelines (nightly ingestion, weekly reports).
 - Orchestrating multi-step bioinformatics or image analysis workflows.
-- Managing dependencies between heterogeneous tasks: bash scripts, Python
-  functions, Kubernetes pods, SQL queries.
+- Managing dependencies between heterogeneous tasks: bash scripts, Python functions, Kubernetes pods, SQL queries.
 
 ::: {.callout-note}
 ## Airflow vs. Nextflow / Snakemake
-Bioinformaticians often use Nextflow or Snakemake because they natively
-understand file-based workflows and integrate with HPC schedulers (SLURM,
-PBS). Airflow is more general-purpose and integrates better with cloud
-services and databases. Both approaches can coexist in one organisation.
+Bioinformaticians often use Nextflow or Snakemake because they natively understand file-based workflows and integrate with HPC schedulers (SLURM, PBS). Airflow is more general-purpose and integrates better with cloud services and databases. Both approaches can coexist in one organisation.
 :::
 
 - [Apache Airflow documentation](https://airflow.apache.org/docs/)
 
 ### Apache Solr
 
-Apache Solr is an enterprise search platform built on Apache Lucene. It
-provides full-text search, faceted search, filtering, and ranked retrieval
-over structured and unstructured data. It is useful for building search
-interfaces over scientific datasets, publications, or metadata catalogues.
+Apache Solr is an enterprise search platform built on Apache Lucene. It provides full-text search, faceted search, filtering, and ranked retrieval over structured and unstructured data. It is useful for building search interfaces over scientific datasets, publications, or metadata catalogues.
+Many data management platforms use Solr to power their search functionality. Solr run parallel to the data management platform to index the data and metadata, and to provide search results to the users. It is generally not used directly by the users, but it can be useful to have a basic knowledge of it to understand how the search works, and to troubleshoot it if needed.
 
 - Supports JSON, XML, and CSV indexing.
 - Runs standalone or in SolrCloud mode for distributed, fault-tolerant search.
 - Used by DSpace (institutional repositories) and CKAN (open data portals).
 
 - [Apache Solr documentation](https://solr.apache.org/guide/solr/latest/)
-
-### Apache Arrow and Parquet
-
-**Apache Arrow** defines a language-agnostic in-memory columnar data format.
-Libraries for Python, R, Java, C++, and others can share data through Arrow
-buffers without copying or serialisation — enabling zero-copy
-interoperability between Pandas, Spark, DuckDB, and other tools.
-
-- [Apache Arrow documentation](https://arrow.apache.org/docs/)
-
-**Apache Parquet** is a columnar storage file format optimised for
-analytics. Storing data column-by-column (rather than row-by-row as in CSV)
-allows efficient compression and selective column reads — you read only the
-columns needed for a query without scanning the whole file.
-
-- Widely supported: Spark, Pandas, DuckDB, BigQuery, Redshift, and Athena
-  all read Parquet natively.
-- Strongly typed schemas with nested data support.
-- Snappy and Zstandard compression significantly reduce storage footprint
-  compared to CSV.
-
-- [Apache Parquet documentation](https://parquet.apache.org/docs/)
 
 ### Apache project summary
 
@@ -1111,8 +1066,6 @@ columns needed for a query without scanning the whole file.
 | Spark | Big data analytics | Large-scale data processing and machine learning |
 | Airflow | Workflow orchestration | Scheduling and monitoring data pipelines |
 | Solr | Search | Full-text search over datasets and metadata catalogues |
-| Arrow | Data interchange | Zero-copy data sharing between analysis tools |
-| Parquet | File format | Efficient columnar storage for analytical datasets |
 
 : Apache Software Foundation projects relevant to research data management {.striped .hover}
 
