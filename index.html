@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6ebf626d957987a3094d36c3262c2f72.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b933da61422079644513f618cd81c344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -310,7 +310,11 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   </ul></li>
   <li><a href="#useful-things-to-know" id="toc-useful-things-to-know" class="nav-link" data-scroll-target="#useful-things-to-know">Useful things to know</a></li>
   </ul></li>
-  <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a></li>
+  <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a>
+  <ul class="collapse">
+  <li><a href="#testingdevelopment-vs-production" id="toc-testingdevelopment-vs-production" class="nav-link" data-scroll-target="#testingdevelopment-vs-production">Testing/Development vs Production</a></li>
+  <li><a href="#when-containerization-is-not-possible" id="toc-when-containerization-is-not-possible" class="nav-link" data-scroll-target="#when-containerization-is-not-possible">When containerization is not possible</a></li>
+  </ul></li>
   <li><a href="#moving-to-docker-compose" id="toc-moving-to-docker-compose" class="nav-link" data-scroll-target="#moving-to-docker-compose">Moving to Docker compose</a>
   <ul class="collapse">
   <li><a href="#advantages" id="toc-advantages" class="nav-link" data-scroll-target="#advantages">Advantages</a></li>
@@ -356,7 +360,6 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#apache-spark" id="toc-apache-spark" class="nav-link" data-scroll-target="#apache-spark">Apache Spark</a></li>
   <li><a href="#apache-airflow" id="toc-apache-airflow" class="nav-link" data-scroll-target="#apache-airflow">Apache Airflow</a></li>
   <li><a href="#apache-solr" id="toc-apache-solr" class="nav-link" data-scroll-target="#apache-solr">Apache Solr</a></li>
-  <li><a href="#apache-arrow-and-parquet" id="toc-apache-arrow-and-parquet" class="nav-link" data-scroll-target="#apache-arrow-and-parquet">Apache Arrow and Parquet</a></li>
   <li><a href="#apache-project-summary" id="toc-apache-project-summary" class="nav-link" data-scroll-target="#apache-project-summary">Apache project summary</a></li>
   </ul></li>
   </ul></li>
@@ -894,7 +897,8 @@ Note
 <p>A Dockerfile defines layers from a base images (<code>FROM image_name:version</code>) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.</p>
 <p>An image is always immutable, and a new image from a base one with modification will also be immutable. In case we need several application with the same base image, it is a good idea to build a custom base image with the common dependencies, and then build the different application images from this custom base image, so the common layers will be shared between the different images.</p>
 <p>A shorcoming is that if a change add dependencies which are again added on the next step, both layers will still be added to the image. It is not always avoidable, but it is good to be aware of it as it can lead to a bigger image than expected, and thus a longer build time and a longer time to start the container.</p>
-<p>A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications.</p>
+<p>A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications. It also allow frequent changes in the second stage without having to rebuild the first stage, which can save a lot of time during development.</p>
+<p>Multi-stage build can be difficult, but most frameworks and languages have good documentation and examples on how to do it, so it is a good idea to look for them when needed.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -908,6 +912,15 @@ Note
 <p>As the image are immutable, updating is always done by fetching a new base image and building a new image on top of it. It is important to keep an eye on the base image, as it can have security vulnerabilities that are fixed in newer versions. It is a good idea to use a specific version of the base image (for instance <code>python:3.9.13-slim</code> instead of <code>python:3.9-slim</code>), so you know exactly which version you are using and can update it when needed.</p>
 </div>
 </div>
+<section id="testingdevelopment-vs-production" class="level2">
+<h2 class="anchored" data-anchor-id="testingdevelopment-vs-production">Testing/Development vs Production</h2>
+<p>Unfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source).</p>
+<p>But it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.</p>
+</section>
+<section id="when-containerization-is-not-possible" class="level2">
+<h2 class="anchored" data-anchor-id="when-containerization-is-not-possible">When containerization is not possible</h2>
+<p>If you plan to containerize an existing application, depending on how it is built and the functionality it offers, it might be difficult or even impossible to containerize it. Particularly, the following cases can be problematic: * The application needs to run as root, which is generally not recommended for security reason and thus not allowed in most container engines. * The application needs to run on a specific operating system, which is not available as a base image. * The application needs to run on a specific hardware, which is not available in a container. Not that for GPU usage there are some solutions, such as NVIDIA Container Toolkit, but it is not always possible to use them. * The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later. * The application needs to run with a specific network configuration, which is not available in a container</p>
+</section>
 </section>
 <section id="moving-to-docker-compose" class="level1">
 <h1>Moving to Docker compose</h1>
@@ -1594,14 +1607,14 @@ Warning
 <li><strong>Modules.</strong> Functionality is extended through modules: <code>mod_proxy</code> for reverse proxying, <code>mod_ssl</code> for HTTPS, <code>mod_rewrite</code> for URL manipulation, <code>mod_auth</code> for authentication.</li>
 <li><strong><code>.htaccess</code> files.</strong> Per-directory configuration allows fine-grained access control without restarting the server, which is useful in multi-user research environments.</li>
 </ul>
-<p>For high-concurrency workloads (many simultaneous connections), Nginx is often preferred due to its event-driven architecture. Apache’s process/thread model is simpler to configure and better supported by legacy applications. Both can coexist: Nginx at the front end proxies requests back to Apache.</p>
+<p>Apache has been the main http server for decades and is still widely used. It can be very complex to configure, and is often replaced by Nginx nowadays, or more recently by Caddy, which are more modern and easier to configure. In some cases, Apache can still be preferred as it support many modules and offers a lot of flexibility, but it is important to be aware that it might require more effort to maintain and secure than more modern alternatives.</p>
 <ul>
 <li><a href="https://httpd.apache.org/docs/">Apache HTTP Server documentation</a></li>
 </ul>
 </section>
 <section id="apache-tomcat" class="level3">
 <h3 class="anchored" data-anchor-id="apache-tomcat">Apache Tomcat</h3>
-<p>Apache Tomcat is a Java Servlet container and web server. It runs Java web applications packaged as WAR (Web Application Archive) files. Many scientific data management platforms — including OMERO, certain LIMS systems, and institutional repository software — are Java-based and require Tomcat.</p>
+<p>Apache Tomcat is a Java Servlet container and web server. It runs Java web applications packaged as WAR (Web Application Archive) files.</p>
 <ul>
 <li><p>Implements the Java Servlet and JavaServer Pages (JSP) specifications.</p></li>
 <li><p>Can be placed behind Apache HTTP Server (via <code>mod_proxy_ajp</code>) or Nginx for SSL termination and load balancing.</p></li>
@@ -1614,17 +1627,21 @@ Warning
 <p>Apache Kafka is a distributed event streaming platform. It acts as a high-throughput, fault-tolerant message broker: producers publish data events (messages) to named topics, and consumers read them independently and at their own pace. Kafka retains messages for a configurable period, so consumers can replay historical data.</p>
 <p>Scientific use cases:</p>
 <ul>
-<li><p>Ingesting high-frequency sensor or instrument data in real time.</p></li>
-<li><p>Decoupling data producers (instruments, simulations) from data consumers (databases, analysis pipelines).</p></li>
-<li><p>Building audit logs where every data change is recorded as an immutable event.</p></li>
-<li><p>Streaming data simultaneously to multiple downstream systems.</p></li>
-<li><p><a href="https://kafka.apache.org/documentation/">Apache Kafka documentation</a></p></li>
-<li><p><a href="https://developer.confluent.io/tutorials/">Confluent Kafka tutorials</a></p></li>
+<li>Ingesting high-frequency sensor or instrument data in real time.</li>
+<li>Decoupling data producers (instruments, simulations) from data consumers (databases, analysis pipelines).</li>
+<li>Building audit logs where every data change is recorded as an immutable event.</li>
+<li>Streaming data simultaneously to multiple downstream systems.</li>
+</ul>
+<p>A popular alternative to Kafka is RabbitMQ, which is a more traditional message queue with different semantics (e.g., messages are removed once consumed). Kafka’s design for high-throughput and durability makes it better suited for large-scale data pipelines, while RabbitMQ may be simpler for smaller applications or those requiring complex routing.</p>
+<p>Both are not used directly, but components of the data management infrastructure (e.g., Spark Structured Streaming, Airflow). But if supported by a data management platform, they might allow to build producer or consumer applications that can be easily integrated with the rest of the infrastructure, and that can scale as needed.</p>
+<ul>
+<li><a href="https://kafka.apache.org/documentation/">Apache Kafka documentation</a></li>
+<li><a href="https://developer.confluent.io/tutorials/">Confluent Kafka tutorials</a></li>
 </ul>
 </section>
 <section id="apache-spark" class="level3">
 <h3 class="anchored" data-anchor-id="apache-spark">Apache Spark</h3>
-<p>Apache Spark is a unified analytics engine for large-scale data processing. It extends the MapReduce paradigm with in-memory computation, making iterative algorithms (common in machine learning and simulation analysis) far faster than disk-based approaches.</p>
+<p>Apache Spark is a unified analytics engine for large-scale data processing. Using Spark SQL, it is possible to easily work on large datasets.</p>
 <p>Core capabilities:</p>
 <ul>
 <li><p><strong>Spark SQL</strong> — query structured data using SQL or a DataFrame API (available in Python, R, Scala, and Java).</p></li>
@@ -1662,26 +1679,12 @@ Warning
 </section>
 <section id="apache-solr" class="level3">
 <h3 class="anchored" data-anchor-id="apache-solr">Apache Solr</h3>
-<p>Apache Solr is an enterprise search platform built on Apache Lucene. It provides full-text search, faceted search, filtering, and ranked retrieval over structured and unstructured data. It is useful for building search interfaces over scientific datasets, publications, or metadata catalogues.</p>
+<p>Apache Solr is an enterprise search platform built on Apache Lucene. It provides full-text search, faceted search, filtering, and ranked retrieval over structured and unstructured data. It is useful for building search interfaces over scientific datasets, publications, or metadata catalogues. Many data management platforms use Solr to power their search functionality. Solr run parallel to the data management platform to index the data and metadata, and to provide search results to the users. It is generally not used directly by the users, but it can be useful to have a basic knowledge of it to understand how the search works, and to troubleshoot it if needed.</p>
 <ul>
 <li><p>Supports JSON, XML, and CSV indexing.</p></li>
 <li><p>Runs standalone or in SolrCloud mode for distributed, fault-tolerant search.</p></li>
 <li><p>Used by DSpace (institutional repositories) and CKAN (open data portals).</p></li>
 <li><p><a href="https://solr.apache.org/guide/solr/latest/">Apache Solr documentation</a></p></li>
-</ul>
-</section>
-<section id="apache-arrow-and-parquet" class="level3">
-<h3 class="anchored" data-anchor-id="apache-arrow-and-parquet">Apache Arrow and Parquet</h3>
-<p><strong>Apache Arrow</strong> defines a language-agnostic in-memory columnar data format. Libraries for Python, R, Java, C++, and others can share data through Arrow buffers without copying or serialisation — enabling zero-copy interoperability between Pandas, Spark, DuckDB, and other tools.</p>
-<ul>
-<li><a href="https://arrow.apache.org/docs/">Apache Arrow documentation</a></li>
-</ul>
-<p><strong>Apache Parquet</strong> is a columnar storage file format optimised for analytics. Storing data column-by-column (rather than row-by-row as in CSV) allows efficient compression and selective column reads — you read only the columns needed for a query without scanning the whole file.</p>
-<ul>
-<li><p>Widely supported: Spark, Pandas, DuckDB, BigQuery, Redshift, and Athena all read Parquet natively.</p></li>
-<li><p>Strongly typed schemas with nested data support.</p></li>
-<li><p>Snappy and Zstandard compression significantly reduce storage footprint compared to CSV.</p></li>
-<li><p><a href="https://parquet.apache.org/docs/">Apache Parquet documentation</a></p></li>
 </ul>
 </section>
 <section id="apache-project-summary" class="level3">
@@ -1730,16 +1733,6 @@ Warning
 <td>Solr</td>
 <td>Search</td>
 <td>Full-text search over datasets and metadata catalogues</td>
-</tr>
-<tr class="odd">
-<td>Arrow</td>
-<td>Data interchange</td>
-<td>Zero-copy data sharing between analysis tools</td>
-</tr>
-<tr class="even">
-<td>Parquet</td>
-<td>File format</td>
-<td>Efficient columnar storage for analytical datasets</td>
 </tr>
 </tbody>
 </table>
