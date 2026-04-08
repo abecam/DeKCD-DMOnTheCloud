@@ -20,6 +20,8 @@ Cloud DB: managed (AWS), specialised (PostGres k8s), "regular", key-value
 
 [Free K8s training:](https://github.com/jpetazzo/container.training)
 
+Future topics: updating a Data Management solution, including backup and restore with adaptation of data, also importing users.
+
 ## Structure
 
 ### General overview

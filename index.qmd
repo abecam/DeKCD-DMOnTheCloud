@@ -29,7 +29,15 @@ When to go full cloud, or with a containerised solution for your datamanagement 
 
 ## Plan for future problems, not future functionalities
 
+What is important when setting up a Data Management Platform is to plan for future problems, things that could be very costly to fix later, such as security issues, data loss, or very serious performance issues that might prevent the use of the platform. We will come back to the most important aspect in this page and in the [Backups and Security page](pages/Backups_and_security.qmd) page.
+
+Related to that, it is primordial to define the current requirements and avoid feature creep, that is the tendency to add more and more features, which can lead to a very complex and hard to maintain solution. It is important to keep in mind that the most important thing is to have a working solution that meets the current requirements, and not to have a perfect solution that meets all possible requirements. Not defining correctly the requirements can force the choice of an overly complex platform that will be harder to maintain and use and might create future problems, including a reflection of the complexity in the user interface, which can lead to a lower adoption by the users.
+
+While defining the requirements, it is important to have a discussion with the users as to find out what they really need. *Building the requirement is about what the users need, not what they want.*
+
 ## Document all specific changes
+
+A good technical setup is one that anyone else can maintain. As such it is important to document all specific changes that are made to the platform, such as configuration changes, custom scripts, or any other modification that is not part of the standard installation. This documentation should be clear and detailed enough so that anyone can understand what was changed, why it was changed, and how to revert it if needed. Ideally it would be centralized in a single document, such as a wiki page or a markdown file in the repository, and should be updated regularly to reflect any new changes, but a simple readme file in the folder where the change is made can also be a good option (better if complementary to the centralized documentation).
 
 ## Use version control for that can be changed
 
