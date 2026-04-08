@@ -86,6 +86,39 @@
     ]
   },
   {
+    "objectID": "index.html#plan-for-future-problems-not-future-functionalities",
+    "href": "index.html#plan-for-future-problems-not-future-functionalities",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Plan for future problems, not future functionalities",
+    "text": "Plan for future problems, not future functionalities",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#document-all-specific-changes",
+    "href": "index.html#document-all-specific-changes",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Document all specific changes",
+    "text": "Document all specific changes",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#use-version-control-for-that-can-be-changed",
+    "href": "index.html#use-version-control-for-that-can-be-changed",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Use version control for that can be changed",
+    "text": "Use version control for that can be changed\nMost Data management setups will involve some customization. If minor it could only be documented, but if significant it should be saved and preferably with version control (typically Git) so changes can be tracked and reversed.\nHighly customizable platforms often offer a way to export customizations as a text file (typically json, ini or xml) and eventually can be customized using an API. Both will allow saving in a folder that can be versionned. Using an API will probably be more work initially but allows a very simple export once in place.\nCommits should still be manual with meaningfull messages (related to the previous chapter).\nIf there is no export functionalities or API support but the changes are saved in an accessible database, it is still possible to export the change from there. To ensure consistency, it is advised to write a script or program doing the export. Using Python is a good option for doing so.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
     "objectID": "index.html#vocabulary",
     "href": "index.html#vocabulary",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
@@ -123,7 +156,7 @@
     "href": "index.html#testingdevelopment-vs-production",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Testing/Development vs Production",
-    "text": "Testing/Development vs Production\nUnfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source).\nBut it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.",
+    "text": "Testing/Development vs Production\nUnfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source).\nBut it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.\n\n\n\n\n\n\nNote\n\n\n\nA light image can be very barebone and offer the minimum linux commands. It might be useful, even on production, to use a slightly more feature-rich image or to add some needed tools. Once the setup is stable, a new image can be built.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
