@@ -25,6 +25,22 @@ Each section assumes that you know the precedents. If you already know one secti
 
 When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and we are working on a [detailed decision tree](pages/TechPlatformDecisionTree.qmd)
 
+# Common remarks
+
+## Plan for future problems, not future functionalities
+
+## Document all specific changes
+
+## Use version control for that can be changed
+
+Most Data management setups will involve some customization. If minor it could only be documented, but if significant it should be saved and preferably with version control (typically Git) so changes can be tracked and reversed.
+
+Highly customizable platforms often offer a way to export customizations as a text file (typically json, ini or xml) and eventually can be customized using an API. Both will allow saving in a folder that can be versionned. Using an API will probably be more work initially but allows a very simple export once in place.
+
+Commits should still be manual with meaningfull messages (related to the previous chapter).
+
+If there is no export functionalities or API support but the changes are saved in an accessible database, it is still possible to export the change from there. To ensure consistency, it is advised to write a script or program doing the export. Using Python is a good option for doing so.
+
 # Quick introduction to Linux/Unix
 
 ::: {.callout-tip}
@@ -498,6 +514,8 @@ A shorcoming is that if a change add dependencies which are again added on the n
 
 A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications. It also allow frequent changes in the second stage without having to rebuild the first stage, which can save a lot of time during development.
 
+It is easy to remember why a multi-stage build is useful by thinking that preparing the application might need a lot more (languages, framework, tools) than is needed to run it. So the second phase only keep what is needed to run things.
+
 Multi-stage build can be difficult, but most frameworks and languages have good documentation and examples on how to do it, so it is a good idea to look for them when needed.
 
 ::: {.callout-note}
@@ -509,6 +527,10 @@ As the image are immutable, updating is always done by fetching a new base image
 Unfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source). 
 
 But it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.
+
+::: {.callout-note}
+A light image can be very barebone and offer the minimum linux commands. It might be useful, even on production, to use a slightly more feature-rich image or to add some needed tools. Once the setup is stable, a new image can be built.
+:::
 
 ## When containerization is not possible
 
@@ -1093,6 +1115,7 @@ But there are also non-relational databases, such as MongoDB, Cassandra, Redis, 
 # Security
 
 Security in Data Management is an important topic, as the data is often sensitive and valuable. It is important to have a basic knowledge of security principles and practices, and to apply them to your Data Management Platform. This includes:
+
 * Keeping the software up-to-date with security patches,
 * Using strong passwords and changing them regularly, though it is better to have strong passwords that do not need to be changed regularly, as changing them regularly can lead to bad practices such as writing them down or using weak passwords,
 * Limiting access to the data and the application to only those who need it,
@@ -1100,6 +1123,10 @@ Security in Data Management is an important topic, as the data is often sensitiv
 * Regularly backing up the data and testing the restore process,
 * Monitoring the system for suspicious activity and responding to incidents promptly,
 * Ensuring that the connections are secure, using HTTPS for web applications and SSH for remote access. If the internal network is secure and only the necessary ports and IP addresses are allowed to access the application, it is possible to use HTTP for internal communication. Using HTTPS need to be done with a proper certificate, which can be obtained for free from [Let's Encrypt](https://letsencrypt.org/), which is a nonprofit organization giving free certificates. Several tools, such as [Certbot](https://certbot.eff.org/), can help with obtaining and renewing certificates from Let's Encrypt.
+* Avoiding any abuse of service. It could be:
+  - spam attack of forms and exposed emails/telephon numbers,
+  - too many requests to a web-server, either maliciously, due to a mistake (for instance from a software misusing an API) or by regular usage (more traffic than expected),
+  - using too much ressources, for instance uploading very large files.
 It is also important to be aware of the specific security risks associated with the technologies you are using, such as containers, virtual machines, or cloud services, and to take appropriate measures to mitigate those risks.
 
 We will explore these topics in more details in the [Backups and Security page](pages/Backups_and_security.qmd).
