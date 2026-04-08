@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b933da61422079644513f618cd81c344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -429,9 +429,13 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <h1>Common remarks</h1>
 <section id="plan-for-future-problems-not-future-functionalities" class="level2">
 <h2 class="anchored" data-anchor-id="plan-for-future-problems-not-future-functionalities">Plan for future problems, not future functionalities</h2>
+<p>What is important when setting up a Data Management Platform is to plan for future problems, things that could be very costly to fix later, such as security issues, data loss, or very serious performance issues that might prevent the use of the platform. We will come back to the most important aspect in this page and in the <a href="./pages/Backups_and_security.html">Backups and Security page</a> page.</p>
+<p>Related to that, it is primordial to define the current requirements and avoid feature creep, that is the tendency to add more and more features, which can lead to a very complex and hard to maintain solution. It is important to keep in mind that the most important thing is to have a working solution that meets the current requirements, and not to have a perfect solution that meets all possible requirements. Not defining correctly the requirements can force the choice of an overly complex platform that will be harder to maintain and use and might create future problems, including a reflection of the complexity in the user interface, which can lead to a lower adoption by the users.</p>
+<p>While defining the requirements, it is important to have a discussion with the users as to find out what they really need. <em>Building the requirement is about what the users need, not what they want.</em></p>
 </section>
 <section id="document-all-specific-changes" class="level2">
 <h2 class="anchored" data-anchor-id="document-all-specific-changes">Document all specific changes</h2>
+<p>A good technical setup is one that anyone else can maintain. As such it is important to document all specific changes that are made to the platform, such as configuration changes, custom scripts, or any other modification that is not part of the standard installation. This documentation should be clear and detailed enough so that anyone can understand what was changed, why it was changed, and how to revert it if needed. Ideally it would be centralized in a single document, such as a wiki page or a markdown file in the repository, and should be updated regularly to reflect any new changes, but a simple readme file in the folder where the change is made can also be a good option (better if complementary to the centralized documentation).</p>
 </section>
 <section id="use-version-control-for-that-can-be-changed" class="level2">
 <h2 class="anchored" data-anchor-id="use-version-control-for-that-can-be-changed">Use version control for that can be changed</h2>
