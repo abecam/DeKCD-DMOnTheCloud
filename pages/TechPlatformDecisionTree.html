@@ -326,7 +326,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 
     MA -- Yes --&gt; MB
 
-    MA -- No --&gt; MD
+    MA -- No --&gt; CA
 
     MB{"Can the selected RDM platform be easily containerized and deployed on Kubernetes (e.g., using Helm charts or operators), and is the database already supported or can it be easily integrated?"}
 
@@ -340,11 +340,17 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 
     MC -- No --&gt; CA
 
-    MD{"Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"}
+    CB{"Do you have specific requirements that necessitate an orchestration (for instance a need for high availability, load balancing)?"}
 
-    MD --&gt; CA
+    CB -- Yes --&gt; MD
+
+    CB -- No --&gt; CAA
+
+    MD["Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"]
     
-    CA -- Yes --&gt; CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
+    CA -- Yes --&gt; CB
+
+    CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
     
     CA -- No --&gt; D
 
