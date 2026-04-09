@@ -53,7 +53,7 @@ flowchart TD
 
 	MA -- Yes --> MB
 
-	MA -- No --> MD
+	MA -- No --> CA
 
 	MB{"Can the selected RDM platform be easily containerized and deployed on Kubernetes (e.g., using Helm charts or operators), and is the database already supported or can it be easily integrated?"}
 
@@ -67,11 +67,17 @@ flowchart TD
 
 	MC -- No --> CA
 
-	MD{"Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"}
+	CB{"Do you have specific requirements that necessitate an orchestration (for instance a need for high availability, load balancing)?"}
 
-	MD --> CA
+	CB -- Yes --> MD
+
+	CB -- No --> CAA
+
+	MD["Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"]
 	
-	CA -- Yes --> CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
+	CA -- Yes --> CB
+
+	CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
 	
 	CA -- No --> D
 

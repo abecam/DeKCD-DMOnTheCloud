@@ -632,6 +632,8 @@ In some cases, it can be better to install directly on the host system or the on
 
 It could be for some specific hardware or security needs, because the application has a very complex setup, because the application hasn't been maintained for a long time and does not offer an image (or the image is not of the last version...).
 
+## Should you virtualize or containerize an application?
+
 Most of the time it is possible to set it up in a virtual machine with some extra effort, but some virtual machine hypervisor (that run the virtual machines) might have some restrictions on the hardware use (GPU for instance), or have some functionality locked as part as a commercial version.
 
 Containers could have a full access to the hardware if run on Linux, but the base image would probably be restricted on what it is allowed to do, or getting the access might be really difficult.
