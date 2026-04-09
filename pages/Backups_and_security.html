@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b933da61422079644513f618cd81c344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -369,22 +369,42 @@ Note
 </section>
 <section id="surface-of-attack" class="level2">
 <h2 class="anchored" data-anchor-id="surface-of-attack">Surface of attack</h2>
+<p>About security, we will often speak about reducing the surface of attack. The surface of attack is the part of the system that can be accessed by an attacker. The more surface of attack, the more chances for an attacker to find a vulnerability. Thus, reducing the surface of attack is necessary for security. For instance, if you have a web application, you should not have any other service running on the same server that can be accessed from the outside. If you have a database, it should not be accessible from the outside, but only from the application. If you have a backup system, it should not be accessible from the outside, but only from the application and/or from a secure location.</p>
 </section>
 <section id="firewall" class="level2">
 <h2 class="anchored" data-anchor-id="firewall">Firewall</h2>
+<p>A firewall is a software or hardware that blocks traffic that is not needed.</p>
+<p>One aspect of a Firewall is to reduce the surface of attack by blocking all the traffic that is not needed. For instance, if you have a web application, you should only allow traffic on port 80 (HTTP) and 443 (HTTPS). The database should not be accessible from the outside, but only from the application. The backup system should not be accessible from the outside, but only from the application and/or from a secure location.</p>
+<p>But a firewall can also be used to block traffic from known malicious IP addresses or, if the software is not designed to be used by the public, to block all traffic from the outside and only allow traffic from a secure location (such as a VPN), while autorizing some external access by whitelisting some IP addresses.</p>
 </section>
 <section id="protections-against-attacks" class="level2">
 <h2 class="anchored" data-anchor-id="protections-against-attacks">Protections against attacks</h2>
+<p>To review, expend and simplify. Extract Denial of Service/BruteForce and simple abuse from robots and agents.</p>
+<p>There are many kinds of attacks, such as SQL injection, cross-site scripting, cross-site request forgery, brute force, denial of service. Some of them can be mitigated by the software design and implementation, such as using prepared statements for SQL queries, using a web application firewall, using a rate limiter, using a CAPTCHA, using a strong password policy, using two-factor authentication, using a VPN, using a firewall, using a backup system, using a monitoring system. Some of them can be mitigated by the user behavior, such as using a strong password, not sharing passwords, not clicking on suspicious links, not downloading suspicious files, not giving away personal information, not using public Wi-Fi for sensitive operations. But some others are more difficult to mitigate, such as zero-day vulnerabilities, insider threats, social engineering, and at the extreme physical attacks (such as theft or sabotage).</p>
+<p>Protecting against abuses is also difficult.</p>
 </section>
 <section id="passwords-and-keys" class="level2">
 <h2 class="anchored" data-anchor-id="passwords-and-keys">Passwords and keys</h2>
+<p>Passwords are still the most common way to protect access to a system, but they are also the most vulnerable. They should be strong and unique, and should not be shared. They should not be written down or stored in plain text. To encourage users to use strong passwords, it is recommended to propose a password manager or a vault, that can generate strong passwords and store them securely. The application should also enforce strong passwords, and should not allow weak passwords. Allowing long passwords allow to use passphrases, that are easier to remember and can be very strong, they can be non-sensical sentences, so easy to remember but hard to guess, such as “TheCowBouBouBounceOnTheMoon!”. If supported, two-factor authentication should be used, as it adds an extra layer of security.</p>
+<p>But one of the strongest way to propose an access is to use keys, that can be generated and stored securely, and can be easily revoked if needed. For instance, SSH keys are a very common way to access a server, and they are much more secure than passwords. They can be generated with a passphrase, that adds an extra layer of security.</p>
+<p>Some authentication system can also use tokens (which are a kind of key), that can be generated and stored securely, and can be easily revoked if needed. For instance, API tokens are a very common way to access an API, and they are much more secure than having to regularly use an username and passwords.</p>
+<p>Most of the time, the software will need to access some resources (such as a database) with a password or a key. In that case, it is important to store these credentials in a secure way, such as in an environment variable, in a configuration file with restricted access, or in a secret manager. They should never be stored in plain text in the code or in the configuration file.</p>
+<p>Most Data Management platforms also support external authentication, such as LDAP or OAuth. OAuth is a very common way to allow users to authenticate with their existing credentials, such as Google or GitHub. It is also a secure way to authenticate, as it relies on the security of the external provider (assuming the user is following the provider’s security practices, but if not it is probably a generalized practice and would be a problem anyway).</p>
 </section>
 <section id="what-to-never-log-log-levels" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-log-log-levels">What to never log, log levels</h2>
 <p>Log are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).</p>
-<p>For instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e.&nbsp;the attacker hoping that a mechanism in the code will execute a payload. A simple example would be executing raw SQL queries: * The URL subpath is /users/[name] where [name] is the name you want to look for. * The code will then simply execute “SELECT * FROM users WHERE name=[name];” * The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“. * The code will execute”SELECT * FROM users WHERE name=“name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error. * If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it should not work).</p>
+<p>For instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e.&nbsp;the attacker hoping that a mechanism in the code will execute a payload.</p>
+<p>A simple example would be executing raw SQL queries:</p>
+<ul>
+<li>The URL subpath is /users/[name] where [name] is the name you want to look for.</li>
+<li>The code will then simply execute “SELECT * FROM users WHERE name=[name];”</li>
+<li>The attacker will use the URL subpath “/users/name”;DROP%20TABLE%20admin;%20 –“.</li>
+<li>The code will execute “SELECT * FROM users WHERE name=”name”;DROP TABLE admin; –““. The end”–” is to comment the closing quote so it does not raise an error.</li>
+<li>If the access right of the database is too permissible and an admin table exists, it will be dropped (but the example code is for illustration only, it might not work and in all cases it <em>should not work</em>).</li>
+</ul>
 <p>This is a really well known and simple example and no modern web framework or API should allow such attacks nowadays. But the actual issue is with unknow vulnerability. Going back to this example, the web application should log something like:</p>
-<p>“2025-11-23_2:32:22 - Warning - incorrect characters in path:”/users/name”;DROP%20TABLE%20admin;%20 –”</p>
+<p><code>"2025-11-23_2:32:22 - Warning - incorrect characters in path: "/users/name";DROP%20TABLE%20admin;%20 --"</code></p>
 <p>And that would allow to check what was attempted.</p>
 <p>But logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:</p>
 <ul>
@@ -394,6 +414,35 @@ Note
 </section>
 <section id="what-to-never-store-or-never-in-reversible-format" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</h2>
+<p>All kind of passwords should never be stored in a reversible format. If the password is needed for the software to work, it should be stored in an encrypted format, with a key that is not stored on the same system. If the password is only needed for authentication, it should be hashed with a strong hashing algorithm and a salt.</p>
+<p>Any key, hash or token that can be used to access the system should be stored in an encrypted format, with a key that is not stored on the same system.</p>
+<p>In most countries, the storage of personal data is restricted by law. In the EU, for instance, personal data can only be stored with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time. Thus, if some research data is linked to person, it is advised to pseudonymize or to anonymize the data. Only the needed data should be stored, and only for the needed time.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The limitation of data storage for personal information includes backups.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The exchange of personal data between institutions can only by done with an agreement and with the consent of the user. It is recommended to consult a data protection officer for that.</p>
+</div>
+</div>
 </section>
 <section id="know-your-infrastructure" class="level2">
 <h2 class="anchored" data-anchor-id="know-your-infrastructure">Know your infrastructure</h2>
