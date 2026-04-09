@@ -3,8 +3,6 @@ title: "Technical Platform decision tree for Data Management Platforms"
 number-sections: true
 ---
 
-TODO: Extend the Kubernetes section. Having a K8s cluster is not enough to take the decision to use it (complexity).
-
 ```{mermaid}
 flowchart TD
 	A["Start: You need to set up<br/>Research Data Management (RDM)"] --> B
@@ -49,7 +47,29 @@ flowchart TD
 
 	M -- Yes, already running & supported --> N["Use a Kubernetes-based RDM stack<br/>(e.g., iRODS, Dataverse, Rucio, Nextcloud,<br/>or custom services deployed on K8s)"]
 
-	M -- No --> CA
+	M -- No --> MA
+
+	MA{"Does the team have the necessary skills to manage and operate Kubernetes?"}
+
+	MA -- Yes --> MB
+
+	MA -- No --> MD
+
+	MB{"Can the selected RDM platform be easily containerized and deployed on Kubernetes (e.g., using Helm charts or operators), and is the database already supported or can it be easily integrated?"}
+
+	MB -- Yes --> MC
+
+	MB -- No --> CA
+
+	MC{"Do the benefits of Kubernetes (scalability, resilience, high availability) outweigh the added complexity and operational overhead?"}
+
+	MC -- Yes --> N
+
+	MC -- No --> CA
+
+	MD{"Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"}
+
+	MD --> CA
 	
 	CA -- Yes --> CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
 	

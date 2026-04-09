@@ -23,7 +23,13 @@ Each section assumes that you know the precedents. If you already know one secti
 
 # When to...
 
-When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and we are working on a [detailed decision tree](pages/TechPlatformDecisionTree.qmd)
+When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and you can find a [detailed decision tree](pages/TechPlatformDecisionTree.qmd).
+
+* If you have a very simple use case, with a single application and a single user, and you do not need to share the data with anyone else, a local installation on a personal computer might be enough ("bare metal"). It is the simplest solution, but it is also the least scalable and the least secure. It is not recommended for production use, but it can be useful for testing and development.
+* A first way to encapsulate  a solution is to use a virtual machine, which will provide a full encapsulation of the application and its dependencies. It is more secure than a local installation and allow to play around without touching your actual system, but it is also more resource intensive and without the benefit of a containerised solution (see below). It is a good option for testing and development, or for applications that cannot be containerised. As on a local setup, it will need to be updated and maintained "directly", where an updated image can be used for a containerised solution (with some caveats)
+* If you have a more complex use case, with several applications and several users, and you need to share the data with other people, a containerised solution might be a good option. Updating is easy as far as the image is updated and the encapsulated application is properly configured to be updated: the data and configuration might need adaptations. In some case it is all transparently handled by the application, in other case there is an update process to follow, and in some case there is no update process and the update needs to be done manually (which can be very costly). It is still a good option for production use, and, if the application allows, can be scaled relatively easily, either by running several instances of the same container (typically behind a load balancing application, such as HAProxy or Traefik), or by using a container orchestration solution (see below).
+* If you have a very complex use case, with several applications and several users, and you need to share the data with other people, and you need to scale the solution, a container orchestration solution might be a good option. It is more complex to set-up and maintain than a containerised solution, but it allows to easily scale the solution and to manage it in a more efficient way. It is a good option for production use, especially if you need to scale the solution, but it is not recommended for testing and development as it can be overkill for such use cases.
+
 
 # Common remarks
 
@@ -38,6 +44,7 @@ While defining the requirements, it is important to have a discussion with the u
 ## Document all specific changes
 
 A good technical setup is one that anyone else can maintain. As such it is important to document all specific changes that are made to the platform, such as configuration changes, custom scripts, or any other modification that is not part of the standard installation. This documentation should be clear and detailed enough so that anyone can understand what was changed, why it was changed, and how to revert it if needed. Ideally it would be centralized in a single document, such as a wiki page or a markdown file in the repository, and should be updated regularly to reflect any new changes, but a simple readme file in the folder where the change is made can also be a good option (better if complementary to the centralized documentation).
+If the changes have the potential to break something, it is better to journal the changes, in the documentation (who at what time) and to have a version control of the actual change (see next section).
 
 ## Use version control for that can be changed
 
@@ -516,6 +523,10 @@ Learning difficulty is medium, assuming you have some knowledge of Linux. There 
 
 A Dockerfile defines layers from a base images (```FROM image_name:version```) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.
 
+::: {.callout-note}
+The base image is often a very light linux (often Alpine Linux) working with BusyBox, which is a collection of Unix utilities in a single executable. Initially you might want a more feature-rich image as to have a more familiar environment.
+:::
+
 An image is always immutable, and a new image from a base one with modification will also be immutable. In case we need several application with the same base image, it is a good idea to build a custom base image with the common dependencies, and then build the different application images from this custom base image, so the common layers will be shared between the different images.
 
 A shorcoming is that if a change add dependencies which are again added on the next step, both layers will still be added to the image. It is not always avoidable, but it is good to be aware of it as it can lead to a bigger image than expected, and thus a longer build time and a longer time to start the container.
@@ -524,7 +535,9 @@ A powerful way to optimize a dockerfile is to use a multi-stage build, where the
 
 It is easy to remember why a multi-stage build is useful by thinking that preparing the application might need a lot more (languages, framework, tools) than is needed to run it. So the second phase only keep what is needed to run things.
 
+::: {.callout-note}
 Multi-stage build can be difficult, but most frameworks and languages have good documentation and examples on how to do it, so it is a good idea to look for them when needed.
+:::
 
 ::: {.callout-note}
 As the image are immutable, updating is always done by fetching a new base image and building a new image on top of it. It is important to keep an eye on the base image, as it can have security vulnerabilities that are fixed in newer versions. It is a good idea to use a specific version of the base image (for instance `python:3.9.13-slim` instead of `python:3.9-slim`), so you know exactly which version you are using and can update it when needed.
