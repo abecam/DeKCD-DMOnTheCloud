@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,10 +74,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b933da61422079644513f618cd81c344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -423,7 +423,13 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 </section>
 <section id="when-to" class="level1">
 <h1>When to…</h1>
-<p>When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and we are working on a <a href="./pages/TechPlatformDecisionTree.html">detailed decision tree</a></p>
+<p>When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and you can find a <a href="./pages/TechPlatformDecisionTree.html">detailed decision tree</a>.</p>
+<ul>
+<li>If you have a very simple use case, with a single application and a single user, and you do not need to share the data with anyone else, a local installation on a personal computer might be enough (“bare metal”). It is the simplest solution, but it is also the least scalable and the least secure. It is not recommended for production use, but it can be useful for testing and development.</li>
+<li>A first way to encapsulate a solution is to use a virtual machine, which will provide a full encapsulation of the application and its dependencies. It is more secure than a local installation and allow to play around without touching your actual system, but it is also more resource intensive and without the benefit of a containerised solution (see below). It is a good option for testing and development, or for applications that cannot be containerised. As on a local setup, it will need to be updated and maintained “directly”, where an updated image can be used for a containerised solution (with some caveats)</li>
+<li>If you have a more complex use case, with several applications and several users, and you need to share the data with other people, a containerised solution might be a good option. Updating is easy as far as the image is updated and the encapsulated application is properly configured to be updated: the data and configuration might need adaptations. In some case it is all transparently handled by the application, in other case there is an update process to follow, and in some case there is no update process and the update needs to be done manually (which can be very costly). It is still a good option for production use, and, if the application allows, can be scaled relatively easily, either by running several instances of the same container (typically behind a load balancing application, such as HAProxy or Traefik), or by using a container orchestration solution (see below).</li>
+<li>If you have a very complex use case, with several applications and several users, and you need to share the data with other people, and you need to scale the solution, a container orchestration solution might be a good option. It is more complex to set-up and maintain than a containerised solution, but it allows to easily scale the solution and to manage it in a more efficient way. It is a good option for production use, especially if you need to scale the solution, but it is not recommended for testing and development as it can be overkill for such use cases.</li>
+</ul>
 </section>
 <section id="common-remarks" class="level1">
 <h1>Common remarks</h1>
@@ -435,7 +441,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 </section>
 <section id="document-all-specific-changes" class="level2">
 <h2 class="anchored" data-anchor-id="document-all-specific-changes">Document all specific changes</h2>
-<p>A good technical setup is one that anyone else can maintain. As such it is important to document all specific changes that are made to the platform, such as configuration changes, custom scripts, or any other modification that is not part of the standard installation. This documentation should be clear and detailed enough so that anyone can understand what was changed, why it was changed, and how to revert it if needed. Ideally it would be centralized in a single document, such as a wiki page or a markdown file in the repository, and should be updated regularly to reflect any new changes, but a simple readme file in the folder where the change is made can also be a good option (better if complementary to the centralized documentation).</p>
+<p>A good technical setup is one that anyone else can maintain. As such it is important to document all specific changes that are made to the platform, such as configuration changes, custom scripts, or any other modification that is not part of the standard installation. This documentation should be clear and detailed enough so that anyone can understand what was changed, why it was changed, and how to revert it if needed. Ideally it would be centralized in a single document, such as a wiki page or a markdown file in the repository, and should be updated regularly to reflect any new changes, but a simple readme file in the folder where the change is made can also be a good option (better if complementary to the centralized documentation). If the changes have the potential to break something, it is better to journal the changes, in the documentation (who at what time) and to have a version control of the actual change (see next section).</p>
 </section>
 <section id="use-version-control-for-that-can-be-changed" class="level2">
 <h2 class="anchored" data-anchor-id="use-version-control-for-that-can-be-changed">Use version control for that can be changed</h2>
@@ -921,11 +927,36 @@ Note
 </div>
 </div>
 <p>A Dockerfile defines layers from a base images (<code>FROM image_name:version</code>) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The base image is often a very light linux (often Alpine Linux) working with BusyBox, which is a collection of Unix utilities in a single executable. Initially you might want a more feature-rich image as to have a more familiar environment.</p>
+</div>
+</div>
 <p>An image is always immutable, and a new image from a base one with modification will also be immutable. In case we need several application with the same base image, it is a good idea to build a custom base image with the common dependencies, and then build the different application images from this custom base image, so the common layers will be shared between the different images.</p>
 <p>A shorcoming is that if a change add dependencies which are again added on the next step, both layers will still be added to the image. It is not always avoidable, but it is good to be aware of it as it can lead to a bigger image than expected, and thus a longer build time and a longer time to start the container.</p>
 <p>A powerful way to optimize a dockerfile is to use a multi-stage build, where the first stage is used to build the application and its dependencies, and the second stage is used to copy only the necessary files from the first stage to create a smaller image. This is especially useful for applications that need to be compiled, such as those written in C or C++, but it can also be useful for other types of applications. It also allow frequent changes in the second stage without having to rebuild the first stage, which can save a lot of time during development.</p>
 <p>It is easy to remember why a multi-stage build is useful by thinking that preparing the application might need a lot more (languages, framework, tools) than is needed to run it. So the second phase only keep what is needed to run things.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Multi-stage build can be difficult, but most frameworks and languages have good documentation and examples on how to do it, so it is a good idea to look for them when needed.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

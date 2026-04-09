@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.36">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-b933da61422079644513f618cd81c344.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -272,8 +272,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 
 
 <script type="text/plain" cookie-consent="tracking"> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]); _paq.push(["setCookieDomain", "*.dekcd.github.io"]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); _paq.push(['enableHeartBeatTimer', 15]); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '38']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
-</script><p>TODO: Extend the Kubernetes section. Having a K8s cluster is not enough to take the decision to use it (complexity).</p>
-<div class="cell" data-layout-align="default">
+</script><div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -321,7 +320,29 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 
     M -- Yes, already running &amp; supported --&gt; N["Use a Kubernetes-based RDM stack&lt;br/&gt;(e.g., iRODS, Dataverse, Rucio, Nextcloud,&lt;br/&gt;or custom services deployed on K8s)"]
 
-    M -- No --&gt; CA
+    M -- No --&gt; MA
+
+    MA{"Does the team have the necessary skills to manage and operate Kubernetes?"}
+
+    MA -- Yes --&gt; MB
+
+    MA -- No --&gt; MD
+
+    MB{"Can the selected RDM platform be easily containerized and deployed on Kubernetes (e.g., using Helm charts or operators), and is the database already supported or can it be easily integrated?"}
+
+    MB -- Yes --&gt; MC
+
+    MB -- No --&gt; CA
+
+    MC{"Do the benefits of Kubernetes (scalability, resilience, high availability) outweigh the added complexity and operational overhead?"}
+
+    MC -- Yes --&gt; N
+
+    MC -- No --&gt; CA
+
+    MD{"Consider using simpler container orchestration alternatives like Docker Swarm, Nomad, or other tools that provide some benefits of containerization with less complexity"}
+
+    MD --&gt; CA
     
     CA -- Yes --&gt; CAA["Use preferably docker-compose, evenually use https://www.composerize.com/ to transform a docker command line to a docker compose manifest."]
     
