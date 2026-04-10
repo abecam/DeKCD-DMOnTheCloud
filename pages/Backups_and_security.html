@@ -260,7 +260,12 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#confidential-data" id="toc-confidential-data" class="nav-link" data-scroll-target="#confidential-data">Confidential data</a></li>
   <li><a href="#passwords-keys" id="toc-passwords-keys" class="nav-link" data-scroll-target="#passwords-keys">Passwords &amp; keys</a></li>
   </ul></li>
-  <li><a href="#backups" id="toc-backups" class="nav-link" data-scroll-target="#backups">Backups</a></li>
+  <li><a href="#backups" id="toc-backups" class="nav-link" data-scroll-target="#backups">Backups</a>
+  <ul class="collapse">
+  <li><a href="#common-backup-strategies" id="toc-common-backup-strategies" class="nav-link" data-scroll-target="#common-backup-strategies">Common backup strategies</a></li>
+  <li><a href="#common-backup-tools" id="toc-common-backup-tools" class="nav-link" data-scroll-target="#common-backup-tools">Common backup tools</a></li>
+  <li><a href="#testing-backups" id="toc-testing-backups" class="nav-link" data-scroll-target="#testing-backups">Testing backups</a></li>
+  </ul></li>
   <li><a href="#security" id="toc-security" class="nav-link" data-scroll-target="#security">Security</a>
   <ul class="collapse">
   <li><a href="#defence-need-to-be-always-a-success-attack-need-only-one" id="toc-defence-need-to-be-always-a-success-attack-need-only-one" class="nav-link" data-scroll-target="#defence-need-to-be-always-a-success-attack-need-only-one">Defence need to be always a success, attack need only one</a></li>
@@ -274,7 +279,11 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#what-to-never-log-log-levels" id="toc-what-to-never-log-log-levels" class="nav-link" data-scroll-target="#what-to-never-log-log-levels">What to never log, log levels</a></li>
   <li><a href="#what-to-never-store" id="toc-what-to-never-store" class="nav-link" data-scroll-target="#what-to-never-store">What to never store (or never in “reversible” format)</a></li>
   <li><a href="#know-your-infrastructure" id="toc-know-your-infrastructure" class="nav-link" data-scroll-target="#know-your-infrastructure">Know your infrastructure</a></li>
-  <li><a href="#deleting-data" id="toc-deleting-data" class="nav-link" data-scroll-target="#deleting-data">Deleting data</a></li>
+  <li><a href="#deleting-data" id="toc-deleting-data" class="nav-link" data-scroll-target="#deleting-data">Deleting data</a>
+  <ul class="collapse">
+  <li><a href="#really-deleting-files-database-entries-backups-cloud-storage-version-control-entries" id="toc-really-deleting-files-database-entries-backups-cloud-storage-version-control-entries" class="nav-link" data-scroll-target="#really-deleting-files-database-entries-backups-cloud-storage-version-control-entries">Really deleting files, database entries, backups, cloud storage, version control entries</a></li>
+  <li><a href="#when-you-should-not-delete-data" id="toc-when-you-should-not-delete-data" class="nav-link" data-scroll-target="#when-you-should-not-delete-data">When you should not delete data</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -357,6 +366,8 @@ Important
 </section>
 <section id="confidential-data" class="level2">
 <h2 class="anchored" data-anchor-id="confidential-data">Confidential data</h2>
+<p>Confidential data is any data that have a restricted access: only for accredited users, that should not be publicly accessible, <em>or</em> data that should not be shared with some countries or entities, or used by them. It can be data that is not personal but still sensitive, such as research data that is not yet published, or data that is only for internal use. It can also be data that is personal but does not fall under the legal definition of personal data, such as pseudonymized data or anonymized data.</p>
+<p>Limitation of use for public data is generally only ensured by a license, but it is important to ensure that the license is respected, and that the data is not used in a way that is not allowed by the license. For instance, if the data is licensed under a non-commercial license, it should not be used for commercial purposes. If the data is licensed under a share-alike license, it should not be used in a way that does not allow others to use it under the same license. If the data is licensed under a license that does not allow modification, it should not be modified. If the data is licensed under a license that does not allow redistribution, it should not be redistributed. Enforcement can be difficult and costly, but in some cases it is important to have a clear license and to monitor the use of the data. It is also important to have a clear policy on how to handle violations of the license, such as sending a cease and desist letter or taking legal action.</p>
 </section>
 <section id="passwords-keys" class="level2">
 <h2 class="anchored" data-anchor-id="passwords-keys">Passwords &amp; keys</h2>
@@ -379,6 +390,22 @@ Note
 </div>
 </div>
 <p>Backups tools -&gt; versioning, monitoring, differential and incremental backups and automation. Using non-backup tools need some parameters and/or script to get some of these functions. Monitoring the backup is working will be extremely important (“silent death”).</p>
+<section id="common-backup-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="common-backup-strategies">Common backup strategies</h2>
+<p>The main backup strategy is to journally backup the data, keep several versions of the backup, and keep at least one backup off-site, following the rule of 3-2-1: 3 copies of the data, on 2 different media, with at least 1 copy off-site.</p>
+<p>If available, a long term backup strategy should also be implemented, with a clear policy on how long to keep the backups, and how to eventually delete them when they are no longer needed. This is especially important for personal data, as they should not be kept longer than necessary. These backups are generally done on tapes that are stored in a secure location and might not be so regularly done.</p>
+</section>
+<section id="common-backup-tools" class="level2">
+<h2 class="anchored" data-anchor-id="common-backup-tools">Common backup tools</h2>
+<p>Backup tools could be a simple cronjob calling a database dump, a script using <code>rsync</code> to copy files, a more complex tool such as <code>BorgBackup</code>, <code>Restic</code> or <code>Veeam</code>, or a cloud-based backup service. The choice of the backup tool will depend on the needs of the users, the software, the infrastructure, and the budget. It is important to choose a backup tool that is reliable, secure, and easy to use.</p>
+<p>If your IT services are providing a backup service, it is generally the best option to use it, as it will be maintained and updated by the provider, and will be more secure than a self-managed solution. It is still important to check the terms of service and the security measures in place, as well as the possibility to access the data and the API if needed.</p>
+<p>Otherwise, the backup tool will depend on the setup and will generally be a combination of tools, such as a database dump for the database, a file copy for the files (<code>rsync</code> or more advanced tools), and a cloud-based backup service for the off-site backup.</p>
+</section>
+<section id="testing-backups" class="level2">
+<h2 class="anchored" data-anchor-id="testing-backups">Testing backups</h2>
+<p>It is always important to test your backups, as a backup that is not working is not a backup. It is also important to test the restore process, as a backup that cannot be restored is also not a backup. Backup testing should be done regularly, and should be part of the backup strategy.</p>
+<p>Long term backups should also be tested, for instance for a random selection of files for a random date.</p>
+</section>
 </section>
 <section id="security" class="level1">
 <h1>Security</h1>
@@ -397,17 +424,21 @@ Note
 </section>
 <section id="general-dispositions" class="level2">
 <h2 class="anchored" data-anchor-id="general-dispositions">General dispositions</h2>
-<p>Default user not root (or super user if Windows)</p>
-<p>Careful with the paths and their access rights</p>
-<p>Symbolic links</p>
-<p>Database user, schema protections</p>
-<p>difficult configurations and their possible issues (such as .htaccess or apache configuration in general)</p>
-<p>Fail fast -&gt; difference between errors where the application needs to/can contine and when it needs to stop.</p>
-<p>???</p>
+<p>It is important to carefully design the foundations of your system in order to minimize security risks. General dispositions are precisely about reducing these oversights:</p>
+<ul>
+<li>FNever run anything as root (or administrator). It may feel convenient during development, but it is equivalent to leaving all doors open in the house because you trust yourself not to make mistakes. Software does not forgive mistakes. By assigning minimal privileges to users and services, you ensure that even if something goes wrong, the damage remains contained. This principle - often called least privilege - is one of the simplest and most effective protections you can apply.</li>
+<li>Closely related to this is the management of paths and access rights. Files are not just data; they are entry points. A poorly protected directory, a writable configuration file, or an executable in the wrong place can quickly become a lever for unintended behavior. Permissions should always be as restrictive as possible, and never rely on assumptions such as “this folder is not visible to users.” If the system can reach it, someone eventually will.</li>
+<li>A symbolic link can redirect operations to unexpected locations, sometimes bypassing access controls that seemed correctly configured. If your application follows links without strict checks, you may end up granting access to resources you never intended to expose.</li>
+<li>Databases follow the same logic. Using a single, highly privileged database user for all operations is convenient, but dangerous. Each component should only access what it strictly needs: read-only where possible, limited schemas otherwise. This way, even if one part of the system is compromised, the attacker does not automatically gain full control over your data.</li>
+<li>Configuration is another common source of trouble. Systems like Apache or tools relying on files such as <code>.htaccess</code> offer great flexibility, but also introduce complexity. And complexity is the natural enemy of security. Misconfigurations are often invisible until they are exploited. The more intricate the setup, the harder it becomes to reason about its behavior. Whenever possible, favor simple, explicit configurations over clever but opaque ones.</li>
+<li>Finally, there is error handling. A system should fail fast when it encounters a situation it cannot safely recover from. Trying to continue at all costs often leads to inconsistent states, which are fertile ground for vulnerabilities. However, failing fast does not mean failing blindly. The application must distinguish between recoverable errors and critical failures. In the first case, it can adapt; in the second, it must stop cleanly and predictably.</li>
+</ul>
+<p>In the end, these dispositions are not advanced techniques. They are habits. And like most habits, they are easy to neglect - until the day they are the only thing standing between a harmless bug and a serious security issue.</p>
 </section>
 <section id="surface-of-attack" class="level2">
 <h2 class="anchored" data-anchor-id="surface-of-attack">Surface of attack</h2>
 <p>About security, we will often speak about reducing the surface of attack. The surface of attack is the part of the system that can be accessed by an attacker. The more surface of attack, the more chances for an attacker to find a vulnerability. Thus, reducing the surface of attack is necessary for security. For instance, if you have a web application, you should not have any other service running on the same server that can be accessed from the outside. If you have a database, it should not be accessible from the outside, but only from the application. If you have a backup system, it should not be accessible from the outside, but only from the application and/or from a secure location.</p>
+<p>:: {.callout-note} Reducing the surface of attack is also related to the complexity of the setup. A very complex setup will have more surface of attack than a simple one, as it will be harder to understand and to monitor. As such, it is important to keep the setup as simple as possible, while still meeting the needs of the users and the software. ::</p>
 </section>
 <section id="firewall" class="level2">
 <h2 class="anchored" data-anchor-id="firewall">Firewall</h2>
@@ -484,11 +515,38 @@ Note
 </section>
 <section id="know-your-infrastructure" class="level2">
 <h2 class="anchored" data-anchor-id="know-your-infrastructure">Know your infrastructure</h2>
+<p>This in in overlap with many topics already covered, but it is primordial to know your infrastructure and have a clear overview of it. That includes the time when the main persons in charge are not available, so it is important to have a clear documentation of the infrastructure, including the software used, the configuration, the access rights, the backup system, the monitoring system, the security measures, and the contact information of the people in charge. It is also important to have a clear policy on how to handle incidents, such as a security breach or a data loss.</p>
+<p>A good document to prepare is a troubleshooting guide, that can be used by anyone to understand the infrastructure and to solve common problems. It should include a clear overview of the infrastructure, a list of common problems and their solutions, and a list of contact information for the people in charge.</p>
 </section>
 <section id="deleting-data" class="level2">
 <h2 class="anchored" data-anchor-id="deleting-data">Deleting data</h2>
+<section id="really-deleting-files-database-entries-backups-cloud-storage-version-control-entries" class="level3">
+<h3 class="anchored" data-anchor-id="really-deleting-files-database-entries-backups-cloud-storage-version-control-entries">Really deleting files, database entries, backups, cloud storage, version control entries</h3>
+<p>Deleting data is not as simple as it seems. When you delete a file, it is not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>shred</code> on Linux or <code>sdelete</code> on Windows.</p>
+<p>When you delete a database entry, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a database entry securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>pg_repack</code> for PostgreSQL or <code>OPTIMIZE TABLE</code> for MySQL.</p>
+<p>When you delete a backup, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a backup securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>shred</code> on Linux or <code>sdelete</code> on Windows.</p>
+<p>When you delete a file from a cloud storage, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file from a cloud storage securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>shred</code> on Linux or <code>sdelete</code> on Windows.</p>
+<p>When you delete a file from a version control system, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file from a version control system securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>git filter-branch</code> for Git or <code>hg convert</code> for Mercurial.</p>
+</section>
+<section id="when-you-should-not-delete-data" class="level3">
+<h3 class="anchored" data-anchor-id="when-you-should-not-delete-data">When you should not delete data</h3>
+<p>Some data should not be deleted, such as data which is part of a funded project and should live for a predetermined time, or data that is part of a publication and should be available for reproducibility. In these cases, it is important to have a clear policy on how to handle the data, such as how to store it securely, how to share it with the right people, how to monitor its usage, and how to eventually delete it when it is no longer needed.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the live of the data is much longer than the project, the Data Management Solution might be difficult to maintain, due to lack of funding, lack of personnel, lack of knowledge, or if the software is not maintained anymore. In that case, it is important to have a clear plan on how to handle the data, such as how to migrate it to another solution, how to archive it.</p>
+</div>
+</div>
 
 
+</section>
 </section>
 </section>
 
