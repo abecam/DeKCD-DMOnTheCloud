@@ -8,14 +8,43 @@ One generally important aspect of Data Management and data usage is to know whic
 
 ## Personal data
 
-In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.
+In many countries, storage of personal information is strictly regulated. In the EU and many other jurisdictions, personal data handling is governed by stringent legal requirements that impose significant responsibilities on data controllers and processors.
 
-TODO: Add links
+### Legal Requirements and User Rights
 
-When some research data is linked to person, it is advised to pseudonymize or to anonymize the data.
+In the EU under the [General Data Protection Regulation (GDPR)](https://eur-lex.europa.eu/eli/reg/2016/679/oj), personal data can be processed only with explicit consent, must be accessible by the user, can be deleted upon request, and can be stored only for a limited time. Users have the right to:
+
+- **[Access](https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_15)** (GDPR Article 15): Users can request to know what personal data is stored about them and how it is being used
+- **[Rectification](https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_16)** (GDPR Article 16): Users can request correction of inaccurate personal data
+- **[Erasure](https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_17)** (GDPR Article 17): Users can request deletion of their data (the "right to be forgotten")
+- **[Data portability](https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_20)** (GDPR Article 20): Users can request their data in a portable format
+- **[Objection](https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_21)** (GDPR Article 21): Users can object to certain uses of their data
+
+For comprehensive information on data protection in the EU, see the [European Commission's Data Protection page](https://ec.europa.eu/info/law/law-topic/data-protection_en).
+
+### Data Minimization Principle
+
+A fundamental principle in personal data protection is data minimization: **only collect and store the minimum data necessary for your specific purpose**. Store it only for the time needed, then delete it. Excess personal data increases risk and legal liability with no additional benefit.
+
+### Pseudonymization and Anonymization
+
+When research data is linked to a person, it is advised to apply data protection techniques:
+
+- **Pseudonymization**: Replace identifying information (names, IDs) with pseudonyms or anonymized identifiers. This allows research while reducing direct identification. However, pseudonymized data linked to a key remains personal data.
+- **Anonymization**: Irreversibly remove or render impossible the identification of individuals. Truly anonymized data is not subject to personal data regulations, but genuine anonymization is difficult to achieve.
+
+You will find more information about data protection techniques in the [Data Protection and Privacy](Data_Protection_and_Privacy.qmd) page.
+
+### Storage and Encryption
+
+See the [What to never store](#what-to-never-store) section for details on secure storage practices. Personal data should never be stored in reversible formats for authentication. All keys, tokens, and sensitive identifiers must be encrypted with keys stored separately from the data. Personal data in backups must also respect the same protection requirements.
+
+### Cross-Institutional Data Sharing
+
+The exchange of personal data between institutions can only be done with a formal agreement and with the explicit consent of the user. It is strongly recommended to consult a data protection officer or legal counsel before sharing personal data with external parties.
 
 ::: {.callout-important}
-The limitation of data storage for personal information includes backups
+The limitation of data storage for personal information includes backups. Backup systems must be subject to the same access controls, encryption, and retention policies as production systems.
 :::
 
 ## Confidential data
@@ -134,7 +163,7 @@ But logs are also plain text and, if accessed by an attacker, will be easy to co
 - username, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.
 - 
 
-## What to never store (or never in "reversible" format)
+## What to never store (or never in "reversible" format) {#what-to-never-store}
 
 All kind of passwords should never be stored in a reversible format. If the password is needed for the software to work, it should be stored in an encrypted format, with a key that is not stored on the same system. If the password is only needed for authentication, it should be hashed with a strong hashing algorithm and a salt.
 
