@@ -249,7 +249,14 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <ul>
   <li><a href="#which-data" id="toc-which-data" class="nav-link active" data-scroll-target="#which-data">Which data</a>
   <ul class="collapse">
-  <li><a href="#personal-data" id="toc-personal-data" class="nav-link" data-scroll-target="#personal-data">Personal data</a></li>
+  <li><a href="#personal-data" id="toc-personal-data" class="nav-link" data-scroll-target="#personal-data">Personal data</a>
+  <ul class="collapse">
+  <li><a href="#legal-requirements-and-user-rights" id="toc-legal-requirements-and-user-rights" class="nav-link" data-scroll-target="#legal-requirements-and-user-rights">Legal Requirements and User Rights</a></li>
+  <li><a href="#data-minimization-principle" id="toc-data-minimization-principle" class="nav-link" data-scroll-target="#data-minimization-principle">Data Minimization Principle</a></li>
+  <li><a href="#pseudonymization-and-anonymization" id="toc-pseudonymization-and-anonymization" class="nav-link" data-scroll-target="#pseudonymization-and-anonymization">Pseudonymization and Anonymization</a></li>
+  <li><a href="#storage-and-encryption" id="toc-storage-and-encryption" class="nav-link" data-scroll-target="#storage-and-encryption">Storage and Encryption</a></li>
+  <li><a href="#cross-institutional-data-sharing" id="toc-cross-institutional-data-sharing" class="nav-link" data-scroll-target="#cross-institutional-data-sharing">Cross-Institutional Data Sharing</a></li>
+  </ul></li>
   <li><a href="#confidential-data" id="toc-confidential-data" class="nav-link" data-scroll-target="#confidential-data">Confidential data</a></li>
   <li><a href="#passwords-keys" id="toc-passwords-keys" class="nav-link" data-scroll-target="#passwords-keys">Passwords &amp; keys</a></li>
   </ul></li>
@@ -265,7 +272,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#protections-against-attacks" id="toc-protections-against-attacks" class="nav-link" data-scroll-target="#protections-against-attacks">Protections against attacks</a></li>
   <li><a href="#passwords-and-keys" id="toc-passwords-and-keys" class="nav-link" data-scroll-target="#passwords-and-keys">Passwords and keys</a></li>
   <li><a href="#what-to-never-log-log-levels" id="toc-what-to-never-log-log-levels" class="nav-link" data-scroll-target="#what-to-never-log-log-levels">What to never log, log levels</a></li>
-  <li><a href="#what-to-never-store-or-never-in-reversible-format" id="toc-what-to-never-store-or-never-in-reversible-format" class="nav-link" data-scroll-target="#what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</a></li>
+  <li><a href="#what-to-never-store" id="toc-what-to-never-store" class="nav-link" data-scroll-target="#what-to-never-store">What to never store (or never in “reversible” format)</a></li>
   <li><a href="#know-your-infrastructure" id="toc-know-your-infrastructure" class="nav-link" data-scroll-target="#know-your-infrastructure">Know your infrastructure</a></li>
   <li><a href="#deleting-data" id="toc-deleting-data" class="nav-link" data-scroll-target="#deleting-data">Deleting data</a></li>
   </ul></li>
@@ -300,9 +307,39 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <p>One generally important aspect of Data Management and data usage is to know which data to store and how to store it.</p>
 <section id="personal-data" class="level2">
 <h2 class="anchored" data-anchor-id="personal-data">Personal data</h2>
-<p>In many countries storage of personal information is strictly regulated. In the EU, storage of personal data can be done only with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time.</p>
-<p>TODO: Add links</p>
-<p>When some research data is linked to person, it is advised to pseudonymize or to anonymize the data.</p>
+<p>In many countries, storage of personal information is strictly regulated. In the EU and many other jurisdictions, personal data handling is governed by stringent legal requirements that impose significant responsibilities on data controllers and processors.</p>
+<section id="legal-requirements-and-user-rights" class="level3">
+<h3 class="anchored" data-anchor-id="legal-requirements-and-user-rights">Legal Requirements and User Rights</h3>
+<p>In the EU under the <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">General Data Protection Regulation (GDPR)</a>, personal data can be processed only with explicit consent, must be accessible by the user, can be deleted upon request, and can be stored only for a limited time. Users have the right to:</p>
+<ul>
+<li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_15">Access</a></strong> (GDPR Article 15): Users can request to know what personal data is stored about them and how it is being used</li>
+<li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_16">Rectification</a></strong> (GDPR Article 16): Users can request correction of inaccurate personal data</li>
+<li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_17">Erasure</a></strong> (GDPR Article 17): Users can request deletion of their data (the “right to be forgotten”)</li>
+<li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_20">Data portability</a></strong> (GDPR Article 20): Users can request their data in a portable format</li>
+<li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_21">Objection</a></strong> (GDPR Article 21): Users can object to certain uses of their data</li>
+</ul>
+<p>For comprehensive information on data protection in the EU, see the <a href="https://ec.europa.eu/info/law/law-topic/data-protection_en">European Commission’s Data Protection page</a>.</p>
+</section>
+<section id="data-minimization-principle" class="level3">
+<h3 class="anchored" data-anchor-id="data-minimization-principle">Data Minimization Principle</h3>
+<p>A fundamental principle in personal data protection is data minimization: <strong>only collect and store the minimum data necessary for your specific purpose</strong>. Store it only for the time needed, then delete it. Excess personal data increases risk and legal liability with no additional benefit.</p>
+</section>
+<section id="pseudonymization-and-anonymization" class="level3">
+<h3 class="anchored" data-anchor-id="pseudonymization-and-anonymization">Pseudonymization and Anonymization</h3>
+<p>When research data is linked to a person, it is advised to apply data protection techniques:</p>
+<ul>
+<li><strong>Pseudonymization</strong>: Replace identifying information (names, IDs) with pseudonyms or anonymized identifiers. This allows research while reducing direct identification. However, pseudonymized data linked to a key remains personal data.</li>
+<li><strong>Anonymization</strong>: Irreversibly remove or render impossible the identification of individuals. Truly anonymized data is not subject to personal data regulations, but genuine anonymization is difficult to achieve.</li>
+</ul>
+<p>You will find more information about data protection techniques in the <a href="Data_Protection_and_Privacy.qmd">Data Protection and Privacy</a> page.</p>
+</section>
+<section id="storage-and-encryption" class="level3">
+<h3 class="anchored" data-anchor-id="storage-and-encryption">Storage and Encryption</h3>
+<p>See the <a href="#what-to-never-store">What to never store</a> section for details on secure storage practices. Personal data should never be stored in reversible formats for authentication. All keys, tokens, and sensitive identifiers must be encrypted with keys stored separately from the data. Personal data in backups must also respect the same protection requirements.</p>
+</section>
+<section id="cross-institutional-data-sharing" class="level3">
+<h3 class="anchored" data-anchor-id="cross-institutional-data-sharing">Cross-Institutional Data Sharing</h3>
+<p>The exchange of personal data between institutions can only be done with a formal agreement and with the explicit consent of the user. It is strongly recommended to consult a data protection officer or legal counsel before sharing personal data with external parties.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -313,9 +350,10 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The limitation of data storage for personal information includes backups</p>
+<p>The limitation of data storage for personal information includes backups. Backup systems must be subject to the same access controls, encryption, and retention policies as production systems.</p>
 </div>
 </div>
+</section>
 </section>
 <section id="confidential-data" class="level2">
 <h2 class="anchored" data-anchor-id="confidential-data">Confidential data</h2>
@@ -412,8 +450,8 @@ Note
 <li></li>
 </ul>
 </section>
-<section id="what-to-never-store-or-never-in-reversible-format" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-never-store-or-never-in-reversible-format">What to never store (or never in “reversible” format)</h2>
+<section id="what-to-never-store" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-never-store">What to never store (or never in “reversible” format)</h2>
 <p>All kind of passwords should never be stored in a reversible format. If the password is needed for the software to work, it should be stored in an encrypted format, with a key that is not stored on the same system. If the password is only needed for authentication, it should be hashed with a strong hashing algorithm and a salt.</p>
 <p>Any key, hash or token that can be used to access the system should be stored in an encrypted format, with a key that is not stored on the same system.</p>
 <p>In most countries, the storage of personal data is restricted by law. In the EU, for instance, personal data can only be stored with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time. Thus, if some research data is linked to person, it is advised to pseudonymize or to anonymize the data. Only the needed data should be stored, and only for the needed time.</p>
