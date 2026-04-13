@@ -41,6 +41,8 @@ website:
     contents:
         - index.qmd
         - pages/TechPlatformDecisionTree.qmd
+        - pages/Backups_and_security.qmd
+        - pages/Data_storage.qmd
         - section: "Data Management Principles"
           contents:
             - pages/DM_planning.qmd
@@ -50,10 +52,10 @@ website:
             - pages/Kubernetes_introduction.qmd
             - pages/Data_storage.qmd
             - pages/Backups_and_security.qmd
-        - section: "Scrap pages"
-          contents:
-            - roadblocks.qmd
-            - to_investigate.qmd
+#        - section: "Scrap pages"
+#          contents:
+#            - roadblocks.qmd
+#            - to_investigate.qmd
       
 format:
   html:
