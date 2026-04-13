@@ -130,7 +130,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Kubernetes_introduction.html">Kubernetes</a></li><li class="breadcrumb-item"><a href="../pages/Backups_and_security.html">Backups and Security</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Backups_and_security.html">Backups and Security</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -160,6 +160,18 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Backups_and_security.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Backups and Security</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Data_storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Storage</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -208,31 +220,8 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Backups_and_security.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/Backups_and_security.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Backups and Security</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Scrap pages</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../roadblocks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scrap page: roadblocks, difficulties to remove or solutions to issues</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../to_investigate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Scrap page: things to investigate</span></a>
   </div>
 </li>
       </ul>
@@ -275,7 +264,11 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#surface-of-attack" id="toc-surface-of-attack" class="nav-link" data-scroll-target="#surface-of-attack">Surface of attack</a></li>
   <li><a href="#firewall" id="toc-firewall" class="nav-link" data-scroll-target="#firewall">Firewall</a></li>
   <li><a href="#protections-against-attacks" id="toc-protections-against-attacks" class="nav-link" data-scroll-target="#protections-against-attacks">Protections against attacks</a></li>
-  <li><a href="#passwords-and-keys" id="toc-passwords-and-keys" class="nav-link" data-scroll-target="#passwords-and-keys">Passwords and keys</a></li>
+  <li><a href="#passwords-and-keys" id="toc-passwords-and-keys" class="nav-link" data-scroll-target="#passwords-and-keys">Passwords and keys</a>
+  <ul class="collapse">
+  <li><a href="#for-users-and-apis" id="toc-for-users-and-apis" class="nav-link" data-scroll-target="#for-users-and-apis">For users and APIs</a></li>
+  <li><a href="#software-keys-and-passwords" id="toc-software-keys-and-passwords" class="nav-link" data-scroll-target="#software-keys-and-passwords">Software keys and passwords</a></li>
+  </ul></li>
   <li><a href="#what-to-never-log-log-levels" id="toc-what-to-never-log-log-levels" class="nav-link" data-scroll-target="#what-to-never-log-log-levels">What to never log, log levels</a></li>
   <li><a href="#what-to-never-store" id="toc-what-to-never-store" class="nav-link" data-scroll-target="#what-to-never-store">What to never store (or never in “reversible” format)</a></li>
   <li><a href="#know-your-infrastructure" id="toc-know-your-infrastructure" class="nav-link" data-scroll-target="#know-your-infrastructure">Know your infrastructure</a></li>
@@ -291,7 +284,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Kubernetes_introduction.html">Kubernetes</a></li><li class="breadcrumb-item"><a href="../pages/Backups_and_security.html">Backups and Security</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Backups and Security</h1>
 </div>
@@ -450,15 +443,36 @@ Note
 <h2 class="anchored" data-anchor-id="protections-against-attacks">Protections against attacks</h2>
 <p>To review, expend and simplify. Extract Denial of Service/BruteForce and simple abuse from robots and agents.</p>
 <p>There are many kinds of attacks, such as SQL injection, cross-site scripting, cross-site request forgery, brute force, denial of service. Some of them can be mitigated by the software design and implementation, such as using prepared statements for SQL queries, using a web application firewall, using a rate limiter, using a CAPTCHA, using a strong password policy, using two-factor authentication, using a VPN, using a firewall, using a backup system, using a monitoring system. Some of them can be mitigated by the user behavior, such as using a strong password, not sharing passwords, not clicking on suspicious links, not downloading suspicious files, not giving away personal information, not using public Wi-Fi for sensitive operations. But some others are more difficult to mitigate, such as zero-day vulnerabilities, insider threats, social engineering, and at the extreme physical attacks (such as theft or sabotage).</p>
-<p>Protecting against abuses is also difficult.</p>
+<p>Protecting against abuses is also difficult. Such abuses can be:</p>
+<ul>
+<li>SPAM and SCAM attack of public forms. Automatic tools are very good at finding common fields in a form, such as “email”, “first name”, … In that case the form can be filled and submitted automatically. Some good transparent mitigations methods are known, such as, from simpler to more complex:
+<ul>
+<li>hashing the fields names so the common fields will be an variable hash that the application can understand using a stored salt, which is valid only once so the form cannot be resubmitted as it, this makes it much more difficult for a bot to fill a form. Such hashing should be used on forms that don’t have a repeated usage by one user, as the browsers will also be unable to automatically refill the fields, as their name will change.</li>
+<li>often combined with a honeypot, hidden fields of the form with the common name, such as “email”, that can only be filled by bots and will automatically exclude the submission,</li>
+<li>delaying the submission of the content, which allow to exclude human-submitted mass-submissions by comparing the content, which generally is very similar. Using a LLM bot, it is unfortunately easy for a mass submission of different content now.</li>
+<li>using common scam keywords, blacklist messages using a thresold. The three last method should keep a copy of the message with a way of resubmitting in the cases of false positive. In our own experience we encountered student who sent the same request to all group leaders of our institute and triggered the mass-submission alert. Our system sent a report after the last received email (waiting for some time) and we did not resubmit the emails but contacted the students.</li>
+</ul></li>
+</ul>
+<p>But few web applications support such methods, and the common way is to use a CAPTCHA. A CAPTCHA is generally a challenge to see if the user is human. Some are rather transparent, simply expecting an human reaction, some are simple puzzles to solve (which might be a problem with some persons with disabilities), and many are still using mangled text to recognize or image where the user need to find an object. Those using mangled texts or images becomes harder and harder to fill correctly by humans, while bots are becoming better and better to solve them.</p>
+<ul>
+<li><p>Attack via vulnerability or</p></li>
+<li><p>Denial of Service/Brute Force attack. Sometime, and attacker just want to disrupt a service, or break it in order to obtain something (like logging in or accessing a database). While a break-in is often the result of exploiting a vulnerability, such as a zero-day vulnerability: a security hole, maybe due to an unknown bug,</p></li>
+<li><p>Abuse by bots</p></li>
+</ul>
 </section>
 <section id="passwords-and-keys" class="level2">
 <h2 class="anchored" data-anchor-id="passwords-and-keys">Passwords and keys</h2>
+<section id="for-users-and-apis" class="level3">
+<h3 class="anchored" data-anchor-id="for-users-and-apis">For users and APIs</h3>
 <p>Passwords are still the most common way to protect access to a system, but they are also the most vulnerable. They should be strong and unique, and should not be shared. They should not be written down or stored in plain text. To encourage users to use strong passwords, it is recommended to propose a password manager or a vault, that can generate strong passwords and store them securely. The application should also enforce strong passwords, and should not allow weak passwords. Allowing long passwords allow to use passphrases, that are easier to remember and can be very strong, they can be non-sensical sentences, so easy to remember but hard to guess, such as “TheCowBouBouBounceOnTheMoon!”. If supported, two-factor authentication should be used, as it adds an extra layer of security.</p>
 <p>But one of the strongest way to propose an access is to use keys, that can be generated and stored securely, and can be easily revoked if needed. For instance, SSH keys are a very common way to access a server, and they are much more secure than passwords. They can be generated with a passphrase, that adds an extra layer of security.</p>
-<p>Some authentication system can also use tokens (which are a kind of key), that can be generated and stored securely, and can be easily revoked if needed. For instance, API tokens are a very common way to access an API, and they are much more secure than having to regularly use an username and passwords.</p>
-<p>Most of the time, the software will need to access some resources (such as a database) with a password or a key. In that case, it is important to store these credentials in a secure way, such as in an environment variable, in a configuration file with restricted access, or in a secret manager. They should never be stored in plain text in the code or in the configuration file.</p>
+<p>Some authentication system can also use tokens (which are a kind of key), that can be generated and stored securely, and can be easily revoked if needed. For instance, API tokens are a very common way to access an API, and they are much more secure than having to regularly use an username and passwords. Token are often salted, so they cannot be used directly, and have a limited validity to avoid an attack reusing a stolen token.</p>
 <p>Most Data Management platforms also support external authentication, such as LDAP or OAuth. OAuth is a very common way to allow users to authenticate with their existing credentials, such as Google or GitHub. It is also a secure way to authenticate, as it relies on the security of the external provider (assuming the user is following the provider’s security practices, but if not it is probably a generalized practice and would be a problem anyway).</p>
+</section>
+<section id="software-keys-and-passwords" class="level3">
+<h3 class="anchored" data-anchor-id="software-keys-and-passwords">Software keys and passwords</h3>
+<p>Most of the time, the software will need to access some resources (such as a database) with a password or a key. In that case, it is important to store these credentials in a secure way, such as in an environment variable, in a configuration file with restricted access, or in a secret manager. They should never be stored in plain text in the code or in the configuration file.</p>
+</section>
 </section>
 <section id="what-to-never-log-log-levels" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-log-log-levels">What to never log, log levels</h2>
