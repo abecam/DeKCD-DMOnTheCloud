@@ -57,6 +57,11 @@ On Linux, there are lightweight setup using various approached. The main ones ar
 It is important to consider that, if some of these setup can be used in production (such as Talos or k3s), Kubernetes is a complex system and should be probably be managed by sys-admin persons, for ensuring fault-tolerance, backups and security.
 :::
 
+## Limits of Kubernetes, complexity and  ###
+
+Kubernetes is an ensemble of small decoupled elements. Each are rather simple to understand and the overal logic is sound and clear. But you need many elements to have a working setup, and the configuration and the overview of all these elements can be complex and obscure.
+Some tools such as K9s can help to have a better overview of the cluster and its elements, but is is important to clearly define and probably document your setup, to ensure that you can understand it later on and that other people can understand it as well.
+
 ## Terminology & main elements
 
 A first glance on Kubernetes can be very confusing. A big part of this confusion is due to a lot of "moving" parts with confusing names.
@@ -430,6 +435,10 @@ ConfigMap and Secrets
 Regular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values **out** of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool).
 
 ## Namespace
+
+Using namespaces allows to have several "virtual" clusters within the same physical cluster. It is a way to separate different environments (for instance, development and production) or different users (for instance, one namespace per user). It can also be used for separating different applications, but it is generally better to use labels for this purpose.
+
+Namespaces are also useful for managing access and permissions, as you can define different roles and policies for each namespace.
 
 ## Network access
 
