@@ -589,6 +589,10 @@ Adding parameters
 
 The different types of volumes
 
+## A typical docker compose yaml file
+
+## Typical usage
+
 ## Namespaces and namespaces collisions
 
 Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
