@@ -36,6 +36,14 @@ Notable examples of such services are the [De.NBI Cloud](https://cloud.denbi.de/
 
 # Common remarks
 
+## Keeping the difficulty under control
+
+The most important aspect when setting up a Data Management Solution is to keep the difficulty of setting it up and using it under check.
+
+As such, this step-by-step page is mostly to determine if the complexity of one solution seems reasonnable, then have some pointers about the solution: what it offers, what is the cost, and a minimal introduction on using it. It is not intended to be a complete documentation on each solution, but to give enough information to understand the solution and navigate through its documentation. 
+
+What this documentation cannot fully plan for is what is in place already: existing servers with some application, a Virtual Machine infrastructure... Which can be used as a base for the set-up, if well documented and supported. Using these can be a major plus for a new solution.
+
 ## Plan for future problems, not future functionalities
 
 What is important when setting up a Data Management Platform is to plan for future problems, things that could be very costly to fix later, such as security issues, data loss, or very serious performance issues that might prevent the use of the platform. We will come back to the most important aspect in this page and in the [Backups and Security page](pages/Backups_and_security.qmd) page.
@@ -76,151 +84,8 @@ Learning difficulty from easy (the basic) to very hard (how it all works). For d
 For most set-up, Linux is the operating system of choice. Due to security concern, a minimal knowledge of it is probably a must in all cases, from bare-metal setup to cloud-based installation, though the useful set will change.
 
 
-We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folder, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
+We list below the commands you should know to survive, and their eventual options (note that some of these command now run on Windows using the Terminal shell), following by the important folders, user and group access on Unix, private and public keys and ssl/ssh. This part is more a check list of things you should know for the following topics, and we recommend that you learn those before continuing. Wikipedia is a good starting point and there are many easy to find good tutorials online. Books are needed only for a deep understanding, but are also stronly recommended if you use Linux a lot and deal with advanced topics.
 Note that Linux is not the only Unix, OpenBSD and FreeBSD being good alternative, but all Unix are very similar for their core usage and structure. The package managers will differ, but also differ on Linux between Debian-based Linux (dpkg), RedHat-based Linux (rpm, yum, now dnf) and Ubuntu-based Linux (apt/apt-get), apk (Alpine Linux), as well as sandboxed or universal package managers like Flatpak and Snap, to list the main ones.
-
-### Viewing a web page in a Linux shell
-
-One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it's also possible to access most web applications using a command line browser. Some fancy web pages won't be displayed in any useful way, but a Data Management Platform is rarely in that category.
-
-::: {.callout-tip}
-A text-only browser is also a good way to check if a web-site is accessible, mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.
-:::
-
-* **lynx**, the best friend of old server-side developers, the oldest web-browser still maintained, with an easy to remember name, is a quick way to check a web-site.
-
-  * Open a page:
-
-    ```bash
-    lynx http://localhost:8080
-    ```
-  * Navigation:
-
-    * Arrow keys: move between links
-    * **Enter**: follow link
-    * **G**: open a new URL
-  * Quit:
-
-    * **Q**, then **Y** to confirm
-
-* **w3m**
-  Slightly more modern than lynx, with optional image support in some terminals.
-
-  * Open a page:
-
-    ```bash
-    w3m http://localhost:8080
-    ```
-  * Navigation:
-
-    * Arrow keys: move
-    * **Enter**: follow link
-    * **U**: open a new URL
-  * Quit:
-
-    * **Q**
-
-* **links / links2**
-  Similar to lynx, with better table rendering and optional graphics support.
-
-  * Open a page:
-
-    ```bash
-    links http://localhost:8080
-    ```
-  * **Esc**: open menu
-  * Quit:
-
-    * **Q**
-
-### Firewall, SSH and VPN
-
-
-### Export display with X11
-
-The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally. It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI. The communication will be ensured by SSH tunneling, thus encrypted.
-
-::: {.callout-warning}
-The remote host must allow the local host, which might create a security risk (**xhost+** instead of **.XAuthority**).
-:::
-
-It is seldom needed to do so but very useful to know it is possible for some very specific need.
-
-### Linux with Wayland: Waypipe
-
-If the same functionality is needed for a distribution using the newer Wayland display server, it is possible using [Waypipe](https://gitlab.freedesktop.org/mstoeckl/waypipe/).
-
-### Remote desktop
-
-A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.
-
-::: {.callout-note}
-Due to security issue, remote desktop (as well as remote X11) might not be usable. Generally, a properly configured firewall will block almost all ports to-from external access.
-
-If a SSH access is allowed, a remote desktop relying on SSH tunneling will be possible (such as X11).
-
-Otherwise it is possible that a VPN connection is needed first.
-
-It is always better to have an extra constraint (using the VPN in this case) than potentially add a vulnerability (see surface of attack in the [Backups and Security page](pages/Backups_and_security.qmd))
-:::
-
-Common tools:
-
-* **RDP**
-
-  * Server: `xrdp`
-  * Client: Remmina, Windows Remote Desktop
-  * Works well over networks
-
-* **VNC**
-
-  * Servers: `tigervnc`, `tightvnc`
-  * Clients: `vncviewer`, Remmina
-  * Simple and widely supported
-
-* **Wayland-friendly options**
-
-  * GNOME Remote Desktop (RDP)
-  * KDE Remote Desktop
-  * `weston` (Wayland reference compositor)
-
-:::{.callout-tip}
-Which option should I use?
-
-I just want to check that a web service is running
--> Use a text-based browser (lynx, w3m, or links)
-Fast, simple, works everywhere.
-
-I need a feature that exists only in a graphical interface
--> Try export display with X11 (if available).
-Useful for configuration tools or admin interfaces.
-
-If too difficult to set-up or not available (on newer Linux or other OS)
--> Use a remote desktop.
-
-I am not sure which option to choose
--> Use a remote desktop.
-It is the most reliable and behaves like a normal desktop.
-:::
-
-### Main web-servers
-
-Most Web applications will be running as CMS: Content Management System. It means that it is a program running on a server that generate the web pages depending on the user actions, using the data stored on the server-side (which are not necessarily on the same server). This program is either serving the web content by itself using functionalities of the used language (for Python, Ruby, Perl, ... ) or within an application server (like Apache Tomcat for Java).
-
-But very often the web application, especially for production, will be accessed through a Web Server. This last will take care of accepting a secure connection (HTTPS) and forward all requests to the web application(s). It offers several benefits:
-* An extra layer for security,
-* A possibility to cache for static content (such as images),
-* Eventually load-balance between several instances of the web application,
-* Offer one central access for several web applications, even if they are not homogeneous.
-
-The main web servers are:
-* **Nginx**,
-* **Apache**,
-* **Internet Information Services** (**IIS**, Windows only, proprietary).
-
-Another web server gaining tracktion is **Caddy**, that try to integrate more aspects (like optaining a SSL certificate) while being easier to use. As always, the gain has to be weighted against the risk as the adoption as well as the ecosystem is smaller.
-
-**IIS** is rarely use for Research project but can be the best choice if the application is built using Microsoft technologies.
 
 
 ### Commands that should be known
@@ -387,6 +252,15 @@ There are several way to do so:
 * **/media** -> temporary mount points for external storage (optional)
 * **/opt** → optional or third-party software
 
+### Users and groups
+
+Unix is a multi-user system, so it has a concept of users and groups to manage permissions and access control. Each user has a unique username and a user ID (UID), and can belong to one or more groups, which also have unique group names and group IDs (GID). Permissions for files and directories are defined for the owner (user), the group, and others (everyone else). Understanding how users, groups, and permissions work is crucial for managing access to files and services on a Unix system.
+Each user has a home directory (usually under /home/username) where they can store their personal files and configuration. The root user (UID 0) has full administrative privileges and should generally not be used. The `sudo` command allows authorized users to execute commands with root privileges, which is a safer alternative to logging in as root.
+
+Each file on Unix systems has an owner and a group, and permissions that determine who can read, write, or execute the file. 
+The owner of a file can be changed using the `chown` command, and the group can be changed using the `chgrp` command. Permissions can be modified using the `chmod` command, which can set permissions for the owner, group, and others.
+Permissions are represented in a symbolic format (e.g., `rwxr-xr--`) or a numeric format (e.g., `755`). The symbolic format has to be read as three sets of permissions: the first set (rwx) is for the owner, the second set (r-x) is for the group, and the third set (r--) is for others. Each set is composed of the permissions to read (r), write (w), and execute (x) the file, and "-" means that the permission is not granted.
+To got from the symbolic format to the numeric format, you can use the following values: read (r) = 4, write (w) = 2, execute (x) = 1. So for example, `rwxr-xr--` would be 755 (4+2+1 for the owner, 4+1 for the group, and 4 for others).
 
 ### Online resources
 
@@ -405,6 +279,153 @@ So for a quick set-up of an exposed application, a virtual machine might be a be
 
 A long term set-up should take a proper care of security in all case, and in this case there should be not benefit in using a virtual machine, aside of cybersecurity needs (like a honeypot).
 
+### Viewing a web page in a Linux shell
+
+One very useful capability while setting-up a web application is to access it directly. You might have access to a graphical terminal (see the next topic) but it's also possible to access most web applications using a command line browser. Some fancy web pages won't be displayed in any useful way, but a Data Management Platform is rarely in that category.
+
+::: {.callout-tip}
+A text-only browser is also a good way to check if a web-site is accessible, mostly for visually impaired persons. All important content should be in plain text and the navigation should still be possible.
+:::
+
+* **lynx**, the best friend of old server-side developers, the oldest web-browser still maintained, with an easy to remember name, is a quick way to check a web-site.
+
+  * Open a page:
+
+    ```bash
+    lynx http://localhost:8080
+    ```
+  * Navigation:
+
+    * Arrow keys: move between links
+    * **Enter**: follow link
+    * **G**: open a new URL
+  * Quit:
+
+    * **Q**, then **Y** to confirm
+
+* **w3m**
+  Slightly more modern than lynx, with optional image support in some terminals.
+
+  * Open a page:
+
+    ```bash
+    w3m http://localhost:8080
+    ```
+  * Navigation:
+
+    * Arrow keys: move
+    * **Enter**: follow link
+    * **U**: open a new URL
+  * Quit:
+
+    * **Q**
+
+* **links / links2**
+  Similar to lynx, with better table rendering and optional graphics support.
+
+  * Open a page:
+
+    ```bash
+    links http://localhost:8080
+    ```
+  * **Esc**: open menu
+  * Quit:
+
+    * **Q**
+
+### Firewall, SSH and VPN
+
+A firewall is a network security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It can be hardware-based, software-based, or a combination of both. Firewalls are used to protect networks from unauthorized access, cyber attacks, and other security threats. They can be configured to block or allow specific types of traffic, such as web traffic, email traffic, or file transfers.
+
+SSH (Secure Shell) is a cryptographic network protocol that allows secure communication between two networked devices. It is commonly used for remote administration of servers and other networked devices. SSH provides a secure channel over an unsecured network by encrypting the data transmitted between the client and the server. SSH generally relies on a pair of cryptographic keys (public and private) for authentication, and it can also use passwords for authentication. SSH is widely used in the IT industry for secure remote access and management of servers and other networked devices.
+
+VPN (Virtual Private Network) is a technology that allows users to create a secure and private connection to another network over the internet. It is commonly used to protect sensitive data and maintain privacy when accessing the internet from public or untrusted networks. A VPN works by creating an encrypted tunnel between the user's device and the VPN server, which can be located in a different geographic location.
+
+### Export display with X11
+
+The X Window System has been conceived as a remote system. So the application using X11 for its display does not have to be displayed locally. It is handy mostly for applications that have a Graphical User Interface only or those that are easier to manage using their GUI. The communication will be ensured by SSH tunneling, thus encrypted.
+
+::: {.callout-warning}
+The remote host must allow the local host, which might create a security risk (**xhost+** instead of **.XAuthority**).
+:::
+
+It is seldom needed to do so but very useful to know it is possible for some very specific need.
+
+### Linux with Wayland: Waypipe
+
+If the same functionality is needed for a distribution using the newer Wayland display server, it is possible using [Waypipe](https://gitlab.freedesktop.org/mstoeckl/waypipe/).
+
+### Remote desktop
+
+A more common way to have a remote graphical display is via remote desktops applications. They are purposely written for such usage and thus should allow a secure and simple solution.
+
+::: {.callout-note}
+Due to security issue, remote desktop (as well as remote X11) might not be usable. Generally, a properly configured firewall will block almost all ports to-from external access.
+
+If a SSH access is allowed, a remote desktop relying on SSH tunneling will be possible (such as X11).
+
+Otherwise it is possible that a VPN connection is needed first.
+
+It is always better to have an extra constraint (using the VPN in this case) than potentially add a vulnerability (see surface of attack in the [Backups and Security page](pages/Backups_and_security.qmd))
+:::
+
+Common tools:
+
+* **RDP**
+
+  * Server: `xrdp`
+  * Client: Remmina, Windows Remote Desktop
+  * Works well over networks
+
+* **VNC**
+
+  * Servers: `tigervnc`, `tightvnc`
+  * Clients: `vncviewer`, Remmina
+  * Simple and widely supported
+
+* **Wayland-friendly options**
+
+  * GNOME Remote Desktop (RDP)
+  * KDE Remote Desktop
+  * `weston` (Wayland reference compositor)
+
+:::{.callout-tip}
+Which option should I use?
+
+I just want to check that a web service is running
+-> Use a text-based browser (lynx, w3m, or links)
+Fast, simple, works everywhere.
+
+I need a feature that exists only in a graphical interface
+-> Try export display with X11 (if available).
+Useful for configuration tools or admin interfaces.
+
+If too difficult to set-up or not available (on newer Linux or other OS)
+-> Use a remote desktop.
+
+I am not sure which option to choose
+-> Use a remote desktop.
+It is the most reliable and behaves like a normal desktop.
+:::
+
+### Main web-servers
+
+Most Web applications will be running as CMS: Content Management System. It means that it is a program running on a server that generate the web pages depending on the user actions, using the data stored on the server-side (which are not necessarily on the same server). This program is either serving the web content by itself using functionalities of the used language (for Python, Ruby, Perl, ... ) or within an application server (like Apache Tomcat for Java).
+
+But very often the web application, especially for production, will be accessed through a Web Server. This last will take care of accepting a secure connection (HTTPS) and forward all requests to the web application(s). It offers several benefits:
+* An extra layer for security,
+* A possibility to cache for static content (such as images),
+* Eventually load-balance between several instances of the web application,
+* Offer one central access for several web applications, even if they are not homogeneous.
+
+The main web servers are:
+* **Nginx**,
+* **Apache**,
+* **Internet Information Services** (**IIS**, Windows only, proprietary).
+
+Another web server gaining tracktion is **Caddy**, that try to integrate more aspects (like optaining a SSL certificate) while being easier to use. As always, the gain has to be weighted against the risk as the adoption as well as the ecosystem is smaller.
+
+**IIS** is rarely use for Research project but can be the best choice if the application is built using Microsoft technologies.
 
 # Bare-Metal setup and Virtual Machines
 
@@ -498,6 +519,8 @@ If Docker is the *de facto* standard, there are other containers engines, such a
   ```bash
   docker-compose up
   ```
+* Images can be stored and used locally, but they are often pulled from a registry, typically Docker Hub. There are other registries, such as GitHub Container Registry, but it is also possible to set up a private registry, which can be useful for internal use or for hosting custom images. Private registries can be useful for security reasons.
+The docker command and Docker Compose assume that the image is either available locally or in Docker Hub. To use a different registry, you have to specify the registry in the image name, for instance `myregistry.com/myimage:tag`. If the registry is private, you will need to authenticate to it using `docker login myregistry.com` before pulling the image.
 
 ### Minimal mental model
 
@@ -506,13 +529,54 @@ If Docker is the *de facto* standard, there are other containers engines, such a
 * **Volume**: persistent data
 * **Docker Compose**: a complete setup of multiple images and volumes.
 
-If you keep this model in mind, most Docker-related documentation will start to make sense.
-
 ## Useful things to know
 
 A docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using ```docker inspect <image id>```, but also individually by using ```docker inspect -f '{{.Config.Entrypoint}}' <image id>``` and ```docker inspect -f '{{.Config.Cmd}}' <image id>```. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about ```cmd``` and ```Entrypoint```, the official Docker documentation offer a [great overview](https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/).
 
 Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.
+
+
+# Moving to Docker compose
+
+::: {.callout-tip}
+## Recommended learning path
+
+The official Online documentations is good and complete. Online tutorials should be enough as a complement.
+
+Learning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system).
+:::
+
+## Advantages
+
+Docker compose is both a tool to setup a docker-based application or set of applications, and the file, written in YAML, that describes the setup. It is a powerful tool to manage a complex application with several components, such as a web server, an application, a database, and a cache. It allows to define the different components of the application and how they are connected together, as well as the volumes and environment variables needed for each component. It also allows to easily start and stop the application with a single command, and to manage the different components of the application in a consistent way.
+
+Docker compose is quite simple to learn and use, and it is a good way to start with container-based applications. With a coherent docker-compose file, it is a good solution for running a web application, with a database and a cache, on a single machine, with a simple set-up and a good performance. 
+
+To access the web-application, it is generally needed to use a reverse proxy, such as Nginx or Apache, to forward the traffic from the host to the container. It is also possible to use a load balancer, such as HAProxy, to distribute the traffic between several instances of the application.
+
+## Things to take into account
+
+Is possible and often needed to use parameters in the docker-compose file, which are passed to the application as environment variables. Environment variables are generally used for all configuration parameters that might change between different environments (development, staging, production), or that are sensitive (such as database credentials). They are generally stored in a .env file.
+
+Secrets can also be used for sensitive data, but they are generally more complex to set-up and use, and they are not supported by all container engines. They are generally stored in a separate file, and they are mounted as a volume in the container.
+
+The different types of volumes (bind mounts, named volumes, tmpfs) have different use cases and implications for performance and security. Bind mounts are generally used for development, as they allow to easily edit the files on the host and see the changes in the container. Named volumes are generally used for production, as they are managed by Docker and can be easily backed up and restored. Tmpfs volumes are generally used for temporary data that does not need to be persisted, such as cache or session data.
+
+## A typical docker compose yaml file
+
+## Typical usage
+
+## Namespaces and namespaces collisions
+
+Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
+For instance, you want 2 instances of the same application, **testApp**, that uses a MySQL database. The database is defined in the docker-compose and used by the **testApp**. The set-up is the following:
+
+```yaml
+application1/testApp/docker-compose.yml
+application2/testApp/docker-compose.yml
+```
+
+It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)
 
 # How to build a Dockerfile
 
@@ -563,48 +627,7 @@ If you plan to containerize an existing application, depending on how it is buil
 * The application needs to run on a specific operating system, which is not available as a base image.
 * The application needs to run on a specific hardware, which is not available in a container. Not that for GPU usage there are some solutions, such as NVIDIA Container Toolkit, but it is not always possible to use them.
 * The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later.
-* The application needs to run with a specific network configuration, which is not available in a container
-
-# Moving to Docker compose
-
-::: {.callout-tip}
-## Recommended learning path
-
-The official Online documentations is good and complete. Online tutorials should be enough as a complement.
-
-Learning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system).
-:::
-
-## Advantages
-
-Docker compose is both a tool to setup a docker-based application or set of applications, and the file, written in YAML, that describes the setup. It is a powerful tool to manage a complex application with several components, such as a web server, an application, a database, and a cache. It allows to define the different components of the application and how they are connected together, as well as the volumes and environment variables needed for each component. It also allows to easily start and stop the application with a single command, and to manage the different components of the application in a consistent way.
-
-Docker compose is quite simple to learn and use, and it is a good way to start with container-based applications. With a coherent docker-compose file, it is a good solution for running a web application, with a database and a cache, on a single machine, with a simple set-up and a good performance. 
-
-To access the web-application, it is generally needed to use a reverse proxy, such as Nginx or Apache, to forward the traffic from the host to the container. It is also possible to use a load balancer, such as HAProxy, to distribute the traffic between several instances of the application.
-
-## Things to take into account
-
-Adding parameters
-
-The different types of volumes
-
-## A typical docker compose yaml file
-
-## Typical usage
-
-## Namespaces and namespaces collisions
-
-Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
-For instance, you want 2 instances of the same application, **testApp**, that uses a MySQL database. The database is defined in the docker-compose and used by the **testApp**. The set-up is the following:
-
-```yaml
-application1/testApp/docker-compose.yml
-application2/testApp/docker-compose.yml
-```
-
-It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)
-
+* The application needs to run with a specific network configuration, which is not available in a container.
 
 # From Docker compose to Kubernetes
 
