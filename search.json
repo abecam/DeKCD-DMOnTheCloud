@@ -641,6 +641,17 @@
     ]
   },
   {
+    "objectID": "index.html#keeping-the-difficulty-under-control",
+    "href": "index.html#keeping-the-difficulty-under-control",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Keeping the difficulty under control",
+    "text": "Keeping the difficulty under control\nThe most important aspect when setting up a Data Management Solution is to keep the difficulty of setting it up and using it under check.\nAs such, this step-by-step page is mostly to determine if the complexity of one solution seems reasonnable, then have some pointers about the solution: what it offers, what is the cost, and a minimal introduction on using it. It is not intended to be a complete documentation on each solution, but to give enough information to understand the solution and navigate through its documentation.\nWhat this documentation cannot fully plan for is what is in place already: existing servers with some application, a Virtual Machine infrastructure… Which can be used as a base for the set-up, if well documented and supported. Using these can be a major plus for a new solution.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
     "objectID": "index.html#plan-for-future-problems-not-future-functionalities",
     "href": "index.html#plan-for-future-problems-not-future-functionalities",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
@@ -689,7 +700,7 @@
     "href": "index.html#vocabulary-1",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Vocabulary",
-    "text": "Vocabulary\n\nAn image is a template used to create containers. It contains:\n\nan operating system base (often minimal Linux), which is not mandatory on Linux as it can use the host operating system, but is generally included for compatibility (be sure that the version of Linux is the right one, or if not running on a Linux host).\nthe application,\nits dependencies,\ndefault configuration.\n\nAn image is immutable: you do not modify it while it is running. Images are usually downloaded from a registry (e.g. Docker Hub).\nA container is a running instance of an image. It:\n\nruns processes,\nlistens on ports,\ncan be started, stopped, or restarted.\n\nNote that the desired application needs to be started (entrypoint), or only the operating system will run.\nContainers are ephemeral:\n\nif a container is deleted, everything inside it is lost\nunless data is stored in a volume\n\nA volume is a persistent storage area outside the container. It is used to store all data that must survive container restarts or upgrades.\nVolumes are:\n\nmounted inside containers\nindependent of the container lifecycle\n\nDocker Compose is a tool to define and run multiple containers together using a single configuration file (docker-compose.yml).\nIt is used to describe:\n\nwhich images to run,\nhow containers are connected,\nports,\nvolumes,\nenvironment variables.\n\nWith Docker Compose, you typically manage an entire application stack:\n\nweb server\napplication\ndatabase\ncache\n\nAll started with:\ndocker-compose up\n\n\nMinimal mental model\n\nImage:→ what to run\nContainer: the running application\nVolume: persistent data\nDocker Compose: a complete setup of multiple images and volumes.\n\nIf you keep this model in mind, most Docker-related documentation will start to make sense.",
+    "text": "Vocabulary\n\nAn image is a template used to create containers. It contains:\n\nan operating system base (often minimal Linux), which is not mandatory on Linux as it can use the host operating system, but is generally included for compatibility (be sure that the version of Linux is the right one, or if not running on a Linux host).\nthe application,\nits dependencies,\ndefault configuration.\n\nAn image is immutable: you do not modify it while it is running. Images are usually downloaded from a registry (e.g. Docker Hub).\nA container is a running instance of an image. It:\n\nruns processes,\nlistens on ports,\ncan be started, stopped, or restarted.\n\nNote that the desired application needs to be started (entrypoint), or only the operating system will run.\nContainers are ephemeral:\n\nif a container is deleted, everything inside it is lost\nunless data is stored in a volume\n\nA volume is a persistent storage area outside the container. It is used to store all data that must survive container restarts or upgrades.\nVolumes are:\n\nmounted inside containers\nindependent of the container lifecycle\n\nDocker Compose is a tool to define and run multiple containers together using a single configuration file (docker-compose.yml).\nIt is used to describe:\n\nwhich images to run,\nhow containers are connected,\nports,\nvolumes,\nenvironment variables.\n\nWith Docker Compose, you typically manage an entire application stack:\n\nweb server\napplication\ndatabase\ncache\n\nAll started with:\ndocker-compose up\nImages can be stored and used locally, but they are often pulled from a registry, typically Docker Hub. There are other registries, such as GitHub Container Registry, but it is also possible to set up a private registry, which can be useful for internal use or for hosting custom images. Private registries can be useful for security reasons. The docker command and Docker Compose assume that the image is either available locally or in Docker Hub. To use a different registry, you have to specify the registry in the image name, for instance myregistry.com/myimage:tag. If the registry is private, you will need to authenticate to it using docker login myregistry.com before pulling the image.\n\n\nMinimal mental model\n\nImage:→ what to run\nContainer: the running application\nVolume: persistent data\nDocker Compose: a complete setup of multiple images and volumes.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
@@ -701,28 +712,6 @@
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Useful things to know",
     "text": "Useful things to know\nA docker image will be started (once used in a container) using an Entrypoint and/or a cmd. These can be listed by using docker inspect &lt;image id&gt;, but also individually by using docker inspect -f '{{.Config.Entrypoint}}' &lt;image id&gt; and docker inspect -f '{{.Config.Cmd}}' &lt;image id&gt;. This is useful in case something goes wrong inside a container to know how the container is supposed to start. To know more about cmd and Entrypoint, the official Docker documentation offer a great overview.\nChanging something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#testingdevelopment-vs-production",
-    "href": "index.html#testingdevelopment-vs-production",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "Testing/Development vs Production",
-    "text": "Testing/Development vs Production\nUnfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source).\nBut it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.\n\n\n\n\n\n\nNote\n\n\n\nA light image can be very barebone and offer the minimum linux commands. It might be useful, even on production, to use a slightly more feature-rich image or to add some needed tools. Once the setup is stable, a new image can be built.",
-    "crumbs": [
-      "Home",
-      "De.KCD - Data Management Platform on the Cloud, step by step"
-    ]
-  },
-  {
-    "objectID": "index.html#when-containerization-is-not-possible",
-    "href": "index.html#when-containerization-is-not-possible",
-    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
-    "section": "When containerization is not possible",
-    "text": "When containerization is not possible\nIf you plan to containerize an existing application, depending on how it is built and the functionality it offers, it might be difficult or even impossible to containerize it. Particularly, the following cases can be problematic: * The application needs to run as root, which is generally not recommended for security reason and thus not allowed in most container engines. * The application needs to run on a specific operating system, which is not available as a base image. * The application needs to run on a specific hardware, which is not available in a container. Not that for GPU usage there are some solutions, such as NVIDIA Container Toolkit, but it is not always possible to use them. * The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later. * The application needs to run with a specific network configuration, which is not available in a container",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
@@ -744,7 +733,7 @@
     "href": "index.html#things-to-take-into-account",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Things to take into account",
-    "text": "Things to take into account\nAdding parameters\nThe different types of volumes",
+    "text": "Things to take into account\nIs possible and often needed to use parameters in the docker-compose file, which are passed to the application as environment variables. Environment variables are generally used for all configuration parameters that might change between different environments (development, staging, production), or that are sensitive (such as database credentials). They are generally stored in a .env file.\nSecrets can also be used for sensitive data, but they are generally more complex to set-up and use, and they are not supported by all container engines. They are generally stored in a separate file, and they are mounted as a volume in the container.\nThe different types of volumes (bind mounts, named volumes, tmpfs) have different use cases and implications for performance and security. Bind mounts are generally used for development, as they allow to easily edit the files on the host and see the changes in the container. Named volumes are generally used for production, as they are managed by Docker and can be easily backed up and restored. Tmpfs volumes are generally used for temporary data that does not need to be persisted, such as cache or session data.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
@@ -778,6 +767,28 @@
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Namespaces and namespaces collisions",
     "text": "Namespaces and namespaces collisions\nNamespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, testApp, that uses a MySQL database. The database is defined in the docker-compose and used by the testApp. The set-up is the following:\napplication1/testApp/docker-compose.yml\napplication2/testApp/docker-compose.yml\nIt is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#testingdevelopment-vs-production",
+    "href": "index.html#testingdevelopment-vs-production",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Testing/Development vs Production",
+    "text": "Testing/Development vs Production\nUnfortunately, if it is quite easy to create a quick Dockerfile for testing/development, it is not the same for production. It might be important to optimize the image for production, to minimize the size and the attack surface. But it is mandatory to think about security, and ensure that all important secrets are not left in the image, but coming from environment variables (or other external source).\nBut it can also be more interesting to use a dockerized application only for testing/development, where changes might be more frequent, and to use a more traditional set-up for production, with a proper configuration of the web-server and the application.\n\n\n\n\n\n\nNote\n\n\n\nA light image can be very barebone and offer the minimum linux commands. It might be useful, even on production, to use a slightly more feature-rich image or to add some needed tools. Once the setup is stable, a new image can be built.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#when-containerization-is-not-possible",
+    "href": "index.html#when-containerization-is-not-possible",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "When containerization is not possible",
+    "text": "When containerization is not possible\nIf you plan to containerize an existing application, depending on how it is built and the functionality it offers, it might be difficult or even impossible to containerize it. Particularly, the following cases can be problematic: * The application needs to run as root, which is generally not recommended for security reason and thus not allowed in most container engines. * The application needs to run on a specific operating system, which is not available as a base image. * The application needs to run on a specific hardware, which is not available in a container. Not that for GPU usage there are some solutions, such as NVIDIA Container Toolkit, but it is not always possible to use them. * The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later. * The application needs to run with a specific network configuration, which is not available in a container.",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
