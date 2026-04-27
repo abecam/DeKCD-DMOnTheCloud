@@ -302,6 +302,102 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 </section>
 <section id="the-default-docker-compose" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="the-default-docker-compose"><span class="header-section-number">2.2</span> The default Docker Compose</h2>
+<p>The default Seek docker compose looks a bit complex, but is straight forward if looked element by element.</p>
+<pre><code>x-shared:
+  seek_base: &amp;seek_base
+    # build: .
+    image: fairdom/seek:main
+
+    restart: always
+    environment: &amp;seek_base_env
+      RAILS_ENV: production
+      SOLR_PORT: 8983
+      SOLR_HOST: solr
+      RAILS_LOG_LEVEL: info # debug, info, warn, error or fatal
+    env_file:
+      - docker/db.env
+    volumes:
+      - seek-filestore:/seek/filestore
+      - seek-cache:/seek/tmp/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      solr:
+        condition: service_started
+
+
+services:
+  db:
+    # Database implementation, in this case MySQL
+    image: mysql:8.4
+    container_name: seek-mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --log-error-verbosity=1
+    restart: always
+    stop_grace_period: 1m30s
+    env_file:
+      - docker/db.env
+    volumes:
+      - seek-mysql-db:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER -p$$MYSQL_PASSWORD --silent" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+
+  seek:
+    # The SEEK application
+    &lt;&lt;: *seek_base
+    container_name: seek
+    command: docker/entrypoint.sh
+    ports:
+      - "3000:3000"
+    environment:
+      &lt;&lt;: *seek_base_env
+      NO_ENTRYPOINT_WORKERS: 1
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000/up" ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  seek_workers:
+    # The SEEK delayed job workers
+    &lt;&lt;: *seek_base
+    container_name: seek-workers
+    environment:
+      &lt;&lt;: *seek_base_env
+      QUIET_SUPERCRONIC: 1
+    command: docker/start_workers.sh
+    healthcheck:
+      test: [ "CMD", "bash", "script/check_worker_pids.sh" ]
+      retries: 5
+
+  solr:
+    image: fairdom/seek-solr:8.11
+    container_name: seek-solr
+    restart: always
+    environment:
+      SOLR_JAVA_MEM: -Xms512m -Xmx1024m
+    volumes:
+      - seek-solr-data:/var/solr/
+    entrypoint:
+      - docker-entrypoint.sh
+      - solr-precreate
+      - seek
+      - /opt/solr/server/solr/configsets/seek_config
+
+volumes:
+  seek-filestore:
+    external: true
+  seek-mysql-db:
+    external: true
+  seek-solr-data:
+    external: true
+  seek-cache:
+    external: true</code></pre>
 </section>
 <section id="what-could-benefit-from-a-cloud-setup" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="what-could-benefit-from-a-cloud-setup"><span class="header-section-number">2.3</span> What could benefit from a cloud setup</h2>

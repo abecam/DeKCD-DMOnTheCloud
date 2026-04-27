@@ -302,6 +302,7 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#a-typical-docker-compose-yaml-file" id="toc-a-typical-docker-compose-yaml-file" class="nav-link" data-scroll-target="#a-typical-docker-compose-yaml-file">A typical docker compose yaml file</a></li>
   <li><a href="#typical-usage" id="toc-typical-usage" class="nav-link" data-scroll-target="#typical-usage">Typical usage</a></li>
   <li><a href="#namespaces-and-namespaces-collisions" id="toc-namespaces-and-namespaces-collisions" class="nav-link" data-scroll-target="#namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</a></li>
+  <li><a href="#bind-mounts" id="toc-bind-mounts" class="nav-link" data-scroll-target="#bind-mounts">Bind mounts</a></li>
   </ul></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a>
   <ul class="collapse">
@@ -937,6 +938,154 @@ Note
 </section>
 <section id="a-typical-docker-compose-yaml-file" class="level2">
 <h2 class="anchored" data-anchor-id="a-typical-docker-compose-yaml-file">A typical docker compose yaml file</h2>
+<p>Here is a simple docker compose with external variables (with a default value) and a postgres database. The main image is stored in a public user’s github repository: <code>ghcr.io/abecam/</code>, without this path, docker compose would assume that the image is stored on docker hub.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As automatically saving an image on Docker Hub might involve a cost, some Open Source projects will use other registries.</p>
+</div>
+</div>
+<p>Variable are defined in a .env file or in one or several files which can be defined using the env_file attribute (<code>env_file: "myenv.env"</code>).</p>
+<p>The usage below is the typical one: <code>attribute_name: ${VARIABLE_NAME:-default_value}</code></p>
+<p>Note that it is an interpolation, and it can be combined with text or other variables: <code>attribute_name: "text${VARIABLE_NAME}:${ANOTHER_VARIABLE_NAME}"</code></p>
+<p>There are more possibilities explained on the official [Docker documentation}(https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)</p>
+<p>The variables used in <code>environment:</code> are available within the application as environment variable, making it simple to use them.</p>
+<p>In this docker compose, we define 2 services:</p>
+<ul>
+<li>a main one, that will map the internal port of 8000 (2nd of the 8000:8000) to an external port of 8000. Which means that the application should run on the port 8000 (it can also uses other ports but they won’t be accessible if not mapped) and will be accessed on the same port (only by choice). It also defines the POSTGRES information that will allow the application to use the 2nd service.</li>
+<li>the database, called db. Note that the values need to be the same otherwise the main application will not be able to access the database. As this docker compose relies on an .env file, it is only a problem if the value is not defined in the .env file (or if there is no .env file) and the default values differs. To ensure that the default values are not repeated, it is possible to use Yaml anchors and aliases. We provide a simple example below.</li>
+</ul>
+<pre><code>services:
+  main:
+    image: ${DOCKER_IMAGE:-ghcr.io/abecam/thefiltershop:latest}
+    ports:
+      - "8000:8000"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-thefiltershop}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-totolebo}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      DEBUG: ${DEBUG:-false}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-your-secret-key}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-thefiltershop}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-totolebo}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Both the postgres password and the Django secret key have a default value in this docker-compose. It is only fine for testing, and need to be replaced by an .env value. In a stable application, password and secret values will probably not get a default value.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Another issue in this docker-compose if the “depends_on: db”. It means that the main application will use the db service, but it will not check if the service is ready. It is fine only if the application is not expected to use the db immediately. In an established Data Management application, there might be an automatic database migration that will need the database to be up and running.</p>
+</div>
+</div>
+<p>If we want to make sure the database default values are the same, while not repeating the environment set-up, we can use the docker compose “x-” prefix, which define an extension field (ignored by Compose) and Yaml anchors (&amp;anchor_name) and aliases (*anchor_name -&gt; reference the anchor):</p>
+<pre><code>x-postgres-env: &amp;postgres-env   # Anchor defined in an extension field (x- prefix = ignored by Compose).
+                                 # Stores the three vars that both services need identically.
+  POSTGRES_DB:       ${POSTGRES_DB:-thefiltershop}
+  POSTGRES_USER:     ${POSTGRES_USER:-postgres}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-totolebo}
+
+services:
+  main:
+    image: ${DOCKER_IMAGE:-ghcr.io/abecam/thefiltershop:latest}
+    ports:
+      - "8000:8000"
+    environment:
+      &lt;&lt;: *postgres-env   # Merges the three shared vars in here...
+      POSTGRES_HOST: db   # ...then these are added on top, specific to 'main' only.
+      POSTGRES_PORT: 5432
+      DEBUG:             ${DEBUG:-false}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-your-secret-key}
+    depends_on:
+      db:
+
+  db:
+    image: postgres:16
+    environment:
+      &lt;&lt;: *postgres-env   # Same anchor reused — single source of truth.
+                          # Change the password in one place, both services get it.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:</code></pre>
+<p>Finally, we can improve the DB depends_on by defining a health_check for the database:</p>
+<pre><code>x-postgres-env: &amp;postgres-env   # Anchor defined in an extension field (x- prefix = ignored by Compose).
+                                 # Stores the three vars that both services need identically.
+  POSTGRES_DB:       ${POSTGRES_DB:-thefiltershop}
+  POSTGRES_USER:     ${POSTGRES_USER:-postgres}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-totolebo}
+
+services:
+  main:
+    image: ${DOCKER_IMAGE:-ghcr.io/abecam/thefiltershop:latest}
+    ports:
+      - "8000:8000"
+    environment:
+      &lt;&lt;: *postgres-env   # Merges the three shared vars in here...
+      POSTGRES_HOST: db   # ...then these are added on top, specific to 'main' only.
+      POSTGRES_PORT: 5432
+      DEBUG:             ${DEBUG:-false}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-your-secret-key}
+    depends_on:
+      db:
+        condition: service_healthy   # Upgraded from a bare list to a map so we can
+                                     # specify 'service_healthy' — now Compose waits
+                                     # for the healthcheck below to pass before starting 'main'.
+
+  db:
+    image: postgres:16
+    environment:
+      &lt;&lt;: *postgres-env   # Same anchor reused — single source of truth.
+                          # Change the password in one place, both services get it.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:                                          # Added to make depends_on meaningful.
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-thefiltershop}"]
+      interval: 10s      # Check every 10 seconds.
+      timeout: 5s        # Fail the check if it takes longer than 5s.
+      retries: 5         # Mark as unhealthy after 5 consecutive failures.
+      start_period: 10s  # Grace period on first start before failures count against retries.
+
+volumes:
+  postgres_data:</code></pre>
 </section>
 <section id="typical-usage" class="level2">
 <h2 class="anchored" data-anchor-id="typical-usage">Typical usage</h2>
@@ -944,9 +1093,14 @@ Note
 <section id="namespaces-and-namespaces-collisions" class="level2">
 <h2 class="anchored" data-anchor-id="namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</h2>
 <p>Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup. For instance, you want 2 instances of the same application, <strong>testApp</strong>, that uses a MySQL database. The database is defined in the docker-compose and used by the <strong>testApp</strong>. The set-up is the following:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">application1/testApp/docker-compose.yml</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">application2/testApp/docker-compose.yml</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">application1/testApp/docker-compose.yml</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">application2/testApp/docker-compose.yml</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)</p>
+</section>
+<section id="bind-mounts" class="level2">
+<h2 class="anchored" data-anchor-id="bind-mounts">Bind mounts</h2>
+<p>The default volume in a docker-compose are named volumes (<code>name:</code> without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above). It’s possible to have a bind mounts, i.e.&nbsp;a volume attached to a specific path on the host, by using an external volume and creating the volume using the docker command</p>
+<p>TO DEVELOP and FIX</p>
 </section>
 </section>
 <section id="how-to-build-a-dockerfile" class="level1">
@@ -1559,13 +1713,13 @@ Warning
 <h3 class="anchored" data-anchor-id="sec-cloudrun">Google Cloud Run</h3>
 <p>Google Cloud Run is Google’s fully managed serverless container platform. It is one of the most mature and widely used serverless container services, and is worth examining in detail as a representative example of the category.</p>
 <p><strong>How it works.</strong> You package your application as a Docker/OCI container image, push it to a container registry (Google Artifact Registry, or any public registry), and deploy it with a single command or through the Cloud Console. Cloud Run starts one or more container instances to handle incoming HTTP/gRPC (a Google remote procedure call framework by Google that allows, as the name implies, to call remote functions) requests and scales the number of instances automatically — including scaling to zero when there is no traffic.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and push a container, then deploy to Cloud Run</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> builds submit <span class="at">--tag</span> gcr.io/MY_PROJECT/my-app</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> run deploy my-app <span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--image</span> gcr.io/MY_PROJECT/my-app <span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> managed <span class="dt">\</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--region</span> europe-west1 <span class="dt">\</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--allow-unauthenticated</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build and push a container, then deploy to Cloud Run</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> builds submit <span class="at">--tag</span> gcr.io/MY_PROJECT/my-app</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> run deploy my-app <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--image</span> gcr.io/MY_PROJECT/my-app <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--platform</span> managed <span class="dt">\</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--region</span> europe-west1 <span class="dt">\</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--allow-unauthenticated</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Key features:</strong></p>
 <ul>
 <li><strong>Scale to zero.</strong> When no requests are incoming, Cloud Run runs no instances and incurs no compute cost. This makes it economical for sporadic or unpredictable workloads typical in research.</li>
@@ -1853,7 +2007,7 @@ Warning
 <h1>Going to an assembly</h1>
 <p>An assembly is when several Data Management Platforms are interconnected to provide a more complete solution. For instance, a Data Management Platform for a research group might need to be connected to a storage solution, to a computing cluster, to a data visualization tool, and to a data analysis tool. It is generally better to have a basic knowledge of the different components of the assembly, and of how they work together, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations.</p>
 <p>They are generally connected via APIs, which can be at a programmatic level (for instance a Python API), or at a higher level (for instance a REST API). It is important to have a basic knowledge of how to use these APIs, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations. It is also important to be aware of the security implications of using APIs, and to take appropriate measures to secure them.</p>
-<p>The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the <a href="pages/Data_Anonymisation_and_Pseudonymisation.qmd">Data Anonymisation and Pseudonymisation page</a>.</p>
+<p>The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the <a href="pages/Pseudonymisation.qmd">Data Anonymisation and Pseudonymisation page</a>.</p>
 </section>
 <section id="automatize-the-setup" class="level1">
 <h1>Automatize the setup</h1>
@@ -1877,14 +2031,14 @@ Warning
 <p><strong>Puppet</strong> was one of the first widely adopted tools for managing server configuration at scale, and many large organizations still use it. You describe the desired state of your systems in Puppet’s own language, and a Puppet agent running on each machine enforces that state continuously. It works well for large, stable fleets but it requires installing and maintaining that agent on every machine you manage, setting up a central Puppet server, and learning a configuration language that has a steep initial curve.</p>
 <p><strong>Ansible</strong> emerged as a simpler alternative for configuration management. It does much of what Puppet does: installing packages, writing config files, managing services. But it works over plain SSH with no agent to install. The desired state of a system is written in <em>playbooks</em>, written in YAML, which most developers already know. The tradeoff is that Ansible is not continuously enforcing state the way Puppet does: you run it when you want changes applied, rather than having it run automatically in the background. For smaller setups or teams without dedicated ops staff, this is often the right balance.</p>
 <p>Example playbook</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> webservers</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">become</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install nginx</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">apt</span><span class="kw">:</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">state</span><span class="kw">:</span><span class="at"> present</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">hosts</span><span class="kw">:</span><span class="at"> webservers</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">become</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Install nginx</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">apt</span><span class="kw">:</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">name</span><span class="kw">:</span><span class="at"> nginx</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">state</span><span class="kw">:</span><span class="at"> present</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Running this playbook installs nginx on all hosts in the webservers group.</p>
 <p>Ansible can be used to set-up a bare-metal installation, but also for complementing a Docker Compose setup, typically for configuring the application.</p>
 <p><strong>Terraform</strong> solves a different problem: not configuring machines, but <em>creating</em> the infrastructure in the first place. It talks to cloud providers (or your local virtualization layer) and sets up virtual machines, networks, storage, DNS entries, and so on. You describe what you want, and Terraform tracks what already exists so it only makes the changes needed. Puppet and Ansible assume the machines are already there, Terraform prepares the virtual machines.</p>
@@ -1921,30 +2075,30 @@ Warning
 <section id="a-minimal-github-actions-example" class="level3">
 <h3 class="anchored" data-anchor-id="a-minimal-github-actions-example">A minimal GitHub Actions example</h3>
 <p>Here’s a simple workflow that automatically deploys your Quarto site to GitHub Pages whenever you push to <code>main</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/deploy.yml</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy site</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to GitHub Pages</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .github/workflows/deploy.yml</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy site</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-and-deploy</span><span class="kw">:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Set up Quarto</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/setup@v2</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Render site</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> quarto render</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Deploy to GitHub Pages</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> peaceiris/actions-gh-pages@v3</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">github_token</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">publish_dir</span><span class="kw">:</span><span class="at"> ./_site</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This file lives in your repo at <code>.github/workflows/deploy.yml</code>. GitHub picks it up automatically, no extra configuration needed. Every push to <code>main</code> triggers a fresh build and deploy.</p>
 </section>
 </section>

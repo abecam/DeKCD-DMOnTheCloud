@@ -298,6 +298,19 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <p>One generally important aspect of Data Management and data usage is to know which data to store and how to store it.</p>
 <section id="personal-data" class="level2">
 <h2 class="anchored" data-anchor-id="personal-data">Personal data</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. It is a very crucial aspect.</p>
+</div>
+</div>
 <p>In many countries, storage of personal information is strictly regulated. In the EU and many other jurisdictions, personal data handling is governed by stringent legal requirements that impose significant responsibilities on data controllers and processors.</p>
 <section id="legal-requirements-and-user-rights" class="level3">
 <h3 class="anchored" data-anchor-id="legal-requirements-and-user-rights">Legal Requirements and User Rights</h3>
@@ -348,6 +361,19 @@ Important
 </section>
 <section id="confidential-data" class="level2">
 <h2 class="anchored" data-anchor-id="confidential-data">Confidential data</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. It is a very crucial aspect.</p>
+</div>
+</div>
 <p>Confidential data is any data that have a restricted access: only for accredited users, that should not be publicly accessible, <em>or</em> data that should not be shared with some countries or entities, or used by them. It can be data that is not personal but still sensitive, such as research data that is not yet published, or data that is only for internal use. It can also be data that is personal but does not fall under the legal definition of personal data, such as pseudonymized data or anonymized data.</p>
 <p>Limitation of use for public data is generally only ensured by a license, but it is important to ensure that the license is respected, and that the data is not used in a way that is not allowed by the license. For instance, if the data is licensed under a non-commercial license, it should not be used for commercial purposes. If the data is licensed under a share-alike license, it should not be used in a way that does not allow others to use it under the same license. If the data is licensed under a license that does not allow modification, it should not be modified. If the data is licensed under a license that does not allow redistribution, it should not be redistributed. Enforcement can be difficult and costly, but in some cases it is important to have a clear license and to monitor the use of the data. It is also important to have a clear policy on how to handle violations of the license, such as sending a cease and desist letter or taking legal action.</p>
 </section>
@@ -357,6 +383,19 @@ Important
 </section>
 <section id="backups" class="level1">
 <h1>Backups</h1>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. Backup needs to be in place once a platform is in production.</p>
+</div>
+</div>
 <p>Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage. Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -428,12 +467,38 @@ Note
 </section>
 <section id="firewall" class="level2">
 <h2 class="anchored" data-anchor-id="firewall">Firewall</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. A Firewall is needed. In most institution a firewall will be in place and managed by the local IT.</p>
+</div>
+</div>
 <p>A firewall is a software or hardware that blocks traffic that is not needed.</p>
 <p>One aspect of a Firewall is to reduce the surface of attack by blocking all the traffic that is not needed. For instance, if you have a web application, you should only allow traffic on port 80 (HTTP) and 443 (HTTPS). The database should not be accessible from the outside, but only from the application. The backup system should not be accessible from the outside, but only from the application and/or from a secure location.</p>
 <p>But a firewall can also be used to block traffic from known malicious IP addresses or, if the software is not designed to be used by the public, to block all traffic from the outside and only allow traffic from a secure location (such as a VPN), while autorizing some external access by whitelisting some IP addresses.</p>
 </section>
 <section id="protections-against-attacks" class="level2">
 <h2 class="anchored" data-anchor-id="protections-against-attacks">Protections against attacks</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>various</em>. Some attacks are systematic but mostly managed by modern platforms (like SQL injections), more sophisticated attacks might come if the Data Management Solution is popular. There can also be a wide attack at institution level which might be more advanced, in that case it is important to monitor the activity to see anomalies and communicate with your local IT. Shutting down a platform in case of doubt is always reasonnable.</p>
+</div>
+</div>
 <p>To review, expend and simplify. Extract Denial of Service/BruteForce and simple abuse from robots and agents.</p>
 <p>There are many kinds of attacks, such as SQL injection, cross-site scripting, cross-site request forgery, brute force, denial of service. Some of them can be mitigated by the software design and implementation, such as using prepared statements for SQL queries, using a web application firewall, using a rate limiter, using a CAPTCHA, using a strong password policy, using two-factor authentication, using a VPN, using a firewall, using a backup system, using a monitoring system. Some of them can be mitigated by the user behavior, such as using a strong password, not sharing passwords, not clicking on suspicious links, not downloading suspicious files, not giving away personal information, not using public Wi-Fi for sensitive operations. But some others are more difficult to mitigate, such as zero-day vulnerabilities, insider threats, social engineering, and at the extreme physical attacks (such as theft or sabotage).</p>
 <p>Protecting against abuses is also difficult. Such abuses can be:</p>
@@ -462,6 +527,19 @@ Note
 </section>
 <section id="passwords-and-keys" class="level2">
 <h2 class="anchored" data-anchor-id="passwords-and-keys">Passwords and keys</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high for public solutions</em>. Solutions exposed publicly should have a strong authentication solution. Using an existing external one is a good solution.</p>
+</div>
+</div>
 <section id="for-users-and-apis" class="level3">
 <h3 class="anchored" data-anchor-id="for-users-and-apis">For users and APIs</h3>
 <p>Passwords are still the most common way to protect access to a system, but they are also the most vulnerable. They should be strong and unique, and should not be shared. They should not be written down or stored in plain text. To encourage users to use strong passwords, it is recommended to propose a password manager or a vault, that can generate strong passwords and store them securely. The application should also enforce strong passwords, and should not allow weak passwords. Allowing long passwords allow to use passphrases, that are easier to remember and can be very strong, they can be non-sensical sentences, so easy to remember but hard to guess, such as “TheCowBouBouBounceOnTheMoon!”. If supported, two-factor authentication should be used, as it adds an extra layer of security.</p>
@@ -476,6 +554,19 @@ Note
 </section>
 <section id="what-to-never-log-log-levels" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-log-log-levels">What to never log, log levels</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>medium</em>. The risk is present but low. It is still important on the long run so better to make right immediately.</p>
+</div>
+</div>
 <p>Log are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection).</p>
 <p>For instance, it could be important to log all suspicious url paths are it might be a tentative of code injection, i.e.&nbsp;the attacker hoping that a mechanism in the code will execute a payload.</p>
 <p>A simple example would be executing raw SQL queries:</p>
@@ -497,6 +588,19 @@ Note
 </section>
 <section id="what-to-never-store" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-never-store">What to never store (or never in “reversible” format)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. Leaks of such information can be difficult to identify and will let attacker impersonates a regular user, thus allowing malicious operations potentially without anybody noticing it.</p>
+</div>
+</div>
 <p>All kind of passwords should never be stored in a reversible format. If the password is needed for the software to work, it should be stored in an encrypted format, with a key that is not stored on the same system. If the password is only needed for authentication, it should be hashed with a strong hashing algorithm and a salt.</p>
 <p>Any key, hash or token that can be used to access the system should be stored in an encrypted format, with a key that is not stored on the same system.</p>
 <p>In most countries, the storage of personal data is restricted by law. In the EU, for instance, personal data can only be stored with consent, must be accessible by the user, can be deleted upon request and can be stored only for a limited time. Thus, if some research data is linked to person, it is advised to pseudonymize or to anonymize the data. Only the needed data should be stored, and only for the needed time.</p>
@@ -529,6 +633,19 @@ Note
 </section>
 <section id="know-your-infrastructure" class="level2">
 <h2 class="anchored" data-anchor-id="know-your-infrastructure">Know your infrastructure</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>.</p>
+</div>
+</div>
 <p>This in in overlap with many topics already covered, but it is primordial to know your infrastructure and have a clear overview of it. That includes the time when the main persons in charge are not available, so it is important to have a clear documentation of the infrastructure, including the software used, the configuration, the access rights, the backup system, the monitoring system, the security measures, and the contact information of the people in charge. It is also important to have a clear policy on how to handle incidents, such as a security breach or a data loss.</p>
 <p>A good document to prepare is a troubleshooting guide, that can be used by anyone to understand the infrastructure and to solve common problems. It should include a clear overview of the infrastructure, a list of common problems and their solutions, and a list of contact information for the people in charge.</p>
 </section>
@@ -536,6 +653,19 @@ Note
 <h2 class="anchored" data-anchor-id="deleting-data">Deleting data</h2>
 <section id="really-deleting-files-database-entries-backups-cloud-storage-version-control-entries" class="level3">
 <h3 class="anchored" data-anchor-id="really-deleting-files-database-entries-backups-cloud-storage-version-control-entries">Really deleting files, database entries, backups, cloud storage, version control entries</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>medium to high</em>. Depending on the data, deleting will be only for saving space. If the data must be deleted (like personal data), it is very important.</p>
+</div>
+</div>
 <p>Deleting data is not as simple as it seems. When you delete a file, it is not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>shred</code> on Linux or <code>sdelete</code> on Windows.</p>
 <p>When you delete a database entry, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a database entry securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>pg_repack</code> for PostgreSQL or <code>OPTIMIZE TABLE</code> for MySQL.</p>
 <p>When you delete a backup, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a backup securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as <code>shred</code> on Linux or <code>sdelete</code> on Windows.</p>
@@ -544,6 +674,19 @@ Note
 </section>
 <section id="when-you-should-not-delete-data" class="level3">
 <h3 class="anchored" data-anchor-id="when-you-should-not-delete-data">When you should not delete data</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Importance: <em>high</em>. It is generally a condition of a project funding or research output.</p>
+</div>
+</div>
 <p>Some data should not be deleted, such as data which is part of a funded project and should live for a predetermined time, or data that is part of a publication and should be available for reproducibility. In these cases, it is important to have a clear policy on how to handle the data, such as how to store it securely, how to share it with the right people, how to monitor its usage, and how to eventually delete it when it is no longer needed.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
