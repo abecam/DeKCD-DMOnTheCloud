@@ -8,6 +8,10 @@ One generally important aspect of Data Management and data usage is to know whic
 
 ## Personal data
 
+::: {.callout-note}
+Importance: *high*. It is a very crucial aspect.
+:::
+
 In many countries, storage of personal information is strictly regulated. In the EU and many other jurisdictions, personal data handling is governed by stringent legal requirements that impose significant responsibilities on data controllers and processors.
 
 ### Legal Requirements and User Rights
@@ -49,6 +53,10 @@ The limitation of data storage for personal information includes backups. Backup
 
 ## Confidential data
 
+::: {.callout-note}
+Importance: *high*. It is a very crucial aspect.
+:::
+
 Confidential data is any data that have a restricted access: only for accredited users, that should not be publicly accessible, *or* data that should not be shared with some countries or entities, or used by them. It can be data that is not personal but still sensitive, such as research data that is not yet published, or data that is only for internal use. It can also be data that is personal but does not fall under the legal definition of personal data, such as pseudonymized data or anonymized data.
 
 Limitation of use for public data is generally only ensured by a license, but it is important to ensure that the license is respected, and that the data is not used in a way that is not allowed by the license. For instance, if the data is licensed under a non-commercial license, it should not be used for commercial purposes. If the data is licensed under a share-alike license, it should not be used in a way that does not allow others to use it under the same license. If the data is licensed under a license that does not allow modification, it should not be modified. If the data is licensed under a license that does not allow redistribution, it should not be redistributed. Enforcement can be difficult and costly, but in some cases it is important to have a clear license and to monitor the use of the data. It is also important to have a clear policy on how to handle violations of the license, such as sending a cease and desist letter or taking legal action. 
@@ -56,6 +64,11 @@ Limitation of use for public data is generally only ensured by a license, but it
 ## Passwords & keys
 
 # Backups
+
+::: {.callout-note}
+Importance: *high*. Backup needs to be in place once a platform is in production.
+:::
+
 
 Backups are an inherent - and maybe the most important - part of security, as they protect from mishaps as well as actual attacks. They are evidently not enough if a software has any kind of shared usage.
 Any shared usage need some kind of security, not only public access. A good faith use of a software with the wrong privileges could have some bad consequences. Evidently such security starts with the software design and implementation, such as database constraints. This page will not speak about that.
@@ -138,6 +151,10 @@ Reducing the surface of attack is also related to the complexity of the setup. A
 
 ## Firewall
 
+::: {.callout-note}
+Importance: *high*. A Firewall is needed. In most institution a firewall will be in place and managed by the local IT.
+:::
+
 A firewall is a software or hardware that blocks traffic that is not needed.
 
 One aspect of a Firewall is to reduce the surface of attack by blocking all the traffic that is not needed. For instance, if you have a web application, you should only allow traffic on port 80 (HTTP) and 443 (HTTPS). The database should not be accessible from the outside, but only from the application. The backup system should not be accessible from the outside, but only from the application and/or from a secure location. 
@@ -145,6 +162,10 @@ One aspect of a Firewall is to reduce the surface of attack by blocking all the 
 But a firewall can also be used to block traffic from known malicious IP addresses or, if the software is not designed to be used by the public, to block all traffic from the outside and only allow traffic from a secure location (such as a VPN), while autorizing some external access by whitelisting some IP addresses.
 
 ## Protections against attacks
+
+::: {.callout-note}
+Importance: *various*. Some attacks are systematic but mostly managed by modern platforms (like SQL injections), more sophisticated attacks might come if the Data Management Solution is popular. There can also be a wide attack at institution level which might be more advanced, in that case it is important to monitor the activity to see anomalies and communicate with your local IT. Shutting down a platform in case of doubt is always reasonnable.
+:::
 
 To review, expend and simplify. Extract Denial of Service/BruteForce and simple abuse from robots and agents.
 
@@ -174,8 +195,11 @@ Some Content Delivery Network (CDN) uses methods to block all access to non-huma
 * Poison data, using a bot through a vulnerability (an undefended form or API for example), or after a successful breach via social engineering, thus destroying the integrity of the data. Depending on the injected data the cleaning of data can be very difficult, and the only solution might be to restore a backup from before the attack, which might means a severe loss of data.
 
 
-
 ## Passwords and keys
+
+::: {.callout-note}
+Importance: *high for public solutions*. Solutions exposed publicly should have a strong authentication solution. Using an existing external one is a good solution. 
+:::
 
 ### For users and APIs
 
@@ -193,6 +217,10 @@ Most Data Management platforms also support external authentication, such as LDA
 Most of the time, the software will need to access some resources (such as a database) with a password or a key. In that case, it is important to store these credentials in a secure way, such as in an environment variable, in a configuration file with restricted access, or in a secret manager. They should never be stored in plain text in the code or in the configuration file.
 
 ## What to never log, log levels
+
+::: {.callout-note}
+Importance: *medium*. The risk is present but low. It is still important on the long run so better to make right immediately.
+:::
 
 Log are incredibly useful and should be used for debugging purpose and for security (they are often the only way to detect a tentative of intrusion/code injection). 
 
@@ -219,6 +247,10 @@ But logs are also plain text and, if accessed by an attacker, will be easy to co
 
 ## What to never store (or never in "reversible" format) {#what-to-never-store}
 
+::: {.callout-note}
+Importance: *high*. Leaks of such information can be difficult to identify and will let attacker impersonates a regular user, thus allowing malicious operations potentially without anybody noticing it.
+:::
+
 All kind of passwords should never be stored in a reversible format. If the password is needed for the software to work, it should be stored in an encrypted format, with a key that is not stored on the same system. If the password is only needed for authentication, it should be hashed with a strong hashing algorithm and a salt.
 
 Any key, hash or token that can be used to access the system should be stored in an encrypted format, with a key that is not stored on the same system.
@@ -235,6 +267,10 @@ The exchange of personal data between institutions can only by done with an agre
 
 ## Know your infrastructure
 
+::: {.callout-note}
+Importance: *high*.
+:::
+
 This in in overlap with many topics already covered, but it is primordial to know your infrastructure and have a clear overview of it. That includes the time when the main persons in charge are not available, so it is important to have a clear documentation of the infrastructure, including the software used, the configuration, the access rights, the backup system, the monitoring system, the security measures, and the contact information of the people in charge. It is also important to have a clear policy on how to handle incidents, such as a security breach or a data loss.
 
 A good document to prepare is a troubleshooting guide, that can be used by anyone to understand the infrastructure and to solve common problems. It should include a clear overview of the infrastructure, a list of common problems and their solutions, and a list of contact information for the people in charge.
@@ -242,6 +278,10 @@ A good document to prepare is a troubleshooting guide, that can be used by anyon
 ## Deleting data
 
 ### Really deleting files, database entries, backups, cloud storage, version control entries
+
+::: {.callout-note}
+Importance: *medium to high*. Depending on the data, deleting will be only for saving space. If the data must be deleted (like personal data), it is very important.
+:::
 
 Deleting data is not as simple as it seems. When you delete a file, it is not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as `shred` on Linux or `sdelete` on Windows.
 
@@ -254,6 +294,10 @@ When you delete a file from a cloud storage, it is also not actually deleted fro
 When you delete a file from a version control system, it is also not actually deleted from the disk, but only the reference to it is removed. The data can still be recovered with special tools until it is overwritten by new data. Thus, if you want to delete a file from a version control system securely, you need to overwrite it with random data before deleting it. There are many tools that can do that, such as `git filter-branch` for Git or `hg convert` for Mercurial.
 
 ### When you should not delete data
+
+::: {.callout-note}
+Importance: *high*. It is generally a condition of a project funding or research output.
+:::
 
 Some data should not be deleted, such as data which is part of a funded project and should live for a predetermined time, or data that is part of a publication and should be available for reproducibility. In these cases, it is important to have a clear policy on how to handle the data, such as how to store it securely, how to share it with the right people, how to monitor its usage, and how to eventually delete it when it is no longer needed.
 
