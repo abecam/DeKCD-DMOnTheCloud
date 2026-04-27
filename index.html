@@ -1099,8 +1099,21 @@ volumes:
 </section>
 <section id="bind-mounts" class="level2">
 <h2 class="anchored" data-anchor-id="bind-mounts">Bind mounts</h2>
-<p>The default volume in a docker-compose are named volumes (<code>name:</code> without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above). It’s possible to have a bind mounts, i.e.&nbsp;a volume attached to a specific path on the host, by using an external volume and creating the volume using the docker command</p>
-<p>TO DEVELOP and FIX</p>
+<p>The default volume in a docker-compose are named volumes (<code>name:</code> without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above). It’s possible to have a bind mounts, i.e.&nbsp;a volume attached to a specific path on the host. These are useful if the data need to be accessed and eventually used by other applications (the named volumes are also on the local file system, but are not supposed to be accessed directly). But 2 instances from the same docker-compose using bind mounts will use the same folder, thus conflicting for using the storage. Depending on the use, it can create very strange problems which are eventually very difficult to find.</p>
+<p>Thus it is recommended to use bind volumes only for testing (to see what happen with the data and eventually manipulate it) and use the default named volumes for production.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It might be tempting to use bind mounts for backups. It is acceptable if it is sure that only one instance of an application will run on the host. Even a test instance, if the bind mounts are the same, will use the same folder as the production server! Generally it is better to use named volume and do backups using the dump tools for databases, or copying the data outside the volumes (often by using the <em>tar</em> archiving tool).</p>
+</div>
+</div>
 </section>
 </section>
 <section id="how-to-build-a-dockerfile" class="level1">
