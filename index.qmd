@@ -721,9 +721,15 @@ It is a clean set-up, with a distinct parent folder before the docker-compose fo
 ## Bind mounts
 
 The default volume in a docker-compose are named volumes (```name:``` without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above).
-It's possible to have a bind mounts, i.e. a volume attached to a specific path on the host, by using an external volume and creating the volume using the docker command
+It's possible to have a bind mounts, i.e. a volume attached to a specific path on the host. These are useful if the data need to be accessed and eventually used by other applications (the named volumes are also on the local file system, but are not supposed to be accessed directly). But 2 instances from the same docker-compose using bind mounts will use the same folder, thus conflicting for using the storage. Depending on the use, it can create very strange problems which are eventually very difficult to find.
 
-TO DEVELOP and FIX
+Thus it is recommended to use bind volumes only for testing (to see what happen with the data and eventually manipulate it) and use the default named volumes for production.
+
+::: {.callout-warning}
+It might be tempting to use bind mounts for backups. It is acceptable if it is sure that only one instance of an application will run on the host. Even a test instance, if the bind mounts are the same, will use the same folder as the production server!
+Generally it is better to use named volume and do backups using the dump tools for databases, or copying the data outside the volumes (often by using the *tar* archiving tool).
+:::
+
 
 # How to build a Dockerfile
 
