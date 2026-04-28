@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3b533b6407337c9b48f49a2c4af65cf6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,6 +70,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="default">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <!-- Cookie Consent by TermsFeed https://www.TermsFeed.com -->
 <script type="text/javascript" src="https://www.termsfeed.com/public/cookie-consent/4.2.0/cookie-consent.js" charset="UTF-8"></script>
 <script type="text/javascript" charset="UTF-8">
@@ -224,14 +228,25 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#volumes" id="toc-volumes" class="nav-link active" data-scroll-target="#volumes">Volumes</a></li>
+  <li><a href="#volumes-keeping-data-alive" id="toc-volumes-keeping-data-alive" class="nav-link active" data-scroll-target="#volumes-keeping-data-alive">Volumes: Keeping Data Alive</a>
+  <ul class="collapse">
+  <li><a href="#types-of-volume" id="toc-types-of-volume" class="nav-link" data-scroll-target="#types-of-volume">Types of Volume</a></li>
+  <li><a href="#who-decides-which-type-to-use" id="toc-who-decides-which-type-to-use" class="nav-link" data-scroll-target="#who-decides-which-type-to-use">Who Decides Which Type to Use?</a></li>
+  </ul></li>
   <li><a href="#databases-on-the-cloud" id="toc-databases-on-the-cloud" class="nav-link" data-scroll-target="#databases-on-the-cloud">Databases on the Cloud</a>
   <ul class="collapse">
-  <li><a href="#on-kubernetes" id="toc-on-kubernetes" class="nav-link" data-scroll-target="#on-kubernetes">On Kubernetes</a>
+  <li><a href="#managed-cloud-services" id="toc-managed-cloud-services" class="nav-link" data-scroll-target="#managed-cloud-services">Managed Cloud Services</a></li>
+  <li><a href="#self-hosted-options" id="toc-self-hosted-options" class="nav-link" data-scroll-target="#self-hosted-options">Self-Hosted Options</a></li>
+  <li><a href="#choosing-a-self-hosted-approach" id="toc-choosing-a-self-hosted-approach" class="nav-link" data-scroll-target="#choosing-a-self-hosted-approach">Choosing a Self-Hosted Approach</a></li>
+  </ul></li>
+  <li><a href="#object-storage" id="toc-object-storage" class="nav-link" data-scroll-target="#object-storage">Object Storage</a>
   <ul class="collapse">
-  <li><a href="#using-an-operator" id="toc-using-an-operator" class="nav-link" data-scroll-target="#using-an-operator">Using an operator</a></li>
+  <li><a href="#key-characteristics" id="toc-key-characteristics" class="nav-link" data-scroll-target="#key-characteristics">Key characteristics</a></li>
+  <li><a href="#common-use-cases" id="toc-common-use-cases" class="nav-link" data-scroll-target="#common-use-cases">Common use cases</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions">Solutions</a></li>
+  <li><a href="#object-storage-vs.-volumes-at-a-glance" id="toc-object-storage-vs.-volumes-at-a-glance" class="nav-link" data-scroll-target="#object-storage-vs.-volumes-at-a-glance">Object storage vs.&nbsp;volumes at a glance</a></li>
   </ul></li>
-  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -259,23 +274,472 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <script type="text/plain" cookie-consent="tracking"> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]); _paq.push(["setCookieDomain", "*.dekcd.github.io"]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); _paq.push(['enableHeartBeatTimer', 15]); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '38']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
 </script>
 <p>Evidently, an important part of Data Management is the storage of data.</p>
-<section id="volumes" class="level1">
-<h1>Volumes</h1>
+<section id="volumes-keeping-data-alive" class="level2">
+<h2 class="anchored" data-anchor-id="volumes-keeping-data-alive">Volumes: Keeping Data Alive</h2>
 <p>From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.</p>
 <p>Some more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.</p>
+<section id="types-of-volume" class="level3">
+<h3 class="anchored" data-anchor-id="types-of-volume">Types of Volume</h3>
+<p>Different situations call for different storage types. The table below summarises the most common ones:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 40%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>What it is</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Local disk</strong></td>
+<td>Storage on the same physical machine</td>
+<td>Simple, single-machine setups</td>
+</tr>
+<tr class="even">
+<td><strong>Network file system (NFS/NAS)</strong></td>
+<td>A shared folder hosted on a separate server</td>
+<td>Sharing files between several containers</td>
+</tr>
+<tr class="odd">
+<td><strong>Block storage</strong></td>
+<td>Low-level, high-speed disk, similar to an internal hard drive</td>
+<td>Databases requiring fast reads/writes</td>
+</tr>
+<tr class="even">
+<td><strong>Distributed storage</strong> (e.g.&nbsp;Ceph, Longhorn)</td>
+<td>Storage spread across several machines for resilience</td>
+<td>Production clusters needing high availability</td>
+</tr>
+<tr class="odd">
+<td><strong>Object storage</strong> (e.g.&nbsp;S3, MinIO)</td>
+<td>File storage accessed via internet-style requests</td>
+<td>Large files, backups, media</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While it is possible to use object storage (generally S3 compatible) as volume, it is generally not recommended as object storage are used in a specific way (see below)</p>
+</div>
+</div>
 </section>
-<section id="databases-on-the-cloud" class="level1">
-<h1>Databases on the Cloud</h1>
-<section id="on-kubernetes" class="level2">
-<h2 class="anchored" data-anchor-id="on-kubernetes">On Kubernetes</h2>
-<section id="using-an-operator" class="level3">
-<h3 class="anchored" data-anchor-id="using-an-operator">Using an operator</h3>
-<p>https://cloudnative-pg.io/</p>
-<p>https://kubeblocks.io/</p>
+<section id="who-decides-which-type-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="who-decides-which-type-to-use">Who Decides Which Type to Use?</h3>
+<p>More advanced storage solutions (distributed storage, cloud block volumes) are powerful but require significant expertise to set up and maintain. In practice, <strong>the available options will generally depend on what your Cloud or infrastructure team has already configured</strong>. Always check with your platform administrators before choosing a storage type.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    A[Application / Container] --&gt;|reads &amp; writes| V[Volume]
+    V --&gt; L[Local Disk\nSimple, fast\nno redundancy]
+    V --&gt; N[Network Storage\nShared access]
+    V --&gt; B[Block Storage\nHigh-speed\nfor databases]
+    V --&gt; D[Distributed Storage\nCeph / Longhorn\nHigh availability]
+
+    style A fill:#4A90D9,color:#fff
+    style V fill:#F5A623,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="databases-on-the-cloud" class="level2">
+<h2 class="anchored" data-anchor-id="databases-on-the-cloud">Databases on the Cloud</h2>
+<p>Most Data Management platform will need a database, generally a relational one, such as MySQL, MariaSQL or PostgreSQL. Cloud infrastrures are not immediately adapted for running database. The 2 main options are the following</p>
+<ol type="1">
+<li><strong>Managed service</strong> — your IT or the cloud provider (AWS, Azure, GCP …) installs, patches, backs up, and monitors the database for you. You simply connect to it.</li>
+<li><strong>Self-hosted</strong> — you are responsible for the database: installing it, keeping it running, and making sure it is backed up. This gives more control and is often cheaper at scale, but requires expertise.</li>
+</ol>
+<section id="managed-cloud-services" class="level3">
+<h3 class="anchored" data-anchor-id="managed-cloud-services">Managed Cloud Services</h3>
+<p>The main cloud providers all offer ready-to-use database services — for example AWS RDS, Azure Database, or Google Cloud SQL. These are the simplest option: no servers to manage, automatic backups, and built-in high availability. The trade-off is cost and the fact that your data resides with the provider.</p>
+<p>For academic project, it is advised to look for managed solution provided by a consortium or an institution.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There might be some Data Management Storage solution available for free within your institution, consortium or as a general offer (like Zenodo for references) which might be an alternative or a complement (avoiding to spend too much effort locally).</p>
+</div>
+</div>
+</section>
+<section id="self-hosted-options" class="level3">
+<h3 class="anchored" data-anchor-id="self-hosted-options">Self-Hosted Options</h3>
+<p>Self-hosting a database means you choose where and how it runs. There are several environments to consider, each with different trade-offs.</p>
+<section id="dedicated-server-physical-vm-or-docker" class="level4">
+<h4 class="anchored" data-anchor-id="dedicated-server-physical-vm-or-docker">Dedicated Server (Physical, VM, or Docker)</h4>
+<p>The most straightforward approach: install the database directly on a machine. That machine can be a <strong>physical server</strong> (bare metal), a <strong>virtual machine</strong> , or a <strong>container</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 43%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Setup</th>
+<th>What it means</th>
+<th>Good when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Physical server</td>
+<td>Database runs on real hardware you own</td>
+<td>Maximum performance, full control</td>
+</tr>
+<tr class="even">
+<td>Virtual machine (VM)</td>
+<td>Database runs inside a virtualised computer</td>
+<td>Easy to snapshot, move, or resize</td>
+</tr>
+<tr class="odd">
+<td>Docker container</td>
+<td>Database runs in a container with a volume</td>
+<td>Quick to set up; good for dev/test</td>
+</tr>
+</tbody>
+</table>
+<p>This setup is simple to understand but requires manual attention for backups, failover, and upgrades. In case nothing else is available, it might be better to set-up ProxMox for a similar setup (see below).</p>
+</section>
+<section id="on-openstack" class="level4">
+<h4 class="anchored" data-anchor-id="on-openstack">On OpenStack</h4>
+<p><strong><a href="https://www.openstack.org/">OpenStack</a></strong> is an open-source platform used by many organisations and public cloud providers to manage large pools of computing, storage, and networking resources. If your organisation runs OpenStack, you can:</p>
+<ul>
+<li>Launch a <strong>VM</strong> through OpenStack Nova (its compute service) and install a database inside it — this is the most common pattern.</li>
+<li>Use <strong>OpenStack Trove</strong>, the dedicated Database-as-a-Service component of OpenStack, which automates provisioning, backups, and basic management of databases on top of OpenStack VMs.</li>
+<li>Attach <strong>Cinder</strong> block storage volumes to give the database fast, persistent disk space.</li>
+</ul>
+<p>This is a good choice for teams whose infrastructure is already managed through OpenStack, as it keeps everything in the same ecosystem. But the complexity is high and is probably best left to your IT team.</p>
+</section>
+<section id="on-proxmox" class="level4">
+<h4 class="anchored" data-anchor-id="on-proxmox">On Proxmox</h4>
+<p><strong><a href="https://www.proxmox.com/">Proxmox VE</a></strong> is a popular open-source virtualisation platform, widely used for on-premises (“on-prem”) private infrastructure. It lets administrators create and manage VMs and containers from a simple web interface — without needing a full cloud platform like OpenStack.</p>
+<p>Databases are typically run on Proxmox in one of two ways: inside a <strong>VM</strong> (full isolation, easy snapshots) or inside an <strong>LXC container</strong> (lighter than a VM, shares the host kernel). It is then very similar to a physical server setup.</p>
+<p><strong>But</strong> Proxmox supports backups “out of the box” and will help with snapshots, making it significantly easier to manage your database. If the needed setup is complex (several applications and databases) and there is no possibility of managed setup (by IT, part of the institution/consortium or paid), it might be interesting to try ProxMox.</p>
+</section>
+<section id="on-kubernetes" class="level4">
+<h4 class="anchored" data-anchor-id="on-kubernetes">On Kubernetes</h4>
+<p><strong><a href="https://kubernetes.io/">Kubernetes</a></strong> (often abbreviated <em>K8s</em>) is a system that automatically manages many containers at once — starting, stopping, and restarting them across a cluster of machines. Running a database on Kubernetes gives you automation and scalability, but it is more complex than a simple VM.</p>
+<p>The recommended approach is to use a <strong>database operator</strong> — a piece of software that knows how to install, configure, back up, and upgrade a specific database inside Kubernetes automatically. Instead of doing all those tasks by hand, you describe what you want and the operator handles the rest.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    Admin["Administrator\n(describes desired state)"]
+    Operator["Database Operator\n(watches &amp; acts)"]
+    DB1[(Primary\nDatabase)]
+    DB2[(Replica 1)]
+    DB3[(Replica 2)]
+
+    Admin --&gt;|"defines via\nconfiguration file"| Operator
+    Operator --&gt;|manages| DB1
+    Operator --&gt;|manages| DB2
+    Operator --&gt;|manages| DB3
+    DB1 --&gt;|replicates to| DB2
+    DB1 --&gt;|replicates to| DB3
+
+    style Admin fill:#4A90D9,color:#fff
+    style Operator fill:#F5A623,color:#fff
+    style DB1 fill:#7ED321,color:#fff
+    style DB2 fill:#7ED321,color:#fff
+    style DB3 fill:#7ED321,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="notable-operators" class="level4">
+<h4 class="anchored" data-anchor-id="notable-operators">Notable Operators</h4>
+<p>Two well-regarded open-source database operators are available for Kubernetes environments:</p>
+<p><strong><a href="https://cloudnative-pg.io/">CloudNativePG</a></strong> — specialised for <strong>PostgreSQL</strong>, one of the most popular open-source relational databases. It handles:</p>
+<ul>
+<li>Automatic failover (switching to a backup if the main database fails)</li>
+<li>Point-in-time recovery (restoring the database to any past moment)</li>
+<li>Rolling upgrades with zero downtime</li>
+</ul>
+<p><strong><a href="https://kubeblocks.io/">KubeBlocks</a></strong> — a more general-purpose operator that supports <strong>many different database engines</strong> (PostgreSQL, MySQL, Redis, MongoDB, and more) from a single unified interface. Useful when a team needs to operate several different types of databases consistently.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 41%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>CloudNativePG</th>
+<th>KubeBlocks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Supported databases</td>
+<td>PostgreSQL only</td>
+<td>Many (PostgreSQL, MySQL, Redis …)</td>
+</tr>
+<tr class="even">
+<td>Specialisation</td>
+<td>Deep PostgreSQL expertise</td>
+<td>Broad multi-engine support</td>
+</tr>
+<tr class="odd">
+<td>Best for</td>
+<td>Teams standardised on PostgreSQL</td>
+<td>Teams with mixed database needs</td>
+</tr>
+<tr class="even">
+<td>Maturity</td>
+<td>Production-ready, CNCF project</td>
+<td>Rapidly growing, active community</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><strong>Key takeaway:</strong> Operators dramatically reduce the operational burden of running databases on Kubernetes — but they still require a capable platform team to install and maintain the operator itself.</p>
+</blockquote>
+</section>
+</section>
+<section id="choosing-a-self-hosted-approach" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-a-self-hosted-approach">Choosing a Self-Hosted Approach</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    Q1{Do you already\nuse a platform?}
+    Q1 --&gt;|OpenStack| OS[Deploy a VM via Nova\nor use Trove DBaaS]
+    Q1 --&gt;|Proxmox| PX[Run DB in a VM\nor LXC container]
+    Q1 --&gt;|Kubernetes| K8S[Use a database operator\nCloudNativePG · KubeBlocks]
+    Q1 --&gt;|None / simple| DS[Dedicated server\nPhysical · VM · Docker]
+
+    style OS fill:#E8A838,color:#fff
+    style PX fill:#E8633A,color:#fff
+    style K8S fill:#4A90D9,color:#fff
+    style DS fill:#7ED321,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="object-storage" class="level2">
+<h2 class="anchored" data-anchor-id="object-storage">Object Storage</h2>
+<p>Object storage is a fundamentally different approach from volumes. Rather than behaving like a hard drive that an application reads and writes to directly, object storage works more like a <strong>postal service</strong>: you send a file (an “object”) to a central repository and get back a unique address to retrieve it later. Applications interact with it through standard web requests (HTTP), not through the filesystem.</p>
+<blockquote class="blockquote">
+<p><strong>Plain language:</strong> Think of object storage like Google Drive or Dropbox — you upload files and retrieve them by name, from anywhere, over the internet.</p>
+</blockquote>
+<section id="key-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="key-characteristics">Key characteristics</h3>
+<ul>
+<li><strong>Not mounted as a volume</strong> — applications must be adapted to use a specific API (most commonly the S3 API, originally from Amazon).</li>
+<li><strong>Virtually unlimited scale</strong> — designed to store billions of files of any size without pre-allocating capacity.</li>
+<li><strong>Cheap for large volumes</strong> — cost per gigabyte is typically much lower than block or distributed storage.</li>
+<li><strong>Access from anywhere</strong> — any application or service with the right credentials can reach the same data.</li>
+</ul>
+</section>
+<section id="common-use-cases" class="level3">
+<h3 class="anchored" data-anchor-id="common-use-cases">Common use cases</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use case</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data lake / raw data archive</td>
+<td>Storing CSV, Parquet, or JSON files for analysis</td>
+</tr>
+<tr class="even">
+<td>Backup &amp; disaster recovery</td>
+<td>Database dumps, configuration snapshots</td>
+</tr>
+<tr class="odd">
+<td>Machine learning datasets</td>
+<td>Training data, model artefacts</td>
+</tr>
+<tr class="even">
+<td>Log &amp; event archives</td>
+<td>Long-term storage of application logs</td>
+</tr>
+<tr class="odd">
+<td>Media &amp; large files</td>
+<td>Images, videos, documents served to users</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="solutions" class="level3">
+<h3 class="anchored" data-anchor-id="solutions">Solutions</h3>
+<p><strong>Cloud-provider managed:</strong> AWS S3, Azure Blob Storage, Google Cloud Storage — fully managed, pay-as-you-go, zero maintenance.</p>
+<p><strong>Self-hosted:</strong> Several open-source solutions implement the S3 API and can run on your own infrastructure, including:</p>
+<p><strong><a href="https://docs.openstack.org/swift/latest/">OpenStack Swift</a></strong> — one of the oldest and most battle-tested open-source object stores, part of the OpenStack project since 2010. It uses its own API (not S3-native, though an S3-compatibility layer exists). Best suited for organisations that already operate an OpenStack infrastructure. It is mature, highly scalable, and actively developed under the OpenStack Foundation.</p>
+<p><strong><a href="https://garagehq.deuxfleurs.fr/">Garage</a></strong> — a lightweight, modern S3-compatible store written in Rust. Unlike most systems designed for data centres, Garage was built specifically for <strong>geo-distributed deployments</strong> — nodes can sit in different physical locations connected over ordinary internet connections. It ships as a single binary, is very easy to operate, and received EU research funding through 2025. A good fit for small to medium self-hosted setups.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>MinIO was long the default recommendation for self-hosted S3-compatible storage. However, through 2025 the company progressively restricted its open-source edition: the web management console was stripped, pre-built Docker images were discontinued, and by early 2026 the community repository was placed in <strong>maintenance mode</strong> (read-only, no new features, security fixes not guaranteed). MinIO is no longer a viable choice for new deployments.</p>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    App1[Application A]
+    App2[Application B]
+    App3[Data Pipeline]
+
+    OS["Object Storage\n(S3-compatible API)"]
+    CLD["Cloud-managed\nAWS S3 · Azure Blob · GCS"]
+    SH["Self-hosted\nSwift · Garage"]
+
+    App1 --&gt;|"upload / download\nvia HTTP"| OS
+    App2 --&gt;|"upload / download\nvia HTTP"| OS
+    App3 --&gt;|"read datasets\nwrite results"| OS
+    OS --&gt; CLD
+    OS --&gt; SH
+
+    style OS fill:#7B68EE,color:#fff
+    style CLD fill:#4A90D9,color:#fff
+    style SH fill:#7ED321,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="object-storage-vs.-volumes-at-a-glance" class="level3">
+<h3 class="anchored" data-anchor-id="object-storage-vs.-volumes-at-a-glance">Object storage vs.&nbsp;volumes at a glance</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 34%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Volumes</th>
+<th>Object Storage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Access method</td>
+<td>Filesystem (read/write like a local disk)</td>
+<td>HTTP API (upload/download)</td>
+</tr>
+<tr class="even">
+<td>Typical use</td>
+<td>Databases, running applications</td>
+<td>Files, datasets, backups, media</td>
+</tr>
+<tr class="odd">
+<td>Scalability</td>
+<td>Limited by disk/cluster size</td>
+<td>Virtually unlimited</td>
+</tr>
+<tr class="even">
+<td>Cost</td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr class="odd">
+<td>App changes needed?</td>
+<td>No</td>
+<td>Yes — app must use S3/Swift API</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+    DM[Data Management]
+    DM --&gt; VS[Volume Storage]
+    DM --&gt; OS[Object Storage]
+    DM --&gt; DB[Databases]
+
+    VS --&gt; LT[Local / Network\nBlock / Distributed]
+
+    OS --&gt; SAAS[Cloud-managed\nAWS S3 · Azure Blob · GCS]
+    OS --&gt; SH[Self-hosted\nSwift · Garage]
+
+    DB --&gt; MS[Managed Cloud Service\nAWS RDS, Azure Database …]
+    DB --&gt; SELF[Self-hosted]
+    SELF --&gt; DS[Dedicated Server\nPhysical · VM · Docker]
+    SELF --&gt; OST[OpenStack\nNova VM · Trove DBaaS]
+    SELF --&gt; PX[Proxmox\nVM · LXC container]
+    SELF --&gt; K8S[Kubernetes\nwith Operator]
+    K8S --&gt; CNPG[CloudNativePG\nPostgreSQL specialist]
+    K8S --&gt; KB[KubeBlocks\nMulti-engine]
+
+    style DM fill:#4A90D9,color:#fff
+    style OS fill:#7B68EE,color:#fff
+    style SELF fill:#F5A623,color:#fff
+    style K8S fill:#4A90D9,color:#fff
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Choosing the right storage strategy always involves a balance between <strong>simplicity</strong>, <strong>cost</strong>, <strong>performance</strong>, and <strong>what your infrastructure team can support</strong>. Volumes are the default for running applications and databases; object storage shines for large files, datasets, and backups. When in doubt, start with managed services offered by your cloud provider — and move to self-hosted solutions only when you have a specific reason and the operational capacity to maintain them.</p>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
