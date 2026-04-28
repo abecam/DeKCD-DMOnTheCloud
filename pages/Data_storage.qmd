@@ -1,21 +1,267 @@
 ---
 title: "Data Storage"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    theme: cosmo
 ---
 
 Evidently, an important part of Data Management is the storage of data. 
 
-# Volumes
+## Volumes: Keeping Data Alive
 
 From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.
 
 Some more advanced solutions might be easy to use, but hard to set-up and maintain. So their usage often depends on what is supported by the Cloud admin.
 
-# Databases on the Cloud
+### Types of Volume
 
-## On Kubernetes
+Different situations call for different storage types. The table below summarises the most common ones:
 
-### Using an operator
+| Type | What it is | Best for |
+|------|-----------|----------|
+| **Local disk** | Storage on the same physical machine | Simple, single-machine setups |
+| **Network file system (NFS/NAS)** | A shared folder hosted on a separate server | Sharing files between several containers |
+| **Block storage** | Low-level, high-speed disk, similar to an internal hard drive | Databases requiring fast reads/writes |
+| **Distributed storage** (e.g. Ceph, Longhorn) | Storage spread across several machines for resilience | Production clusters needing high availability |
+| **Object storage** (e.g. S3, MinIO) | File storage accessed via internet-style requests | Large files, backups, media |
 
-https://cloudnative-pg.io/
 
-https://kubeblocks.io/
+::: {.callout-note}
+While it is possible to use object storage (generally S3 compatible) as volume, it is generally not recommended as object storage are used in a specific way (see below)
+:::
+
+### Who Decides Which Type to Use?
+
+More advanced storage solutions (distributed storage, cloud block volumes) are powerful but require significant expertise to set up and maintain. In practice, **the available options will generally depend on what your Cloud or infrastructure team has already configured**. Always check with your platform administrators before choosing a storage type.
+
+```{mermaid}
+flowchart TD
+    A[Application / Container] -->|reads & writes| V[Volume]
+    V --> L[Local Disk\nSimple, fast\nno redundancy]
+    V --> N[Network Storage\nShared access]
+    V --> B[Block Storage\nHigh-speed\nfor databases]
+    V --> D[Distributed Storage\nCeph / Longhorn\nHigh availability]
+
+    style A fill:#4A90D9,color:#fff
+    style V fill:#F5A623,color:#fff
+```
+
+## Databases on the Cloud
+
+Most Data Management platform will need a database, generally a relational one, such as MySQL, MariaSQL or PostgreSQL. Cloud infrastrures are not immediately adapted for running database. The 2 main options are the following
+
+1. **Managed service** — your IT or the cloud provider (AWS, Azure, GCP …) installs, patches, backs up, and monitors the database for you. You simply connect to it.
+2. **Self-hosted** — you are responsible for the database: installing it, keeping it running, and making sure it is backed up. This gives more control and is often cheaper at scale, but requires expertise.
+
+### Managed Cloud Services
+
+The main cloud providers all offer ready-to-use database services — for example AWS RDS, Azure Database, or Google Cloud SQL. These are the simplest option: no servers to manage, automatic backups, and built-in high availability. The trade-off is cost and the fact that your data resides with the provider.
+
+For academic project, it is advised to look for managed solution provided by a consortium or an institution. 
+
+:::{.callout-note}
+There might be some Data Management Storage solution available for free within your institution, consortium or as a general offer (like Zenodo for references) which might be an alternative or a complement (avoiding to spend too much effort locally).
+:::
+
+### Self-Hosted Options
+
+Self-hosting a database means you choose where and how it runs. There are several environments to consider, each with different trade-offs.
+
+#### Dedicated Server (Physical, VM, or Docker)
+
+The most straightforward approach: install the database directly on a machine. That machine can be a **physical server** (bare metal), a **virtual machine** , or a **container**.
+
+| Setup | What it means | Good when |
+|-------|--------------|-----------|
+| Physical server | Database runs on real hardware you own | Maximum performance, full control |
+| Virtual machine (VM) | Database runs inside a virtualised computer | Easy to snapshot, move, or resize |
+| Docker container | Database runs in a container with a volume | Quick to set up; good for dev/test |
+
+This setup is simple to understand but requires manual attention for backups, failover, and upgrades. In case nothing else is available, it might be better to set-up ProxMox for a similar setup (see below).
+
+#### On OpenStack
+
+**[OpenStack](https://www.openstack.org/)** is an open-source platform used by many organisations and public cloud providers to manage large pools of computing, storage, and networking resources. If your organisation runs OpenStack, you can:
+
+- Launch a **VM** through OpenStack Nova (its compute service) and install a database inside it — this is the most common pattern.
+- Use **OpenStack Trove**, the dedicated Database-as-a-Service component of OpenStack, which automates provisioning, backups, and basic management of databases on top of OpenStack VMs.
+- Attach **Cinder** block storage volumes to give the database fast, persistent disk space.
+
+This is a good choice for teams whose infrastructure is already managed through OpenStack, as it keeps everything in the same ecosystem. But the complexity is high and is probably best left to your IT team.
+
+#### On Proxmox
+
+**[Proxmox VE](https://www.proxmox.com/)** is a popular open-source virtualisation platform, widely used for on-premises ("on-prem") private infrastructure. It lets administrators create and manage VMs and containers from a simple web interface — without needing a full cloud platform like OpenStack.
+
+Databases are typically run on Proxmox in one of two ways: inside a **VM** (full isolation, easy snapshots) or inside an **LXC container** (lighter than a VM, shares the host kernel). It is then very similar to a physical server setup.
+
+**But** Proxmox supports backups "out of the box" and will help with snapshots, making it significantly easier to manage your database. If the needed setup is complex (several applications and databases) and there is no possibility of managed setup (by IT, part of the institution/consortium or paid), it might be interesting to try ProxMox.
+
+
+#### On Kubernetes
+
+**[Kubernetes](https://kubernetes.io/)** (often abbreviated *K8s*) is a system that automatically manages many containers at once — starting, stopping, and restarting them across a cluster of machines. Running a database on Kubernetes gives you automation and scalability, but it is more complex than a simple VM.
+
+The recommended approach is to use a **database operator** — a piece of software that knows how to install, configure, back up, and upgrade a specific database inside Kubernetes automatically. Instead of doing all those tasks by hand, you describe what you want and the operator handles the rest.
+
+```{mermaid}
+flowchart LR
+    Admin["Administrator\n(describes desired state)"]
+    Operator["Database Operator\n(watches & acts)"]
+    DB1[(Primary\nDatabase)]
+    DB2[(Replica 1)]
+    DB3[(Replica 2)]
+
+    Admin -->|"defines via\nconfiguration file"| Operator
+    Operator -->|manages| DB1
+    Operator -->|manages| DB2
+    Operator -->|manages| DB3
+    DB1 -->|replicates to| DB2
+    DB1 -->|replicates to| DB3
+
+    style Admin fill:#4A90D9,color:#fff
+    style Operator fill:#F5A623,color:#fff
+    style DB1 fill:#7ED321,color:#fff
+    style DB2 fill:#7ED321,color:#fff
+    style DB3 fill:#7ED321,color:#fff
+```
+
+#### Notable Operators
+
+Two well-regarded open-source database operators are available for Kubernetes environments:
+
+**[CloudNativePG](https://cloudnative-pg.io/)** — specialised for **PostgreSQL**, one of the most popular open-source relational databases. It handles:
+
+- Automatic failover (switching to a backup if the main database fails)
+- Point-in-time recovery (restoring the database to any past moment)
+- Rolling upgrades with zero downtime
+
+**[KubeBlocks](https://kubeblocks.io/)** — a more general-purpose operator that supports **many different database engines** (PostgreSQL, MySQL, Redis, MongoDB, and more) from a single unified interface. Useful when a team needs to operate several different types of databases consistently.
+
+| Feature | CloudNativePG | KubeBlocks |
+|---------|---------------|------------|
+| Supported databases | PostgreSQL only | Many (PostgreSQL, MySQL, Redis …) |
+| Specialisation | Deep PostgreSQL expertise | Broad multi-engine support |
+| Best for | Teams standardised on PostgreSQL | Teams with mixed database needs |
+| Maturity | Production-ready, CNCF project | Rapidly growing, active community |
+
+> **Key takeaway:** Operators dramatically reduce the operational burden of running databases on Kubernetes — but they still require a capable platform team to install and maintain the operator itself.
+
+### Choosing a Self-Hosted Approach
+
+```{mermaid}
+flowchart TD
+    Q1{Do you already\nuse a platform?}
+    Q1 -->|OpenStack| OS[Deploy a VM via Nova\nor use Trove DBaaS]
+    Q1 -->|Proxmox| PX[Run DB in a VM\nor LXC container]
+    Q1 -->|Kubernetes| K8S[Use a database operator\nCloudNativePG · KubeBlocks]
+    Q1 -->|None / simple| DS[Dedicated server\nPhysical · VM · Docker]
+
+    style OS fill:#E8A838,color:#fff
+    style PX fill:#E8633A,color:#fff
+    style K8S fill:#4A90D9,color:#fff
+    style DS fill:#7ED321,color:#fff
+```
+
+---
+
+## Object Storage
+
+Object storage is a fundamentally different approach from volumes. Rather than behaving like a hard drive that an application reads and writes to directly, object storage works more like a **postal service**: you send a file (an "object") to a central repository and get back a unique address to retrieve it later. Applications interact with it through standard web requests (HTTP), not through the filesystem.
+
+> **Plain language:** Think of object storage like Google Drive or Dropbox — you upload files and retrieve them by name, from anywhere, over the internet.
+
+### Key characteristics
+
+- **Not mounted as a volume** — applications must be adapted to use a specific API (most commonly the S3 API, originally from Amazon).
+- **Virtually unlimited scale** — designed to store billions of files of any size without pre-allocating capacity.
+- **Cheap for large volumes** — cost per gigabyte is typically much lower than block or distributed storage.
+- **Access from anywhere** — any application or service with the right credentials can reach the same data.
+
+### Common use cases
+
+| Use case | Example |
+|----------|---------|
+| Data lake / raw data archive | Storing CSV, Parquet, or JSON files for analysis |
+| Backup & disaster recovery | Database dumps, configuration snapshots |
+| Machine learning datasets | Training data, model artefacts |
+| Log & event archives | Long-term storage of application logs |
+| Media & large files | Images, videos, documents served to users |
+
+### Solutions
+
+**Cloud-provider managed:** AWS S3, Azure Blob Storage, Google Cloud Storage — fully managed, pay-as-you-go, zero maintenance.
+
+**Self-hosted:** Several open-source solutions implement the S3 API and can run on your own infrastructure, including:
+
+**[OpenStack Swift](https://docs.openstack.org/swift/latest/)** — one of the oldest and most battle-tested open-source object stores, part of the OpenStack project since 2010. It uses its own API (not S3-native, though an S3-compatibility layer exists). Best suited for organisations that already operate an OpenStack infrastructure. It is mature, highly scalable, and actively developed under the OpenStack Foundation.
+
+**[Garage](https://garagehq.deuxfleurs.fr/)** — a lightweight, modern S3-compatible store written in Rust. Unlike most systems designed for data centres, Garage was built specifically for **geo-distributed deployments** — nodes can sit in different physical locations connected over ordinary internet connections. It ships as a single binary, is very easy to operate, and received EU research funding through 2025. A good fit for small to medium self-hosted setups.
+
+::: {.callout-note}
+MinIO was long the default recommendation for self-hosted S3-compatible storage. However, through 2025 the company progressively restricted its open-source edition: the web management console was stripped, pre-built Docker images were discontinued, and by early 2026 the community repository was placed in **maintenance mode** (read-only, no new features, security fixes not guaranteed). MinIO is no longer a viable choice for new deployments.
+:::
+
+```{mermaid}
+flowchart LR
+    App1[Application A]
+    App2[Application B]
+    App3[Data Pipeline]
+
+    OS["Object Storage\n(S3-compatible API)"]
+    CLD["Cloud-managed\nAWS S3 · Azure Blob · GCS"]
+    SH["Self-hosted\nSwift · Garage"]
+
+    App1 -->|"upload / download\nvia HTTP"| OS
+    App2 -->|"upload / download\nvia HTTP"| OS
+    App3 -->|"read datasets\nwrite results"| OS
+    OS --> CLD
+    OS --> SH
+
+    style OS fill:#7B68EE,color:#fff
+    style CLD fill:#4A90D9,color:#fff
+    style SH fill:#7ED321,color:#fff
+```
+
+### Object storage vs. volumes at a glance
+
+| | Volumes | Object Storage |
+|-|---------|----------------|
+| Access method | Filesystem (read/write like a local disk) | HTTP API (upload/download) |
+| Typical use | Databases, running applications | Files, datasets, backups, media |
+| Scalability | Limited by disk/cluster size | Virtually unlimited |
+| Cost | Higher | Lower |
+| App changes needed? | No | Yes — app must use S3/Swift API |
+
+## Summary
+
+```{mermaid}
+flowchart TD
+    DM[Data Management]
+    DM --> VS[Volume Storage]
+    DM --> OS[Object Storage]
+    DM --> DB[Databases]
+
+    VS --> LT[Local / Network\nBlock / Distributed]
+
+    OS --> SAAS[Cloud-managed\nAWS S3 · Azure Blob · GCS]
+    OS --> SH[Self-hosted\nSwift · Garage]
+
+    DB --> MS[Managed Cloud Service\nAWS RDS, Azure Database …]
+    DB --> SELF[Self-hosted]
+    SELF --> DS[Dedicated Server\nPhysical · VM · Docker]
+    SELF --> OST[OpenStack\nNova VM · Trove DBaaS]
+    SELF --> PX[Proxmox\nVM · LXC container]
+    SELF --> K8S[Kubernetes\nwith Operator]
+    K8S --> CNPG[CloudNativePG\nPostgreSQL specialist]
+    K8S --> KB[KubeBlocks\nMulti-engine]
+
+    style DM fill:#4A90D9,color:#fff
+    style OS fill:#7B68EE,color:#fff
+    style SELF fill:#F5A623,color:#fff
+    style K8S fill:#4A90D9,color:#fff
+```
+
+Choosing the right storage strategy always involves a balance between **simplicity**, **cost**, **performance**, and **what your infrastructure team can support**. Volumes are the default for running applications and databases; object storage shines for large files, datasets, and backups. When in doubt, start with managed services offered by your cloud provider — and move to self-hosted solutions only when you have a specific reason and the operational capacity to maintain them.

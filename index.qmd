@@ -870,6 +870,12 @@ Proxmox Virtual Environment (Proxmox VE) is an open-source server virtualisation
 
 It has gained significant traction in scientific and institutional settings as a cost-free replacement for VMware vSphere following Broadcom's acquisition of VMware in 2023 and the subsequent end of free ESXi licences.
 
+:::{.callout-tip}
+ProxMox is simpler to use and setup than OpenStack or Kubernetes, having a much more limited scope. But it still provides a full GUI-based management and support for snapshots and backups. It might be a good options between managing directly one or several servers and setting up OpenStack and/or Kubernetes (Kubernetes can run *on* OpenStack, but OpenStack have some functionalities comparable to Kubernetes).
+
+Docker Swarm is even simpler but with an even more limited scope.
+:::
+
 ### What Proxmox can do
 
 **Virtual Machines (KVM/QEMU).**
