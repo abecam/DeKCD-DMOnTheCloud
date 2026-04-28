@@ -498,6 +498,8 @@ If Docker is the *de facto* standard, there are other containers engines, such a
   * mounted inside containers
   * independent of the container lifecycle
 
+  A volume is associated to a path for the container, meaning that any application that write/read/delete using this path will use this volume.
+  *But* if an application needs to save data on a path which is not associated with a volume, it will still work: docker give a full working environment within the container. But it will be removed if the container is removed or replaced (updated for instance).
 
 * **Docker Compose** is a tool to **define and run multiple containers together** using a single configuration file (`docker-compose.yml`).
 
@@ -541,7 +543,7 @@ Changing something that is part of the image is possible when running the contai
 ::: {.callout-tip}
 ## Recommended learning path
 
-The official Online documentations is good and complete. Online tutorials should be enough as a complement.
+The official [Online documentations](https://docs.docker.com/compose/) is good and complete. Online tutorials should be enough as a complement.
 
 Learning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system).
 :::
@@ -570,7 +572,7 @@ Here is a simple docker compose with external variables (with a default value) a
 As automatically saving an image on Docker Hub might involve a cost, some Open Source projects will use other registries.
 :::
 
-Variable are defined in a .env file or in one or several files which can be defined using the env_file attribute (```env_file: "myenv.env"```). 
+Variable are defined in a ```.env``` file or in one or several files which can be defined using the env_file attribute (```env_file: "myenv.env"```). 
 
 The usage below is the typical one: ```attribute_name: ${VARIABLE_NAME:-default_value}```
 
@@ -706,6 +708,20 @@ volumes:
 
 ## Typical usage
 
+The docker compose file only need to be in a specific folder (which will give the container namespace: /one_appl/docker-compose.yml will use the "one_appl" namespace). It needs to be named "docker-compose.yml", "docker-compose.yaml", "compose.yml" or "compose.yaml".
+
+To run the application, simply run ```docker-compose up``` in the same folder, all text output of the application (and linked applications) will be shown in the terminal, CTRL-C will stop the applications (all containers defined) and exit to the terminal. To run the application *detached*, run ```docker-compose up -d```. To stop the application when detached, or attached from another terminal, run ```docker-compose down```
+
+One the containers are running, they are generally managed directly using docker (or any desktop tool managing containers).
+
+::: {.callout-note}
+Some complex setup can have several configuration file (used from the main file using ```include:```).
+:::
+
+## Env files
+
+The environment file has to be created in the same folder as the docker compose configuration file (if not defined otherwise). It should never be provided! Most application will provide an example either as a default env file (that can be modified and renamed) or in their documentation. 
+
 ## Namespaces and namespaces collisions
 
 Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
@@ -718,6 +734,12 @@ application2/testApp/docker-compose.yml
 
 It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)
 
+## Container names
+
+By default the containers get a name composed of their namespace and their key (like "main:" in the previous docker compose). But it is possible to name them: ```container_name: my-web-container```. In that case, the namespace is ignored and there can be only one instance of this container.
+
+It is rarely useful and can pause problem while testing.
+
 ## Bind mounts
 
 The default volume in a docker-compose are named volumes (```name:``` without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above).
@@ -729,7 +751,6 @@ Thus it is recommended to use bind volumes only for testing (to see what happen 
 It might be tempting to use bind mounts for backups. It is acceptable if it is sure that only one instance of an application will run on the host. Even a test instance, if the bind mounts are the same, will use the same folder as the production server!
 Generally it is better to use named volume and do backups using the dump tools for databases, or copying the data outside the volumes (often by using the *tar* archiving tool).
 :::
-
 
 # How to build a Dockerfile
 
