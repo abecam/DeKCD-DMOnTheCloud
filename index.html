@@ -301,7 +301,9 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
   <li><a href="#things-to-take-into-account" id="toc-things-to-take-into-account" class="nav-link" data-scroll-target="#things-to-take-into-account">Things to take into account</a></li>
   <li><a href="#a-typical-docker-compose-yaml-file" id="toc-a-typical-docker-compose-yaml-file" class="nav-link" data-scroll-target="#a-typical-docker-compose-yaml-file">A typical docker compose yaml file</a></li>
   <li><a href="#typical-usage" id="toc-typical-usage" class="nav-link" data-scroll-target="#typical-usage">Typical usage</a></li>
+  <li><a href="#env-files" id="toc-env-files" class="nav-link" data-scroll-target="#env-files">Env files</a></li>
   <li><a href="#namespaces-and-namespaces-collisions" id="toc-namespaces-and-namespaces-collisions" class="nav-link" data-scroll-target="#namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</a></li>
+  <li><a href="#container-names" id="toc-container-names" class="nav-link" data-scroll-target="#container-names">Container names</a></li>
   <li><a href="#bind-mounts" id="toc-bind-mounts" class="nav-link" data-scroll-target="#bind-mounts">Bind mounts</a></li>
   </ul></li>
   <li><a href="#how-to-build-a-dockerfile" id="toc-how-to-build-a-dockerfile" class="nav-link" data-scroll-target="#how-to-build-a-dockerfile">How to build a Dockerfile</a>
@@ -871,7 +873,8 @@ Note
 <ul>
 <li>mounted inside containers</li>
 <li>independent of the container lifecycle</li>
-</ul></li>
+</ul>
+<p>A volume is associated to a path for the container, meaning that any application that write/read/delete using this path will use this volume. <em>But</em> if an application needs to save data on a path which is not associated with a volume, it will still work: docker give a full working environment within the container. But it will be removed if the container is removed or replaced (updated for instance).</p></li>
 <li><p><strong>Docker Compose</strong> is a tool to <strong>define and run multiple containers together</strong> using a single configuration file (<code>docker-compose.yml</code>).</p>
 <p>It is used to describe:</p>
 <ul>
@@ -920,7 +923,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The official Online documentations is good and complete. Online tutorials should be enough as a complement.</p>
+<p>The official <a href="https://docs.docker.com/compose/">Online documentations</a> is good and complete. Online tutorials should be enough as a complement.</p>
 <p>Learning difficulty is easy/medium, assuming you have some knowledge of Linux. The difficulty is more about the different components of the setup (for instance an image with a database, linked with an Authentication system).</p>
 </div>
 </div>
@@ -952,7 +955,7 @@ Note
 <p>As automatically saving an image on Docker Hub might involve a cost, some Open Source projects will use other registries.</p>
 </div>
 </div>
-<p>Variable are defined in a .env file or in one or several files which can be defined using the env_file attribute (<code>env_file: "myenv.env"</code>).</p>
+<p>Variable are defined in a <code>.env</code> file or in one or several files which can be defined using the env_file attribute (<code>env_file: "myenv.env"</code>).</p>
 <p>The usage below is the typical one: <code>attribute_name: ${VARIABLE_NAME:-default_value}</code></p>
 <p>Note that it is an interpolation, and it can be combined with text or other variables: <code>attribute_name: "text${VARIABLE_NAME}:${ANOTHER_VARIABLE_NAME}"</code></p>
 <p>There are more possibilities explained on the official [Docker documentation}(https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)</p>
@@ -1089,6 +1092,26 @@ volumes:
 </section>
 <section id="typical-usage" class="level2">
 <h2 class="anchored" data-anchor-id="typical-usage">Typical usage</h2>
+<p>The docker compose file only need to be in a specific folder (which will give the container namespace: /one_appl/docker-compose.yml will use the “one_appl” namespace). It needs to be named “docker-compose.yml”, “docker-compose.yaml”, “compose.yml” or “compose.yaml”.</p>
+<p>To run the application, simply run <code>docker-compose up</code> in the same folder, all text output of the application (and linked applications) will be shown in the terminal, CTRL-C will stop the applications (all containers defined) and exit to the terminal. To run the application <em>detached</em>, run <code>docker-compose up -d</code>. To stop the application when detached, or attached from another terminal, run <code>docker-compose down</code></p>
+<p>One the containers are running, they are generally managed directly using docker (or any desktop tool managing containers).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some complex setup can have several configuration file (used from the main file using <code>include:</code>).</p>
+</div>
+</div>
+</section>
+<section id="env-files" class="level2">
+<h2 class="anchored" data-anchor-id="env-files">Env files</h2>
+<p>The environment file has to be created in the same folder as the docker compose configuration file (if not defined otherwise). It should never be provided! Most application will provide an example either as a default env file (that can be modified and renamed) or in their documentation.</p>
 </section>
 <section id="namespaces-and-namespaces-collisions" class="level2">
 <h2 class="anchored" data-anchor-id="namespaces-and-namespaces-collisions">Namespaces and namespaces collisions</h2>
@@ -1096,6 +1119,11 @@ volumes:
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="at">application1/testApp/docker-compose.yml</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">application2/testApp/docker-compose.yml</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>It is a clean set-up, with a distinct parent folder before the docker-compose folder (which would make a lot of sense if you want to store some specific files outside of the docker-compose folder). But as the direct parent folder of the docker-compose has the same name, only one MySQL instance will be used by both (or there will be a binding error and one application will fail, which is probably the best outcome)</p>
+</section>
+<section id="container-names" class="level2">
+<h2 class="anchored" data-anchor-id="container-names">Container names</h2>
+<p>By default the containers get a name composed of their namespace and their key (like “main:” in the previous docker compose). But it is possible to name them: <code>container_name: my-web-container</code>. In that case, the namespace is ignored and there can be only one instance of this container.</p>
+<p>It is rarely useful and can pause problem while testing.</p>
 </section>
 <section id="bind-mounts" class="level2">
 <h2 class="anchored" data-anchor-id="bind-mounts">Bind mounts</h2>
