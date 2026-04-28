@@ -348,7 +348,18 @@
     "href": "index.html#keeping-the-difficulty-under-control",
     "title": "De.KCD - Data Management Platform on the Cloud, step by step",
     "section": "Keeping the difficulty under control",
-    "text": "Keeping the difficulty under control\nThe most important aspect when setting up a Data Management Solution is to keep the difficulty of setting it up and using it under check.\nAs such, this step-by-step page is mostly to determine if the complexity of one solution seems reasonnable, then have some pointers about the solution: what it offers, what is the cost, and a minimal introduction on using it. It is not intended to be a complete documentation on each solution, but to give enough information to understand the solution and navigate through its documentation.\nWhat this documentation cannot fully plan for is what is in place already: existing servers with some application, a Virtual Machine infrastructure… Which can be used as a base for the set-up, if well documented and supported. Using these can be a major plus for a new solution.",
+    "text": "Keeping the difficulty under control\nThe most important aspect when setting up a Data Management Solution is to keep the difficulty of setting it up and using it under check.\nAs such, this step-by-step page is mostly to determine if the complexity of one solution seems reasonnable, then have some pointers about the solution: what it offers, what is the cost, and a minimal introduction on using it. It is not intended to be a complete documentation on each solution, but to give enough information to understand the solution and navigate through its documentation.\nWhat this documentation cannot fully plan for is what is in place already: existing servers with some applications, a Virtual Machine infrastructure… Which can be used as a base for the set-up, if well documented and supported. Using these can be a major plus for a new solution.",
+    "crumbs": [
+      "Home",
+      "De.KCD - Data Management Platform on the Cloud, step by step"
+    ]
+  },
+  {
+    "objectID": "index.html#which-level-of-service",
+    "href": "index.html#which-level-of-service",
+    "title": "De.KCD - Data Management Platform on the Cloud, step by step",
+    "section": "Which level of service?",
+    "text": "Which level of service?\nThe difference in cost between allowing a downtime of 1 night and one of 1 hour is probably smaller than between allowing a downtime of 1 hour and one of 1 minute. And such differences can be found with storage, security and network access.\nIf your institution provide a fully managed infrastucture but with low availability (such as waiting the next day for a problem to be fixed), the benefit can still be bigger than the cost. Moving to an higher availability will mean an adapted infrastructure that you will have to manage locally, and having a technical person that is available in case of full outage.\n\n\n\n\n\n\nTip\n\n\n\nIf the needs are very high and not satisfied by a local IT, it might be a better option to pay for an external service. In that case it is important to evaluate correctly the price, and to check if the security is good enough and if the use is allowed (storing personal data out of your country might be prohibited for instance).",
     "crumbs": [
       "Home",
       "De.KCD - Data Management Platform on the Cloud, step by step"
