@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3b533b6407337c9b48f49a2c4af65cf6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d22b584035f135c269abed1b239a31db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -174,10 +174,16 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
  <span class="menu-text">Data Storage</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pseudonymization</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Management Principles</span></a>
+ <span class="menu-text">Kubernetes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -185,31 +191,8 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/DM_planning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DataManagement - Planning</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Pseudonymization</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Kubernetes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../pages/Kubernetes_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Kubernetes - introduction</span></a>
+ <span class="menu-text">Kubernetes - step by step</span></a>
   </div>
 </li>
       </ul>
@@ -293,6 +276,8 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 
 <script type="text/plain" cookie-consent="tracking"> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]); _paq.push(["setCookieDomain", "*.dekcd.github.io"]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); _paq.push(['enableHeartBeatTimer', 15]); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '38']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })();
 </script>
+<p>While backups and security are a very important aspect of running a Data Management Solution, as we want to <em>securely keep</em> data as part of it, a perfectly safe solution <em>does not exist</em>. What to pursue is what should ensure safety in all but the most <em>extreme</em> cases. But <em>extreme</em> needs to be contextualized: if the tool is a temporary sharing platform, then losing data is not a security concern, only a nuisance for the users that need to upload their data again. On the other hand, an unauthorized access to the share data might be grave security concern.</p>
+<p>So it is important to be realistic and think carefully about what is actually needed and what can realistically achieved. For each section, we provide the importance we estimate in term of security. This has to be considered critically.</p>
 <section id="which-data" class="level1">
 <h1>Which data</h1>
 <p>One generally important aspect of Data Management and data usage is to know which data to store and how to store it.</p>
@@ -583,7 +568,8 @@ Note
 <p>But logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:</p>
 <ul>
 <li>username, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.</li>
-<li></li>
+<li>sensitive details about the implementation or the setup: it could be logged for debug, but should not appear for production run. In case of unknown access to the log, it might allow a much wider attack using the leaked details. For instance, simply logging important path might allow an attacker to know where to act</li>
+<li>confidential data. Once again, it could be important to see some data in the log for debugging a setup, but it is important to use dummy data for confidential fields and to not let anything confidential once in production.</li>
 </ul>
 </section>
 <section id="what-to-never-store" class="level2">
