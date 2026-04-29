@@ -2,6 +2,10 @@
 title: "Backups and Security"
 ---
 
+While backups and security are a very important aspect of running a Data Management Solution, as we want to *securely keep* data as part of it, a perfectly safe solution *does not exist*. What to pursue is what should ensure safety in all but the most *extreme* cases. But *extreme* needs to be contextualized: if the tool is a temporary sharing platform, then losing data is not a security concern, only a nuisance for the users that need to upload their data again. On the other hand, an unauthorized access to the share data might be grave security concern.
+
+So it is important to be realistic and think carefully about what is actually needed and what can realistically achieved. For each section, we provide the importance we estimate in term of security. This has to be considered critically.
+
 # Which data
 
 One generally important aspect of Data Management and data usage is to know which data to store and how to store it. 
@@ -243,7 +247,8 @@ And that would allow to check what was attempted.
 But logs are also plain text and, if accessed by an attacker, will be easy to comprehend. As such, there are information that should never been logged, and some that should be carefully logged:
 
 - username, password, keys, important DB table names (such as a users table used for login), should ideally never be written in a log file, even on DEBUG level and even on test. The reason for that is that everything that happen on test can happen on production. Amid a quick fix during an emergency, a test log entry can be forgiven and go to production. A fix on sensitive information can use the logs, but should be done in a very controlled way, without hurry, even during an emergency. A good way to proceed is to allow the log info only when needed, then switch it off (ideally remove the log entries) immediately after.
-- 
+- sensitive details about the implementation or the setup: it could be logged for debug, but should not appear for production run. In case of unknown access to the log, it might allow a much wider attack using the leaked details. For instance, simply logging important path might allow an attacker to know where to act
+- confidential data. Once again, it could be important to see some data in the log for debugging a setup, but it is important to use dummy data for confidential fields and to not let anything confidential once in production.
 
 ## What to never store (or never in "reversible" format) {#what-to-never-store}
 

@@ -30,9 +30,16 @@ When to go full cloud, or with a containerised solution for your datamanagement 
 * If you have a more complex use case, with several applications and several users, and you need to share the data with other people, a containerised solution might be a good option. Updating is easy as far as the image is updated and the encapsulated application is properly configured to be updated: the data and configuration might need adaptations. In some case it is all transparently handled by the application, in other case there is an update process to follow, and in some case there is no update process and the update needs to be done manually (which can be very costly). It is still a good option for production use, and, if the application allows, can be scaled relatively easily, either by running several instances of the same container (typically behind a load balancing application, such as HAProxy or Traefik), or by using a container orchestration solution (see below).
 * If you have a very complex use case, with several applications and several users, and you need to share the data with other people, and you need to scale the solution, a container orchestration solution might be a good option. It is more complex to set-up and maintain than a containerised solution, but it allows to easily scale the solution and to manage it in a more efficient way. It is a good option for production use, especially if you need to scale the solution, but it is not recommended for testing and development as it can be overkill for such use cases.
 
+::: {.callout-note}
 **If** your institution or consortium offers a suitable hosted service, it is generally the best option to use it, as it will be maintained and updated by the provider, and will be more secure than a self-hosted solution. It is still important to check the terms of service and the security measures in place, as well as the possibility to access the data and the API if needed.
 In many cases, the different usages will be well documented and in some cases tutorials will be available.
 Notable examples of such services are the [De.NBI Cloud](https://cloud.denbi.de/), which is offering a wide range of services and support for research projects in Germany, the [European Open Science Cloud](https://open-science-cloud.ec.europa.eu/) and the [EGI Federation](https://www.egi.eu/egi-federation/) for European research projects, [Gaia-X](https://gaia-x.eu/) for European partners (not only for science), the [ACCESS program](https://access-ci.org/) funded by the [National Science Foundation](https://www.nsf.gov/) in the United States, which provides integrated access to cloud and HPC resources such as Jetstream2, the [Digital Research Alliance of Canada](https://alliancecan.ca/) with its Arbutus cloud platform, the [Nectar Research Cloud](https://ardc.edu.au/services/nectar-research-cloud/) in Australia, and national or institutional initiatives such as the [GWDG Academic Cloud](https://academiccloud.de/), which offer OpenStack-based virtual machines and increasingly Kubernetes-based container orchestration for academic users.
+:::
+
+::: {.callout-tip}
+There are also some Data management solutions that can be used by academic institutions (such as several [Seek instances](https://fair-dom.org/fairdom-in-use/)). There is probably still a need for a dedicated solution (for security and privacy concern, for storing large data with high performance...) but they can be a good complement.
+:::
+
 
 # Common remarks
 
@@ -547,6 +554,11 @@ A docker image will be started (once used in a container) using an Entrypoint an
 
 Changing something that is part of the image is possible when running the container, but it will never be persistent and is generally a bad idea. One good case is when debugging an application, and if the debugged code is changed (in the code base) as soon as the issue is found.
 
+::: {.callout-note}
+A container might need some extra steps once started, especially with a first installation.
+
+**Often**, a test setup rely *only* on running the container, which will use a tempary database (often SQLite) and temporary file system. Once the container is removed or replaced, all data is gone. A production setup will need some extra steps, at least to set-up volumes so the data can persist, but some time some initial steps for the applications. Thus it is almost always needed to follow the documentation to set-up a platform. 
+:::
 
 # Moving to Docker compose
 
@@ -565,6 +577,10 @@ Docker compose is both a tool to setup a docker-based application or set of appl
 Docker compose is quite simple to learn and use, and it is a good way to start with container-based applications. With a coherent docker-compose file, it is a good solution for running a web application, with a database and a cache, on a single machine, with a simple set-up and a good performance. 
 
 To access the web-application, it is generally needed to use a reverse proxy, such as Nginx or Apache, to forward the traffic from the host to the container. It is also possible to use a load balancer, such as HAProxy, to distribute the traffic between several instances of the application.
+
+::: {.callout-note}
+As for a pure docker container, there will often still be some extra steps to setup an application. Many docker-compose for web-applications have a ready-to-use test setup, where there might be nothing to do. Most will need to set-up variables in an .env file (db password, application admin password, ...). Several will also need some extra steps for an initial set-up (preparing the database, seeding some new data), and for an update (doing some premilinary steps).
+:::
 
 ## Things to take into account
 

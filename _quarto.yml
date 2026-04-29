@@ -43,10 +43,11 @@ website:
         - pages/TechPlatformDecisionTree.qmd
         - pages/Backups_and_security.qmd
         - pages/Data_storage.qmd
-        - section: "Data Management Principles"
-          contents:
-            - pages/DM_planning.qmd
-            - pages/Pseudonymization.qmd
+        - pages/Pseudonymization.qmd
+#        - section: "Data Management Principles"
+#          contents:
+#            - pages/DM_planning.qmd
+#            - pages/Pseudonymization.qmd
         - section: "Kubernetes"
           contents:
             - pages/Kubernetes_introduction.qmd

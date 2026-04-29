@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes - introduction"
+title: "Kubernetes - step by step"
 number-sections: true
 ---
 
@@ -15,6 +15,7 @@ Seek is an extensive Data Management platform mostly aimed at Life Sciences but 
 
 ## Seek and his components
 
+Seek is 
 ## The default Docker Compose
 
 The default Seek docker compose looks a bit complex, but is straight forward if looked element by element.
@@ -116,6 +117,127 @@ volumes:
   seek-cache:
     external: true
 ```
+
+Sure! Here's a walkthrough of each part of the file.
+
+---
+
+## Shared Base Configuration
+
+```yaml
+x-shared:
+  seek_base: &seek_base
+    image: fairdom/seek:main
+    restart: always
+    environment: &seek_base_env
+      RAILS_ENV: production
+      SOLR_PORT: 8983
+      SOLR_HOST: solr
+    env_file:
+      - docker/db.env
+    volumes:
+      - seek-filestore:/seek/filestore
+      - seek-cache:/seek/tmp/cache
+    depends_on:
+      db:
+        condition: service_healthy
+      solr:
+        condition: service_started
+```
+
+This is a YAML anchor — not a service, but a reusable template - ```x-``` meaning "extension". Both `seek` and `seek_workers` inherit from it via `<<: *seek_base`. It sets the shared image, always-restart policy, environment variables pointing to Solr, and the two shared volumes for uploaded files and cache. Crucially, it enforces startup order: the app won't start until the database passes its health check and Solr has at least started.
+
+---
+
+## The Database (`db`)
+
+```yaml
+db:
+  image: mysql:8.4
+  command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  restart: always
+  stop_grace_period: 1m30s
+  healthcheck:
+    test: ["CMD-SHELL", "mysqladmin ping -h localhost -u $$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+    interval: 10s
+    retries: 5
+    start_period: 20s
+```
+
+A standard MySQL 8.4 container, forced into `utf8mb4` encoding (required for full Unicode support). The `stop_grace_period: 1m30s` gives MySQL time to flush and close connections cleanly on shutdown. The health check pings the server every 10 seconds, with a 20-second warm-up window — other services won't start until this passes.
+
+---
+
+## The Web App (`seek`)
+
+```yaml
+seek:
+  <<: *seek_base
+  command: docker/entrypoint.sh
+  ports:
+    - "3000:3000"
+  environment:
+    <<: *seek_base_env
+    NO_ENTRYPOINT_WORKERS: 1
+```
+
+This is the main Rails web process, inheriting the shared base and exposing port 3000 to the host. The `NO_ENTRYPOINT_WORKERS: 1` flag tells the entrypoint script *not* to start background workers here — those are intentionally split off into the next service.
+
+---
+
+## The Background Workers (`seek_workers`)
+
+```yaml
+seek_workers:
+  <<: *seek_base
+  command: docker/start_workers.sh
+  environment:
+    <<: *seek_base_env
+    QUIET_SUPERCRONIC: 1
+  healthcheck:
+    test: ["CMD", "bash", "script/check_worker_pids.sh"]
+    retries: 5
+```
+
+A separate container running SEEK's delayed job workers, using the same image but a different entrypoint. `QUIET_SUPERCRONIC: 1` suppresses verbose cron-job logging. Splitting workers from the web process is good practice — it lets each scale and restart independently.
+
+---
+
+## The Search Engine (`solr`)
+
+```yaml
+solr:
+  image: fairdom/seek-solr:8.11
+  environment:
+    SOLR_JAVA_MEM: -Xms512m -Xmx1024m
+  volumes:
+    - seek-solr-data:/var/solr/
+  entrypoint:
+    - docker-entrypoint.sh
+    - solr-precreate
+    - seek
+    - /opt/solr/server/solr/configsets/seek_config
+```
+
+A pre-configured Solr image maintained by the SEEK team. The entrypoint uses `solr-precreate` to initialise a core named `seek` from a bundled config set on first run. Java heap is bounded between 512 MB and 1 GB — a sensible default for a small-to-medium deployment.
+
+---
+
+## Volumes
+
+```yaml
+volumes:
+  seek-filestore:
+    external: true
+  seek-mysql-db:
+    external: true
+  seek-solr-data:
+    external: true
+  seek-cache:
+    external: true
+```
+
+All four volumes are marked `external: true`, meaning Compose expects them to already exist on the host — it will **not** create or delete them automatically. This is a deliberate safety measure: running `docker compose down -v` won't wipe your data.
 
 ## What could benefit from a cloud setup
 

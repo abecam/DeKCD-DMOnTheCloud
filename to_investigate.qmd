@@ -131,3 +131,7 @@ OpenStack: Swift or Ceph using a Gateway (also supporting Swift)
 Swift: integrate with Keystone
 Better to avoid Swift
 Objects have meta-data
+
+Use kubectl describe pod ... to find the node running your Pod and the container ID (docker://...)
+SSH into the node
+Run docker exec -it -u root CONTAINER_ID /bin/bash
