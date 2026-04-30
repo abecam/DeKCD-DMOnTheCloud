@@ -35,10 +35,10 @@ More advanced storage solutions (distributed storage, cloud block volumes) are p
 ```{mermaid}
 flowchart TD
     A[Application / Container] -->|reads & writes| V[Volume]
-    V --> L[Local Disk\nSimple, fast\nno redundancy]
-    V --> N[Network Storage\nShared access]
-    V --> B[Block Storage\nHigh-speed\nfor databases]
-    V --> D[Distributed Storage\nCeph / Longhorn\nHigh availability]
+    V --> L[Local Disk - Simple, fast - no redundancy]
+    V --> N[Network Storage - Shared access]
+    V --> B[Block Storage - High-speed - for databases]
+    V --> D[Distributed Storage - Ceph / Longhorn - High availability]
 
     style A fill:#4A90D9,color:#fff
     style V fill:#F5A623,color:#fff
@@ -104,13 +104,13 @@ The recommended approach is to use a **database operator** — a piece of softwa
 
 ```{mermaid}
 flowchart LR
-    Admin["Administrator\n(describes desired state)"]
-    Operator["Database Operator\n(watches & acts)"]
-    DB1[(Primary\nDatabase)]
+    Admin["Administrator - (describes desired state)"]
+    Operator["Database Operator - (watches & acts)"]
+    DB1[(Primary - Database)]
     DB2[(Replica 1)]
     DB3[(Replica 2)]
 
-    Admin -->|"defines via\nconfiguration file"| Operator
+    Admin -->|"defines via - configuration file"| Operator
     Operator -->|manages| DB1
     Operator -->|manages| DB2
     Operator -->|manages| DB3
@@ -149,11 +149,11 @@ Two well-regarded open-source database operators are available for Kubernetes en
 
 ```{mermaid}
 flowchart TD
-    Q1{Do you already\nuse a platform?}
-    Q1 -->|OpenStack| OS[Deploy a VM via Nova\nor use Trove DBaaS]
-    Q1 -->|Proxmox| PX[Run DB in a VM\nor LXC container]
-    Q1 -->|Kubernetes| K8S[Use a database operator\nCloudNativePG · KubeBlocks]
-    Q1 -->|None / simple| DS[Dedicated server\nPhysical · VM · Docker]
+    Q1{Do you already - use a platform?}
+    Q1 -->|OpenStack| OS[Deploy a VM via Nova - or use Trove DBaaS]
+    Q1 -->|Proxmox| PX[Run DB in a VM - or LXC container]
+    Q1 -->|Kubernetes| K8S[Use a database operator - CloudNativePG · KubeBlocks]
+    Q1 -->|None / simple| DS[Dedicated server - Physical · VM · Docker]
 
     style OS fill:#E8A838,color:#fff
     style PX fill:#E8633A,color:#fff
@@ -204,13 +204,13 @@ flowchart LR
     App2[Application B]
     App3[Data Pipeline]
 
-    OS["Object Storage\n(S3-compatible API)"]
-    CLD["Cloud-managed\nAWS S3 · Azure Blob · GCS"]
-    SH["Self-hosted\nSwift · Garage"]
+    OS["Object Storage - (S3-compatible API)"]
+    CLD["Cloud-managed - AWS S3 · Azure Blob · GCS"]
+    SH["Self-hosted - Swift · Garage"]
 
-    App1 -->|"upload / download\nvia HTTP"| OS
-    App2 -->|"upload / download\nvia HTTP"| OS
-    App3 -->|"read datasets\nwrite results"| OS
+    App1 -->|"upload / download - via HTTP"| OS
+    App2 -->|"upload / download - via HTTP"| OS
+    App3 -->|"read datasets - write results"| OS
     OS --> CLD
     OS --> SH
 
@@ -238,19 +238,19 @@ flowchart TD
     DM --> OS[Object Storage]
     DM --> DB[Databases]
 
-    VS --> LT[Local / Network\nBlock / Distributed]
+    VS --> LT[Local / Network - Block / Distributed]
 
-    OS --> SAAS[Cloud-managed\nAWS S3 · Azure Blob · GCS]
-    OS --> SH[Self-hosted\nSwift · Garage]
+    OS --> SAAS[Cloud-managed - AWS S3 · Azure Blob · GCS]
+    OS --> SH[Self-hosted - Swift · Garage]
 
-    DB --> MS[Managed Cloud Service\nAWS RDS, Azure Database …]
+    DB --> MS[Managed Cloud Service - AWS RDS, Azure Database …]
     DB --> SELF[Self-hosted]
-    SELF --> DS[Dedicated Server\nPhysical · VM · Docker]
-    SELF --> OST[OpenStack\nNova VM · Trove DBaaS]
-    SELF --> PX[Proxmox\nVM · LXC container]
-    SELF --> K8S[Kubernetes\nwith Operator]
-    K8S --> CNPG[CloudNativePG\nPostgreSQL specialist]
-    K8S --> KB[KubeBlocks\nMulti-engine]
+    SELF --> DS[Dedicated Server - Physical · VM · Docker]
+    SELF --> OST[OpenStack - Nova VM · Trove DBaaS]
+    SELF --> PX[Proxmox - VM · LXC container]
+    SELF --> K8S[Kubernetes - with Operator]
+    K8S --> CNPG[CloudNativePG - PostgreSQL specialist]
+    K8S --> KB[KubeBlocks - Multi-engine]
 
     style DM fill:#4A90D9,color:#fff
     style OS fill:#7B68EE,color:#fff
