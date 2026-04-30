@@ -3,12 +3,6 @@ title: "Kubernetes - step by step"
 number-sections: true
 ---
 
-# Working progress
-
-Try to explain clearly what the Kubernetes elements translate to and repeat it often to clarify this vocabulary as quickly as possible.
-Explain everything: so start from a simple (and stupid) solution and add to it.
-Do not drown: keep things structured so things are not confusing.
-
 # Our showcase application: [FAIRDOM Seek](https://seek4science.org/)
 
 Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bare metal to full cloud setup as:
@@ -312,10 +306,25 @@ On Linux, there are lightweight setup using various approached. The main ones ar
 It is important to consider that, if some of these setup can be used in production (such as Talos or k3s), Kubernetes is a complex system and should be probably be managed by sys-admin persons, for ensuring fault-tolerance, backups and security.
 :::
 
-## Limits of Kubernetes, complexity and  ###
+## Limits of Kubernetes, complexity and many moving parts
 
-Kubernetes is an ensemble of small decoupled elements. Each are rather simple to understand and the overal logic is sound and clear. But you need many elements to have a working setup, and the configuration and the overview of all these elements can be complex and obscure.
+Kubernetes is an ensemble of small, decoupled components. Each one is relatively simple to understand in isolation, and the overall architecture is logically consistent. However, a functional setup requires a large number of these components working together, which introduces significant operational complexity.
+
+A typical deployment involves multiple layers: workloads (Pods, Deployments, StatefulSets), networking (Services, Ingress, DNS), configuration management (ConfigMaps, Secrets), storage (PersistentVolumes and PersistentVolumeClaims), and access control (RBAC). On top of that, there are cluster-level components such as the scheduler, controller manager, API server, and etcd, which are usually abstracted away but still influence behavior.
+
+The “many moving parts” become especially apparent when troubleshooting or evolving a system. A single application request might traverse an Ingress controller, a Service, kube-proxy rules, and finally reach a Pod that depends on mounted volumes and injected configuration. If something breaks, the root cause could lie in any of these layers—or in the interactions between them.
+
+This complexity is amplified by the ecosystem around Kubernetes. Most real-world setups rely on additional tools: Helm charts for packaging, operators for managing stateful applications, monitoring stacks (e.g., Prometheus), logging pipelines, and CI/CD integrations. Each tool introduces its own abstractions and configuration formats.
+
 Some tools such as K9s can help to have a better overview of the cluster and its elements, but is is important to clearly define and probably document your setup, to ensure that you can understand it later on and that other people can understand it as well.
+
+:::{.callout-note}
+That will mostly define the cost of using Kubernetes.
+
+If you have access to a fully managed cluster, with a good documentation and a good support, the complexity will be limited to the parts you are responsible for (probably at least the application deployment, but maybe also a database, a log manager, ...).
+
+If you need to manage your cluster, the cost might exceed the benefits and you might prefer a simpler solution, such as Docker, Docker Swarm, Proxmox (see the [main step-by-step guide](/index.html) for more information).
+:::
 
 ## Terminology & main elements
 
@@ -631,8 +640,6 @@ In short:
 But you can also store your data in a **database** or an **object storage** (such as an S3 implementations). They might be part of the Kubernetes cluster, in another Kubernetes cluster, or fully external. Their access and usage will generally be the same in all cases. When within a Kubernetes cluster, they use volumes of their own and their setup could involve setting-up the volumes (see the note below).
 Some data storage (such as Postgresql) might be managed by an **operator**. *Operators* are software extensions of Kubernetes, that can define, as their name implies, operations on the cluster. In that case, you generally set-up the database and the operator as instructed by the operator documentation, and you will then have the database managed by the operator. They could take care of data replication, failure management, ..., and are generally the prefered way to set-up a data storage on Kubernetes when something more than a simple volume is needed.
 
----
-
 ### A note about automatic storage (StorageClass)
 
 Kubernetes can automatically create persistent storage for you — but **only if the cluster has been set up with a storage backend**.
@@ -648,8 +655,6 @@ In short:
 
 * Cloud clusters (AWS, Google, Azure) usually have a StorageClass ready by default.
 * Local or on-premise clusters might need to install one manually (for example, a **local-path-provisioner** or **NFS**).
-
----
 
 ### Visual overview of automatic storage provisioning
 
@@ -681,8 +686,6 @@ In short:
 
 If a suitable **StorageClass** is present, the system automatically creates a **PersistentVolume** and binds it to your claim.
 Otherwise, the claim just stays pending until an administrator provides a volume manually.
-
----
 
 ### Visual overview of storage
 
@@ -716,8 +719,6 @@ Otherwise, the claim just stays pending until an administrator provides a volume
 
 This structure lets you move or restart pods without losing any data — Kubernetes will reconnect the storage automatically.
 
----
-
 ## How Kubernetes keeps things running
 
 Kubernetes is designed to make sure your applications stay up and running, even if something fails.
@@ -730,11 +731,26 @@ You don’t need to manually restart or move anything — Kubernetes takes care 
 This is one of its biggest advantages compared to running containers manually:
 you describe *what you want to run*, and Kubernetes makes sure it *stays* that way.
 
-## Configuration values
+### Configuration values
 
-ConfigMap and Secrets
+**ConfigMaps and Secrets**
 
-Regular Values can be stored in a ConfigMap, while values that should be hidden are store in Secrets. The main idea of Secrets is to keep your confidential values **out** of the regular configuration, in a secure place. Secret values are encoded in Base64 for preventing issues with special characters but it does not offer any added security (it can be decoded with any Base64 decoding tool).
+Regular values can be stored in a ConfigMap, while values that should be hidden are stored in Secrets. The main idea of Secrets is to keep your confidential values out of the regular configuration, in a separate, access-controlled resource. Secret values are encoded in Base64 to avoid issues with special characters, but this encoding does not provide real security, as it can easily be decoded. For actual protection, Secrets should be combined with additional measures such as RBAC (see below), [encryption at rest](https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/), and external secret management systems.
+
+ConfigMaps and Secrets can both be consumed by Pods as environment variables or mounted as files inside containers, making them flexible mechanisms for injecting configuration into applications at runtime.
+
+For more details, see the official Kubernetes documentation:
+
+* ConfigMaps: [https://kubernetes.io/docs/concepts/configuration/configmap/](https://kubernetes.io/docs/concepts/configuration/configmap/)
+* Secrets: [https://kubernetes.io/docs/concepts/configuration/secret/](https://kubernetes.io/docs/concepts/configuration/secret/)
+
+**Role-Based Access Control (RBAC)**
+
+Kubernetes RBAC (Role-Based Access Control) is used to regulate who can access or modify resources such as ConfigMaps and Secrets. RBAC works by defining **Roles** (or ClusterRoles) that specify allowed actions (e.g., get, list, create) on specific resources, and **RoleBindings** (or ClusterRoleBindings) that assign these permissions to users, groups, or service accounts. Proper RBAC configuration is essential to ensure that only authorized components or users can read or modify sensitive data like Secrets, thereby strengthening the overall security model of the cluster.
+
+For more details, see the official documentation:
+
+* [https://kubernetes.io/docs/reference/access-authn-authz/rbac/](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
 
 ## Namespace
 

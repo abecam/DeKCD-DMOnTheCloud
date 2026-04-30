@@ -1,10 +1,6 @@
 ---
 title: "Data Storage"
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    theme: cosmo
+number-sections: true
 ---
 
 Evidently, an important part of Data Management is the storage of data. 
@@ -164,8 +160,6 @@ flowchart TD
     style K8S fill:#4A90D9,color:#fff
     style DS fill:#7ED321,color:#fff
 ```
-
----
 
 ## Object Storage
 

@@ -1,5 +1,6 @@
 ---
 title: "Backups and Security"
+number-sections: true
 ---
 
 While backups and security are a very important aspect of running a Data Management Solution, as we want to *securely keep* data as part of it, a perfectly safe solution *does not exist*. What to pursue is what should ensure safety in all but the most *extreme* cases. But *extreme* needs to be contextualized: if the tool is a temporary sharing platform, then losing data is not a security concern, only a nuisance for the users that need to upload their data again. On the other hand, an unauthorized access to the share data might be grave security concern.

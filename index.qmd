@@ -1,5 +1,6 @@
 ---
 title: "De.KCD - Data Management Platform on the Cloud, step by step"
+number-sections: true
 ---
 
 Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.
@@ -1537,7 +1538,7 @@ Depending on the usage, it might still be beneficial to adopt a brand new produc
 * the gain is major, for example the new product is significantly faster, very simple to use for an usually complex task, offer a new functionality with no equivalent.
 
 
-
+---
 This is a Quarto website.
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
