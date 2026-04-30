@@ -333,9 +333,9 @@ cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","notic
 <li><strong>seek</strong> — the Rails application itself, served by Puma on port 3000. It handles all HTTP traffic, the JSON:API, authentication, and asset management.</li>
 <li><strong>seek-mysql</strong> — a <strong>MySQL 8.4</strong> database that stores all structured metadata: users, projects, assets, permissions, job queues, etc.</li>
 <li><strong>seek-solr</strong> — an <strong>Apache Solr 8.11</strong> instance (custom image <code>fairdom/seek-solr:8.11</code>) that powers full-text and faceted search across all platform assets.</li>
-<li><strong>seek-workers</strong> — a dedicated worker container running the same image as the main app but started with a different entrypoint. It processes background jobs (file content extraction, email delivery, Solr re-indexing, remote data fetching …) via <strong>Delayed Job</strong>, and runs scheduled tasks (feed refresh, sitemap generation …) via <strong>Supercronic</strong>.</li>
+<li><strong>seek-workers</strong> — a dedicated worker container running the same image as the main app but started with a different entrypoint. It processes background jobs (file content extraction, email delivery, Solr re-indexing, remote data fetching…) via <strong>Delayed Job</strong>, and runs scheduled tasks (feed refresh, sitemap generation…) via <strong>Supercronic</strong>.</li>
 </ul>
-<p>Uploaded binary content (data files, model files, SOPs …) is stored outside the database in a <strong>filestore volume</strong> (<code>seek-filestore</code>), which in a basic setup is simply a local directory but can be swapped for any network-attached or S3-compatible object store in larger deployments.</p>
+<p>Uploaded binary content (data files, model files, SOPs…) is stored outside the database in a <strong>filestore volume</strong> (<code>seek-filestore</code>), which in a basic setup is simply a local directory but can be swapped for any network-attached or S3-compatible object store in larger deployments.</p>
 <p>An optional fifth service, <strong>OpenLink Virtuoso</strong>, can be added to expose a SPARQL endpoint over the RDF knowledge graph that SEEK builds from its metadata, enabling Linked Data queries for FAIR-compliance scenarios.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
