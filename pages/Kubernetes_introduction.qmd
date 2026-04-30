@@ -11,16 +11,53 @@ Do not drown: keep things structured so things are not confusing.
 
 # Our showcase application: [FAIRDOM Seek](https://seek4science.org/)
 
-Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bar metal to full cloud setup as (1) it is already available as container and bare-metal installation, with a complete Docker compose which is still easy to understand,(2) it generally relies on several containers (4 with the default docker compose), several volumes, workers (i.e. side process that run regularly for doing batch works), a comprehensive search using Solr, and object storage and (3) it can be run with the unique Seek container (using a sqlite database within the container) so can go from really simple (for discovery or tutorials) to rather large (with load balancing, external DB, backups) which will allow us to go from a simple and stupid (in a Kubernetes context) case to full setups with most of the cases suitable for production.
+Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bare metal to full cloud setup as:
+ 
+ - it is already available as container and bare-metal installation, with a complete Docker compose which is still easy to understand,
+ - it generally relies on several containers (4 with the default docker compose), several volumes, workers (i.e. side process that run regularly for doing batch works), a comprehensive search using Solr, and object storage,
+ - it can be run with the unique Seek container (using a sqlite database within the container) so can go from really simple (for discovery or tutorials) to rather large (with load balancing, external DB, backups) which will allow us to go from a simple and stupid (in a Kubernetes context) case to full setups with most of the cases suitable for production.
 
-## Seek and his components
+## Seek and its components
 
-Seek is 
+FAIRDOM-SEEK is a **Ruby on Rails** web application. In its standard Docker Compose deployment it is composed of four services that must all be running for the platform to be fully operational:
+
+- **seek** — the Rails application itself, served by Puma on port 3000. It handles all HTTP traffic, the JSON:API, authentication, and asset management.
+- **seek-mysql** — a **MySQL 8.4** database that stores all structured metadata: users, projects, assets, permissions, job queues, etc.
+- **seek-solr** — an **Apache Solr 8.11** instance (custom image `fairdom/seek-solr:8.11`) that powers full-text and faceted search across all platform assets.
+- **seek-workers** — a dedicated worker container running the same image as the main app but started with a different entrypoint. It processes background jobs (file content extraction, email delivery, Solr re-indexing, remote data fetching …) via **Delayed Job**, and runs scheduled tasks (feed refresh, sitemap generation …) via **Supercronic**.
+
+Uploaded binary content (data files, model files, SOPs …) is stored outside the database in a **filestore volume** (`seek-filestore`), which in a basic setup is simply a local directory but can be swapped for any network-attached or S3-compatible object store in larger deployments.
+
+An optional fifth service, **OpenLink Virtuoso**, can be added to expose a SPARQL endpoint over the RDF knowledge graph that SEEK builds from its metadata, enabling Linked Data queries for FAIR-compliance scenarios.
+
+```{mermaid}
+flowchart TD
+    Browser -->|HTTP| seek["seek (Rails / Puma :3000)"]
+    seek --> db["seek-mysql (MySQL 8.4)"]
+    seek --> solr["seek-solr (Solr 8.11 · :8983)"]
+    seek --> fs["seek-filestore (volume · binary assets)"]
+    workers["seek-workers (Delayed Job + Supercronic)"] --> db
+    workers --> solr
+    workers --> fs
+    seek -.->|optional| virtuoso["seek-virtuoso (Virtuoso 7 · :8890 SPARQL)"]
+```
+
+The table below lists all named Docker volumes and their role:
+
+| Volume | Mounted into | Contents |
+|---|---|---|
+| `seek-filestore` | seek, workers | Uploaded research assets |
+| `seek-mysql-db` | seek-mysql | MySQL data directory |
+| `seek-solr-data` | seek-solr | Solr index data |
+| `seek-cache` | seek | Rails fragment and asset cache |
+| `seek-virtuoso-data` | seek-virtuoso *(optional)* | Virtuoso triple store |
+
+
 ## The default Docker Compose
 
 The default Seek docker compose looks a bit complex, but is straight forward if looked element by element.
 
-```
+```yaml
 x-shared:
   seek_base: &seek_base
     # build: .
@@ -118,11 +155,7 @@ volumes:
     external: true
 ```
 
-Sure! Here's a walkthrough of each part of the file.
-
----
-
-## Shared Base Configuration
+### Shared Base Configuration
 
 ```yaml
 x-shared:
@@ -147,9 +180,7 @@ x-shared:
 
 This is a YAML anchor — not a service, but a reusable template - ```x-``` meaning "extension". Both `seek` and `seek_workers` inherit from it via `<<: *seek_base`. It sets the shared image, always-restart policy, environment variables pointing to Solr, and the two shared volumes for uploaded files and cache. Crucially, it enforces startup order: the app won't start until the database passes its health check and Solr has at least started.
 
----
-
-## The Database (`db`)
+### The Database (`db`)
 
 ```yaml
 db:
@@ -166,9 +197,7 @@ db:
 
 A standard MySQL 8.4 container, forced into `utf8mb4` encoding (required for full Unicode support). The `stop_grace_period: 1m30s` gives MySQL time to flush and close connections cleanly on shutdown. The health check pings the server every 10 seconds, with a 20-second warm-up window — other services won't start until this passes.
 
----
-
-## The Web App (`seek`)
+### The Web App (`seek`)
 
 ```yaml
 seek:
@@ -183,9 +212,7 @@ seek:
 
 This is the main Rails web process, inheriting the shared base and exposing port 3000 to the host. The `NO_ENTRYPOINT_WORKERS: 1` flag tells the entrypoint script *not* to start background workers here — those are intentionally split off into the next service.
 
----
-
-## The Background Workers (`seek_workers`)
+### The Background Workers (`seek_workers`)
 
 ```yaml
 seek_workers:
@@ -201,9 +228,7 @@ seek_workers:
 
 A separate container running SEEK's delayed job workers, using the same image but a different entrypoint. `QUIET_SUPERCRONIC: 1` suppresses verbose cron-job logging. Splitting workers from the web process is good practice — it lets each scale and restart independently.
 
----
-
-## The Search Engine (`solr`)
+### The Search Engine (`solr`)
 
 ```yaml
 solr:
@@ -221,9 +246,7 @@ solr:
 
 A pre-configured Solr image maintained by the SEEK team. The entrypoint uses `solr-precreate` to initialise a core named `seek` from a bundled config set on first run. Java heap is bounded between 512 MB and 1 GB — a sensible default for a small-to-medium deployment.
 
----
-
-## Volumes
+### Volumes
 
 ```yaml
 volumes:
@@ -241,9 +264,19 @@ All four volumes are marked `external: true`, meaning Compose expects them to al
 
 ## What could benefit from a cloud setup
 
+The benefits that can be expected from a cloud setup depends mostly on the scale of the platform and the expected traffic. As such, they are listed from the most general benefits to those that will be more relevant for larger platforms or more needs:
+
+* **High availability**: Cloud providers often have multiple data centers and availability zones, which can help ensure that your application remains available even if one data center experiences an outage. This can be achieved through load balancing and failover mechanisms.
+This is especially beneficial is the Kubernetes cluster is managed by an IT team (on site or not), even if they are not directly involved in the platform management: if one node of the cluster goes down, Kubernetes will automatically move the application to another node, ensuring that it remains available without any manual intervention. If the crash has to be investigated, it can be done later on without any rush, and without the need to restore the platform from a backup.
+* **Relatively simple load balancing**: Kubernetes has built-in support for load balancing, which can help distribute traffic across multiple instances of your application. This can help improve performance and ensure that your application can handle increased traffic.
+Note that load balancing can also be handled by a reverse proxy such as Nginx, but it is generally easier to set up and manage with Kubernetes, especially if you are using a managed Kubernetes service that includes load balancing as part of the offering.
+* Using a S3 storage, provide a direct access to the data, with a better performance and a better security than if the data is stored on a local volume. This is especially beneficial for large files, as the upload and download will be faster, and the storage will be more secure and scalable. The access can be temporary (given by token) and limited to a specific file, which can be useful for security and for sharing data with external collaborators. 
+* **Scalability**: Cloud platforms can automatically scale resources up or down based on demand. This means that if your application experiences a sudden increase in traffic, the cloud can allocate more resources to handle the load, and then scale back down when traffic decreases.
+
 ## A pragmatic approach of Cloud setup
 
 The main question of which setup to choose is a matter or benefit/cost:
+
 * How much time will be needed for the training, the setup, the maintenance,
 * How secure is the setup, what solution is available for backup,
 * Which complexity can be managed, as a high complexity can also give a security risk.
@@ -465,6 +498,55 @@ Why there is so many extra layers compared to docker compose -> full decoupling.
 
 ## Most configuration is declarative
 
+Kubernetes follows a declarative model: instead of describing how to perform actions, you define the desired state of your system (for example, how many replicas of a Pod should run, which image to use, or how services are exposed). The control plane continuously reconciles the actual state with this desired state and makes adjustments automatically.
+
+This approach makes deployments more predictable, easier to version, and resilient to failures, since Kubernetes will always try to restore the declared configuration.
+
+Here is a minimal Kubernetes Deployment that runs an NGINX container:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment        # Name of the Deployment
+spec:
+  replicas: 2                   # Desired number of Pods
+  selector:
+    matchLabels:
+      app: nginx                # How the Deployment finds its Pods
+  template:
+    metadata:
+      labels:
+        app: nginx              # Labels applied to Pods
+    spec:
+      containers:
+        - name: nginx           # Container name
+          image: nginx:1.25     # Container image
+          ports:
+            - containerPort: 80 # Port exposed by the container
+```
+
+Explanations:
+
+* apiVersion / kind: Defines that this object is a Deployment using the stable apps/v1 API.
+* metadata.name: Unique name of the Deployment in the namespace.
+* spec.replicas: Kubernetes will ensure that exactly 2 Pods are running at all times.
+* spec.selector: Tells the Deployment which Pods it manages, based on labels.
+* spec.template: Template used to create Pods.
+* metadata.labels: Labels assigned to Pods (must match the selector).
+* spec.containers: Defines the container(s) running in each Pod.
+* image: The container image to run.
+* ports: Informational field describing exposed ports.
+
+Once applied (kubectl apply -f deployment.yaml), Kubernetes will continuously ensure that:
+
+* 2 Pods are running,
+* they match this configuration,
+* and if a Pod crashes, it is automatically recreated.
+
+This illustrates the declarative model: you describe the desired state, and Kubernetes handles the rest.
+At the beginning of using Kubernetes, it can be confusing to stop an application: if you delete a Pod declared in a deployment (for instance), it will be recreated automatically, as requested. To effectively stop the application, you need to modify or delete the top-level object (for example, a Deployment) that defines the desired state.
+
 ## The various objects for your application
 
 While the **Pod** is the smallest element in Kubernetes, it is directly started *only* for testing.
@@ -515,9 +597,6 @@ Here’s a simple way to picture how Kubernetes manages your applications:
 If a pod fails, the ReplicaSet creates a new one.
 If you update your app, the Deployment creates a new ReplicaSet with the new version and removes the old one once everything runs correctly.
 
-
----
-
 ## Updating an application
 
 Applications are still running in containers, so updating means updating the container image.
@@ -526,11 +605,12 @@ This allows smooth, gradual updates with no downtime.
 
 You can also roll back easily if something goes wrong, as Kubernetes keeps the previous version ready.
 
----
-
 ## Where do you store the data
 
-TODO: Note about etcd
+Kubernetes itself also stores data — but not application data.
+
+The cluster state (what pods exist, their configuration, secrets, etc.) is stored in **etcd**, a distributed key-value database used internally by Kubernetes.
+This data is critical for the cluster to function, but it is not meant for your application data.
 
 Containers are temporary — when they stop, everything inside disappears.
 For most applications, you need to keep data somewhere safe and separate from the containers.
@@ -548,7 +628,7 @@ In short:
 * Data should live in Volumes or PersistentVolumes.
 * Kubernetes handles the connection between the app and its data storage.
 
-*For review:* But you can also store your data in a **database** or an **object storage** (such as an S3 implementations). They might be part of the Kubernetes cluster, in another Kubernetes cluster, or fully external. Their access and usage will generally be the same in all cases. When within a Kubernetes cluster, they use volumes of their own and their setup could involve setting-up the volumes (see the note below).
+But you can also store your data in a **database** or an **object storage** (such as an S3 implementations). They might be part of the Kubernetes cluster, in another Kubernetes cluster, or fully external. Their access and usage will generally be the same in all cases. When within a Kubernetes cluster, they use volumes of their own and their setup could involve setting-up the volumes (see the note below).
 Some data storage (such as Postgresql) might be managed by an **operator**. *Operators* are software extensions of Kubernetes, that can define, as their name implies, operations on the cluster. In that case, you generally set-up the database and the operator as instructed by the operator documentation, and you will then have the database managed by the operator. They could take care of data replication, failure management, ..., and are generally the prefered way to set-up a data storage on Kubernetes when something more than a simple volume is needed.
 
 ---
@@ -664,12 +744,40 @@ Namespaces are also useful for managing access and permissions, as you can defin
 
 ## Network access
 
+The network access to the application can be managed through Services, Ingress or Gateway. Services are used for internal access, while Ingress and Gateway are used for external access. The main difference between Ingress and Gateway is that Ingress is a simpler and more limited solution, while Gateway is more flexible and powerful, but also more complex to set-up and manage. Gateway is the newer solution and is generally recommended for new setups, but Ingress can still be used for simple setups or for compatibility with older Kubernetes versions.
+
 ## LoadBalancing
+
+Load balancing in Kubernetes is, on the side of the application, using several replicas of the application, which can be managed by a Deployment or a StatefulSet. On the side of the network access, it is generally managed by a Service of type LoadBalancer, which will create an external load balancer and route the traffic to the different replicas of the application. It is also possible to use an Ingress or a Gateway for managing the load balancing, but it is generally easier to use a Service of type LoadBalancer for this purpose.
 
 ## Several Deployments
 
-kustomize
+For managing several kind of deployments for an application, 2 complementary solutions can be used (with many other solutions as external tools):
 
-helm
+* kustomize is a tool for managing Kubernetes configurations, which allows to have a base configuration and then create different overlays for different environments (for instance, development, staging and production). It is a good solution for managing different configurations for the same application, as it allows to keep the common configuration in a single place and to only define the differences in the overlays. A simple example of kustomize configuration can be found in the [official documentation](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/).
+
+* helm is both a template engine and a package manager for Kubernetes, which allows to define a chart for an application, and then create different releases for different environments. It is a good solution for managing different versions of the same application, as it allows to keep the common configuration in a single place and to only define the differences in the releases. A simple example of helm configuration can be found in the [official documentation](https://helm.sh/docs/intro/quickstart/).
+Helm charts can also be used for managing the deployment of an application, as it allows to define the different components of the application (for instance, the database, the web server, the cache, ...) in a single chart, and then create different releases for different environments.
+They are recommended for managing complex applications with many components, as they allow to keep the configuration organized and to easily manage the different versions of the application. Unfortunately, they can be a bit complex to set-up and manage, especially for simple applications, and they can also create some issues with the management of the configuration, as it is not always clear which values are defined in the chart and which values are defined in the release.
+
+## Artifact Hub & Local repository
+
+Helm charts can be stored on Artifact Hub, a centralized registry of charts, or on any registry that can also be set-up locally.
+
+To use a chart from a registry, the helm command is used:
+
+```bash
+helm install mylocalwordpress bitnami/wordpress
+```
+
+The helm command is well explained in the [official documentation](https://helm.sh/docs/intro/using_helm)
 
 ## Affinities {#sec-affinities}
+
+Affinity and anti-affinity rules in Kubernetes allow you to control how Pods are scheduled onto nodes, based on labels. They can be used to ensure Pods are placed close to each other (affinity) or kept apart (anti-affinity), which is useful for performance, availability, or fault tolerance.
+
+There are two main types: **node affinity** (rules about which nodes a Pod can run on) and **pod affinity/anti-affinity** (rules about how Pods relate to other Pods).
+
+Affinities are defined in the Pod specification and give more expressive control than simple node selectors.
+
+The concept is well explained in the official documentation: [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
