@@ -35,9 +35,9 @@ More advanced storage solutions (distributed storage, cloud block volumes) are p
 ```{mermaid}
 flowchart TD
     A[Application / Container] -->|reads & writes| V[Volume]
-    V --> L[Local Disk - Simple, fast - no redundancy]
+    V --> L[Local Disk - Simple, fast, no redundancy]
     V --> N[Network Storage - Shared access]
-    V --> B[Block Storage - High-speed - for databases]
+    V --> B[Block Storage - High-speed for databases]
     V --> D[Distributed Storage - Ceph / Longhorn - High availability]
 
     style A fill:#4A90D9,color:#fff
@@ -48,7 +48,7 @@ flowchart TD
 
 Most Data Management platform will need a database, generally a relational one, such as MySQL, MariaSQL or PostgreSQL. Cloud infrastrures are not immediately adapted for running database. The 2 main options are the following
 
-1. **Managed service** — your IT or the cloud provider (AWS, Azure, GCP …) installs, patches, backs up, and monitors the database for you. You simply connect to it.
+1. **Managed service** — your IT or the cloud provider (AWS, Azure, GCP...) installs, patches, backs up, and monitors the database for you. You simply connect to it.
 2. **Self-hosted** — you are responsible for the database: installing it, keeping it running, and making sure it is backed up. This gives more control and is often cheaper at scale, but requires expertise.
 
 ### Managed Cloud Services
@@ -104,13 +104,13 @@ The recommended approach is to use a **database operator** — a piece of softwa
 
 ```{mermaid}
 flowchart LR
-    Admin["Administrator - (describes desired state)"]
-    Operator["Database Operator - (watches & acts)"]
-    DB1[(Primary - Database)]
+    Admin["Administrator (describes desired state)"]
+    Operator["Database Operator (watches & acts)"]
+    DB1[(Primary Database)]
     DB2[(Replica 1)]
     DB3[(Replica 2)]
 
-    Admin -->|"defines via - configuration file"| Operator
+    Admin -->|"defines via configuration file"| Operator
     Operator -->|manages| DB1
     Operator -->|manages| DB2
     Operator -->|manages| DB3
@@ -138,7 +138,7 @@ Two well-regarded open-source database operators are available for Kubernetes en
 
 | Feature | CloudNativePG | KubeBlocks |
 |---------|---------------|------------|
-| Supported databases | PostgreSQL only | Many (PostgreSQL, MySQL, Redis …) |
+| Supported databases | PostgreSQL only | Many (PostgreSQL, MySQL, Redis...) |
 | Specialisation | Deep PostgreSQL expertise | Broad multi-engine support |
 | Best for | Teams standardised on PostgreSQL | Teams with mixed database needs |
 | Maturity | Production-ready, CNCF project | Rapidly growing, active community |
@@ -149,11 +149,11 @@ Two well-regarded open-source database operators are available for Kubernetes en
 
 ```{mermaid}
 flowchart TD
-    Q1{Do you already - use a platform?}
-    Q1 -->|OpenStack| OS[Deploy a VM via Nova - or use Trove DBaaS]
-    Q1 -->|Proxmox| PX[Run DB in a VM - or LXC container]
-    Q1 -->|Kubernetes| K8S[Use a database operator - CloudNativePG · KubeBlocks]
-    Q1 -->|None / simple| DS[Dedicated server - Physical · VM · Docker]
+    Q1{Do you already use a platform?}
+    Q1 -->|OpenStack| OS[Deploy a VM via Nova or use Trove DBaaS]
+    Q1 -->|Proxmox| PX[Run DB in a VM or LXC container]
+    Q1 -->|Kubernetes| K8S[Use a database operator: CloudNativePG, KubeBlocks]
+    Q1 -->|None / simple| DS[Dedicated server: Physical, VM, Docker]
 
     style OS fill:#E8A838,color:#fff
     style PX fill:#E8633A,color:#fff
@@ -204,9 +204,9 @@ flowchart LR
     App2[Application B]
     App3[Data Pipeline]
 
-    OS["Object Storage - (S3-compatible API)"]
-    CLD["Cloud-managed - AWS S3 · Azure Blob · GCS"]
-    SH["Self-hosted - Swift · Garage"]
+    OS["Object Storage (S3-compatible API)"]
+    CLD["Cloud-managed: AWS S3, Azure Blob, GCS"]
+    SH["Self-hosted: Swift, Garage"]
 
     App1 -->|"upload / download - via HTTP"| OS
     App2 -->|"upload / download - via HTTP"| OS
@@ -240,15 +240,15 @@ flowchart TD
 
     VS --> LT[Local / Network - Block / Distributed]
 
-    OS --> SAAS[Cloud-managed - AWS S3 · Azure Blob · GCS]
-    OS --> SH[Self-hosted - Swift · Garage]
+    OS --> SAAS[Cloud-managed - AWS S3, Azure Blob, GCS]
+    OS --> SH[Self-hosted - Swift, Garage]
 
-    DB --> MS[Managed Cloud Service - AWS RDS, Azure Database …]
+    DB --> MS[Managed Cloud Service - AWS RDS, Azure Database...]
     DB --> SELF[Self-hosted]
-    SELF --> DS[Dedicated Server - Physical · VM · Docker]
-    SELF --> OST[OpenStack - Nova VM · Trove DBaaS]
-    SELF --> PX[Proxmox - VM · LXC container]
-    SELF --> K8S[Kubernetes - with Operator]
+    SELF --> DS[Dedicated Server - Physical, VM, Docker]
+    SELF --> OST[OpenStack - Nova VM, Trove DBaaS]
+    SELF --> PX[Proxmox - VM, LXC container]
+    SELF --> K8S[Kubernetes with Operator]
     K8S --> CNPG[CloudNativePG - PostgreSQL specialist]
     K8S --> KB[KubeBlocks - Multi-engine]
 

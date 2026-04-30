@@ -36,7 +36,7 @@ They usually explain *why* something failed, not just *that* it failed.
 
 While common default locations exist, **log paths depend on the setup**:
 
-* distribution (Debian, Ubuntu, RedHat, Alpine…)
+* distribution (Debian, Ubuntu, RedHat, Alpine...)
 * application configuration
 * containerization (Docker)
 * logging system (files vs journald)
@@ -243,7 +243,7 @@ ss -tulpn
 netstat -tulpn   # older systems
 ```
 
-Check if the expected port (80, 443, 8080…) is open.
+Check if the expected port (80, 443, 8080, ...) is open.
 
 ---
 
