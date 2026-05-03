@@ -711,9 +711,7 @@ services:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-your-secret-key}
     depends_on:
       db:
-        condition: service_healthy   # Upgraded from a bare list to a map so we can
-                                     # specify 'service_healthy' — now Compose waits
-                                     # for the healthcheck below to pass before starting 'main'.
+        condition: service_healthy   # now Compose waits for the healthcheck below to pass before starting 'main'.
 
   db:
     image: postgres:16
