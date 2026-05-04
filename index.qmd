@@ -782,9 +782,11 @@ Generally it is better to use named volume and do backups using the dump tools f
 ::: {.callout-tip}
 ## Recommended learning path
 
-The official Online documentations is good and complete. Online tutorials or books are recommended for an easier approach.
+The official Online documentations is good and complete. Online tutorials or books are recommended for an easier approach. If you don't intend to build a production Dockerfile (see remark below), it is useful for understanding what is inside a Docker image and how it works.
 
 Learning difficulty is medium, assuming you have some knowledge of Linux. There is nothing really difficult but there are a lot of aspects to take into account.
+
+Creating a Dockerfile for an application you are not developing can be quite difficult, as you might not know all the dependencies and how to set-up the application. As such, it should be done only if strickly needed, mostly if there is a need to repeat a setup and using an image would ensure a consistent set-up. Another solution, with a better flexibility, would be to use Ansible (see below: [Puppet, Ansible & Terraform](#puppet-ansible--terraform) to automate the set-up of the application on a server, without using a container.
 :::
 
 A Dockerfile defines layers from a base images (```FROM image_name:version```) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.
@@ -834,7 +836,7 @@ If you plan to containerize an existing application, depending on how it is buil
 ## Recommended learning path
 
 Kubernetes is composed of many elements and has its own vocabulary. Each elements and the way the work together are not complex, but to grasp a minimal working set of Kubernetes will take some effort.
-We recommend to start with an online tutorial, interactive or not (**links to separate resource page**), and ideally a book, such as Kubernetes in Action, Production Kubernetes, Cloud Native DevOps with Kubernetes or Kubernetes: Up and Running
+We recommend to start with an [online tutorial, interactive or not](/pages/Kubernetes_introduction.qmd#good-free-instructory-resources), and ideally a book, such as Kubernetes in Action, Production Kubernetes, Cloud Native DevOps with Kubernetes or Kubernetes: Up and Running.
 
 Learning difficulty is medium/hard, assuming you have some knowledge of containers. Using Kubernetes is still much easier than to set-up a production cluster. As software developers, we recommend that you set-up a cluster only as a testbed and rely on sysadmins for a production cluster.
 :::
