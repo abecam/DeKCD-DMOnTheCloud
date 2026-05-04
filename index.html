@@ -1208,8 +1208,9 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The official Online documentations is good and complete. Online tutorials or books are recommended for an easier approach.</p>
+<p>The official Online documentations is good and complete. Online tutorials or books are recommended for an easier approach. If you don’t intend to build a production Dockerfile (see remark below), it is useful for understanding what is inside a Docker image and how it works.</p>
 <p>Learning difficulty is medium, assuming you have some knowledge of Linux. There is nothing really difficult but there are a lot of aspects to take into account.</p>
+<p>Creating a Dockerfile for an application you are not developing can be quite difficult, as you might not know all the dependencies and how to set-up the application. As such, it should be done only if strickly needed, mostly if there is a need to repeat a setup and using an image would ensure a consistent set-up. Another solution, with a better flexibility, would be to use Ansible (see below: <a href="#puppet-ansible--terraform">Puppet, Ansible &amp; Terraform</a> to automate the set-up of the application on a server, without using a container.</p>
 </div>
 </div>
 <p>A Dockerfile defines layers from a base images (<code>FROM image_name:version</code>) to build a new image. For instance, if the application is running on Python, it is a good idea to start from an official Python image, which will already have the right version of Python and its dependencies. Then you can add the application and its dependencies on top of it.</p>
@@ -1291,7 +1292,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Kubernetes is composed of many elements and has its own vocabulary. Each elements and the way the work together are not complex, but to grasp a minimal working set of Kubernetes will take some effort. We recommend to start with an online tutorial, interactive or not (<strong>links to separate resource page</strong>), and ideally a book, such as Kubernetes in Action, Production Kubernetes, Cloud Native DevOps with Kubernetes or Kubernetes: Up and Running</p>
+<p>Kubernetes is composed of many elements and has its own vocabulary. Each elements and the way the work together are not complex, but to grasp a minimal working set of Kubernetes will take some effort. We recommend to start with an <a href="./pages/Kubernetes_introduction.html#good-free-instructory-resources">online tutorial, interactive or not</a>, and ideally a book, such as Kubernetes in Action, Production Kubernetes, Cloud Native DevOps with Kubernetes or Kubernetes: Up and Running.</p>
 <p>Learning difficulty is medium/hard, assuming you have some knowledge of containers. Using Kubernetes is still much easier than to set-up a production cluster. As software developers, we recommend that you set-up a cluster only as a testbed and rely on sysadmins for a production cluster.</p>
 </div>
 </div>
