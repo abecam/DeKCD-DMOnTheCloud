@@ -194,6 +194,8 @@ Object storage is a fundamentally different approach from volumes. Rather than b
 
 **[Garage](https://garagehq.deuxfleurs.fr/)** — a lightweight, modern S3-compatible store written in Rust. Unlike most systems designed for data centres, Garage was built specifically for **geo-distributed deployments** — nodes can sit in different physical locations connected over ordinary internet connections. It ships as a single binary, is very easy to operate, and received EU research funding through 2025. A good fit for small to medium self-hosted setups.
 
+**[RustFS](https://rustfs.com/)** - A S3 and Swift compatible open source data storage, also written in Rust. It supports large data sets, with a distribituted architecture, scalable and fault-tolerant.
+
 ::: {.callout-note}
 MinIO was long the default recommendation for self-hosted S3-compatible storage. However, through 2025 the company progressively restricted its open-source edition: the web management console was stripped, pre-built Docker images were discontinued, and by early 2026 the community repository was placed in **maintenance mode** (read-only, no new features, security fixes not guaranteed). MinIO is no longer a viable choice for new deployments.
 :::
