@@ -482,6 +482,10 @@ A clear presentation of Docker is available [here](https://container.training/in
 
 If Docker is the *de facto* standard, there are other containers engines, such as [PodMan](https://podman.io/), [containerd ](https://containerd.io/), or [cri-o](https://cri-o.io/) and a standard, [Open Container Initiative (OCI)](https://opencontainers.org/) that PodMan, Containerd and Cri-o follow and Docker almost follows (new image should be OCI compliant, old ones might not), so Docker images might need some adaptations to run with PodMan and others. Docker offer an [OCI exporter](https://docs.docker.com/build/exporters/oci-docker/) for the image builts.
 
+::: {.callout-note}
+We will focus on docker in this document as it is the most used and best supported solution for a person wanting to set-up applications. Docker is easy to use and docker compose is also rather simple but also as most platforms providing an image use docker and often docker compose.
+:::
+
 ## Vocabulary
 
 * **An image** is a **template** used to create containers.
@@ -572,6 +576,13 @@ Learning difficulty is easy/medium, assuming you have some knowledge of Linux. T
 :::
 
 ## Advantages
+
+::: {.callout-note}
+The biggest advantage of Docker Compose is to have a prepared setup defined with a text (Yaml) configuration file (or several) that can easily be saved (in a version tracking system if ready for production), and documented.
+If something goes wrong or the server needs to change, it makes recreating the setup trivial (if the docker compose has been done correctly, never forget to test).
+
+As such, we strongly recommend to create a docker compose file if you want to use containerization and no docker compose are already provided.
+:::
 
 Docker compose is both a tool to setup a docker-based application or set of applications, and the file, written in YAML, that describes the setup. It is a powerful tool to manage a complex application with several components, such as a web server, an application, a database, and a cache. It allows to define the different components of the application and how they are connected together, as well as the volumes and environment variables needed for each component. It also allows to easily start and stop the application with a single command, and to manage the different components of the application in a consistent way.
 
@@ -778,6 +789,10 @@ Generally it is better to use named volume and do backups using the dump tools f
 :::
 
 # How to build a Dockerfile
+
+::: {.callout-note}
+As opposite to Docker compose, we do not recommend writing a dockerfile if none exists. The reasoning is developed below.
+:::
 
 ::: {.callout-tip}
 ## Recommended learning path
