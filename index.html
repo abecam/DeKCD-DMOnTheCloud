@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-51ec0baac84c74459878fd0df95b10e6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-83d6731c42c83706f5616676628995c1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -2211,7 +2211,21 @@ Warning
 <section id="cicd-and-gitops" class="level2" data-number="16.2">
 <h2 data-number="16.2" class="anchored" data-anchor-id="cicd-and-gitops"><span class="header-section-number">16.2</span> CI/CD and GitOps</h2>
 <p>CI/CD is an important aspect for modern online platforms, when you develop them. It allows to ensure your deployed application is up-to-date (Continous Deployment) and free of issues (Continous Integration).</p>
-<p><strong>CI/CD</strong> stands for <em>Continuous Integration / Continuous Delivery</em> (or Deployment). The idea is simple: every time you push code or config changes to a repository, an automated pipeline picks them up, tests them, and - if everything looks good - deploys them. No more manually copying files to servers or running scripts by hand.</p>
+<p><strong>CI/CD</strong> stands for <em>Continuous Integration / Continuous Delivery</em> (or Deployment). The idea is simple: every time you push code or config changes to a repository, an automated pipeline picks them up, tests them, and - if everything looks good - deploys them. No more manually copying files to servers or running scripts by hand. CI/Continuous Delivery is very useful with a container based distribution: * interation: updating the code base will built the application, then run tests, so it informs quickly if the changes broke something or not * delivery: if all tests pass, build the image, then upload it to a repository (Docker Hub or GitHub Repository). In non-containerised setup, it will build a release (like a installable software), * deployment: deploy the updated application to a server (could be test as well, and a manual action will install on production). It implies a secured setup so the deployment cannot be used to hack the server.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>CI/CD can be an opening for attack. One common attack for CI is a supply chain attack: the hacker find a way to replace/change a commonly used library used to build an application, or a tool of the CI action. The built application will then be infected. It is not a generalized risk, so it is a good idea to know that such issues exist. A mitigation is to monitor any strange activities from the application and be well informed: from the application developers and users, from the security community (SecOps).</p>
+<p>Continous Deployment between a code repository such as GitHub and a server needs to be properly secured. If unsure, it is better to only do CI and deploy to the server manually.</p>
+</div>
+</div>
 <p><strong>GitOps</strong> takes this further by making Git the single source of truth for your entire system state. Your infrastructure configuration lives in a repo, and a tool running in your cluster constantly watches that repo. When you push a change, the tool detects it and applies it automatically. If someone makes a manual change on the server that drifts from what’s in Git, the tool corrects it. Your Git history becomes a full audit trail of every change ever made.</p>
 <p><strong>Flux CD</strong> is a popular GitOps tool for Kubernetes environments. It runs inside your cluster and syncs it to one or more Git repositories, handling updates to apps and infrastructure alike.</p>
 <p>For CI/CD pipelines, the most common options are:</p>
