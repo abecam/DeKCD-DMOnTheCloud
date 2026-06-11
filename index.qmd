@@ -1474,7 +1474,17 @@ Puppet and Ansible are Open Source while Terraform is a product of HashiCorp wit
 
 CI/CD is an important aspect for modern online platforms, when you develop them. It allows to ensure your deployed application is up-to-date (Continous Deployment) and free of issues (Continous Integration).
 
-**CI/CD** stands for *Continuous Integration / Continuous Delivery* (or Deployment). The idea is simple: every time you push code or config changes to a repository, an automated pipeline picks them up, tests them, and - if everything looks good - deploys them. No more manually copying files to servers or running scripts by hand.
+**CI/CD** stands for *Continuous Integration / Continuous Delivery* (or Deployment). The idea is simple: every time you push code or config changes to a repository, an automated pipeline picks them up, tests them, and - if everything looks good - deploys them. No more manually copying files to servers or running scripts by hand. CI/Continuous Delivery is very useful with a container based distribution: 
+* interation: updating the code base will built the application, then run tests, so it informs quickly if the changes broke something or not 
+* delivery: if all tests pass, build the image, then upload it to a repository (Docker Hub or GitHub Repository). In non-containerised setup, it will build a release (like a installable software),
+* deployment: deploy the updated application to a server (could be test as well, and a manual action will install on production). It implies a secured setup so the deployment cannot be used to hack the server.
+
+::: {.callout-caution}
+CI/CD can be an opening for attack. One common attack for CI is a supply chain attack: the hacker find a way to replace/change a commonly used library used to build an application, or a tool of the CI action. The built application will then be infected.
+It is not a generalized risk, so it is a good idea to know that such issues exist. A mitigation is to monitor any strange activities from the application and be well informed: from the application developers and users, from the security community (SecOps).
+
+Continous Deployment between a code repository such as GitHub and a server needs to be properly secured. If unsure, it is better to only do CI and deploy to the server manually.
+:::
 
 **GitOps** takes this further by making Git the single source of truth for your entire system state. Your infrastructure configuration lives in a repo, and a tool running in your cluster constantly watches that repo. When you push a change, the tool detects it and applies it automatically. If someone makes a manual change on the server that drifts from what's in Git, the tool corrects it. Your Git history becomes a full audit trail of every change ever made.
 
