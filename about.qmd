@@ -1,4 +1,11 @@
 ---
 title: "About"
 ---
-TBD
+
+As part of the [De.KCD project](https://datenkompetenz.cloud/), this website provides practical guidance for deploying and operating Research Data Management (RDM) platforms in cloud environments. It focuses on real-world installation procedures, configuration examples, infrastructure requirements, and operational considerations.
+
+The goal is to help research institutions, service providers, and individual researchers evaluate, deploy, and maintain RDM services from bare-metal setup to modern cloud and virtualized infrastructures.
+
+The content is based on hands-on experience and is intended to serve as a starting point for both testing and production deployments.
+
+Contributions are welcome. If you would like to improve an existing guide, add deployment notes, report an issue, or contribute documentation for an additional platform, please feel free to submit an issue or pull request. Feedback from platform developers, operators, and users is especially appreciated.

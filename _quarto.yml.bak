@@ -8,10 +8,9 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - pages/privacy.qmd
     tools:
      - icon: github
-       href: https://github.com/abecam/DeKCD-DMOnTheCloud
+       href: https://github.com/deKCD/DeKCD-DMOnTheCloud
 
   body-header:
     <script type="text/plain" cookie-consent="tracking">
