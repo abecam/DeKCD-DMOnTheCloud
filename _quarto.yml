@@ -17,7 +17,6 @@ website:
     <script>
       var _paq = window._paq = window._paq || [];
 
-      // GDPR-safe: do NOT track until consent is given
       _paq.push(['requireConsent']);
 
       // Optional privacy settings
