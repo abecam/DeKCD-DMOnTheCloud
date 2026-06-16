@@ -3,6 +3,14 @@ project:
 
 website:
   title: "De.KCD - Data Management Platform on the Cloud - Quickstart"
+  cookie-consent:
+    value: true
+    type: express
+    style: simple
+    palette: light
+    policy-url: "https://dekcd.github.io/FAIR-DMP-Registry/pages/privacy.html"
+    language: en
+    prefs-text: "Update cookies preferences"
   navbar:
     left:
       - href: index.qmd
@@ -13,33 +21,6 @@ website:
      - icon: github
        href: https://github.com/abecam/DeKCD-DMOnTheCloud
 
-  body-header:
-    <script>
-      var _paq = window._paq = window._paq || [];
-
-      _paq.push(['requireConsent']);
-
-      // Optional privacy settings
-      _paq.push(['setVisitorCookieTimeout', '2592000']);
-      _paq.push(['setSessionCookieTimeout', '0']);
-      _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]);
-      _paq.push(["setCookieDomain", "*.dekcd.github.io"]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      _paq.push(['enableHeartBeatTimer', 15]);
-
-      var u = "https://piwik.cebitec.uni-bielefeld.de/";
-      _paq.push(['setTrackerUrl', u + 'matomo.php']);
-      _paq.push(['setSiteId', '38']);
-
-      var g = document.createElement('script');
-      g.async = true;
-      g.src = u + 'matomo.js';
-      document.head.appendChild(g);
-    </script>
-    <noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="https://piwik.cebitec.uni-bielefeld.de/matomo.php?idsite=38&amp;rec=1" style="border:0;" alt="" /></p></noscript>
-    <!-- End Matomo Code --> 
-    
   sidebar:
     style : "docked"
     search: true
@@ -69,6 +50,6 @@ format:
     mermaid:
       theme: default
     include-in-header:
-      - file: CookieConsent.html
+      - file: matomo.html
 
 
