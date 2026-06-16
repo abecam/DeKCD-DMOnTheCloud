@@ -3,6 +3,14 @@ title: "Technical Platform decision tree for Data Management Platforms"
 number-sections: true
 ---
 
+::: {.callout-note}
+## OpenStack and Proxmox
+This decision tree does not include OpenStack or Proxmox. In most cases we consider that you shouldn't have to set-up any of them nor use them without some support.
+
+OpenStack is very complex to set-up and quite complex to use and should probably only be a solution for a project when knowing exactly what to expect, and this guide is probably not needed then.
+
+ProxMox could be a solution *if* there is a need for multiple servers that is *not satisfied* by your IT offering and you have *enough persons and time* (probably one person full time at minimum).
+:::
 ```{mermaid}
 flowchart TD
 	A["Start - to repeat for each platform for an assembly"] --> B
