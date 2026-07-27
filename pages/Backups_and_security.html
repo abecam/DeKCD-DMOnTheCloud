@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -41,10 +44,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-51ec0baac84c74459878fd0df95b10e6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-6493d055a62f6a5fae3ea0397f3ce425.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -335,6 +338,7 @@ Note
 <li><strong><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj#art_21">Objection</a></strong> (GDPR Article 21): Users can object to certain uses of their data</li>
 </ul>
 <p>For comprehensive information on data protection in the EU, see the <a href="https://ec.europa.eu/info/law/law-topic/data-protection_en">European Commission’s Data Protection page</a>.</p>
+<p>For a RDM-oriented overview, see <a href="https://rdmkit.elixir-europe.org/gdpr_compliance">RDM Kit - GDPR Compliance</a>.</p>
 </section>
 <section id="data-minimization-principle" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="data-minimization-principle"><span class="header-section-number">1.1.2</span> Data Minimization Principle</h3>
@@ -454,6 +458,7 @@ Note
 <h2 data-number="3.2" class="anchored" data-anchor-id="aspects-of-security"><span class="header-section-number">3.2</span> Aspects of security</h2>
 <p>By security in an information system, we consider every aspect allowing the right use of the information system (including, but not only, the protection of data): Availability, integrity, confidentiality, trustworthiness, access control. It is important to know which of these aspects are needed in the system to build. The possible threats are then coming from: - the system users, not willingly doing any damage, - malicious persons, who want to access data or program, to damage the infrastructure, to cheat, to annoy, - malicious software, a software which will give a nuisance to other or abuse the resources (that can be unintentional), open the system to intrusions, - one disaster, a simple electric break, one bad manipulation, a fire, … It is very common that the regular users are gates for malicious persons. We speak here about social engineering: the weak point is the human-human relation. The famous Kevin Mitnick mostly used this system to intrude systems. A right information of the user is one way to fight against this kind of problem.</p>
 <p>A very wide overview of possible outrages and how to mitigate them is part of <a href="https://en.wikipedia.org/wiki/Business_continuity_planning">Business Continuity Planning</a>.</p>
+<p>A comprehensive overview of data security is also available in the <a href="https://rdmkit.elixir-europe.org/data_security">RDMKit</a>.</p>
 </section>
 <section id="limits-of-security" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="limits-of-security"><span class="header-section-number">3.3</span> Limits of security</h2>
