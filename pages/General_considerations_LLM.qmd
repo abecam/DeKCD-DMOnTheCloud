@@ -1,0 +1,30 @@
+---
+title: "General Considerations for Using LLMs in Research Data Management"
+number-sections: true
+---
+
+# Which kind of LLM to use?
+
+Local, tiny local, or online LLMs. The choice of which type of LLM to use will depend on the specific needs and requirements of the research project or task. Local LLMs may be preferred for tasks that require access to sensitive data, while online LLMs may be preferred for tasks that require access to a wider range of resources and tools.
+
+# Which uses?
+
+## technical issues and tasks
+
+## data analysis and visualization
+
+## data cleaning and preparation
+
+## data management and organization
+
+## data sharing and collaboration
+
+## data security and privacy
+
+## data governance and compliance
+
+## data documentation and metadata management
+
+# Limits and risks
+
+# Where is the data?

@@ -1,0 +1,60 @@
+---
+title: "Building an Assembly"
+number-sections: true
+---
+
+# What is an assembly?
+
+An assembly in Research Data Management is the connected usage of one or many Research Data Management (RDM) tools to achieve a specific goal. It is a way to combine different tools and resources to create a workflow that meets the needs of a particular research project or task. Assemblies can be simple, involving just a few tools, or complex, involving many tools and resources.
+It could be with a Research Data Management Platform and other tools like a data repository, a data visualization tool, or a data analysis tool, or between different Research Data Management Platforms, such as a sharing platform, an electronic lab notebook (ELN), and a data repository such as iRODS or Aruna. The goal of an assembly is to streamline the research process, improve data management practices, and facilitate collaboration among researchers.
+
+# Keep it simple
+
+-> DMPlatform with Data Repository (central)
+
+# Avoid using the wrong tools
+
+i.e. NextCloud for general file storage, not in a dedicated RDM Platform where it would add noise and issues.
+
+# Concerns with assemblies
+
+When building an assembly, it is important to consider the following concerns:
+* Compatibility: Ensure that the tools and resources being used are compatible with each other and can work together seamlessly.
+* Security: Ensure that the tools and resources being used are secure and protect sensitive data.
+* Scalability: Ensure that the assembly can handle the volume of data and users that will be involved in the research project.
+
+# Connecting using APIs
+
+# Avoid several logins: central identity management
+
+Authentik, Keycloak, or other identity management systems can be used to provide single sign-on (SSO) capabilities for the assembly. This allows users to log in once and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.
+
+Consortium (such as Life Science login) or institutional identity management systems can also be used to provide SSO capabilities for the assembly. This allows users to log in using their institutional credentials and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.
+
+# Assemblies between institutions
+
+What is allowed and how to get it allowed?
+
+Tunneling between institutions can be achieved through the use of virtual private networks (VPNs) or other secure communication protocols. This allows researchers from different institutions to access the tools and resources in the assembly as if they were on the same network.
+
+Security and privacy concerns must be addressed when building assemblies between institutions. This may involve implementing access controls, encryption, and other security measures to protect sensitive data.
+
+Performance and reliability concerns must also be addressed when building assemblies between institutions. This may involve optimizing the assembly for performance, implementing redundancy and failover mechanisms, and monitoring the assembly for issues.
+
+# Using a LLM to build an assembly
+
+## As a general help with online LLMs
+
+Help with APIs, integration, and general assembly building. LLMs can provide guidance on best practices, suggest compatible tools, and help troubleshoot issues that arise during the assembly building process.
+
+Be careful to understand what is being suggested and to verify the information provided by the LLM. LLMs may not always provide accurate or up-to-date information, so it is important to cross-check their suggestions with reliable sources.
+
+## With a local LLM aside the assembly
+
+For instance to help with data analysis, data visualization, or other tasks that are part of the assembly. A local LLM can be used to provide additional support and guidance for researchers working on the assembly. It can for instance help with SparQL queries, data cleaning, or other tasks that require specialized knowledge or expertise.
+
+The simple approach would be using exposed APIs and documentation, without access to the data itself. This allows the LLM to provide guidance and support without compromising the security or privacy of the data being used in the assembly.
+
+The next step would be to provide the LLM with access to the data as read-only (no write operations permitted), allowing it to perform more advanced tasks such as data analysis or visualization. It is still important to ensure that the results of the LLM's analysis are accurate and reliable, and to verify its suggestions with other sources.
+
+The last step is a "full" approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e. not actually deleted but marked as deleted) and/or require human approval before being executed.
