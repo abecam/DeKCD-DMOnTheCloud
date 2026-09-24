@@ -1,0 +1,32 @@
+---
+title: "Pseudonymization"
+number-sections: true
+---
+
+# What are Semantic Graphs
+
+## Definition
+
+## Current solutions
+
+## Use in Research Data Management
+
+### As a different way to store and access data
+
+### For an assembly
+
+# RDF and SparQL
+
+# LLM and Semantic Graphs
+
+# How to
+
+## From relational database to RDF
+
+## A SparQL endpoint
+
+## Using a LLM to query a SparQL endpoint or create queries
+
+## Going further
+ -> See Building an Assembly and General Considerations for Using LLMs in Research Data Management
+
