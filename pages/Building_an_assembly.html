@@ -251,6 +251,7 @@ cookieconsent.run({
   <li><a href="#with-a-local-llm-aside-the-assembly" id="toc-with-a-local-llm-aside-the-assembly" class="nav-link" data-scroll-target="#with-a-local-llm-aside-the-assembly"><span class="header-section-number">8.2</span> With a local LLM aside the assembly</a>
   <ul class="collapse">
   <li><a href="#semantic-graphs-api-documentation-and-llms" id="toc-semantic-graphs-api-documentation-and-llms" class="nav-link" data-scroll-target="#semantic-graphs-api-documentation-and-llms"><span class="header-section-number">8.2.1</span> Semantic graphs, API documentation and LLMs</a></li>
+  <li><a href="#semantic-graphs-and-assemblies" id="toc-semantic-graphs-and-assemblies" class="nav-link" data-scroll-target="#semantic-graphs-and-assemblies"><span class="header-section-number">8.2.2</span> Semantic graphs and assemblies</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -361,6 +362,11 @@ Note
 <p>As the database schema is fixed but the metadata part of the dynamic data, the resulting semantic graph will be a mix of a read-only part (the database schema) and a dynamic part (the metadata). In that case it might be better to create 2 semantic graphs, one for the read-only part and one for the dynamic part. If the data is also stored in a semantic graph, then a 3rd semantic graph can be created to represent the data itself.</p>
 </div>
 </div>
+</section>
+<section id="semantic-graphs-and-assemblies" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="semantic-graphs-and-assemblies"><span class="header-section-number">8.2.2</span> Semantic graphs and assemblies</h3>
+<p>The main benefit of using a semantic graph in an assembly is that it allows for a unified view of the data and metadata across the various tools and resources being used. This also can allow an unique endpoint for querying the data and metadata, regardless of where they are stored or how they are represented.</p>
+<p>The building cost will be quite high, and it is not something that can be built by the Scientists themselves, while necessitating a good knowledge of the domain. As such, it can be seen as the last step of building an assembly, and should be considered only if the assembly is expected to be used for a long time and/or by many users.</p>
 
 
 </section>
