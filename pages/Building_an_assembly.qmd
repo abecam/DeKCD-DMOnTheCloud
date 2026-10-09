@@ -91,3 +91,9 @@ The data do not have to be stored in a semantic graph, and can rely on the built
 ::: {.callout-note}
 As the database schema is fixed but the metadata part of the dynamic data, the resulting semantic graph will be a mix of a read-only part (the database schema) and a dynamic part (the metadata). In that case it might be better to create 2 semantic graphs, one for the read-only part and one for the dynamic part. If the data is also stored in a semantic graph, then a 3rd semantic graph can be created to represent the data itself.
 :::
+
+### Semantic graphs and assemblies
+
+The main benefit of using a semantic graph in an assembly is that it allows for a unified view of the data and metadata across the various tools and resources being used. This also can allow an unique endpoint for querying the data and metadata, regardless of where they are stored or how they are represented.
+
+The building cost will be quite high, and it is not something that can be built by the Scientists themselves, while necessitating a good knowledge of the domain. As such, it can be seen as the last step of building an assembly, and should be considered only if the assembly is expected to be used for a long time and/or by many users.
