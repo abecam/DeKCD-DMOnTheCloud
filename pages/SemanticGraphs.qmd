@@ -1,0 +1,62 @@
+---
+title: "Semantic Graphs"
+number-sections: true
+---
+
+# What are Semantic Graphs
+
+Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities. 
+
+## Definition
+
+## Current solutions
+
+## Mapping from relational database to a semantic graph
+
+### Data
+
+In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.
+
+Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.
+
+### Meta-data
+
+### NoSQL and other cases
+
+NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.
+
+The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. It is also true for a relational database if the schema is not normalized in the general traditional sense: it is for instance possible to to flatten several tables into one table, where some columns will become elements in a row.
+
+For instance:
+
+`Person ID, Type of Data, Value of Data`
+
+That can contains:
+
+* `1, Name, John Doe`
+* `1, Age, 30`
+* `1, Address, 123 Main St`
+
+As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and "losing" some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.
+
+## Use in Research Data Management
+
+### As a different way to store and access data
+
+### For an assembly
+
+# RDF and SparQL
+
+# LLM and Semantic Graphs
+
+# How to
+
+## From relational database to RDF
+
+## A SparQL endpoint
+
+## Using a LLM to query a SparQL endpoint or create queries
+
+## Going further
+ -> See Building an Assembly and General Considerations for Using LLMs in Research Data Management
+

@@ -61,7 +61,7 @@ The last step is a "full" approach, where the LLM has full access to the data an
 
 ### Semantic graphs, API documentation and LLMs
 
-Semantic graphs are an useful representation of data, metadata, and their relationships, relying on existing semantic graphs and ontologies to give an unified view. Data represented within a semantic graph that conforms to common semantic graphs and ontologies can be easily integrated with other data sources conforming to the same semantic graphs and ontologies.
+[Semantic graphs](pages/SemanticGraphs.qmd) are an useful representation of data, metadata, and their relationships, relying on existing semantic graphs and ontologies to give an unified view. Data represented within a semantic graph that conforms to common semantic graphs and ontologies can be easily integrated with other data sources conforming to the same semantic graphs and ontologies.
 
 The main aspect of a semantic graph is a triple:
 
