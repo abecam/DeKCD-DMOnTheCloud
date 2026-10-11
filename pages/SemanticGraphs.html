@@ -242,26 +242,24 @@ cookieconsent.run({
   <ul class="collapse">
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">1.1</span> Definition</a></li>
   <li><a href="#current-solutions" id="toc-current-solutions" class="nav-link" data-scroll-target="#current-solutions"><span class="header-section-number">1.2</span> Current solutions</a></li>
-  <li><a href="#mapping-from-relational-database-to-a-semantic-graph" id="toc-mapping-from-relational-database-to-a-semantic-graph" class="nav-link" data-scroll-target="#mapping-from-relational-database-to-a-semantic-graph"><span class="header-section-number">1.3</span> Mapping from relational database to a semantic graph</a>
-  <ul class="collapse">
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">1.3.1</span> Data</a></li>
-  <li><a href="#meta-data" id="toc-meta-data" class="nav-link" data-scroll-target="#meta-data"><span class="header-section-number">1.3.2</span> Meta-data</a></li>
-  <li><a href="#nosql-and-other-cases" id="toc-nosql-and-other-cases" class="nav-link" data-scroll-target="#nosql-and-other-cases"><span class="header-section-number">1.3.3</span> NoSQL and other cases</a></li>
   </ul></li>
-  <li><a href="#use-in-research-data-management" id="toc-use-in-research-data-management" class="nav-link" data-scroll-target="#use-in-research-data-management"><span class="header-section-number">1.4</span> Use in Research Data Management</a>
+  <li><a href="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases" id="toc-what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="nav-link" data-scroll-target="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases"><span class="header-section-number">2</span> What to use when: Semantic Graphs, Relational Databases, NoSQL Databases</a></li>
+  <li><a href="#use-in-research-data-management" id="toc-use-in-research-data-management" class="nav-link" data-scroll-target="#use-in-research-data-management"><span class="header-section-number">3</span> Use in Research Data Management</a>
   <ul class="collapse">
-  <li><a href="#as-a-different-way-to-store-and-access-data" id="toc-as-a-different-way-to-store-and-access-data" class="nav-link" data-scroll-target="#as-a-different-way-to-store-and-access-data"><span class="header-section-number">1.4.1</span> As a different way to store and access data</a></li>
-  <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">1.4.2</span> For an assembly</a></li>
+  <li><a href="#as-a-different-way-to-store-and-access-data" id="toc-as-a-different-way-to-store-and-access-data" class="nav-link" data-scroll-target="#as-a-different-way-to-store-and-access-data"><span class="header-section-number">3.1</span> As a different way to store and access data</a></li>
+  <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">3.2</span> For an assembly</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">2</span> RDF and SparQL</a></li>
-  <li><a href="#llm-and-semantic-graphs" id="toc-llm-and-semantic-graphs" class="nav-link" data-scroll-target="#llm-and-semantic-graphs"><span class="header-section-number">3</span> LLM and Semantic Graphs</a></li>
-  <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">4</span> How to</a>
+  <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">4</span> RDF and SparQL</a></li>
+  <li><a href="#llm-and-semantic-graphs" id="toc-llm-and-semantic-graphs" class="nav-link" data-scroll-target="#llm-and-semantic-graphs"><span class="header-section-number">5</span> LLM and Semantic Graphs</a></li>
+  <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">6</span> How to</a>
   <ul class="collapse">
-  <li><a href="#from-relational-database-to-rdf" id="toc-from-relational-database-to-rdf" class="nav-link" data-scroll-target="#from-relational-database-to-rdf"><span class="header-section-number">4.1</span> From relational database to RDF</a></li>
-  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint"><span class="header-section-number">4.2</span> A SparQL endpoint</a></li>
-  <li><a href="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries" id="toc-using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="nav-link" data-scroll-target="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">4.3</span> Using a LLM to query a SparQL endpoint or create queries</a></li>
-  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">4.4</span> Going further</a></li>
+  <li><a href="#from-relational-database-to-rdf" id="toc-from-relational-database-to-rdf" class="nav-link" data-scroll-target="#from-relational-database-to-rdf"><span class="header-section-number">6.1</span> From relational database to RDF</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">6.2</span> Data</a></li>
+  <li><a href="#meta-data" id="toc-meta-data" class="nav-link" data-scroll-target="#meta-data"><span class="header-section-number">6.3</span> Meta-data</a></li>
+  <li><a href="#nosql-and-other-cases" id="toc-nosql-and-other-cases" class="nav-link" data-scroll-target="#nosql-and-other-cases"><span class="header-section-number">6.4</span> NoSQL and other cases</a></li>
+  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint"><span class="header-section-number">6.5</span> A SparQL endpoint</a></li>
+  <li><a href="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries" id="toc-using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="nav-link" data-scroll-target="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">6.6</span> Using a LLM to query a SparQL endpoint or create queries</a></li>
+  <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">6.7</span> Going further</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -297,18 +295,54 @@ cookieconsent.run({
 <section id="current-solutions" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="current-solutions"><span class="header-section-number">1.2</span> Current solutions</h2>
 </section>
-<section id="mapping-from-relational-database-to-a-semantic-graph" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="mapping-from-relational-database-to-a-semantic-graph"><span class="header-section-number">1.3</span> Mapping from relational database to a semantic graph</h2>
-<section id="data" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="data"><span class="header-section-number">1.3.1</span> Data</h3>
+</section>
+<section id="what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> What to use when: Semantic Graphs, Relational Databases, NoSQL Databases</h1>
+<p>Relational databases offer a clear benefit for storing repeated data with clear relationships between them, with fast and relatively simple queries.</p>
+<p>But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a semantic graph, which are more flexible.</p>
+<p>Note that a NoSQL database can be stored in a relational database, and a semantic graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a semantic graph).</p>
+<p>A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, … A semantic graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object).</p>
+<p>As such, it is simpler to consider the benefits of a semantic graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).</p>
+<p>There exists several kinds of NoSQL databases:</p>
+<ul>
+<li>Key-value stores: store data as a collection of key-value pairs, where each key is unique and maps to a specific value. Examples include Redis and Amazon DynamoDB.</li>
+<li>Document stores: store data as documents, typically in JSON or BSON format, where each document can have a different structure. Examples include MongoDB and Couchbase.</li>
+<li>Column-family stores: store data in columns rather than rows, allowing for efficient storage and retrieval</li>
+<li>Graph databases: store data as nodes and edges, allowing for efficient representation of complex relationships. Examples include Neo4j and Amazon Neptune.</li>
+<li>Multi-model databases: support multiple data models, allowing for flexibility in how data is stored and queried. Examples include ArangoDB and OrientDB.</li>
+</ul>
+<p>Each kind of NoSQL database has its own strengths and weaknesses, and the choice of which one to use will depend on the specific requirements of the application.</p>
+</section>
+<section id="use-in-research-data-management" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Use in Research Data Management</h1>
+<section id="as-a-different-way-to-store-and-access-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="as-a-different-way-to-store-and-access-data"><span class="header-section-number">3.1</span> As a different way to store and access data</h2>
+</section>
+<section id="for-an-assembly" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="for-an-assembly"><span class="header-section-number">3.2</span> For an assembly</h2>
+</section>
+</section>
+<section id="rdf-and-sparql" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> RDF and SparQL</h1>
+</section>
+<section id="llm-and-semantic-graphs" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> LLM and Semantic Graphs</h1>
+</section>
+<section id="how-to" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> How to</h1>
+<section id="from-relational-database-to-rdf" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="from-relational-database-to-rdf"><span class="header-section-number">6.1</span> From relational database to RDF</h2>
+</section>
+<section id="data" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data"><span class="header-section-number">6.2</span> Data</h2>
 <p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
 <p>Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
 </section>
-<section id="meta-data" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="meta-data"><span class="header-section-number">1.3.2</span> Meta-data</h3>
+<section id="meta-data" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="meta-data"><span class="header-section-number">6.3</span> Meta-data</h2>
 </section>
-<section id="nosql-and-other-cases" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="nosql-and-other-cases"><span class="header-section-number">1.3.3</span> NoSQL and other cases</h3>
+<section id="nosql-and-other-cases" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="nosql-and-other-cases"><span class="header-section-number">6.4</span> NoSQL and other cases</h2>
 <p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.</p>
 <p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. It is also true for a relational database if the schema is not normalized in the general traditional sense: it is for instance possible to to flatten several tables into one table, where some columns will become elements in a row.</p>
 <p>For instance:</p>
@@ -321,36 +355,14 @@ cookieconsent.run({
 </ul>
 <p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
 </section>
+<section id="a-sparql-endpoint" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">6.5</span> A SparQL endpoint</h2>
 </section>
-<section id="use-in-research-data-management" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="use-in-research-data-management"><span class="header-section-number">1.4</span> Use in Research Data Management</h2>
-<section id="as-a-different-way-to-store-and-access-data" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="as-a-different-way-to-store-and-access-data"><span class="header-section-number">1.4.1</span> As a different way to store and access data</h3>
+<section id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">6.6</span> Using a LLM to query a SparQL endpoint or create queries</h2>
 </section>
-<section id="for-an-assembly" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="for-an-assembly"><span class="header-section-number">1.4.2</span> For an assembly</h3>
-</section>
-</section>
-</section>
-<section id="rdf-and-sparql" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> RDF and SparQL</h1>
-</section>
-<section id="llm-and-semantic-graphs" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> LLM and Semantic Graphs</h1>
-</section>
-<section id="how-to" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> How to</h1>
-<section id="from-relational-database-to-rdf" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="from-relational-database-to-rdf"><span class="header-section-number">4.1</span> From relational database to RDF</h2>
-</section>
-<section id="a-sparql-endpoint" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">4.2</span> A SparQL endpoint</h2>
-</section>
-<section id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">4.3</span> Using a LLM to query a SparQL endpoint or create queries</h2>
-</section>
-<section id="going-further" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="going-further"><span class="header-section-number">4.4</span> Going further</h2>
+<section id="going-further" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">6.7</span> Going further</h2>
 <p>-&gt; See Building an Assembly and General Considerations for Using LLMs in Research Data Management</p>
 
 
