@@ -11,17 +11,51 @@ Semantic graphs represent data in a graph structure where nodes represent entiti
 
 ## Current solutions
 
-## Mapping from relational database to a semantic graph
+# What to use when: Semantic Graphs, Relational Databases, NoSQL Databases
 
-### Data
+Relational databases offer a clear benefit for storing repeated data with clear relationships between them, with fast and relatively simple queries.
+
+But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a semantic graph, which are more flexible.
+
+Note that a NoSQL database can be stored in a relational database, and a semantic graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a semantic graph).
+
+A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, ... A semantic graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object). 
+
+As such, it is simpler to consider the benefits of a semantic graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).
+
+There exists several kinds of NoSQL databases:
+
+* Key-value stores: store data as a collection of key-value pairs, where each key is unique and maps to a specific value. Examples include Redis and Amazon DynamoDB.
+* Document stores: store data as documents, typically in JSON or BSON format, where each document can have a different structure. Examples include MongoDB and Couchbase.
+* Column-family stores: store data in columns rather than rows, allowing for efficient storage and retrieval
+* Graph databases: store data as nodes and edges, allowing for efficient representation of complex relationships. Examples include Neo4j and Amazon Neptune.
+* Multi-model databases: support multiple data models, allowing for flexibility in how data is stored and queried. Examples include ArangoDB and OrientDB.
+
+Each kind of NoSQL database has its own strengths and weaknesses, and the choice of which one to use will depend on the specific requirements of the application.
+
+# Use in Research Data Management
+
+## As a different way to store and access data
+
+## For an assembly
+
+# RDF and SparQL
+
+# LLM and Semantic Graphs
+
+# How to
+
+## From relational database to RDF
+
+## Data
 
 In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.
 
 Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.
 
-### Meta-data
+## Meta-data
 
-### NoSQL and other cases
+## NoSQL and other cases
 
 NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.
 
@@ -38,20 +72,6 @@ That can contains:
 * `1, Address, 123 Main St`
 
 As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and "losing" some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.
-
-## Use in Research Data Management
-
-### As a different way to store and access data
-
-### For an assembly
-
-# RDF and SparQL
-
-# LLM and Semantic Graphs
-
-# How to
-
-## From relational database to RDF
 
 ## A SparQL endpoint
 
