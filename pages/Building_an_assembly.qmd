@@ -10,7 +10,15 @@ It could be with a Research Data Management Platform and other tools like a data
 
 # Keep it simple
 
--> DMPlatform with Data Repository (central)
+When working on a Data Management Solution, it is important to think about the actual usage: will the Scientists benefits from it enough that they will use it and justify the cost of building and maintaining it? One benefit might be a requirement of the funding agency, so might be felt by the Scientists as a burden. The role of a Data Management Solution is to reduce the friction as much as possible (together with the training and support from the Data Management Team), so that the benefits, even if not directly felt by the Scientists, will be enough to justify the usage of the Data Management Solution.
+
+As such it is important to keep the assembly as simple as possible, and to avoid adding unnecessary complexity or features that do not directly contribute to the research goals. The assembly should be designed with the end-users in mind, and should be easy to use and understand.
+
+One approach might be to have a specialized Data Management Platform adapted to the specific research domain (such as a Laboratory Notebook for a wet-lab), and to connect it to a central Data Repository. This allows researchers to use the specialized tools they are familiar with, while still ensuring that the data is stored in a secure and accessible location.
+
+In many case, the central Data Repository can be an external service, such as Zenodo, or a managed service provided by the institution, such as iRODS or Aruna. In that case, there might be no need for an assembly, but for connecting the services using APis, and, if possible, to have a single sign-on (SSO) solution for the users. A central SSO is only possible if the Data Management Platform and the Data Repository are both managed by the same institution, or if they are part of a consortium that allows for SSO between institutions.
+
+Another part of an assembly can be a general file storage solution, such as NextCloud, that can be used to store and share files that are not directly related to the research data, but are still important for the research project. One drawback of a general file storage solution is that, by default, the data are unstructured and lack meta-data, so might not be suitable for the main output of the research project. But it can be useful for storing and sharing supplementary materials, such as protocols, presentations, or other documents.
 
 # Avoid using the wrong tools
 
