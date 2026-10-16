@@ -20,9 +20,27 @@ In many case, the central Data Repository can be an external service, such as Ze
 
 Another part of an assembly can be a general file storage solution, such as NextCloud, that can be used to store and share files that are not directly related to the research data, but are still important for the research project. One drawback of a general file storage solution is that, by default, the data are unstructured and lack meta-data, so might not be suitable for the main output of the research project. But it can be useful for storing and sharing supplementary materials, such as protocols, presentations, or other documents.
 
+## Small tools
+
+Writting small tools to connect the different parts of the assembly or to provide some additional functionality can be a good approach, as long as the tools are well-documented and maintained. Small tools can be used to automate repetitive tasks, integrate different tools and resources, or provide additional functionality that is not available in the existing tools, such as sending automated emails with some reporting.
+
+Python is a good choice for writing small tools, as it is simple, well documented, widely used in the research community and has a large number of libraries and frameworks that can be used to build tools quickly and easily. Other programming languages, such as R or JavaScript, can also be used to build small tools, depending on the specific needs of the assembly.
+
+In any case, documenting them need to be also for their usage, i.e. that there is a central place where the tools are listed, how to use them, how they work, and where they are used in the assembly. This can be done using a wiki, a documentation website, or other similar tools.
+
+Using a version control system, such as Git, to manage the code and track changes is also important.
+
+We recommend to write this tools following the KISS principle (Keep It Simple, Stupid), so that they are easy to understand and maintain.
+
 # Avoid using the wrong tools
 
-i.e. NextCloud for general file storage, not in a dedicated RDM Platform where it would add noise and issues.
+An important aspect of data management is to use the right tools for the right tasks. Using a tool that is not designed for a specific task can lead to issues with data integrity, security, and usability.
+
+For instance, if there is a need for a general file storage solution, using a dedicated Research Data Management Platform for that purpose might not be the best approach, as it can add unnecessary complexity and noise to the platform. Instead, using a general file storage solution, such as NextCloud, that is designed for that purpose can be a better approach.
+
+The opposite, i.e. using a general file storage solution for storing research data that should be structured and have metadata, is probably a bad idea.
+
+Convoluted ways to connect the data management platforms have the potential to be extremely damaging in the long term. If there is a need for a quick and dirty solution, it is important to ensure that it will be replaced by a proper solution as soon as possible. "Hacks" are generally time bombs and often, if left in place, will be a problem long after anyone properly remember what it does and how it does it. One good way of providing a temporary fix is when it informs by itself of his temporary nature, if possible.
 
 # Concerns with assemblies
 
