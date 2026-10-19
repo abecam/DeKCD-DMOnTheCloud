@@ -1,0 +1,289 @@
+# Use in Research Data Management
+
+TO REWRITE
+
+Research data is rarely one clean table. It is spread over spreadsheets, instrument files, lab notebooks and several databases, and the meaning of the columns often lives only in someone's head. A knowledge graph helps in two ways: it stores data together with its meaning, and it connects data that was produced separately.
+
+## As a different way to store and access data
+
+In a table, the structure is decided in advance: the columns are fixed and every row has the same ones. In a knowledge graph, every piece of information is a separate statement (a triple, see above). This has a few consequences:
+
+* **Adding something new is easy.** A new property for a single sample does not require changing a schema or adding an empty column for all other samples.
+* **The meaning travels with the data.** Properties are identified by web addresses (URIs) that can point to a shared definition. This supports the FAIR principles (Findable, Accessible, Interoperable, Reusable).
+* **One way to ask questions.** A single query language (SPARQL) works across the whole graph, without needing to know in which "table" something is stored.
+
+A knowledge graph is not the right place for large numerical data such as time series, images or sequencing files. These stay in files or a suitable database, and the graph stores the description and a link: who produced it, when, with which method, and where the file is.
+
+## For an assembly
+
+TO REVIEW and complete
+
+Here, "assembly" means bringing together data from several sources (labs, projects, public databases).
+
+Because everything has a global identifier, one graph can combine information from different origins. If two sources use the same identifier for a species, a person (e.g. an ORCID iD) or a gene, their statements connect automatically, without matching free-text names that may be spelled differently.
+
+```turtle
+@prefix ex:   <https://example.org/> .
+@prefix obo:  <http://purl.obolibrary.org/obo/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Data from our lab
+ex:sample_42 ex:collectedFrom obo:NCBITaxon_3702 .
+
+# Data from a public ontology
+obo:NCBITaxon_3702 rdfs:label "Arabidopsis thaliana" .
+```
+
+Loaded together, `sample_42` is linked to the species name because both statements use the same identifier.
+
+The technology is the easy part. The real work is agreeing on identifiers and vocabularies and describing how each source maps to them.
+
+# RDF and SPARQL
+
+TO REVIEW and complete
+
+RDF defines **how data is stored** (as triples). SPARQL (pronounced "sparkle") is the language to **ask questions** about it, in the same way SQL is used for tables.
+
+A SPARQL query describes a pattern with blanks, and the database returns everything that fits the pattern. The blanks are variables, written with a leading `?`.
+
+```sparql
+PREFIX ex: <https://example.org/>
+
+SELECT ?name ?labName
+WHERE {
+  ?person ex:name     ?name ;
+          ex:worksIn  ?lab .
+  ?lab    ex:labName  ?labName .
+}
+```
+
+The same question in SQL:
+
+```sql
+SELECT person.name, lab.lab_name
+FROM person
+JOIN lab ON person.lab_id = lab.id;
+```
+
+A few words that help when reading the documentation:
+
+* `PREFIX` defines a short name for a long URI, as in Turtle, so `ex:name` stands for `https://example.org/name`.
+* `SELECT` lists what you want back. The result is a table, with one column per variable.
+* `WHERE` contains the pattern to match.
+* There is no `JOIN`. Using the same variable (`?lab`) in two places is what links the statements.
+* Other query types exist: `ASK` returns yes or no, and `CONSTRUCT` returns a new graph instead of a table.
+
+# LLM and Knowledge graphs
+
+TO REVIEW and complete
+
+Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:
+
+* **Asking questions in plain language.** The LLM translates a question into a SPARQL query (see "How to" below).
+* **Giving an LLM reliable facts.** Before answering, the LLM looks up the relevant facts in the graph, which reduces made-up answers. This approach is often called GraphRAG (RAG stands for retrieval-augmented generation).
+* **Building a graph from text.** The LLM extracts entities and relations from articles or lab notes and writes them as triples. The result needs to be checked by a person.
+
+In all cases, the LLM is a helper whose output should be verified, not a source of truth.
+
+# How to
+
+## From relational database to RDF
+
+The idea is to turn every row and cell into statements. The correspondence is:
+
+| Relational database | Knowledge graph (RDF) |
+|---|---|
+| Table | Class (the type of thing, e.g. `Person`) |
+| Row | A resource with its own identifier (URI) |
+| Column name | Predicate |
+| Cell value | Object (a "literal": plain text, number, date) |
+| Foreign key | Object that is the identifier of another resource |
+
+There are three common ways to do the conversion:
+
+* **A script** (for instance in Python with the `rdflib` library, or in R). Simple for a one-off export of a few tables.
+* **A mapping file** written in a mapping language such as R2RML or RML, run by a tool such as Morph-KGC. The mapping is written once and rerun whenever the data changes.
+* **A virtual graph**, for instance with Ontop. The data stays in the relational database and is queried as if it were RDF.
+
+## Data
+
+In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a knowledge graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.
+
+Relations between tables in a relational database will be represented as a triple in a knowledge graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.
+
+For example, with these two tables:
+
+| person | | | |
+|---|---|---|---|
+| **id** | **name** | **age** | **lab_id** |
+| 1 | John Doe | 30 | 7 |
+
+| lab | |
+|---|---|
+| **id** | **lab_name** |
+| 7 | Plant Genomics |
+
+The result in Turtle is:
+
+```turtle
+@prefix ex: <https://example.org/> .
+
+ex:person_1 a ex:Person ;
+            ex:name    "John Doe" ;
+            ex:age     30 ;
+            ex:worksIn ex:lab_7 .
+
+ex:lab_7    a ex:Lab ;
+            ex:labName "Plant Genomics" .
+```
+
+The identifiers are created by combining a base address with the table name and the key (`person` + `1` becomes `ex:person_1`). `John Doe` and `30` are literals, whereas `ex:lab_7` is a link to another resource: this is what the foreign key `lab_id` became.
+
+## Meta-data
+
+TO REVIEW and complete
+
+Meta-data is data about the data: who produced it, when, with which method or instrument, in which unit, under which license. In a relational database it usually lives somewhere else (a README, a data dictionary, column comments). In a knowledge graph it is written in the same way as the data, so both can be linked and queried together.
+
+Rather than inventing your own terms, reuse existing vocabularies (shared lists of properties and classes):
+
+* **Dublin Core** (`dcterms`): general properties such as title, creator, date and license
+* **DCAT**: describing datasets and where to download them
+* **PROV-O**: provenance, i.e. how and from what a result was produced
+* **schema.org**: general-purpose, also used by search engines
+* Domain ontologies, for instance for units, species or methods
+
+```turtle
+@prefix ex:      <https://example.org/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+ex:dataset_12 a dcat:Dataset ;
+    dcterms:title   "Leaf area measurements, summer 2025" ;
+    dcterms:creator ex:person_1 ;
+    dcterms:created "2025-08-14"^^xsd:date ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+
+# Even the meaning of a column can be described
+ex:age rdfs:label   "age"@en ;
+       rdfs:comment "Age of the person, in years"@en .
+```
+
+## NoSQL and other cases
+
+TO REVIEW
+
+NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.
+
+The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. This is also true for a relational database if the schema is not normalised in the traditional sense: it is, for instance, possible to flatten several tables into one table, where some columns become elements in a row.
+
+For instance:
+
+`Person ID, Type of Data, Value of Data`
+
+That can contain:
+
+* `1, Name, John Doe`
+* `1, Age, 30`
+* `1, Address, 123 Main St`
+
+As such it is closer to a NoSQL database than to a relational database (while stored in a relational database, but with a denormalised structure and "losing" some querying capabilities: all queries are still possible but will be more complex and less efficient), and the mapping to a knowledge graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.
+
+```turtle
+@prefix ex: <https://example.org/> .
+
+ex:person_1 ex:name    "John Doe" ;
+            ex:age     30 ;
+            ex:address "123 Main St" .
+```
+
+Note that here the predicates (`name`, `age`, `address`) come from the *values* of the column `Type of Data`, not from column names.
+
+## A SPARQL endpoint
+
+TO REVIEW and complete
+
+A SPARQL endpoint is a web address that accepts SPARQL queries and returns the results. It can be used from a web form, from a script, or from another program. Some public examples are Wikidata (`query.wikidata.org`) and UniProt (`sparql.uniprot.org`).
+
+To offer your own, you need a **triple store**: a database made to store triples, which usually provides the endpoint. Common choices are Apache Jena Fuseki, GraphDB, Virtuoso and Oxigraph. The steps are:
+
+1. Load your data (for instance Turtle files) into the triple store
+2. Start it
+3. Send queries to its `/sparql` address
+
+Under the hood this is an ordinary web request, so any language can do it. For example in Python:
+
+```python
+from SPARQLWrapper import SPARQLWrapper, JSON
+
+endpoint = SPARQLWrapper("https://example.org/sparql")
+endpoint.setQuery("""
+    PREFIX ex: <https://example.org/>
+    SELECT ?name WHERE { ?person ex:name ?name . }
+""")
+endpoint.setReturnFormat(JSON)
+
+results = endpoint.query().convert()
+for row in results["results"]["bindings"]:
+    print(row["name"]["value"])
+```
+
+Public endpoints often limit the running time of a query, and an endpoint with sensitive data must be protected like any other database.
+
+## Using a LLM to query a SPARQL endpoint or create queries
+
+An LLM can write a SPARQL query from a question, but it does not know your graph. If it does not get the vocabulary, it will guess property names. The approach that works best is:
+
+1. **Give it the schema**, not the data: the prefixes, the classes and the properties with a one-line description each. Optionally add one or two example queries.
+2. **Ask the question** in plain language.
+3. **Check the query** before trusting the answer: read it, test it with `LIMIT 10`, and try a question for which you already know the answer.
+
+An example prompt:
+
+```text
+You write SPARQL 1.1 queries. Use only the prefixes, classes and
+properties listed below. Return only the query.
+
+PREFIX ex: <https://example.org/>
+ex:Person  - a person
+ex:Lab     - a laboratory
+ex:name    - name of a person
+ex:worksIn - links a person to the lab where they work
+ex:labName - name of a lab
+
+Question: Which people work in the lab named "Plant Genomics"?
+```
+
+The answer should look like this:
+
+```sparql
+PREFIX ex: <https://example.org/>
+
+SELECT ?name
+WHERE {
+  ?person ex:name    ?name ;
+          ex:worksIn ?lab .
+  ?lab    ex:labName "Plant Genomics" .
+}
+```
+
+Typical problems are invented properties, wrong prefixes, and a query that is valid but answers a slightly different question. Since only the schema and the question are sent to the LLM, and not the data, this approach is also suitable when the data itself is sensitive.
+
+The reverse also works well: paste a query from the documentation or from a colleague and ask the LLM to explain it in plain words.
+
+# Glossary
+
+| Term | Meaning |
+|---|---|
+| Triple | One statement: subject, predicate, object |
+| URI / IRI | A globally unique identifier, written like a web address |
+| Literal | A plain value (text, number, date) as opposed to a link to another resource |
+| Prefix | A short name for the start of a URI (`ex:` for `https://example.org/`) |
+| Vocabulary | A shared list of terms (classes and properties) to describe things |
+| Ontology | A vocabulary with formal rules, usually written in OWL |
+| Triple store | A database for triples |
+| SPARQL endpoint | A web address that accepts SPARQL queries |
+| Reasoner | A program that infers new facts from an ontology |
+| SHACL | A language to check that data has the expected shape |
