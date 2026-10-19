@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Semantic Graphs – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
+<title>Knowledge graphs – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -94,6 +94,10 @@ cookieconsent.run({
 });
 </script> 
   
+<meta name="mermaid-theme" content="default">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 <script type="text/plain" cookie-consent="tracking">
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -161,7 +165,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Semantic Graphs</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Knowledge graphs</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -239,19 +243,27 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#scope" id="toc-scope" class="nav-link active" data-scroll-target="#scope"><span class="header-section-number">1</span> Scope</a></li>
-  <li><a href="#what-are-semantic-graphs" id="toc-what-are-semantic-graphs" class="nav-link" data-scroll-target="#what-are-semantic-graphs"><span class="header-section-number">2</span> What are Semantic Graphs</a>
+  <li><a href="#what-are-knowledge-graphs" id="toc-what-are-knowledge-graphs" class="nav-link" data-scroll-target="#what-are-knowledge-graphs"><span class="header-section-number">2</span> What are Knowledge graphs</a>
   <ul class="collapse">
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2.1</span> Definition</a></li>
-  <li><a href="#current-solutions" id="toc-current-solutions" class="nav-link" data-scroll-target="#current-solutions"><span class="header-section-number">2.2</span> Current solutions</a></li>
+  <li><a href="#current-solutions" id="toc-current-solutions" class="nav-link" data-scroll-target="#current-solutions"><span class="header-section-number">2.2</span> Current solutions</a>
+  <ul class="collapse">
+  <li><a href="#rdf" id="toc-rdf" class="nav-link" data-scroll-target="#rdf"><span class="header-section-number">2.2.1</span> RDF</a></li>
   </ul></li>
-  <li><a href="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases" id="toc-what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="nav-link" data-scroll-target="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases"><span class="header-section-number">3</span> What to use when: Semantic Graphs, Relational Databases, NoSQL Databases</a></li>
+  </ul></li>
+  <li><a href="#what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" id="toc-what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" class="nav-link" data-scroll-target="#what-to-use-when-knowledge-graphs-relational-databases-nosql-databases"><span class="header-section-number">3</span> What to use when: Knowledge graphs, Relational Databases, NoSQL Databases</a>
+  <ul class="collapse">
+  <li><a href="#owl" id="toc-owl" class="nav-link" data-scroll-target="#owl"><span class="header-section-number">3.0.1</span> OWL</a></li>
+  <li><a href="#other-solutions" id="toc-other-solutions" class="nav-link" data-scroll-target="#other-solutions"><span class="header-section-number">3.0.2</span> Other solutions</a></li>
+  <li><a href="#rdf-with-owl-or-a-property-graph" id="toc-rdf-with-owl-or-a-property-graph" class="nav-link" data-scroll-target="#rdf-with-owl-or-a-property-graph"><span class="header-section-number">3.0.3</span> RDF with OWL or a property graph?</a></li>
+  </ul></li>
   <li><a href="#use-in-research-data-management" id="toc-use-in-research-data-management" class="nav-link" data-scroll-target="#use-in-research-data-management"><span class="header-section-number">4</span> Use in Research Data Management</a>
   <ul class="collapse">
   <li><a href="#as-a-different-way-to-store-and-access-data" id="toc-as-a-different-way-to-store-and-access-data" class="nav-link" data-scroll-target="#as-a-different-way-to-store-and-access-data"><span class="header-section-number">4.1</span> As a different way to store and access data</a></li>
   <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">4.2</span> For an assembly</a></li>
   </ul></li>
   <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">5</span> RDF and SparQL</a></li>
-  <li><a href="#llm-and-semantic-graphs" id="toc-llm-and-semantic-graphs" class="nav-link" data-scroll-target="#llm-and-semantic-graphs"><span class="header-section-number">6</span> LLM and Semantic Graphs</a></li>
+  <li><a href="#llm-and-knowledge-graphs" id="toc-llm-and-knowledge-graphs" class="nav-link" data-scroll-target="#llm-and-knowledge-graphs"><span class="header-section-number">6</span> LLM and Knowledge graphs</a></li>
   <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">7</span> How to</a>
   <ul class="collapse">
   <li><a href="#from-relational-database-to-rdf" id="toc-from-relational-database-to-rdf" class="nav-link" data-scroll-target="#from-relational-database-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</a></li>
@@ -270,7 +282,7 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Semantic Graphs</h1>
+<h1 class="title">Knowledge graphs</h1>
 </div>
 
 
@@ -290,27 +302,87 @@ cookieconsent.run({
 <section id="scope" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Scope</h1>
 <p>While setting up a Data Management Platform, you will have to choose a compatible way to store the data, which will be documented in the Data Management Platform’s documentation. In this case, you generally do not have to care about the implementation, even if it could help for certain cases and for maintenance.</p>
-<p>But Semantic graphs answer a more general need: they are a way to represent data with semantic meaning, with shared, agreed-upon vocabularies and ontologies. As such, they are a good way to help with the Interoperability and Reusability of data, the IR of FAIR.</p>
-<p>Another interesting aspect is how they can be queried and navigated, which is a good way to help with the Accessibility of data, the A of FAIR. SPARQL is a standard query language for most semantic graphs (those based on RDF), and it is possible to use a LLM to query a SPARQL endpoint or create queries.</p>
-<p>Semantic graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.</p>
+<p>But Knowledge graphs answer a more general need: they are a way to represent data with semantic meaning, with shared, agreed-upon vocabularies and ontologies. As such, they are a good way to help with the Interoperability and Reusability of data, the IR of FAIR.</p>
+<p>Another interesting aspect is how they can be queried and navigated, which is a good way to help with the Accessibility of data, the A of FAIR. SPARQL is a standard query language for most knowledge graphs (those based on RDF), and it is possible to use a LLM to query a SPARQL endpoint or create queries.</p>
+<p>Knowledge graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.</p>
 </section>
-<section id="what-are-semantic-graphs" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> What are Semantic Graphs</h1>
-<p>Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
+<section id="what-are-knowledge-graphs" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> What are Knowledge graphs</h1>
+<p>Knowledge graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
 <section id="definition" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">2.1</span> Definition</h2>
+<p>A knowledge graph is a way of organizing information as a network of entities (people, places, concepts, datasets) connected by labeled relationships, typically stored as subject-predicate-object triples like “Marie Curie-&gt; won -&gt; Nobel Prize in Physics.” Because the data is structured as nodes and edges, often with a shared schema or ontology that defines what types of things and relationships exist, it can be queried, linked across sources, and reasoned over to reveal connections that would be hard to see in flat tables or unstructured text. Knowledge graphs power things like search engine info panels, recommendation systems, and data integration across research or enterprise systems.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    Curie["Marie Curie"] --&gt;|won| Nobel["Nobel Prize in Physics"]
+    Curie --&gt;|born in| Warsaw["Warsaw"]
+    Curie --&gt;|discovered| Radium["Radium"]
+    Curie --&gt;|spouse of| Pierre["Pierre Curie"]
+    Pierre --&gt;|won| Nobel
+    Warsaw --&gt;|capital of| Poland["Poland"]
+    Radium --&gt;|type of| Element["Chemical Element"]
+    Curie --&gt;|type of| Person["Person"]
+    Pierre --&gt;|type of| Person
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
 <section id="current-solutions" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="current-solutions"><span class="header-section-number">2.2</span> Current solutions</h2>
+<section id="rdf" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="rdf"><span class="header-section-number">2.2.1</span> RDF</h3>
+<p>One prevalent method to store a knowledge graph is RDF, Resource Description Framework. It is not a language, but a list of definitions (framework) that can be “implemented” using various serialization formats: i.e.&nbsp;how it is stored in a file.</p>
+<p>The first serialization format was RDF/XML. It is not very readable and difficult to write, but might be used in many legacy systems and graphs. If you need to write a knowledge graph in this format, it might be a better approach to use either Turtle or JSON-LD (see below) and use a conversion tool to RDF/XML.</p>
+<pre class="{xml}"><code>&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ex="http://example.org/"&gt;
+  &lt;rdf:Description rdf:about="http://example.org/MarieCurie"&gt;
+    &lt;ex:won rdf:resource="http://example.org/NobelPrizePhysics"/&gt;
+  &lt;/rdf:Description&gt;
+&lt;/rdf:RDF&gt;</code></pre>
+<p>The 2 most popular formats now are Turtle (.ttl) and JSON-LD (.jsonld).</p>
+<p>Turtle is the most human readable and the easiest to write by hand.</p>
+<pre class="{turtle}"><code>@prefix ex: &lt;http://example.org/&gt; .
+
+ex:MarieCurie ex:won ex:NobelPrizePhysics ;
+              ex:bornIn ex:Warsaw .</code></pre>
+<p>JSON-LD is also quite simple and used for embedding structured data in HTML pages (schema.org markup) and for APIs</p>
+<pre class="{json}"><code>{
+  "@context": { "ex": "http://example.org/" },
+  "@id": "ex:MarieCurie",
+  "ex:won": { "@id": "ex:NobelPrizePhysics" },
+  "ex:bornIn": { "@id": "ex:Warsaw" }
+}</code></pre>
+<p>Embedded in HTML, using <a href="http://www.schema.org">schema.org</a> vocabulary:</p>
+<pre class="{html}"><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Marie Curie",
+  "birthPlace": "Warsaw"
+}
+&lt;/script&gt;</code></pre>
+<p>Other formats are:</p>
+<ul>
+<li>N-Triples (.nt), a line-based format with one full triple per line and no prefixes. It’s easy to parse and stream, so it’s often used for large dumps and data exchange.</li>
+<li>N-Quads (.nq) extends N-Triples with a fourth element for the named graph, and TriG (.trig) does the same for Turtle. Both are used when you need to store multiple graphs in one file.</li>
+</ul>
 </section>
 </section>
-<section id="what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> What to use when: Semantic Graphs, Relational Databases, NoSQL Databases</h1>
+</section>
+<section id="what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What to use when: Knowledge graphs, Relational Databases, NoSQL Databases</h1>
 <p>Relational databases offer a clear benefit for storing repeated data with clear relationships between them, with fast and relatively simple queries.</p>
-<p>But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a semantic graph, which are more flexible.</p>
-<p>Note that a NoSQL database can be stored in a relational database, and a semantic graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a semantic graph).</p>
-<p>A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, … A semantic graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object).</p>
-<p>As such, it is simpler to consider the benefits of a semantic graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).</p>
+<p>But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a knowledge graph, which are more flexible.</p>
+<p>Note that a NoSQL database can be stored in a relational database, and a knowledge graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a knowledge graph).</p>
+<p>A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, … A knowledge graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object).</p>
+<p>As such, it is simpler to consider the benefits of a knowledge graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).</p>
 <p>There exists several kinds of NoSQL databases:</p>
 <ul>
 <li>Key-value stores: store data as a collection of key-value pairs, where each key is unique and maps to a specific value. Examples include Redis and Amazon DynamoDB.</li>
@@ -320,6 +392,197 @@ cookieconsent.run({
 <li>Multi-model databases: support multiple data models, allowing for flexibility in how data is stored and queried. Examples include ArangoDB and OrientDB.</li>
 </ul>
 <p>Each kind of NoSQL database has its own strengths and weaknesses, and the choice of which one to use will depend on the specific requirements of the application.</p>
+<section id="owl" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1" class="anchored" data-anchor-id="owl"><span class="header-section-number">3.0.1</span> OWL</h3>
+<p>RDF only says <em>that</em> two things are related, not what the relationship or the types mean. OWL (Web Ontology Language) adds this meaning. It is a vocabulary built on top of RDF (and RDFS) for describing classes, properties and the constraints between them, so it is not an alternative to RDF but an extension of it. An OWL ontology is itself stored as RDF, typically in Turtle or RDF/XML.</p>
+<p>With OWL you can, for example, declare that:</p>
+<ul>
+<li><code>Scientist</code> is a subclass of <code>Person</code></li>
+<li><code>won</code> links a <code>Person</code> to a <code>Prize</code></li>
+<li><code>bornIn</code> can have only one value per person</li>
+<li><code>spouseOf</code> is symmetric</li>
+</ul>
+<pre class="{turtle}"><code>@prefix ex:   &lt;http://example.org/&gt; .
+@prefix owl:  &lt;http://www.w3.org/2002/07/owl#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+
+ex:Person    a owl:Class .
+ex:Scientist a owl:Class ;
+             rdfs:subClassOf ex:Person .
+ex:Prize     a owl:Class .
+
+ex:won a owl:ObjectProperty ;
+       rdfs:domain ex:Person ;
+       rdfs:range  ex:Prize .
+
+ex:bornIn a owl:ObjectProperty , owl:FunctionalProperty .
+
+ex:spouseOf a owl:ObjectProperty , owl:SymmetricProperty .
+
+ex:MarieCurie a ex:Scientist ;
+              ex:spouseOf ex:PierreCurie .</code></pre>
+<p>A reasoner (e.g.&nbsp;HermiT, Pellet, or the one built into Protégé) can then infer facts that were never written down: Marie Curie is a <code>Person</code> (because every <code>Scientist</code> is), and Pierre Curie is the spouse of Marie Curie (because <code>spouseOf</code> is symmetric). It can also flag contradictions, such as a person with two different birthplaces.</p>
+<p>OWL ontologies are usually edited with <a href="https://protege.stanford.edu/">Protégé</a>. For validating the <em>shape</em> of data rather than inferring new facts, SHACL is often used alongside OWL. SHACL (Shapes Constraint Language) is a standard language for describing RDF graphs.</p>
+</section>
+<section id="other-solutions" class="level3" data-number="3.0.2">
+<h3 data-number="3.0.2" class="anchored" data-anchor-id="other-solutions"><span class="header-section-number">3.0.2</span> Other solutions</h3>
+<section id="labeled-property-graphs-lpg" class="level4" data-number="3.0.2.1">
+<h4 data-number="3.0.2.1" class="anchored" data-anchor-id="labeled-property-graphs-lpg"><span class="header-section-number">3.0.2.1</span> Labeled Property Graphs (LPG)</h4>
+<p>In a labeled property graph, nodes and edges can both carry a label and arbitrary key-value properties. This is the model used by most graph databases, such as Neo4j, Amazon Neptune (which supports both models), Memgraph or JanusGraph. Compared with RDF, it is more compact when you want to attach details to a relationship (e.g.&nbsp;the year of the prize), because edges can have properties directly. The trade-off is that there is no global standard for identifiers and vocabularies, so sharing and merging graphs across organisations is harder.</p>
+<p>The same facts in Cypher (Neo4j’s query language, which is also the basis of the ISO standard GQL):</p>
+<pre class="{cypher}"><code>CREATE (curie:Person {name: "Marie Curie"})
+CREATE (nobel:Prize {name: "Nobel Prize in Physics"})
+CREATE (warsaw:City {name: "Warsaw"})
+CREATE (curie)-[:WON {year: 1903}]-&gt;(nobel)
+CREATE (curie)-[:BORN_IN]-&gt;(warsaw)</code></pre>
+<p>Querying it:</p>
+<pre class="{cypher}"><code>MATCH (p:Person)-[w:WON]-&gt;(prize:Prize)
+RETURN p.name, prize.name, w.year</code></pre>
+<p>Other query languages for property graphs are Gremlin (Apache TinkerPop) and, more recently, GQL (ISO/IEC 39075:2024).</p>
+</section>
+<section id="rdf-star-rdf-1.2" class="level4" data-number="3.0.2.2">
+<h4 data-number="3.0.2.2" class="anchored" data-anchor-id="rdf-star-rdf-1.2"><span class="header-section-number">3.0.2.2</span> RDF-star (RDF 1.2)</h4>
+<p>To get the best of both worlds, RDF-star lets you make statements about a triple, which is what edge properties do in an LPG:</p>
+<pre class="{turtle}"><code>@prefix ex: &lt;http://example.org/&gt; .
+
+&lt;&lt; ex:MarieCurie ex:won ex:NobelPrizePhysics &gt;&gt; ex:year 1903 .</code></pre>
+</section>
+<section id="relational-databases" class="level4" data-number="3.0.2.3">
+<h4 data-number="3.0.2.3" class="anchored" data-anchor-id="relational-databases"><span class="header-section-number">3.0.2.3</span> Relational databases</h4>
+<p>A knowledge graph can be stored in a relational database, either as a generic triples table or with one table per entity type. Everything is available with standard SQL tooling, but navigating long chains of relationships requires many joins (or recursive queries) and quickly becomes slow and complex.</p>
+<pre class="{sql}"><code>CREATE TABLE triples (
+  subject   TEXT,
+  predicate TEXT,
+  object    TEXT
+);
+
+INSERT INTO triples VALUES
+  ('MarieCurie', 'won',    'NobelPrizePhysics'),
+  ('MarieCurie', 'bornIn', 'Warsaw');</code></pre>
+</section>
+<section id="document-stores-json" class="level4" data-number="3.0.2.4">
+<h4 data-number="3.0.2.4" class="anchored" data-anchor-id="document-stores-json"><span class="header-section-number">3.0.2.4</span> Document stores (JSON)</h4>
+<p>Document databases such as MongoDB or Couchbase can store entities as nested JSON documents. This is flexible and easy for applications to consume, but relationships are implicit (nested or referenced by ID), so there is no built-in semantics or graph traversal. JSON-LD (see above) is the bridge: it is plain JSON that can be loaded in a document store and still be interpreted as RDF.</p>
+</section>
+<section id="virtual-knowledge-graphs" class="level4" data-number="3.0.2.5">
+<h4 data-number="3.0.2.5" class="anchored" data-anchor-id="virtual-knowledge-graphs"><span class="header-section-number">3.0.2.5</span> Virtual knowledge graphs</h4>
+<p>Instead of copying the data, a virtual knowledge graph (also called Ontology-Based Data Access) keeps the data in its original relational database and exposes it as RDF through mappings such as R2RML, so it can be queried with SPARQL. Tools include Ontop and Morph-KGC. This is useful when the data must stay in its source system.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Model</th>
+<th>Query language</th>
+<th>Strength</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RDF triple store</td>
+<td>Triples</td>
+<td>SPARQL</td>
+<td>Standards, interoperability, reasoning</td>
+<td>Edge properties are awkward (without RDF-star)</td>
+</tr>
+<tr class="even">
+<td>Property graph</td>
+<td>Nodes and edges with properties</td>
+<td>Cypher, Gremlin, GQL</td>
+<td>Intuitive, fast traversal</td>
+<td>No shared vocabulary standard</td>
+</tr>
+<tr class="odd">
+<td>Relational</td>
+<td>Tables</td>
+<td>SQL</td>
+<td>Mature tooling</td>
+<td>Costly joins for deep relationships</td>
+</tr>
+<tr class="even">
+<td>Document store</td>
+<td>JSON documents</td>
+<td>Vendor specific</td>
+<td>Flexible</td>
+<td>Implicit relationships</td>
+</tr>
+<tr class="odd">
+<td>Virtual KG</td>
+<td>RDF view on existing data</td>
+<td>SPARQL</td>
+<td>No data duplication</td>
+<td>Depends on mapping quality</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="rdf-with-owl-or-a-property-graph" class="level3" data-number="3.0.3">
+<h3 data-number="3.0.3" class="anchored" data-anchor-id="rdf-with-owl-or-a-property-graph"><span class="header-section-number">3.0.3</span> RDF with OWL or a property graph?</h3>
+<p>Once you have decided on a graph, the next question is which graph model to use. The two main choices are RDF (optionally with OWL and SHACL) and a labeled property graph such as Neo4j. They overlap a lot, but they are optimised for different goals.</p>
+<p>RDF with OWL is the better fit when:</p>
+<ul>
+<li>the data must be <strong>shared or integrated</strong> across systems or organisations, since global identifiers (URIs) and shared vocabularies (schema.org, Dublin Core, DCAT, …) make merging graphs straightforward</li>
+<li>you need <strong>inference or consistency checks</strong>, e.g.&nbsp;deriving new facts from class hierarchies or detecting contradictions</li>
+<li>you want to <strong>publish linked or open data</strong> following W3C standards (SPARQL, SHACL, JSON-LD)</li>
+</ul>
+<p>A property graph is the better fit when:</p>
+<ul>
+<li>the focus is on <strong>application-level traversal and analytics</strong>, such as shortest paths, recommendations, or network analysis</li>
+<li>relationships carry <strong>many attributes</strong> (dates, weights, sources) that you want to store directly on the edge</li>
+<li>the data stays <strong>within a single system</strong>, so shared semantics are not a priority</li>
+<li>your team prefers a developer-friendly query language such as Cypher</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>RDF + OWL</th>
+<th>Property graph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Strength</td>
+<td>Shared semantics, interoperability, reasoning</td>
+<td>Intuitive modelling, fast traversal</td>
+</tr>
+<tr class="even">
+<td>Query language</td>
+<td>SPARQL</td>
+<td>Cypher, Gremlin, GQL</td>
+</tr>
+<tr class="odd">
+<td>Schema</td>
+<td>Ontology (OWL), shapes (SHACL)</td>
+<td>Optional, database specific</td>
+</tr>
+<tr class="even">
+<td>Edge attributes</td>
+<td>Via RDF-star or reification</td>
+<td>Native</td>
+</tr>
+<tr class="odd">
+<td>Typical use</td>
+<td>Open data, metadata, data integration</td>
+<td>Applications, analytics, recommendations</td>
+</tr>
+</tbody>
+</table>
+<p>The two are not mutually exclusive. RDF-star brings edge attributes to RDF, and some property graph databases can import and export RDF (for instance, the neosemantics plugin for Neo4j), so you can start with one model and convert later if your needs change.</p>
+</section>
 </section>
 <section id="use-in-research-data-management" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Use in Research Data Management</h1>
@@ -333,8 +596,8 @@ cookieconsent.run({
 <section id="rdf-and-sparql" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> RDF and SparQL</h1>
 </section>
-<section id="llm-and-semantic-graphs" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> LLM and Semantic Graphs</h1>
+<section id="llm-and-knowledge-graphs" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> LLM and Knowledge graphs</h1>
 </section>
 <section id="how-to" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> How to</h1>
@@ -343,15 +606,15 @@ cookieconsent.run({
 </section>
 <section id="data" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="data"><span class="header-section-number">7.2</span> Data</h2>
-<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
-<p>Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
+<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a knowledge graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
+<p>Relation between tables in a relational database will be represented as a triple in a knowledge graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
 </section>
 <section id="meta-data" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="meta-data"><span class="header-section-number">7.3</span> Meta-data</h2>
 </section>
 <section id="nosql-and-other-cases" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="nosql-and-other-cases"><span class="header-section-number">7.4</span> NoSQL and other cases</h2>
-<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.</p>
+<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.</p>
 <p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. It is also true for a relational database if the schema is not normalized in the general traditional sense: it is for instance possible to to flatten several tables into one table, where some columns will become elements in a row.</p>
 <p>For instance:</p>
 <p><code>Person ID, Type of Data, Value of Data</code></p>
@@ -361,7 +624,7 @@ cookieconsent.run({
 <li><code>1, Age, 30</code></li>
 <li><code>1, Address, 123 Main St</code></li>
 </ul>
-<p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
+<p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a knowledge graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
 </section>
 <section id="a-sparql-endpoint" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">7.5</span> A SparQL endpoint</h2>
