@@ -85,11 +85,11 @@ The next step would be to provide the LLM with access to the data as read-only (
 
 The last step is a "full" approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e. not actually deleted but marked as deleted) and/or require human approval before being executed.
 
-### Knowledge graphs, API documentation and LLMs
+### Semantic graphs, API documentation and LLMs
 
-[Knowledge graphs](pages/KnowledgeGraphs.qmd) are an useful representation of data, metadata, and their relationships, relying on existing knowledge graphs and ontologies to give an unified view. Data represented within a knowledge graph that conforms to common knowledge graphs and ontologies can be easily integrated with other data sources conforming to the same knowledge graphs and ontologies.
+[Semantic graphs](pages/SemanticGraphs.qmd) are an useful representation of data, metadata, and their relationships, relying on existing semantic graphs and ontologies to give an unified view. Data represented within a semantic graph that conforms to common semantic graphs and ontologies can be easily integrated with other data sources conforming to the same semantic graphs and ontologies.
 
-The main aspect of a knowledge graph is a triple:
+The main aspect of a semantic graph is a triple:
 
 `(subject, predicate, object)`
 
@@ -97,29 +97,29 @@ For instance `("Sample_1", "has_measurement", "Measurement_1")`
 
 Links between triples are simply another triple, for instance `("Measurement_1", "is_part_of", "Experiment_1")`
 
-But it is often an overkill to use a knowledge graph within a Data Management Platform, and most Data Management Platforms rely on a relational database to store their data and metadata.
+But it is often an overkill to use a semantic graph within a Data Management Platform, and most Data Management Platforms rely on a relational database to store their data and metadata.
 
-In that case, the knowledge graph can still be built from the relational database. Data will be subject and object, with the column name the predicate. For instance a table with columns `sample_id`, `measurement_id`, and `temperature` will have the following triples:
+In that case, the semantic graph can still be built from the relational database. Data will be subject and object, with the column name the predicate. For instance a table with columns `sample_id`, `measurement_id`, and `temperature` will have the following triples:
 * `(sample_id, measurement_id, temperature)`
 
 Metadata will be predicate with object (for instance "storage temperature" as predicate and "4°C" as object).
 
-As the schema of the relational database is fixed but not necessarily accessible, the knowledge graph can be built from the API documentation, if one is available for the Data Management Platform. The API documentation will describe the endpoints and their parameters, which can be used to construct the triples in the knowledge graph.
+As the schema of the relational database is fixed but not necessarily accessible, the semantic graph can be built from the API documentation, if one is available for the Data Management Platform. The API documentation will describe the endpoints and their parameters, which can be used to construct the triples in the semantic graph.
 
-Most LLMs will know how to build a knowledge graph from an API documentation, or if there is another approach better suited. Several tools can also be used to build a knowledge graph from an API documentation, or to prepare a Knowledge graph Query Language endpoint such as SparQL.
+Most LLMs will know how to build a semantic graph from an API documentation, or if there is another approach better suited. Several tools can also be used to build a semantic graph from an API documentation, or to prepare a semantic graph Query Language endpoint such as SparQL.
 
-One remaining issue is to use existing knowledge graphs and ontologies to give an unified view. This is a complex task that requires a deep understanding of the data and its relationships, as well as knowledge of existing knowledge graphs and ontologies. LLMs can assist in this process by suggesting relevant knowledge graphs and ontologies, and helping to map the data to these representations. But there will probably be a need for human expertise to ensure that the mapping is accurate and meaningful.
+One remaining issue is to use existing semantic graphs and ontologies to give an unified view. This is a complex task that requires a deep understanding of the data and its relationships, as well as semantic of existing semantic graphs and ontologies. LLMs can assist in this process by suggesting relevant semantic graphs and ontologies, and helping to map the data to these representations. But there will probably be a need for human expertise to ensure that the mapping is accurate and meaningful.
 
 ::: {.callout-note}
-The data do not have to be stored in a knowledge graph, and can rely on the built knowledge graph only to be queried using a Knowledge graph Query Language endpoint such as SparQL.
+The data do not have to be stored in a semantic graph, and can rely on the built semantic graph only to be queried using a semantic graph Query Language endpoint such as SparQL.
 :::
 
 ::: {.callout-note}
-As the database schema is fixed but the metadata part of the dynamic data, the resulting knowledge graph will be a mix of a read-only part (the database schema) and a dynamic part (the metadata). In that case it might be better to create 2 knowledge graphs, one for the read-only part and one for the dynamic part. If the data is also stored in a knowledge graph, then a 3rd knowledge graph can be created to represent the data itself.
+As the database schema is fixed but the metadata part of the dynamic data, the resulting semantic graph will be a mix of a read-only part (the database schema) and a dynamic part (the metadata). In that case it might be better to create 2 semantic graphs, one for the read-only part and one for the dynamic part. If the data is also stored in a semantic graph, then a 3rd semantic graph can be created to represent the data itself.
 :::
 
-### Knowledge graphs and assemblies
+### Semantic graphs and assemblies
 
-The main benefit of using a knowledge graph in an assembly is that it allows for a unified view of the data and metadata across the various tools and resources being used. This also can allow an unique endpoint for querying the data and metadata, regardless of where they are stored or how they are represented.
+The main benefit of using a semantic graph in an assembly is that it allows for a unified view of the data and metadata across the various tools and resources being used. This also can allow an unique endpoint for querying the data and metadata, regardless of where they are stored or how they are represented.
 
 The building cost will be quite high, and it is not something that can be built by the Scientists themselves, while necessitating a good knowledge of the domain. As such, it can be seen as the last step of building an assembly, and should be considered only if the assembly is expected to be used for a long time and/or by many users.
