@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Knowledge graphs – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
+<title>Semantic graphs – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -165,7 +165,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Knowledge graphs</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Semantic graphs</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -243,15 +243,19 @@ cookieconsent.run({
    
   <ul>
   <li><a href="#scope" id="toc-scope" class="nav-link active" data-scroll-target="#scope"><span class="header-section-number">1</span> Scope</a></li>
-  <li><a href="#what-are-knowledge-graphs" id="toc-what-are-knowledge-graphs" class="nav-link" data-scroll-target="#what-are-knowledge-graphs"><span class="header-section-number">2</span> What are Knowledge graphs</a>
+  <li><a href="#what-are-semantic-graphs" id="toc-what-are-semantic-graphs" class="nav-link" data-scroll-target="#what-are-semantic-graphs"><span class="header-section-number">2</span> What are Semantic graphs</a>
   <ul class="collapse">
-  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2.1</span> Definition</a></li>
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2.1</span> Definition</a>
+  <ul class="collapse">
+  <li><a href="#knowledge-graüj" id="toc-knowledge-graüj" class="nav-link" data-scroll-target="#knowledge-graüj"><span class="header-section-number">2.1.1</span> Knowledge graüj</a></li>
+  <li><a href="#semantic-graph" id="toc-semantic-graph" class="nav-link" data-scroll-target="#semantic-graph"><span class="header-section-number">2.1.2</span> Semantic graph</a></li>
+  </ul></li>
   <li><a href="#current-solutions" id="toc-current-solutions" class="nav-link" data-scroll-target="#current-solutions"><span class="header-section-number">2.2</span> Current solutions</a>
   <ul class="collapse">
   <li><a href="#rdf" id="toc-rdf" class="nav-link" data-scroll-target="#rdf"><span class="header-section-number">2.2.1</span> RDF</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" id="toc-what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" class="nav-link" data-scroll-target="#what-to-use-when-knowledge-graphs-relational-databases-nosql-databases"><span class="header-section-number">3</span> What to use when: Knowledge graphs, Relational Databases, NoSQL Databases</a>
+  <li><a href="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases" id="toc-what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="nav-link" data-scroll-target="#what-to-use-when-semantic-graphs-relational-databases-nosql-databases"><span class="header-section-number">3</span> What to use when: Semantic graphs, Relational Databases, NoSQL Databases</a>
   <ul class="collapse">
   <li><a href="#owl" id="toc-owl" class="nav-link" data-scroll-target="#owl"><span class="header-section-number">3.0.1</span> OWL</a></li>
   <li><a href="#other-solutions" id="toc-other-solutions" class="nav-link" data-scroll-target="#other-solutions"><span class="header-section-number">3.0.2</span> Other solutions</a></li>
@@ -263,7 +267,7 @@ cookieconsent.run({
   <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">4.2</span> For an assembly</a></li>
   </ul></li>
   <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">5</span> RDF and SparQL</a></li>
-  <li><a href="#llm-and-knowledge-graphs" id="toc-llm-and-knowledge-graphs" class="nav-link" data-scroll-target="#llm-and-knowledge-graphs"><span class="header-section-number">6</span> LLM and Knowledge graphs</a></li>
+  <li><a href="#llm-and-semantic-graphs" id="toc-llm-and-semantic-graphs" class="nav-link" data-scroll-target="#llm-and-semantic-graphs"><span class="header-section-number">6</span> LLM and Semantic graphs</a></li>
   <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">7</span> How to</a>
   <ul class="collapse">
   <li><a href="#from-relational-database-to-rdf" id="toc-from-relational-database-to-rdf" class="nav-link" data-scroll-target="#from-relational-database-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</a></li>
@@ -282,7 +286,7 @@ cookieconsent.run({
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Knowledge graphs</h1>
+<h1 class="title">Semantic graphs</h1>
 </div>
 
 
@@ -302,15 +306,17 @@ cookieconsent.run({
 <section id="scope" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Scope</h1>
 <p>While setting up a Data Management Platform, you will have to choose a compatible way to store the data, which will be documented in the Data Management Platform’s documentation. In this case, you generally do not have to care about the implementation, even if it could help for certain cases and for maintenance.</p>
-<p>But Knowledge graphs answer a more general need: they are a way to represent data with semantic meaning, with shared, agreed-upon vocabularies and ontologies. As such, they are a good way to help with the Interoperability and Reusability of data, the IR of FAIR.</p>
-<p>Another interesting aspect is how they can be queried and navigated, which is a good way to help with the Accessibility of data, the A of FAIR. SPARQL is a standard query language for most knowledge graphs (those based on RDF), and it is possible to use a LLM to query a SPARQL endpoint or create queries.</p>
-<p>Knowledge graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.</p>
+<p>But Semantic graphs answer a more general need: they are a way to represent data with semantic meaning, with shared, agreed-upon vocabularies and ontologies. As such, they are a good way to help with the Interoperability and Reusability of data, the IR of FAIR.</p>
+<p>Another interesting aspect is how they can be queried and navigated, which is a good way to help with the Accessibility of data, the A of FAIR. SPARQL is a standard query language for most semantic graphs (those based on RDF), and it is possible to use a LLM to query a SPARQL endpoint or create queries.</p>
+<p>Semantic graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.</p>
 </section>
-<section id="what-are-knowledge-graphs" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> What are Knowledge graphs</h1>
-<p>Knowledge graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
+<section id="what-are-semantic-graphs" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> What are Semantic graphs</h1>
+<p>Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
 <section id="definition" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">2.1</span> Definition</h2>
+<section id="knowledge-graüj" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="knowledge-graüj"><span class="header-section-number">2.1.1</span> Knowledge graüj</h3>
 <p>A knowledge graph is a way of organizing information as a network of entities (people, places, concepts, datasets) connected by labeled relationships, typically stored as subject-predicate-object triples like “Marie Curie-&gt; won -&gt; Nobel Prize in Physics.” Because the data is structured as nodes and edges, often with a shared schema or ontology that defines what types of things and relationships exist, it can be queried, linked across sources, and reasoned over to reveal connections that would be hard to see in flat tables or unstructured text. Knowledge graphs power things like search engine info panels, recommendation systems, and data integration across research or enterprise systems.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -334,12 +340,24 @@ cookieconsent.run({
 </div>
 </div>
 </section>
+<section id="semantic-graph" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="semantic-graph"><span class="header-section-number">2.1.2</span> Semantic graph</h3>
+<p>A <strong>semantic graph</strong> goes further: the nodes and edges are identified by <strong>globally unique identifiers (IRIs)</strong> and their meaning is defined in shared, machine-readable vocabularies called <strong>ontologies</strong>. This makes data:</p>
+<ul>
+<li><strong>self-describing:</strong> the graph contains its own schema;</li>
+<li><strong>integrable:</strong> graphs from different sources merge simply by sharing identifiers;</li>
+<li><strong>inferable:</strong> software can derive new facts through logical reasoning;</li>
+<li><strong>interoperable:</strong> built on open W3C standards, so there is no vendor lock-in.</li>
+</ul>
+<p>This is the technology behind the <strong>Semantic Web</strong>, <strong>Linked Open Data</strong> and many <strong>knowledge graphs</strong>, and it underpins the <strong>FAIR</strong> principles (Findable, Accessible, Interoperable, Reusable) for research data.</p>
+</section>
+</section>
 <section id="current-solutions" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="current-solutions"><span class="header-section-number">2.2</span> Current solutions</h2>
 <section id="rdf" class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="rdf"><span class="header-section-number">2.2.1</span> RDF</h3>
-<p>One prevalent method to store a knowledge graph is RDF, Resource Description Framework. It is not a language, but a list of definitions (framework) that can be “implemented” using various serialization formats: i.e.&nbsp;how it is stored in a file.</p>
-<p>The first serialization format was RDF/XML. It is not very readable and difficult to write, but might be used in many legacy systems and graphs. If you need to write a knowledge graph in this format, it might be a better approach to use either Turtle or JSON-LD (see below) and use a conversion tool to RDF/XML.</p>
+<p>One prevalent method to store a semantic graph is RDF, Resource Description Framework. It is not a language, but a list of definitions (framework) that can be “implemented” using various serialization formats: i.e.&nbsp;how it is stored in a file.</p>
+<p>The first serialization format was RDF/XML. It is not very readable and difficult to write, but might be used in many legacy systems and graphs. If you need to write a semantic graph in this format, it might be a better approach to use either Turtle or JSON-LD (see below) and use a conversion tool to RDF/XML.</p>
 <pre class="{xml}"><code>&lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:ex="http://example.org/"&gt;
   &lt;rdf:Description rdf:about="http://example.org/MarieCurie"&gt;
@@ -376,13 +394,13 @@ ex:MarieCurie ex:won ex:NobelPrizePhysics ;
 </section>
 </section>
 </section>
-<section id="what-to-use-when-knowledge-graphs-relational-databases-nosql-databases" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> What to use when: Knowledge graphs, Relational Databases, NoSQL Databases</h1>
+<section id="what-to-use-when-semantic-graphs-relational-databases-nosql-databases" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> What to use when: Semantic graphs, Relational Databases, NoSQL Databases</h1>
 <p>Relational databases offer a clear benefit for storing repeated data with clear relationships between them, with fast and relatively simple queries.</p>
-<p>But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a knowledge graph, which are more flexible.</p>
-<p>Note that a NoSQL database can be stored in a relational database, and a knowledge graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a knowledge graph).</p>
-<p>A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, … A knowledge graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object).</p>
-<p>As such, it is simpler to consider the benefits of a knowledge graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).</p>
+<p>But if the data starts to self-reference, queries become more complex and less efficient. Database normalisation avoids such problems, but it is not always possible or desirable to normalise the data. In such cases, it can be better to opt for a NoSQL database or a semantic graph, which are more flexible.</p>
+<p>Note that a NoSQL database can be stored in a relational database, and a semantic graph can be stored in a NoSQL database, and by extension in a relational database (which might be poorly suited for navigating a semantic graph).</p>
+<p>A NoSQL database is an technical solution to store data in a flexible way, with no predefined assumptions other than the basic structure: a set of key-value pairs, key-columns, graph, … A semantic graph is a higher level solution to represent data with semantic meaning, with a predefined structure: a set of triples (subject, predicate, object).</p>
+<p>As such, it is simpler to consider the benefits of a semantic graph first: it offers a known, standardised, and widely used structure to represent data with semantic meaning with their relationships, and it is easier to query and navigate the data (with a standard query language such as SparQL).</p>
 <p>There exists several kinds of NoSQL databases:</p>
 <ul>
 <li>Key-value stores: store data as a collection of key-value pairs, where each key is unique and maps to a specific value. Examples include Redis and Amazon DynamoDB.</li>
@@ -596,8 +614,8 @@ INSERT INTO triples VALUES
 <section id="rdf-and-sparql" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> RDF and SparQL</h1>
 </section>
-<section id="llm-and-knowledge-graphs" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> LLM and Knowledge graphs</h1>
+<section id="llm-and-semantic-graphs" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> LLM and Semantic graphs</h1>
 </section>
 <section id="how-to" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> How to</h1>
@@ -606,15 +624,15 @@ INSERT INTO triples VALUES
 </section>
 <section id="data" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="data"><span class="header-section-number">7.2</span> Data</h2>
-<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a knowledge graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
-<p>Relation between tables in a relational database will be represented as a triple in a knowledge graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
+<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
+<p>Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
 </section>
 <section id="meta-data" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="meta-data"><span class="header-section-number">7.3</span> Meta-data</h2>
 </section>
 <section id="nosql-and-other-cases" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="nosql-and-other-cases"><span class="header-section-number">7.4</span> NoSQL and other cases</h2>
-<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.</p>
+<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.</p>
 <p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. It is also true for a relational database if the schema is not normalized in the general traditional sense: it is for instance possible to to flatten several tables into one table, where some columns will become elements in a row.</p>
 <p>For instance:</p>
 <p><code>Person ID, Type of Data, Value of Data</code></p>
@@ -624,7 +642,7 @@ INSERT INTO triples VALUES
 <li><code>1, Age, 30</code></li>
 <li><code>1, Address, 123 Main St</code></li>
 </ul>
-<p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a knowledge graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
+<p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
 </section>
 <section id="a-sparql-endpoint" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">7.5</span> A SparQL endpoint</h2>
