@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>De.KCD - Data Management Platform on the Cloud: Onboarding – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ce0f0d1e95892c391167071f7e5e54e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":"",
+"website_privacy_policy_url":"https://dekcd.github.io/FAIR-DMP-Registry/pages/privacy.html"
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<script type="text/plain" cookie-consent="tracking">
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['setVisitorCookieTimeout', '2592000']);
+  _paq.push(['setSessionCookieTimeout', '0']);
+  _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]);
+  _paq.push(["setCookieDomain", "*.dekcd.github.io"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  _paq.push(['enableHeartBeatTimer', 15]);
+  (function() {
+    var u="https://piwik.cebitec.uni-bielefeld.de/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '38']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+</script>
+ 
+<noscript></noscript></head><body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><p><img referrerpolicy="no-referrer-when-downgrade" src="https://piwik.cebitec.uni-bielefeld.de/matomo.php?idsite=38&amp;rec=1" style="border:0;" alt=""></p>
+
+
+<link rel="stylesheet" href="styles.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">De.KCD - Data Management Platform on the Cloud - Quickstart</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pages/privacy.html"> 
+<span class="menu-text">Privacy Policy</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/abecam/DeKCD-DMOnTheCloud" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">De.KCD - Data Management Platform on the Cloud: Onboarding</li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">De.KCD - Data Management Platform on the Cloud, step by step</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Backups_and_security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Backups and Security</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Data_storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Storage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pseudonymization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Kubernetes</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Kubernetes_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kubernetes - step by step</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-this-guide-is-for" id="toc-what-this-guide-is-for" class="nav-link active" data-scroll-target="#what-this-guide-is-for"><span class="header-section-number">1</span> What this guide is for</a></li>
+  <li><a href="#which-solution-do-i-need" id="toc-which-solution-do-i-need" class="nav-link" data-scroll-target="#which-solution-do-i-need"><span class="header-section-number">2</span> Which solution do I need?</a></li>
+  <li><a href="#five-rules-to-follow-from-day-one" id="toc-five-rules-to-follow-from-day-one" class="nav-link" data-scroll-target="#five-rules-to-follow-from-day-one"><span class="header-section-number">3</span> Five rules to follow from day one</a></li>
+  <li><a href="#the-linux-you-need" id="toc-the-linux-you-need" class="nav-link" data-scroll-target="#the-linux-you-need"><span class="header-section-number">4</span> The Linux you need</a></li>
+  <li><a href="#containers-and-docker-in-five-minutes" id="toc-containers-and-docker-in-five-minutes" class="nav-link" data-scroll-target="#containers-and-docker-in-five-minutes"><span class="header-section-number">5</span> Containers and Docker in five minutes</a>
+  <ul class="collapse">
+  <li><a href="#the-four-words-to-know" id="toc-the-four-words-to-know" class="nav-link" data-scroll-target="#the-four-words-to-know"><span class="header-section-number">5.1</span> The four words to know</a></li>
+  <li><a href="#why-docker-compose" id="toc-why-docker-compose" class="nav-link" data-scroll-target="#why-docker-compose"><span class="header-section-number">5.2</span> Why Docker Compose</a></li>
+  <li><a href="#everyday-commands" id="toc-everyday-commands" class="nav-link" data-scroll-target="#everyday-commands"><span class="header-section-number">5.3</span> Everyday commands</a></li>
+  <li><a href="#pitfalls-that-cost-people-days" id="toc-pitfalls-that-cost-people-days" class="nav-link" data-scroll-target="#pitfalls-that-cost-people-days"><span class="header-section-number">5.4</span> Pitfalls that cost people days</a></li>
+  </ul></li>
+  <li><a href="#kubernetes-in-a-nutshell" id="toc-kubernetes-in-a-nutshell" class="nav-link" data-scroll-target="#kubernetes-in-a-nutshell"><span class="header-section-number">6</span> Kubernetes in a nutshell</a></li>
+  <li><a href="#other-solutions-at-a-glance" id="toc-other-solutions-at-a-glance" class="nav-link" data-scroll-target="#other-solutions-at-a-glance"><span class="header-section-number">7</span> Other solutions at a glance</a></li>
+  <li><a href="#topics-that-matter-at-every-level" id="toc-topics-that-matter-at-every-level" class="nav-link" data-scroll-target="#topics-that-matter-at-every-level"><span class="header-section-number">8</span> Topics that matter at every level</a></li>
+  <li><a href="#suggested-path-for-newcomers" id="toc-suggested-path-for-newcomers" class="nav-link" data-scroll-target="#suggested-path-for-newcomers"><span class="header-section-number">9</span> Suggested path for newcomers</a></li>
+  <li><a href="#where-to-go-next" id="toc-where-to-go-next" class="nav-link" data-scroll-target="#where-to-go-next"><span class="header-section-number">10</span> Where to go next</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">De.KCD - Data Management Platform on the Cloud: Onboarding</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A short introduction to setting up and running a Data Management Platform (such as Seek4Science) in the cloud. Reading time: about 15 minutes.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the condensed version. Each section ends with a pointer to the matching part of the <a href="./index.html">full step-by-step guide</a>, which has the details, examples and further reading.</p>
+</div>
+</div>
+<section id="what-this-guide-is-for" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> What this guide is for</h1>
+<p>It helps you to decide <strong>which solution fits your project</strong> and to understand it well enough to find your way through its documentation. It does not replace the documentation of each tool.</p>
+<ul>
+<li>It covers the whole path, from a simple local installation to Kubernetes.</li>
+<li>For each solution it tells you what it costs (effort, complexity, security risk) and what you gain.</li>
+<li>It is aimed at research projects and institutions, and at scientists who are not IT specialists.</li>
+<li>By <em>Data Management Platform</em> we mean an online application with a data repository, such as those listed in our <a href="https://dekcd.github.io/FAIR-DMP-Registry/">Data Management Platforms registry</a>.</li>
+</ul>
+<p>For the wider topic of research data management, start with <a href="https://rdmkit.elixir-europe.org/research_software_engineer">RDMKit</a> and come back here for the technical depth.</p>
+</section>
+<section id="which-solution-do-i-need" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Which solution do I need?</h1>
+<p>Choose the <strong>simplest level that meets your current needs</strong>. Moving up is possible later; moving down is rarely needed.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Good for</th>
+<th>Main drawback</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hosted service</strong> from your institution or consortium</td>
+<td>Almost everyone, if one exists</td>
+<td>Less control; check terms of service, data access and API</td>
+</tr>
+<tr class="even">
+<td><strong>Local installation</strong> (“bare metal”)</td>
+<td>One user, no sharing, testing</td>
+<td>Not scalable, not secure enough for production</td>
+</tr>
+<tr class="odd">
+<td><strong>Virtual machine</strong></td>
+<td>Testing, or applications that cannot be containerised</td>
+<td>Heavier; you update the whole system yourself</td>
+</tr>
+<tr class="even">
+<td><strong>Docker / Docker Compose</strong></td>
+<td>Most production setups of one to a few applications</td>
+<td>You need to understand volumes, backups and updates</td>
+</tr>
+<tr class="odd">
+<td><strong>Kubernetes</strong></td>
+<td>Many applications, 24/7 operation, transparent updates, scaling</td>
+<td>High complexity; overkill for small setups</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Always check for a hosted service first.</strong> Examples are the <a href="https://cloud.denbi.de/">De.NBI Cloud</a>, the <a href="https://open-science-cloud.ec.europa.eu/">European Open Science Cloud</a>, the <a href="https://www.egi.eu/egi-federation/">EGI Federation</a> and the <a href="https://academiccloud.de/">GWDG Academic Cloud</a>. Someone else maintains and updates it, which is usually more secure than self-hosting. You may still need a dedicated installation for privacy reasons or for large, high-performance data.</p>
+</div>
+</div>
+<p>More detail: <a href="./pages/TechPlatformDecisionTree.html">decision tree</a>.</p>
+</section>
+<section id="five-rules-to-follow-from-day-one" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Five rules to follow from day one</h1>
+<ol type="1">
+<li><strong>Keep the difficulty under control.</strong> A solution you cannot maintain is a bad solution. Reuse what already exists at your institution (servers, virtual machines) when it is well documented and supported.</li>
+<li><strong>Decide the level of service.</strong> Going from “down for one night” to “down for one hour” costs less than going from one hour to one minute. Pick what the users really need.</li>
+<li><strong>Plan for future problems, not future features.</strong> Security, data loss and performance problems are expensive to fix later. Avoid feature creep: build for what users <em>need</em>, not for everything they <em>want</em>.</li>
+<li><strong>Document every specific change</strong>: what, why, who, when, and how to undo it. A central document plus a short README next to each change works well.</li>
+<li><strong>Use version control (Git)</strong> for anything you customise: configuration files, compose files, scripts. If the platform has no export or API, write a small script (for instance in Python) that exports the settings.</li>
+</ol>
+</section>
+<section id="the-linux-you-need" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> The Linux you need</h1>
+<p>Linux is the usual operating system for these setups, and basic knowledge is a must for security reasons. Learn the basics from the <a href="https://swcarpentry.github.io/shell-novice/index.html">Software Carpentry shell lesson</a> or similar tutorials.</p>
+<p><strong>Commands to know:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Commands</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Navigate and manage files</td>
+<td><code>ls -al</code>, <code>cd</code>, <code>pwd</code>, <code>cp</code>, <code>mv</code>, <code>mkdir</code>, <code>rm</code>, <code>ln</code></td>
+</tr>
+<tr class="even">
+<td>Read and edit files</td>
+<td><code>cat</code>, <code>less</code>, <code>tail</code>, <code>nano</code> (or <code>vim</code>), <code>grep</code>, <code>find</code></td>
+</tr>
+<tr class="odd">
+<td>Permissions</td>
+<td><code>chmod</code>, <code>chown</code>, <code>chgrp</code>, <code>sudo</code></td>
+</tr>
+<tr class="even">
+<td>System and processes</td>
+<td><code>ps</code>, <code>top</code>, <code>kill</code>, <code>df</code>, <code>du</code>, <code>free</code>, <code>mount</code></td>
+</tr>
+<tr class="odd">
+<td>Network and remote</td>
+<td><code>ssh</code>, <code>scp</code>, <code>rsync</code>, <code>curl</code>, <code>wget</code></td>
+</tr>
+<tr class="even">
+<td>Help</td>
+<td><code>man &lt;command&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Folders to know:</strong> <code>/etc</code> (configuration, very important), <code>/var/log</code> (logs, the first place to look when something fails), <code>/home</code> (users), <code>/opt</code> (third-party software), <code>/tmp</code> (temporary files).</p>
+<p><strong>Permissions:</strong> every file has an owner, a group and permissions for owner, group and others. Permissions can be written as letters or as numbers, where read = 4, write = 2, execute = 1. For example, <code>rwxr-xr--</code> is <code>754</code> (owner 4+2+1, group 4+1, others 4). Do not work as <code>root</code>; use <code>sudo</code>.</p>
+<p><strong>Network basics:</strong></p>
+<ul>
+<li>A <strong>firewall</strong> controls which traffic may reach your server. Open only the ports you need.</li>
+<li><strong>SSH</strong> is the secure way to administer a server remotely. Use key pairs rather than passwords.</li>
+<li>A <strong>VPN</strong> gives secure access to a private network.</li>
+<li>A <strong>web server / reverse proxy</strong> (Nginx, Apache, or the newer Caddy) usually sits in front of your application. It handles HTTPS, can cache static content, and can serve several applications from one address.</li>
+</ul>
+<p>More detail: <a href="./index.html#quick-introduction-to-linuxunix">Linux introduction</a>.</p>
+</section>
+<section id="containers-and-docker-in-five-minutes" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Containers and Docker in five minutes</h1>
+<section id="the-four-words-to-know" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="the-four-words-to-know"><span class="header-section-number">5.1</span> The four words to know</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Image</strong></td>
+<td>A template containing the application, its dependencies and default configuration. It does not change while running.</td>
+</tr>
+<tr class="even">
+<td><strong>Container</strong></td>
+<td>A running instance of an image. It is ephemeral: <strong>if it is deleted, everything inside is lost</strong>.</td>
+</tr>
+<tr class="odd">
+<td><strong>Volume</strong></td>
+<td>Persistent storage outside the container. Everything that must survive restarts and updates goes here.</td>
+</tr>
+<tr class="even">
+<td><strong>Docker Compose</strong></td>
+<td>One text file (YAML) that describes several containers, their connections, ports, volumes and variables.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Many “quick start” containers use a temporary database and file system. <strong>For production you must set up volumes</strong> and usually a few initial steps. Always follow the platform’s documentation.</p>
+</div>
+</div>
+</section>
+<section id="why-docker-compose" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="why-docker-compose"><span class="header-section-number">5.2</span> Why Docker Compose</h2>
+<p>A compose file can be stored in Git and documented, and it makes rebuilding a server much easier. If the platform does not provide one, we strongly recommend writing one (and testing it).</p>
+<p>A minimal example, with an application and its PostgreSQL database:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">app</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> ghcr.io/example/myapp:1.2.3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8000:8000"</span><span class="co">          # host port : container port</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_HOST</span><span class="kw">:</span><span class="at"> db</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> ${POSTGRES_DB:-appdb}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> ${POSTGRES_USER:-appuser}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> ${POSTGRES_PASSWORD}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> postgres:16</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_DB</span><span class="kw">:</span><span class="at"> ${POSTGRES_DB:-appdb}</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_USER</span><span class="kw">:</span><span class="at"> ${POSTGRES_USER:-appuser}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">POSTGRES_PASSWORD</span><span class="kw">:</span><span class="at"> ${POSTGRES_PASSWORD}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_data:/var/lib/postgresql/data</span><span class="co">   # data survives restarts</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db_data</span><span class="kw">:</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Secrets and settings that change between environments go into a <code>.env</code> file next to the compose file. <strong>Never commit it to Git.</strong> The syntax <code>${NAME:-default}</code> uses a default when the variable is not set.</p>
+</section>
+<section id="everyday-commands" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="everyday-commands"><span class="header-section-number">5.3</span> Everyday commands</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up        <span class="co"># start in the foreground (CTRL-C stops)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span>     <span class="co"># start in the background</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose down      <span class="co"># stop and remove the containers (named volumes are kept)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="pitfalls-that-cost-people-days" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="pitfalls-that-cost-people-days"><span class="header-section-number">5.4</span> Pitfalls that cost people days</h2>
+<ul>
+<li><strong>Folder name = namespace.</strong> Two compose setups in folders with the same name (even under different parents) share a network and can talk to each other’s containers.</li>
+<li><strong>Avoid <code>container_name</code>.</strong> It ignores the namespace and allows only one instance.</li>
+<li><strong>Bind mounts</strong> (a host folder) are fine for testing, but two instances using the same folder will conflict, and a test instance can end up writing into production data. Use <strong>named volumes</strong> in production and back them up with the database dump tools or <code>tar</code>.</li>
+<li><strong>Containers share the host kernel.</strong> A badly configured host volume can expose sensitive parts of the host. For a quick, exposed test, a virtual machine is the safer choice.</li>
+<li><strong>Not everything can be containerised</strong>, for example applications that must run as root or need a specific kernel or hardware.</li>
+</ul>
+<p>More detail: <a href="./index.html#containers-overview-of-docker-usage">Docker</a>, <a href="./index.html#moving-to-docker-compose">Docker Compose</a>.</p>
+</section>
+</section>
+<section id="kubernetes-in-a-nutshell" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Kubernetes in a nutshell</h1>
+<p>Kubernetes is an <strong>orchestrator</strong>. Where Docker Compose runs containers on one machine, Kubernetes decides on which machine containers run, replicates them, replaces unhealthy ones, and exposes them as services.</p>
+<ul>
+<li>Containers run in <strong>pods</strong>, which run on <strong>nodes</strong> (machines). Copies of an application are called <strong>replicas</strong>.</li>
+<li>It works <strong>declaratively</strong>: you describe the wanted state in manifests, and Kubernetes keeps working towards it, even after a node fails.</li>
+</ul>
+<p><strong>Is it for you?</strong> For a simple application it is overkill. The bigger and more demanding your setup (24/7, transparent updates, hundreds to thousands of users), the more you gain. Learning it is medium to hard. Using a cluster is much easier than building a production cluster, so we recommend that developers set up a cluster only as a test bed and <strong>rely on sysadmins for production</strong>.</p>
+<p>More detail: <a href="./pages/Kubernetes_introduction.html">Kubernetes introduction</a>.</p>
+</section>
+<section id="other-solutions-at-a-glance" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Other solutions at a glance</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Solution</th>
+<th>What it is</th>
+<th>When to consider it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Proxmox VE</strong></td>
+<td>Open-source virtualisation platform with a web GUI (virtual machines and Linux containers, snapshots, backups)</td>
+<td>A good middle step between managing servers by hand and Kubernetes or OpenStack. Free alternative to VMware.</td>
+</tr>
+<tr class="even">
+<td><strong>OpenStack</strong></td>
+<td>Open-source cloud infrastructure made of many services (compute, networking, storage, identity); can provide Kubernetes as a service</td>
+<td>Larger institutional clouds. Often something you <em>use</em> rather than run yourself.</td>
+</tr>
+<tr class="odd">
+<td><strong>Docker Swarm</strong></td>
+<td>Very simple container orchestration</td>
+<td>Small setups that need slightly more than Compose</td>
+</tr>
+<tr class="even">
+<td><strong>Nomad, ECS, GKE, Cloud Run</strong></td>
+<td>Lightweight or cloud-provider orchestrators</td>
+<td>When you are already committed to that ecosystem; watch for vendor lock-in</td>
+</tr>
+<tr class="odd">
+<td><strong>Apache projects</strong></td>
+<td>HTTP Server, Tomcat, Kafka, Spark, Airflow, Solr</td>
+<td>When your platform or pipeline is built on them</td>
+</tr>
+</tbody>
+</table>
+<p>Proxmox and Kubernetes work at different layers and combine well: Kubernetes can run on virtual machines managed by Proxmox.</p>
+</section>
+<section id="topics-that-matter-at-every-level" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Topics that matter at every level</h1>
+<p><strong>Scalability.</strong> You rarely need it on day one, but know what it means. <em>Vertical</em>: a bigger machine, or moving the database to its own machine. <em>Horizontal</em>: more instances behind a load balancer. Horizontal scaling only works if the application handles shared data correctly, for example when two users edit the same item.</p>
+<p><strong>Databases.</strong> Most platforms use a relational database (PostgreSQL, MySQL, MariaDB, SQLite). Learn basic SQL: it helps with troubleshooting, bulk updates, and backup and restore.</p>
+<p><strong>Security.</strong> At a minimum:</p>
+<ul>
+<li>keep software up to date,</li>
+<li>use strong passwords, and give access only to those who need it,</li>
+<li>use HTTPS (free certificates from <a href="https://letsencrypt.org/">Let’s Encrypt</a>) and SSH,</li>
+<li><strong>back up regularly and test the restore</strong>,</li>
+<li>monitor for suspicious activity,</li>
+<li>guard against abuse (spam, too many requests, huge uploads).</li>
+</ul>
+<p>More detail: <a href="./pages/Backups_and_security.html">Backups and security</a>.</p>
+<p><strong>Assemblies.</strong> Platforms are often connected to each other (storage, compute clusters, analysis tools), usually through APIs. Check the security of each connection, and note that sensitive data may need to be anonymised or pseudonymised before being shared (<a href="pages/Pseudonymisation.qmd">details</a>).</p>
+<p><strong>Automation.</strong> Once you repeat a setup, automate it. <strong>Ansible</strong> configures machines over SSH with YAML playbooks and is the easiest to start with. <strong>Puppet</strong> enforces configuration continuously on large fleets. <strong>Terraform</strong> creates the infrastructure itself (virtual machines, networks) and is usually handled by your sysadmin.</p>
+<p><strong>CI/CD and GitOps.</strong> CI/CD runs tests and builds automatically whenever you push to Git; with CD it also deploys. GitOps makes Git the single source of truth for a cluster (for example with Flux CD). Automatic deployment must be properly secured. If unsure, do CI only and deploy manually.</p>
+<p><strong>Choosing tools.</strong> There are always more tools than you need. Prefer popular, well-documented, well-maintained ones from known sources. Use brand-new products only where there is no security risk, they cannot break the platform, and the gain is major. For databases, stick to the well-known ones.</p>
+</section>
+<section id="suggested-path-for-newcomers" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Suggested path for newcomers</h1>
+<ol type="1">
+<li>Read the sections above and decide on the <strong>simplest level</strong> that fits (hosted service first).</li>
+<li>Get comfortable with <strong>Linux basics</strong> and SSH.</li>
+<li>Run the platform locally with <strong>Docker Compose</strong> using the test setup from its documentation.</li>
+<li>Add <strong>volumes, an <code>.env</code> file and a reverse proxy with HTTPS</strong>, then put the compose file under <strong>Git</strong>.</li>
+<li>Set up and test <strong>backups and restores</strong>.</li>
+<li>Write down what you changed and why.</li>
+<li>Only if your needs grow: look at Proxmox, then Kubernetes, ideally together with a sysadmin.</li>
+</ol>
+</section>
+<section id="where-to-go-next" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Where to go next</h1>
+<ul>
+<li><a href="./index.html">Full step-by-step guide</a></li>
+<li><a href="./pages/TechPlatformDecisionTree.html">Decision tree</a></li>
+<li><a href="./pages/Kubernetes_introduction.html">Kubernetes introduction</a></li>
+<li><a href="./pages/Backups_and_security.html">Backups and security</a></li>
+<li><a href="https://rdmkit.elixir-europe.org/">RDMKit</a></li>
+<li>Official documentation: <a href="https://docs.docker.com/">Docker</a>, <a href="https://docs.docker.com/compose/">Docker Compose</a>, <a href="https://pve.proxmox.com/pve-docs/">Proxmox VE</a>, <a href="https://docs.ansible.com">Ansible</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/abecam\.github\.io\/DeKCD-DMOnTheCloud\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Update cookies preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
