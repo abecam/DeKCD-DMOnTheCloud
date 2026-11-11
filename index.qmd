@@ -288,7 +288,7 @@ Each user has a home directory (usually under /home/username) where they can sto
 
 Each file on Unix systems has an owner and a group, and permissions that determine who can read, write, or execute the file. 
 The owner of a file can be changed using the `chown` command, and the group can be changed using the `chgrp` command. Permissions can be modified using the `chmod` command, which can set permissions for the owner, group, and others.
-Permissions are represented in a symbolic format (e.g., `rwxr-xr--`) or a numeric format (e.g., `755`). The symbolic format has to be read as three sets of permissions: the first set (rwx) is for the owner, the second set (r-x) is for the group, and the third set (r--) is for others. Each set is composed of the permissions to read (r), write (w), and execute (x) the file, and "-" means that the permission is not granted.
+Permissions are represented in a symbolic format (e.g., `rwxr-xr--`) or a numeric format (e.g., `754`). The symbolic format has to be read as three sets of permissions: the first set (rwx) is for the owner, the second set (r-x) is for the group, and the third set (r--) is for others. Each set is composed of the permissions to read (r), write (w), and execute (x) the file, and "-" means that the permission is not granted.
 To got from the symbolic format to the numeric format, you can use the following values: read (r) = 4, write (w) = 2, execute (x) = 1. So for example, `rwxr-xr--` would be 755 (4+2+1 for the owner, 4+1 for the group, and 4 for others).
 
 ### Online resources

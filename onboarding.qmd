@@ -1,0 +1,210 @@
+---
+title: "De.KCD - Data Management Platform on the Cloud: Onboarding"
+number-sections: true
+---
+
+A short introduction to setting up and running a Data Management Platform (such as Seek4Science) in the cloud. Reading time: about 15 minutes.
+
+::: {.callout-note}
+This is the condensed version. Each section ends with a pointer to the matching part of the [full step-by-step guide](index.qmd), which has the details, examples and further reading.
+:::
+
+# What this guide is for
+
+It helps you to decide **which solution fits your project** and to understand it well enough to find your way through its documentation. It does not replace the documentation of each tool.
+
+* It covers the whole path, from a simple local installation to Kubernetes.
+* For each solution it tells you what it costs (effort, complexity, security risk) and what you gain.
+* It is aimed at research projects and institutions, and at scientists who are not IT specialists.
+* By *Data Management Platform* we mean an online application with a data repository, such as those listed in our [Data Management Platforms registry](https://dekcd.github.io/FAIR-DMP-Registry/).
+
+For the wider topic of research data management, start with [RDMKit](https://rdmkit.elixir-europe.org/research_software_engineer) and come back here for the technical depth.
+
+# Which solution do I need?
+
+Choose the **simplest level that meets your current needs**. Moving up is possible later; moving down is rarely needed.
+
+| Level | Good for | Main drawback |
+|---|---|---|
+| **Hosted service** from your institution or consortium | Almost everyone, if one exists | Less control; check terms of service, data access and API |
+| **Local installation** ("bare metal") | One user, no sharing, testing | Not scalable, not secure enough for production |
+| **Virtual machine** | Testing, or applications that cannot be containerised | Heavier; you update the whole system yourself |
+| **Docker / Docker Compose** | Most production setups of one to a few applications | You need to understand volumes, backups and updates |
+| **Kubernetes** | Many applications, 24/7 operation, transparent updates, scaling | High complexity; overkill for small setups |
+
+::: {.callout-tip}
+**Always check for a hosted service first.** Examples are the [De.NBI Cloud](https://cloud.denbi.de/), the [European Open Science Cloud](https://open-science-cloud.ec.europa.eu/), the [EGI Federation](https://www.egi.eu/egi-federation/) and the [GWDG Academic Cloud](https://academiccloud.de/). Someone else maintains and updates it, which is usually more secure than self-hosting. You may still need a dedicated installation for privacy reasons or for large, high-performance data.
+:::
+
+More detail: [decision tree](pages/TechPlatformDecisionTree.qmd).
+
+# Five rules to follow from day one
+
+1. **Keep the difficulty under control.** A solution you cannot maintain is a bad solution. Reuse what already exists at your institution (servers, virtual machines) when it is well documented and supported.
+2. **Decide the level of service.** Going from "down for one night" to "down for one hour" costs less than going from one hour to one minute. Pick what the users really need.
+3. **Plan for future problems, not future features.** Security, data loss and performance problems are expensive to fix later. Avoid feature creep: build for what users *need*, not for everything they *want*.
+4. **Document every specific change**: what, why, who, when, and how to undo it. A central document plus a short README next to each change works well.
+5. **Use version control (Git)** for anything you customise: configuration files, compose files, scripts. If the platform has no export or API, write a small script (for instance in Python) that exports the settings.
+
+# The Linux you need
+
+Linux is the usual operating system for these setups, and basic knowledge is a must for security reasons. Learn the basics from the [Software Carpentry shell lesson](https://swcarpentry.github.io/shell-novice/index.html) or similar tutorials.
+
+**Commands to know:**
+
+| Task | Commands |
+|---|---|
+| Navigate and manage files | `ls -al`, `cd`, `pwd`, `cp`, `mv`, `mkdir`, `rm`, `ln` |
+| Read and edit files | `cat`, `less`, `tail`, `nano` (or `vim`), `grep`, `find` |
+| Permissions | `chmod`, `chown`, `chgrp`, `sudo` |
+| System and processes | `ps`, `top`, `kill`, `df`, `du`, `free`, `mount` |
+| Network and remote | `ssh`, `scp`, `rsync`, `curl`, `wget` |
+| Help | `man <command>` |
+
+**Folders to know:** `/etc` (configuration, very important), `/var/log` (logs, the first place to look when something fails), `/home` (users), `/opt` (third-party software), `/tmp` (temporary files).
+
+**Permissions:** every file has an owner, a group and permissions for owner, group and others. Permissions can be written as letters or as numbers, where read = 4, write = 2, execute = 1. For example, `rwxr-xr--` is `754` (owner 4+2+1, group 4+1, others 4). Do not work as `root`; use `sudo`.
+
+**Network basics:**
+
+* A **firewall** controls which traffic may reach your server. Open only the ports you need.
+* **SSH** is the secure way to administer a server remotely. Use key pairs rather than passwords.
+* A **VPN** gives secure access to a private network.
+* A **web server / reverse proxy** (Nginx, Apache, or the newer Caddy) usually sits in front of your application. It handles HTTPS, can cache static content, and can serve several applications from one address.
+
+More detail: [Linux introduction](index.qmd#quick-introduction-to-linuxunix).
+
+# Containers and Docker in five minutes
+
+## The four words to know
+
+| Term | Meaning |
+|---|---|
+| **Image** | A template containing the application, its dependencies and default configuration. It does not change while running. |
+| **Container** | A running instance of an image. It is ephemeral: **if it is deleted, everything inside is lost**. |
+| **Volume** | Persistent storage outside the container. Everything that must survive restarts and updates goes here. |
+| **Docker Compose** | One text file (YAML) that describes several containers, their connections, ports, volumes and variables. |
+
+::: {.callout-warning}
+Many "quick start" containers use a temporary database and file system. **For production you must set up volumes** and usually a few initial steps. Always follow the platform's documentation.
+:::
+
+## Why Docker Compose
+
+A compose file can be stored in Git and documented, and it makes rebuilding a server much easier. If the platform does not provide one, we strongly recommend writing one (and testing it).
+
+A minimal example, with an application and its PostgreSQL database:
+
+```yaml
+services:
+  app:
+    image: ghcr.io/example/myapp:1.2.3
+    ports:
+      - "8000:8000"          # host port : container port
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_DB: ${POSTGRES_DB:-appdb}
+      POSTGRES_USER: ${POSTGRES_USER:-appuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-appdb}
+      POSTGRES_USER: ${POSTGRES_USER:-appuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data   # data survives restarts
+
+volumes:
+  db_data:
+```
+
+Secrets and settings that change between environments go into a `.env` file next to the compose file. **Never commit it to Git.** The syntax `${NAME:-default}` uses a default when the variable is not set.
+
+## Everyday commands
+
+```bash
+docker compose up        # start in the foreground (CTRL-C stops)
+docker compose up -d     # start in the background
+docker compose down      # stop and remove the containers (named volumes are kept)
+```
+
+## Pitfalls that cost people days
+
+* **Folder name = namespace.** Two compose setups in folders with the same name (even under different parents) share a network and can talk to each other's containers.
+* **Avoid `container_name`.** It ignores the namespace and allows only one instance.
+* **Bind mounts** (a host folder) are fine for testing, but two instances using the same folder will conflict, and a test instance can end up writing into production data. Use **named volumes** in production and back them up with the database dump tools or `tar`.
+* **Containers share the host kernel.** A badly configured host volume can expose sensitive parts of the host. For a quick, exposed test, a virtual machine is the safer choice.
+* **Not everything can be containerised**, for example applications that must run as root or need a specific kernel or hardware.
+
+More detail: [Docker](index.qmd#containers-overview-of-docker-usage), [Docker Compose](index.qmd#moving-to-docker-compose).
+
+# Kubernetes in a nutshell
+
+Kubernetes is an **orchestrator**. Where Docker Compose runs containers on one machine, Kubernetes decides on which machine containers run, replicates them, replaces unhealthy ones, and exposes them as services.
+
+* Containers run in **pods**, which run on **nodes** (machines). Copies of an application are called **replicas**.
+* It works **declaratively**: you describe the wanted state in manifests, and Kubernetes keeps working towards it, even after a node fails.
+
+**Is it for you?** For a simple application it is overkill. The bigger and more demanding your setup (24/7, transparent updates, hundreds to thousands of users), the more you gain. Learning it is medium to hard. Using a cluster is much easier than building a production cluster, so we recommend that developers set up a cluster only as a test bed and **rely on sysadmins for production**.
+
+More detail: [Kubernetes introduction](pages/Kubernetes_introduction.qmd).
+
+# Other solutions at a glance
+
+| Solution | What it is | When to consider it |
+|---|---|---|
+| **Proxmox VE** | Open-source virtualisation platform with a web GUI (virtual machines and Linux containers, snapshots, backups) | A good middle step between managing servers by hand and Kubernetes or OpenStack. Free alternative to VMware. |
+| **OpenStack** | Open-source cloud infrastructure made of many services (compute, networking, storage, identity); can provide Kubernetes as a service | Larger institutional clouds. Often something you *use* rather than run yourself. |
+| **Docker Swarm** | Very simple container orchestration | Small setups that need slightly more than Compose |
+| **Nomad, ECS, GKE, Cloud Run** | Lightweight or cloud-provider orchestrators | When you are already committed to that ecosystem; watch for vendor lock-in |
+| **Apache projects** | HTTP Server, Tomcat, Kafka, Spark, Airflow, Solr | When your platform or pipeline is built on them |
+
+Proxmox and Kubernetes work at different layers and combine well: Kubernetes can run on virtual machines managed by Proxmox.
+
+# Topics that matter at every level
+
+**Scalability.** You rarely need it on day one, but know what it means. *Vertical*: a bigger machine, or moving the database to its own machine. *Horizontal*: more instances behind a load balancer. Horizontal scaling only works if the application handles shared data correctly, for example when two users edit the same item.
+
+**Databases.** Most platforms use a relational database (PostgreSQL, MySQL, MariaDB, SQLite). Learn basic SQL: it helps with troubleshooting, bulk updates, and backup and restore.
+
+**Security.** At a minimum:
+
+* keep software up to date,
+* use strong passwords, and give access only to those who need it,
+* use HTTPS (free certificates from [Let's Encrypt](https://letsencrypt.org/)) and SSH,
+* **back up regularly and test the restore**,
+* monitor for suspicious activity,
+* guard against abuse (spam, too many requests, huge uploads).
+
+More detail: [Backups and security](pages/Backups_and_security.qmd).
+
+**Assemblies.** Platforms are often connected to each other (storage, compute clusters, analysis tools), usually through APIs. Check the security of each connection, and note that sensitive data may need to be anonymised or pseudonymised before being shared ([details](pages/Pseudonymisation.qmd)).
+
+**Automation.** Once you repeat a setup, automate it. **Ansible** configures machines over SSH with YAML playbooks and is the easiest to start with. **Puppet** enforces configuration continuously on large fleets. **Terraform** creates the infrastructure itself (virtual machines, networks) and is usually handled by your sysadmin.
+
+**CI/CD and GitOps.** CI/CD runs tests and builds automatically whenever you push to Git; with CD it also deploys. GitOps makes Git the single source of truth for a cluster (for example with Flux CD). Automatic deployment must be properly secured. If unsure, do CI only and deploy manually.
+
+**Choosing tools.** There are always more tools than you need. Prefer popular, well-documented, well-maintained ones from known sources. Use brand-new products only where there is no security risk, they cannot break the platform, and the gain is major. For databases, stick to the well-known ones.
+
+# Suggested path for newcomers
+
+1. Read the sections above and decide on the **simplest level** that fits (hosted service first).
+2. Get comfortable with **Linux basics** and SSH.
+3. Run the platform locally with **Docker Compose** using the test setup from its documentation.
+4. Add **volumes, an `.env` file and a reverse proxy with HTTPS**, then put the compose file under **Git**.
+5. Set up and test **backups and restores**.
+6. Write down what you changed and why.
+7. Only if your needs grow: look at Proxmox, then Kubernetes, ideally together with a sysadmin.
+
+# Where to go next
+
+* [Full step-by-step guide](index.qmd)
+* [Decision tree](pages/TechPlatformDecisionTree.qmd)
+* [Kubernetes introduction](pages/Kubernetes_introduction.qmd)
+* [Backups and security](pages/Backups_and_security.qmd)
+* [RDMKit](https://rdmkit.elixir-europe.org/)
+* Official documentation: [Docker](https://docs.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Proxmox VE](https://pve.proxmox.com/pve-docs/), [Ansible](https://docs.ansible.com)
