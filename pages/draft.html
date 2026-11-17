@@ -225,6 +225,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../onboarding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">De.KCD - Data Management Platform on the Cloud: Onboarding</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -245,6 +251,24 @@ cookieconsent.run({
   <div class="sidebar-item-container"> 
   <a href="../pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pseudonymization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Building_an_assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building an Assembly</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/SemanticGraphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semantic graphs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/General_considerations_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Considerations for Using LLMs in Research Data Management</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -284,7 +308,11 @@ cookieconsent.run({
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#meta-data" id="toc-meta-data" class="nav-link" data-scroll-target="#meta-data">Meta-data</a></li>
   <li><a href="#nosql-and-other-cases" id="toc-nosql-and-other-cases" class="nav-link" data-scroll-target="#nosql-and-other-cases">NoSQL and other cases</a></li>
-  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint">A SPARQL endpoint</a></li>
+  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint">A SPARQL endpoint</a>
+  <ul class="collapse">
+  <li><a href="#implementing-a-sparql-endpoint-with-a-llm" id="toc-implementing-a-sparql-endpoint-with-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-with-a-llm">Implementing a SPARQL endpoint with a LLM</a></li>
+  <li><a href="#implementing-a-sparql-endpoint-without-a-llm" id="toc-implementing-a-sparql-endpoint-without-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-without-a-llm">Implementing a SPARQL endpoint without a LLM</a></li>
+  </ul></li>
   <li><a href="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries" id="toc-using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="nav-link" data-scroll-target="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries">Using a LLM to query a SPARQL endpoint or create queries</a></li>
   </ul></li>
   <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary">Glossary</a></li>
@@ -299,8 +327,7 @@ cookieconsent.run({
 
 <section id="use-in-research-data-management" class="level1">
 <h1>Use in Research Data Management</h1>
-<p>TO REWRITE</p>
-<p>Research data is rarely one clean table. It is spread over spreadsheets, instrument files, lab notebooks and several databases, and the meaning of the columns often lives only in someone’s head. A knowledge graph helps in two ways: it stores data together with its meaning, and it connects data that was produced separately.</p>
+<p>Semantic graphs offer two main benefits for research data management, (1) they allow to store and query data in a flexible way, which might be better adapted for some types of data, for instance analysis of classical literature, where the relationships between entities are complex, and (2) they make it easier to combine information from different sources, as they rely on global identifiers.</p>
 <section id="as-a-different-way-to-store-and-access-data" class="level2">
 <h2 class="anchored" data-anchor-id="as-a-different-way-to-store-and-access-data">As a different way to store and access data</h2>
 <p>In a table, the structure is decided in advance: the columns are fixed and every row has the same ones. In a knowledge graph, every piece of information is a separate statement (a triple, see above). This has a few consequences:</p>
@@ -313,8 +340,6 @@ cookieconsent.run({
 </section>
 <section id="for-an-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="for-an-assembly">For an assembly</h2>
-<p>TO REVIEW and complete</p>
-<p>Here, “assembly” means bringing together data from several sources (labs, projects, public databases).</p>
 <p>Because everything has a global identifier, one graph can combine information from different origins. If two sources use the same identifier for a species, a person (e.g.&nbsp;an ORCID iD) or a gene, their statements connect automatically, without matching free-text names that may be spelled differently.</p>
 <pre class="turtle"><code>@prefix ex:   &lt;https://example.org/&gt; .
 @prefix obo:  &lt;http://purl.obolibrary.org/obo/&gt; .
@@ -326,12 +351,11 @@ ex:sample_42 ex:collectedFrom obo:NCBITaxon_3702 .
 # Data from a public ontology
 obo:NCBITaxon_3702 rdfs:label "Arabidopsis thaliana" .</code></pre>
 <p>Loaded together, <code>sample_42</code> is linked to the species name because both statements use the same identifier.</p>
-<p>The technology is the easy part. The real work is agreeing on identifiers and vocabularies and describing how each source maps to them.</p>
+<p>The difficulty is agreeing on identifiers and vocabularies and describing how each source maps to them. As output of a data management platform relying on a relational database, the semantic graph will be partly static, and partly generated on the fly from the database (generally if the metadata changes). You will find more information about this in the <a href="#how-to">“How to”</a> section below.</p>
 </section>
 </section>
 <section id="rdf-and-sparql" class="level1">
 <h1>RDF and SPARQL</h1>
-<p>TO REVIEW and complete</p>
 <p>RDF defines <strong>how data is stored</strong> (as triples). SPARQL (pronounced “sparkle”) is the language to <strong>ask questions</strong> about it, in the same way SQL is used for tables.</p>
 <p>A SPARQL query describes a pattern with blanks, and the database returns everything that fits the pattern. The blanks are variables, written with a leading <code>?</code>.</p>
 <pre class="sparql"><code>PREFIX ex: &lt;https://example.org/&gt;
@@ -357,7 +381,6 @@ WHERE {
 </section>
 <section id="llm-and-knowledge-graphs" class="level1">
 <h1>LLM and Knowledge graphs</h1>
-<p>TO REVIEW and complete</p>
 <p>Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:</p>
 <ul>
 <li><strong>Asking questions in plain language.</strong> The LLM translates a question into a SPARQL query (see “How to” below).</li>
@@ -469,7 +492,6 @@ ex:lab_7    a ex:Lab ;
 </section>
 <section id="meta-data" class="level2">
 <h2 class="anchored" data-anchor-id="meta-data">Meta-data</h2>
-<p>TO REVIEW and complete</p>
 <p>Meta-data is data about the data: who produced it, when, with which method or instrument, in which unit, under which license. In a relational database it usually lives somewhere else (a README, a data dictionary, column comments). In a knowledge graph it is written in the same way as the data, so both can be linked and queried together.</p>
 <p>Rather than inventing your own terms, reuse existing vocabularies (shared lists of properties and classes):</p>
 <ul>
@@ -497,7 +519,6 @@ ex:age rdfs:label   "age"@en ;
 </section>
 <section id="nosql-and-other-cases" class="level2">
 <h2 class="anchored" data-anchor-id="nosql-and-other-cases">NoSQL and other cases</h2>
-<p>TO REVIEW</p>
 <p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.</p>
 <p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. This is also true for a relational database if the schema is not normalised in the traditional sense: it is, for instance, possible to flatten several tables into one table, where some columns become elements in a row.</p>
 <p>For instance:</p>
@@ -518,7 +539,6 @@ ex:person_1 ex:name    "John Doe" ;
 </section>
 <section id="a-sparql-endpoint" class="level2">
 <h2 class="anchored" data-anchor-id="a-sparql-endpoint">A SPARQL endpoint</h2>
-<p>TO REVIEW and complete</p>
 <p>A SPARQL endpoint is a web address that accepts SPARQL queries and returns the results. It can be used from a web form, from a script, or from another program. Some public examples are Wikidata (<code>query.wikidata.org</code>) and UniProt (<code>sparql.uniprot.org</code>).</p>
 <p>To offer your own, you need a <strong>triple store</strong>: a database made to store triples, which usually provides the endpoint. Common choices are Apache Jena Fuseki, GraphDB, Virtuoso and Oxigraph. The steps are:</p>
 <ol type="1">
@@ -540,6 +560,14 @@ ex:person_1 ex:name    "John Doe" ;
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> results[<span class="st">"results"</span>][<span class="st">"bindings"</span>]:</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(row[<span class="st">"name"</span>][<span class="st">"value"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Public endpoints often limit the running time of a query, and an endpoint with sensitive data must be protected like any other database.</p>
+<section id="implementing-a-sparql-endpoint-with-a-llm" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-a-sparql-endpoint-with-a-llm">Implementing a SPARQL endpoint with a LLM</h3>
+<p>With access to the source code of the Data Management platform, a LLM can be used, step by step, to implement a SPARQL endpoint, by writing the code to load the data, start the server, and handle queries. The LLM can also be used to write the queries themselves, as explained below.</p>
+</section>
+<section id="implementing-a-sparql-endpoint-without-a-llm" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-a-sparql-endpoint-without-a-llm">Implementing a SPARQL endpoint without a LLM</h3>
+<p>It is also possible to implement a SPARQL endpoint without a LLM, by using existing triple stores and their documentation. The steps are similar: load the data, start the server, and handle queries. It can also be a first step in order to understand how it works first, before using a LLM to help with a more complex implementation.</p>
+</section>
 </section>
 <section id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries">Using a LLM to query a SPARQL endpoint or create queries</h2>

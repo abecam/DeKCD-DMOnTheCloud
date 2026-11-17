@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -166,7 +201,7 @@ cookieconsent.run({
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Semantic graphs</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/SemanticGraphs.html">Semantic graphs</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -194,6 +229,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../onboarding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">De.KCD - Data Management Platform on the Cloud: Onboarding</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -214,6 +255,24 @@ cookieconsent.run({
   <div class="sidebar-item-container"> 
   <a href="../pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Pseudonymization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Building_an_assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building an Assembly</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/SemanticGraphs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Semantic graphs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/General_considerations_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Considerations for Using LLMs in Research Data Management</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -245,7 +304,7 @@ cookieconsent.run({
   <ul class="collapse">
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2.1</span> Definition</a>
   <ul class="collapse">
-  <li><a href="#knowledge-graüj" id="toc-knowledge-graüj" class="nav-link" data-scroll-target="#knowledge-graüj"><span class="header-section-number">2.1.1</span> Knowledge graüj</a></li>
+  <li><a href="#knowledge-graph" id="toc-knowledge-graph" class="nav-link" data-scroll-target="#knowledge-graph"><span class="header-section-number">2.1.1</span> Knowledge graph</a></li>
   <li><a href="#semantic-graph" id="toc-semantic-graph" class="nav-link" data-scroll-target="#semantic-graph"><span class="header-section-number">2.1.2</span> Semantic graph</a></li>
   </ul></li>
   <li><a href="#current-solutions" id="toc-current-solutions" class="nav-link" data-scroll-target="#current-solutions"><span class="header-section-number">2.2</span> Current solutions</a>
@@ -264,16 +323,20 @@ cookieconsent.run({
   <li><a href="#as-a-different-way-to-store-and-access-data" id="toc-as-a-different-way-to-store-and-access-data" class="nav-link" data-scroll-target="#as-a-different-way-to-store-and-access-data"><span class="header-section-number">4.1</span> As a different way to store and access data</a></li>
   <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">4.2</span> For an assembly</a></li>
   </ul></li>
-  <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">5</span> RDF and SparQL</a></li>
-  <li><a href="#llm-and-semantic-graphs" id="toc-llm-and-semantic-graphs" class="nav-link" data-scroll-target="#llm-and-semantic-graphs"><span class="header-section-number">6</span> LLM and Semantic graphs</a></li>
+  <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">5</span> RDF and SPARQL</a></li>
+  <li><a href="#llm-and-knowledge-graphs" id="toc-llm-and-knowledge-graphs" class="nav-link" data-scroll-target="#llm-and-knowledge-graphs"><span class="header-section-number">6</span> LLM and Knowledge graphs</a></li>
   <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">7</span> How to</a>
   <ul class="collapse">
-  <li><a href="#from-relational-database-to-rdf" id="toc-from-relational-database-to-rdf" class="nav-link" data-scroll-target="#from-relational-database-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</a></li>
+  <li><a href="#sec-rdb-to-rdf" id="toc-sec-rdb-to-rdf" class="nav-link" data-scroll-target="#sec-rdb-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">7.2</span> Data</a></li>
   <li><a href="#meta-data" id="toc-meta-data" class="nav-link" data-scroll-target="#meta-data"><span class="header-section-number">7.3</span> Meta-data</a></li>
   <li><a href="#nosql-and-other-cases" id="toc-nosql-and-other-cases" class="nav-link" data-scroll-target="#nosql-and-other-cases"><span class="header-section-number">7.4</span> NoSQL and other cases</a></li>
-  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint"><span class="header-section-number">7.5</span> A SparQL endpoint</a></li>
-  <li><a href="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries" id="toc-using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="nav-link" data-scroll-target="#using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">7.6</span> Using a LLM to query a SparQL endpoint or create queries</a></li>
+  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</a>
+  <ul class="collapse">
+  <li><a href="#implementing-a-sparql-endpoint-with-a-llm" id="toc-implementing-a-sparql-endpoint-with-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-with-a-llm"><span class="header-section-number">7.5.1</span> Implementing a SPARQL endpoint with a LLM</a></li>
+  <li><a href="#implementing-a-sparql-endpoint-without-a-llm" id="toc-implementing-a-sparql-endpoint-without-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-without-a-llm"><span class="header-section-number">7.5.2</span> Implementing a SPARQL endpoint without a LLM</a></li>
+  </ul></li>
+  <li><a href="#sec-sparql-llm" id="toc-sec-sparql-llm" class="nav-link" data-scroll-target="#sec-sparql-llm"><span class="header-section-number">7.6</span> Using a LLM to query a SPARQL endpoint or create queries</a></li>
   <li><a href="#going-further" id="toc-going-further" class="nav-link" data-scroll-target="#going-further"><span class="header-section-number">7.7</span> Going further</a></li>
   </ul></li>
   </ul>
@@ -313,8 +376,8 @@ cookieconsent.run({
 <p>Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
 <section id="definition" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">2.1</span> Definition</h2>
-<section id="knowledge-graüj" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="knowledge-graüj"><span class="header-section-number">2.1.1</span> Knowledge graüj</h3>
+<section id="knowledge-graph" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="knowledge-graph"><span class="header-section-number">2.1.1</span> Knowledge graph</h3>
 <p>A knowledge graph is a way of organizing information as a network of entities (people, places, concepts, datasets) connected by labeled relationships, typically stored as subject-predicate-object triples like “Marie Curie-&gt; won -&gt; Nobel Prize in Physics.” Because the data is structured as nodes and edges, often with a shared schema or ontology that defines what types of things and relationships exist, it can be queried, linked across sources, and reasoned over to reveal connections that would be hard to see in flat tables or unstructured text. Knowledge graphs power things like search engine info panels, recommendation systems, and data integration across research or enterprise systems.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -603,55 +666,339 @@ INSERT INTO triples VALUES
 </section>
 <section id="use-in-research-data-management" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Use in Research Data Management</h1>
+<p>Semantic graphs offer two main benefits for research data management, (1) they allow to store and query data in a flexible way, which might be better adapted for some types of data, for instance analysis of classical literature, where the relationships between entities are complex, and (2) they make it easier to combine information from different sources, as they rely on global identifiers.</p>
 <section id="as-a-different-way-to-store-and-access-data" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="as-a-different-way-to-store-and-access-data"><span class="header-section-number">4.1</span> As a different way to store and access data</h2>
+<p>In a table, the structure is decided in advance: the columns are fixed and every row has the same ones. In a knowledge graph, every piece of information is a separate statement (a triple, see above). This has a few consequences:</p>
+<ul>
+<li><strong>Adding something new is easy.</strong> A new property for a single sample does not require changing a schema or adding an empty column for all other samples.</li>
+<li><strong>The meaning travels with the data.</strong> Properties are identified by web addresses (URIs) that can point to a shared definition. This supports the FAIR principles (Findable, Accessible, Interoperable, Reusable).</li>
+<li><strong>One way to ask questions.</strong> A single query language (SPARQL) works across the whole graph, without needing to know in which “table” something is stored.</li>
+</ul>
+<p>A knowledge graph is not the right place for large numerical data such as time series, images or sequencing files. These stay in files or a suitable database, and the graph stores the description and a link: who produced it, when, with which method, and where the file is.</p>
 </section>
 <section id="for-an-assembly" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="for-an-assembly"><span class="header-section-number">4.2</span> For an assembly</h2>
+<p>Because everything has a global identifier, one graph can combine information from different origins. If two sources use the same identifier for a species, a person (e.g.&nbsp;an ORCID iD) or a gene, their statements connect automatically, without matching free-text names that may be spelled differently.</p>
+<pre class="turtle"><code>@prefix ex:   &lt;https://example.org/&gt; .
+@prefix obo:  &lt;http://purl.obolibrary.org/obo/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+
+# Data from our lab
+ex:sample_42 ex:collectedFrom obo:NCBITaxon_3702 .
+
+# Data from a public ontology
+obo:NCBITaxon_3702 rdfs:label "Arabidopsis thaliana" .</code></pre>
+<p>Loaded together, <code>sample_42</code> is linked to the species name because both statements use the same identifier.</p>
+<p>The difficulty is agreeing on identifiers and vocabularies and describing how each source maps to them. When to take on this effort in an assembly is discussed in <a href="../pages/Building_an_assembly.html#sec-assembly-graphs">Semantic graphs in an assembly</a>.</p>
 </section>
 </section>
 <section id="rdf-and-sparql" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> RDF and SparQL</h1>
+<h1 data-number="5"><span class="header-section-number">5</span> RDF and SPARQL</h1>
+<p>RDF defines <strong>how data is stored</strong> (as triples). SPARQL (pronounced “sparkle”) is the language to <strong>ask questions</strong> about it, in the same way SQL is used for tables.</p>
+<p>A SPARQL query describes a pattern with blanks, and the database returns everything that fits the pattern. The blanks are variables, written with a leading <code>?</code>.</p>
+<pre class="sparql"><code>PREFIX ex: &lt;https://example.org/&gt;
+
+SELECT ?name ?labName
+WHERE {
+  ?person ex:name     ?name ;
+          ex:worksIn  ?lab .
+  ?lab    ex:labName  ?labName .
+}</code></pre>
+<p>The same question in SQL:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> person.name, lab.lab_name</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> person</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> lab <span class="kw">ON</span> person.lab_id <span class="op">=</span> lab.<span class="kw">id</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A few words that help when reading the documentation:</p>
+<ul>
+<li><code>PREFIX</code> defines a short name for a long URI, as in Turtle, so <code>ex:name</code> stands for <code>https://example.org/name</code>.</li>
+<li><code>SELECT</code> lists what you want back. The result is a table, with one column per variable.</li>
+<li><code>WHERE</code> contains the pattern to match.</li>
+<li>There is no <code>JOIN</code>. Using the same variable (<code>?lab</code>) in two places is what links the statements.</li>
+<li>Other query types exist: <code>ASK</code> returns yes or no, and <code>CONSTRUCT</code> returns a new graph instead of a table.</li>
+</ul>
 </section>
-<section id="llm-and-semantic-graphs" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> LLM and Semantic graphs</h1>
+<section id="llm-and-knowledge-graphs" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> LLM and Knowledge graphs</h1>
+<p>Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:</p>
+<ul>
+<li><strong>Asking questions in plain language.</strong> The LLM translates a question into a SPARQL query (see “How to” below).</li>
+<li><strong>Giving an LLM reliable facts.</strong> Before answering, the LLM looks up the relevant facts in the graph, which reduces made-up answers. This approach is often called GraphRAG (RAG stands for retrieval-augmented generation).</li>
+<li><strong>Building a graph from text.</strong> The LLM extracts entities and relations from articles or lab notes and writes them as triples. The result needs to be checked by a person.</li>
+</ul>
+<p>In all cases, the LLM is a helper whose output should be verified, not a source of truth.</p>
 </section>
 <section id="how-to" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> How to</h1>
-<section id="from-relational-database-to-rdf" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="from-relational-database-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</h2>
+<section id="sec-rdb-to-rdf" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-rdb-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</h2>
+<p>The idea is to turn every row and cell into statements. The correspondence is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Relational database</th>
+<th>Knowledge graph (RDF)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Table</td>
+<td>Class (the type of thing, e.g.&nbsp;<code>Person</code>)</td>
+</tr>
+<tr class="even">
+<td>Row</td>
+<td>A resource with its own identifier (URI)</td>
+</tr>
+<tr class="odd">
+<td>Column name</td>
+<td>Predicate</td>
+</tr>
+<tr class="even">
+<td>Cell value</td>
+<td>Object (a “literal”: plain text, number, date)</td>
+</tr>
+<tr class="odd">
+<td>Foreign key</td>
+<td>Object that is the identifier of another resource</td>
+</tr>
+</tbody>
+</table>
+<p>There are three common ways to do the conversion:</p>
+<ul>
+<li><strong>A script</strong> (for instance in Python with the <code>rdflib</code> library, or in R). Simple for a one-off export of a few tables.</li>
+<li><strong>A mapping file</strong> written in a mapping language such as R2RML or RML, run by a tool such as Morph-KGC. The mapping is written once and rerun whenever the data changes.</li>
+<li><strong>A virtual graph</strong>, for instance with Ontop. The data stays in the relational database and is queried as if it were RDF.</li>
+</ul>
 </section>
 <section id="data" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="data"><span class="header-section-number">7.2</span> Data</h2>
-<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a semantic graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
-<p>Relation between tables in a relational database will be represented as a triple in a semantic graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
+<p>In general cases, one piece of information in a relational database will be one identifier, a value in a column, and the column name. In a knowledge graph, this information will be represented as a triple: subject, predicate, object. The subject is the identifier, the predicate is the column name, and the object is the value.</p>
+<p>Relations between tables in a relational database will be represented as a triple in a knowledge graph. The subject will be the identifier of the first table, the predicate will be the name of the relation, and the object will be the identifier of the second table.</p>
+<p>For example, with these two tables:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>person</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>id</strong></td>
+<td><strong>name</strong></td>
+<td><strong>age</strong></td>
+<td><strong>lab_id</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>John Doe</td>
+<td>30</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>lab</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>id</strong></td>
+<td><strong>lab_name</strong></td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Plant Genomics</td>
+</tr>
+</tbody>
+</table>
+<p>The result in Turtle is:</p>
+<pre class="turtle"><code>@prefix ex: &lt;https://example.org/&gt; .
+
+ex:person_1 a ex:Person ;
+            ex:name    "John Doe" ;
+            ex:age     30 ;
+            ex:worksIn ex:lab_7 .
+
+ex:lab_7    a ex:Lab ;
+            ex:labName "Plant Genomics" .</code></pre>
+<p>The identifiers are created by combining a base address with the table name and the key (<code>person</code> + <code>1</code> becomes <code>ex:person_1</code>). <code>John Doe</code> and <code>30</code> are literals, whereas <code>ex:lab_7</code> is a link to another resource: this is what the foreign key <code>lab_id</code> became.</p>
 </section>
 <section id="meta-data" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="meta-data"><span class="header-section-number">7.3</span> Meta-data</h2>
+<p>Meta-data is data about the data: who produced it, when, with which method or instrument, in which unit, under which license. In a relational database it usually lives somewhere else (a README, a data dictionary, column comments). In a knowledge graph it is written in the same way as the data, so both can be linked and queried together.</p>
+<p>Rather than inventing your own terms, reuse existing vocabularies (shared lists of properties and classes):</p>
+<ul>
+<li><strong>Dublin Core</strong> (<code>dcterms</code>): general properties such as title, creator, date and license</li>
+<li><strong>DCAT</strong>: describing datasets and where to download them</li>
+<li><strong>PROV-O</strong>: provenance, i.e.&nbsp;how and from what a result was produced</li>
+<li><strong>schema.org</strong>: general-purpose, also used by search engines</li>
+<li>Domain ontologies, for instance for units, species or methods</li>
+</ul>
+<pre class="turtle"><code>@prefix ex:      &lt;https://example.org/&gt; .
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+@prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix xsd:     &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+ex:dataset_12 a dcat:Dataset ;
+    dcterms:title   "Leaf area measurements, summer 2025" ;
+    dcterms:creator ex:person_1 ;
+    dcterms:created "2025-08-14"^^xsd:date ;
+    dcterms:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; .
+
+# Even the meaning of a column can be described
+ex:age rdfs:label   "age"@en ;
+       rdfs:comment "Age of the person, in years"@en .</code></pre>
 </section>
 <section id="nosql-and-other-cases" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="nosql-and-other-cases"><span class="header-section-number">7.4</span> NoSQL and other cases</h2>
-<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a semantic graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the semantic graph.</p>
-<p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. It is also true for a relational database if the schema is not normalized in the general traditional sense: it is for instance possible to to flatten several tables into one table, where some columns will become elements in a row.</p>
+<p>NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.</p>
+<p>The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. This is also true for a relational database if the schema is not normalised in the traditional sense: it is, for instance, possible to flatten several tables into one table, where some columns become elements in a row.</p>
 <p>For instance:</p>
 <p><code>Person ID, Type of Data, Value of Data</code></p>
-<p>That can contains:</p>
+<p>That can contain:</p>
 <ul>
 <li><code>1, Name, John Doe</code></li>
 <li><code>1, Age, 30</code></li>
 <li><code>1, Address, 123 Main St</code></li>
 </ul>
-<p>As such it is closer to a NoSQL database than a relational database (while stored in a relational database, but with a denormalized structure and “losing” some querying capabilities, all queries are still possible but will be more complex and less efficient), and the mapping to a semantic graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
+<p>As such it is closer to a NoSQL database than to a relational database (while stored in a relational database, but with a denormalised structure and “losing” some querying capabilities: all queries are still possible but will be more complex and less efficient), and the mapping to a knowledge graph will be different. The subject will be the identifier of the person, the predicate will be the type of data, and the object will be the value of the data.</p>
+<pre class="turtle"><code>@prefix ex: &lt;https://example.org/&gt; .
+
+ex:person_1 ex:name    "John Doe" ;
+            ex:age     30 ;
+            ex:address "123 Main St" .</code></pre>
+<p>Note that here the predicates (<code>name</code>, <code>age</code>, <code>address</code>) come from the <em>values</em> of the column <code>Type of Data</code>, not from column names.</p>
 </section>
 <section id="a-sparql-endpoint" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">7.5</span> A SparQL endpoint</h2>
+<h2 data-number="7.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</h2>
+<p>TO REVIEW and complete</p>
+<p>A SPARQL endpoint is a web address that accepts SPARQL queries and returns the results. It can be used from a web form, from a script, or from another program. Some public examples are Wikidata (<code>query.wikidata.org</code>) and UniProt (<code>sparql.uniprot.org</code>).</p>
+<p>To offer your own, you need a <strong>triple store</strong>: a database made to store triples, which usually provides the endpoint. Common choices are Apache Jena Fuseki, GraphDB, Virtuoso and Oxigraph. The steps are:</p>
+<ol type="1">
+<li>Load your data (for instance Turtle files) into the triple store</li>
+<li>Start it</li>
+<li>Send queries to its <code>/sparql</code> address</li>
+</ol>
+<p>Under the hood this is an ordinary web request, so any language can do it. For example in Python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SPARQLWrapper <span class="im">import</span> SPARQLWrapper, JSON</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>endpoint <span class="op">=</span> SPARQLWrapper(<span class="st">"https://example.org/sparql"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>endpoint.setQuery(<span class="st">"""</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="st">    PREFIX ex: &lt;https://example.org/&gt;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ?name WHERE { ?person ex:name ?name . }</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>endpoint.setReturnFormat(JSON)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> endpoint.query().convert()</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row <span class="kw">in</span> results[<span class="st">"results"</span>][<span class="st">"bindings"</span>]:</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(row[<span class="st">"name"</span>][<span class="st">"value"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Public endpoints often limit the running time of a query, and an endpoint with sensitive data must be protected like any other database.</p>
+<section id="implementing-a-sparql-endpoint-with-a-llm" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="implementing-a-sparql-endpoint-with-a-llm"><span class="header-section-number">7.5.1</span> Implementing a SPARQL endpoint with a LLM</h3>
+<p>With access to the source code of the Data Management platform, a LLM can be used, step by step, to implement a SPARQL endpoint, by writing the code to load the data, start the server, and handle queries. The LLM can also be used to write the queries themselves, as explained below.</p>
 </section>
-<section id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="using-a-llm-to-query-a-sparql-endpoint-or-create-queries"><span class="header-section-number">7.6</span> Using a LLM to query a SparQL endpoint or create queries</h2>
+<section id="implementing-a-sparql-endpoint-without-a-llm" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="implementing-a-sparql-endpoint-without-a-llm"><span class="header-section-number">7.5.2</span> Implementing a SPARQL endpoint without a LLM</h3>
+<p>It is also possible to implement a SPARQL endpoint without a LLM, by using existing triple stores and their documentation. The steps are similar: load the data, start the server, and handle queries. It can also be a first step in order to understand how it works first, before using a LLM to help with a more complex implementation.</p>
+</section>
+</section>
+<section id="sec-sparql-llm" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="sec-sparql-llm"><span class="header-section-number">7.6</span> Using a LLM to query a SPARQL endpoint or create queries</h2>
+<p>An LLM can write a SPARQL query from a question, but it does not know your graph. If it does not get the vocabulary, it will guess property names. The approach that works best is:</p>
+<ol type="1">
+<li><strong>Give it the schema</strong>, not the data: the prefixes, the classes and the properties with a one-line description each. Optionally add one or two example queries.</li>
+<li><strong>Ask the question</strong> in plain language.</li>
+<li><strong>Check the query</strong> before trusting the answer: read it, test it with <code>LIMIT 10</code>, and try a question for which you already know the answer.</li>
+</ol>
+<p>An example prompt:</p>
+<pre class="text"><code>You write SPARQL 1.1 queries. Use only the prefixes, classes and
+properties listed below. Return only the query.
+
+PREFIX ex: &lt;https://example.org/&gt;
+ex:Person  - a person
+ex:Lab     - a laboratory
+ex:name    - name of a person
+ex:worksIn - links a person to the lab where they work
+ex:labName - name of a lab
+
+Question: Which people work in the lab named "Plant Genomics"?</code></pre>
+<p>The answer should look like this:</p>
+<pre class="sparql"><code>PREFIX ex: &lt;https://example.org/&gt;
+
+SELECT ?name
+WHERE {
+  ?person ex:name    ?name ;
+          ex:worksIn ?lab .
+  ?lab    ex:labName "Plant Genomics" .
+}</code></pre>
+<p>Typical problems are invented properties, wrong prefixes, and a query that is valid but answers a slightly different question. Since only the schema and the question are sent to the LLM, and not the data, this approach is also suitable when the data itself is sensitive.</p>
+<p>The reverse also works well: paste a query from the documentation or from a colleague and ask the LLM to explain it in plain words.</p>
 </section>
 <section id="going-further" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="going-further"><span class="header-section-number">7.7</span> Going further</h2>
-<p>-&gt; See Building an Assembly and General Considerations for Using LLMs in Research Data Management</p>
+<p>See <a href="../pages/Building_an_assembly.html">Building an Assembly</a> and <a href="General_Considerations_LLM.qmd">General Considerations for Using LLMs in Research Data Management</a>.</p>
+<p># Glossary</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Triple</td>
+<td>One statement: subject, predicate, object</td>
+</tr>
+<tr class="even">
+<td>URI / IRI</td>
+<td>A globally unique identifier, written like a web address</td>
+</tr>
+<tr class="odd">
+<td>Literal</td>
+<td>A plain value (text, number, date) as opposed to a link to another resource</td>
+</tr>
+<tr class="even">
+<td>Prefix</td>
+<td>A short name for the start of a URI (<code>ex:</code> for <code>https://example.org/</code>)</td>
+</tr>
+<tr class="odd">
+<td>Vocabulary</td>
+<td>A shared list of terms (classes and properties) to describe things</td>
+</tr>
+<tr class="even">
+<td>Ontology</td>
+<td>A vocabulary with formal rules, usually written in OWL</td>
+</tr>
+<tr class="odd">
+<td>Triple store</td>
+<td>A database for triples</td>
+</tr>
+<tr class="even">
+<td>SPARQL endpoint</td>
+<td>A web address that accepts SPARQL queries</td>
+</tr>
+<tr class="odd">
+<td>Reasoner</td>
+<td>A program that infers new facts from an ontology</td>
+</tr>
+<tr class="even">
+<td>SHACL</td>
+<td>A language to check that data has the expected shape</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
