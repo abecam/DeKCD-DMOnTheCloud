@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ce0f0d1e95892c391167071f7e5e54e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d24e9988e144b212bf8980b3ab8c7ee6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -272,7 +272,7 @@ cookieconsent.run({
   <li><a href="#assemblies-between-institutions" id="toc-assemblies-between-institutions" class="nav-link" data-scroll-target="#assemblies-between-institutions"><span class="header-section-number">7</span> Assemblies between institutions</a></li>
   <li><a href="#using-a-llm-to-build-an-assembly" id="toc-using-a-llm-to-build-an-assembly" class="nav-link" data-scroll-target="#using-a-llm-to-build-an-assembly"><span class="header-section-number">8</span> Using a LLM to build an assembly</a>
   <ul class="collapse">
-  <li><a href="#as-a-general-help-with-online-llms" id="toc-as-a-general-help-with-online-llms" class="nav-link" data-scroll-target="#as-a-general-help-with-online-llms"><span class="header-section-number">8.1</span> As a general help with online LLMs</a></li>
+  <li><a href="#sec-online-llm-help" id="toc-sec-online-llm-help" class="nav-link" data-scroll-target="#sec-online-llm-help"><span class="header-section-number">8.1</span> As a general help with online LLMs</a></li>
   <li><a href="#sec-llm-assembly" id="toc-sec-llm-assembly" class="nav-link" data-scroll-target="#sec-llm-assembly"><span class="header-section-number">8.2</span> With a local LLM aside the assembly</a>
   <ul class="collapse">
   <li><a href="#sec-assembly-graphs" id="toc-sec-assembly-graphs" class="nav-link" data-scroll-target="#sec-assembly-graphs"><span class="header-section-number">8.2.1</span> Semantic graphs in an assembly</a></li>
@@ -332,10 +332,23 @@ cookieconsent.run({
 </section>
 <section id="concerns-with-assemblies" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Concerns with assemblies</h1>
-<p>When building an assembly, it is important to consider the following concerns: * Compatibility: Ensure that the tools and resources being used are compatible with each other and can work together seamlessly. * Security: Ensure that the tools and resources being used are secure and protect sensitive data. * Scalability: Ensure that the assembly can handle the volume of data and users that will be involved in the research project.</p>
+<p>When building an assembly, it is important to consider the following concerns:</p>
+<ul>
+<li>Compatibility: Ensure that the tools and resources being used are compatible with each other and can work together seamlessly.</li>
+<li>Security: Ensure that the tools and resources being used are secure and protect sensitive data.</li>
+<li>Scalability: Ensure that the assembly can handle the volume of data and users that will be involved in the research project.</li>
+</ul>
 </section>
 <section id="connecting-using-apis" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Connecting using APIs</h1>
+<p>Data management platforms and other tools often provide APIs (Application Programming Interfaces) that allow for programmatic access to their functionality. Using APIs to connect the different parts of the assembly is generally the preferred approach, as it allows using the platforms together while ensuring the right level of control and security. The integration of APIs can be done using small tools, as described above, or using a workflow management system, such as Nextflow or Snakemake, that can orchestrate the different parts of the assembly and ensure that the data flows correctly between them. In some cases, one platform can directly connect to another platform using its API, without the need for an additional tool. This is generally the preferred approach, as it reduces the complexity of the assembly and ensures that the data flows correctly between the platforms.</p>
+<p>LLMs can be used to help with the integration of APIs, see <a href="#sec-online-llm-help">Using a LLM to build an assembly</a> for more information.</p>
+<p>When using APIs, it is important to consider the following:</p>
+<ul>
+<li>Authentication: Ensure that the APIs being used require proper authentication and authorization to access the data and functionality.</li>
+<li>Rate limits: Ensure that the APIs being used have appropriate rate limits to prevent abuse and ensure that the assembly can handle the volume of requests that will be made.</li>
+<li>Error handling: Ensure that the APIs being used have appropriate error handling to prevent issues with data integrity and usability.</li>
+</ul>
 </section>
 <section id="avoid-several-logins-central-identity-management" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Avoid several logins: central identity management</h1>
@@ -351,8 +364,8 @@ cookieconsent.run({
 </section>
 <section id="using-a-llm-to-build-an-assembly" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Using a LLM to build an assembly</h1>
-<section id="as-a-general-help-with-online-llms" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="as-a-general-help-with-online-llms"><span class="header-section-number">8.1</span> As a general help with online LLMs</h2>
+<section id="sec-online-llm-help" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-online-llm-help"><span class="header-section-number">8.1</span> As a general help with online LLMs</h2>
 <p>Help with APIs, integration, and general assembly building. LLMs can provide guidance on best practices, suggest compatible tools, and help troubleshoot issues that arise during the assembly building process.</p>
 <p>Be careful to understand what is being suggested and to verify the information provided by the LLM. LLMs may not always provide accurate or up-to-date information, so it is important to cross-check their suggestions with reliable sources.</p>
 </section>
