@@ -45,11 +45,23 @@ Convoluted ways to connect the data management platforms have the potential to b
 # Concerns with assemblies
 
 When building an assembly, it is important to consider the following concerns:
+
 * Compatibility: Ensure that the tools and resources being used are compatible with each other and can work together seamlessly.
 * Security: Ensure that the tools and resources being used are secure and protect sensitive data.
 * Scalability: Ensure that the assembly can handle the volume of data and users that will be involved in the research project.
 
 # Connecting using APIs
+
+Data management platforms and other tools often provide APIs (Application Programming Interfaces) that allow for programmatic access to their functionality. Using APIs to connect the different parts of the assembly is generally the preferred approach, as it allows using the platforms together while ensuring the right level of control and security.
+The integration of APIs can be done using small tools, as described above, or using a workflow management system, such as Nextflow or Snakemake, that can orchestrate the different parts of the assembly and ensure that the data flows correctly between them. In some cases, one platform can directly connect to another platform using its API, without the need for an additional tool. This is generally the preferred approach, as it reduces the complexity of the assembly and ensures that the data flows correctly between the platforms.
+
+LLMs can be used to help with the integration of APIs, see [Using a LLM to build an assembly](#sec-online-llm-help) for more information.
+
+When using APIs, it is important to consider the following:
+
+* Authentication: Ensure that the APIs being used require proper authentication and authorization to access the data and functionality.
+* Rate limits: Ensure that the APIs being used have appropriate rate limits to prevent abuse and ensure that the assembly can handle the volume of requests that will be made.
+* Error handling: Ensure that the APIs being used have appropriate error handling to prevent issues with data integrity and usability.
 
 # Avoid several logins: central identity management
 
@@ -69,7 +81,7 @@ Performance and reliability concerns must also be addressed when building assemb
 
 # Using a LLM to build an assembly
 
-## As a general help with online LLMs
+## As a general help with online LLMs {#sec-online-llm-help}
 
 Help with APIs, integration, and general assembly building. LLMs can provide guidance on best practices, suggest compatible tools, and help troubleshoot issues that arise during the assembly building process.
 
