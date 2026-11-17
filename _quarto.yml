@@ -26,10 +26,14 @@ website:
     search: true
     contents:
         - index.qmd
+        - onboarding.qmd
         - pages/TechPlatformDecisionTree.qmd
         - pages/Backups_and_security.qmd
         - pages/Data_storage.qmd
         - pages/Pseudonymization.qmd
+        - pages/Building_an_assembly.qmd
+        - pages/SemanticGraphs.qmd
+        - pages/General_considerations_LLM.qmd
 #        - section: "Data Management Principles"
 #          contents:
 #            - pages/DM_planning.qmd

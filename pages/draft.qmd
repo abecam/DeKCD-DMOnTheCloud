@@ -1,8 +1,6 @@
 # Use in Research Data Management
 
-TO REWRITE
-
-Research data is rarely one clean table. It is spread over spreadsheets, instrument files, lab notebooks and several databases, and the meaning of the columns often lives only in someone's head. A knowledge graph helps in two ways: it stores data together with its meaning, and it connects data that was produced separately.
+Semantic graphs offer two main benefits for research data management, (1) they allow to store and query data in a flexible way, which might be better adapted for some types of data, for instance analysis of classical literature, where the relationships between entities are complex, and (2) they make it easier to combine information from different sources, as they rely on global identifiers.
 
 ## As a different way to store and access data
 
@@ -15,10 +13,6 @@ In a table, the structure is decided in advance: the columns are fixed and every
 A knowledge graph is not the right place for large numerical data such as time series, images or sequencing files. These stay in files or a suitable database, and the graph stores the description and a link: who produced it, when, with which method, and where the file is.
 
 ## For an assembly
-
-TO REVIEW and complete
-
-Here, "assembly" means bringing together data from several sources (labs, projects, public databases).
 
 Because everything has a global identifier, one graph can combine information from different origins. If two sources use the same identifier for a species, a person (e.g. an ORCID iD) or a gene, their statements connect automatically, without matching free-text names that may be spelled differently.
 
@@ -36,11 +30,10 @@ obo:NCBITaxon_3702 rdfs:label "Arabidopsis thaliana" .
 
 Loaded together, `sample_42` is linked to the species name because both statements use the same identifier.
 
-The technology is the easy part. The real work is agreeing on identifiers and vocabularies and describing how each source maps to them.
+The difficulty is agreeing on identifiers and vocabularies and describing how each source maps to them.
+As output of a data management platform relying on a relational database, the semantic graph will be partly static, and partly generated on the fly from the database (generally if the metadata changes). You will find more information about this in the ["How to"](#how-to) section below.
 
 # RDF and SPARQL
-
-TO REVIEW and complete
 
 RDF defines **how data is stored** (as triples). SPARQL (pronounced "sparkle") is the language to **ask questions** about it, in the same way SQL is used for tables.
 
@@ -74,8 +67,6 @@ A few words that help when reading the documentation:
 * Other query types exist: `ASK` returns yes or no, and `CONSTRUCT` returns a new graph instead of a table.
 
 # LLM and Knowledge graphs
-
-TO REVIEW and complete
 
 Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:
 
@@ -141,8 +132,6 @@ The identifiers are created by combining a base address with the table name and 
 
 ## Meta-data
 
-TO REVIEW and complete
-
 Meta-data is data about the data: who produced it, when, with which method or instrument, in which unit, under which license. In a relational database it usually lives somewhere else (a README, a data dictionary, column comments). In a knowledge graph it is written in the same way as the data, so both can be linked and queried together.
 
 Rather than inventing your own terms, reuse existing vocabularies (shared lists of properties and classes):
@@ -173,8 +162,6 @@ ex:age rdfs:label   "age"@en ;
 
 ## NoSQL and other cases
 
-TO REVIEW
-
 NoSQL databases and other types of databases may have different structures and representations of data, but the general principle of mapping data to a knowledge graph remains the same. The key is to identify the entities and relationships in the data and represent them as triples in the knowledge graph.
 
 The main difference from a general table in a relational database is that the column name is not necessarily the predicate, and the value is not necessarily the object. The mapping will depend on the specific structure and representation of the data. This is also true for a relational database if the schema is not normalised in the traditional sense: it is, for instance, possible to flatten several tables into one table, where some columns become elements in a row.
@@ -203,8 +190,6 @@ Note that here the predicates (`name`, `age`, `address`) come from the *values* 
 
 ## A SPARQL endpoint
 
-TO REVIEW and complete
-
 A SPARQL endpoint is a web address that accepts SPARQL queries and returns the results. It can be used from a web form, from a script, or from another program. Some public examples are Wikidata (`query.wikidata.org`) and UniProt (`sparql.uniprot.org`).
 
 To offer your own, you need a **triple store**: a database made to store triples, which usually provides the endpoint. Common choices are Apache Jena Fuseki, GraphDB, Virtuoso and Oxigraph. The steps are:
@@ -231,6 +216,14 @@ for row in results["results"]["bindings"]:
 ```
 
 Public endpoints often limit the running time of a query, and an endpoint with sensitive data must be protected like any other database.
+
+### Implementing a SPARQL endpoint with a LLM
+
+With access to the source code of the Data Management platform, a LLM can be used, step by step, to implement a SPARQL endpoint, by writing the code to load the data, start the server, and handle queries. The LLM can also be used to write the queries themselves, as explained below.
+
+### Implementing a SPARQL endpoint without a LLM
+
+It is also possible to implement a SPARQL endpoint without a LLM, by using existing triple stores and their documentation. The steps are similar: load the data, start the server, and handle queries. It can also be a first step in order to understand how it works first, before using a LLM to help with a more complex implementation.
 
 ## Using a LLM to query a SPARQL endpoint or create queries
 

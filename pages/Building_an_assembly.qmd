@@ -75,7 +75,7 @@ Help with APIs, integration, and general assembly building. LLMs can provide gui
 
 Be careful to understand what is being suggested and to verify the information provided by the LLM. LLMs may not always provide accurate or up-to-date information, so it is important to cross-check their suggestions with reliable sources.
 
-## With a local LLM aside the assembly
+## With a local LLM aside the assembly  {#sec-llm-assembly}
 
 For instance to help with data analysis, data visualization, or other tasks that are part of the assembly. A local LLM can be used to provide additional support and guidance for researchers working on the assembly. It can for instance help with SparQL queries, data cleaning, or other tasks that require specialized knowledge or expertise.
 
@@ -85,41 +85,20 @@ The next step would be to provide the LLM with access to the data as read-only (
 
 The last step is a "full" approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e. not actually deleted but marked as deleted) and/or require human approval before being executed.
 
-### Semantic graphs, API documentation and LLMs
+### Semantic graphs in an assembly {#sec-assembly-graphs}
 
-[Semantic graphs](pages/SemanticGraphs.qmd) are an useful representation of data, metadata, and their relationships, relying on existing semantic graphs and ontologies to give an unified view. Data represented within a semantic graph that conforms to common semantic graphs and ontologies can be easily integrated with other data sources conforming to the same semantic graphs and ontologies.
+A [semantic graph](SemanticGraphs.qmd) describes data and metadata as shared, machine-readable statements. In an assembly, it can give a **unified view** of what is stored in the different tools, and a **single endpoint** to query it (typically SPARQL), wherever the data actually lives. How a semantic graph works is explained on the [Semantic graphs page](SemanticGraphs.qmd); this section only covers what matters when deciding whether to use one in an assembly.
 
-The main aspect of a semantic graph is a triple:
+**The data does not have to move.** Most Data Management Platforms rely on a relational database, and replacing it is rarely a good idea. The graph can be built *from* the platform and used only for querying, see [From relational database to RDF](SemanticGraphs.qmd#sec-rdb-to-rdf). If the database schema is not accessible, the platform's API documentation can serve as the starting point to describe the data. LLMs are reasonably good at this first draft, see [Using a LLM to query a SPARQL endpoint](SemanticGraphs.qmd#sec-sparql-llm).
 
-`(subject, predicate, object)`
+**Several graphs may be better than one.** The database schema is fixed, whereas the metadata is dynamic. It can therefore be cleaner to keep separate graphs:
 
-For instance `("Sample_1", "has_measurement", "Measurement_1")`
+1. the schema (read-only);
+2. the metadata (dynamic);
+3. the data itself, only if it is also stored as a graph.
 
-Links between triples are simply another triple, for instance `("Measurement_1", "is_part_of", "Experiment_1")`
+**It is the last step, not the first.** Building the graph is expensive. It needs good knowledge of the domain, mapping to existing ontologies that no LLM can fully validate, and it is not something scientists can do by themselves. It is worth considering only if the assembly will be used for a long time and/or by many users. Until then, the simpler options earlier on this page (APIs between tools, single sign-on, small documented tools) deliver most of the benefit.
 
-But it is often an overkill to use a semantic graph within a Data Management Platform, and most Data Management Platforms rely on a relational database to store their data and metadata.
-
-In that case, the semantic graph can still be built from the relational database. Data will be subject and object, with the column name the predicate. For instance a table with columns `sample_id`, `measurement_id`, and `temperature` will have the following triples:
-* `(sample_id, measurement_id, temperature)`
-
-Metadata will be predicate with object (for instance "storage temperature" as predicate and "4°C" as object).
-
-As the schema of the relational database is fixed but not necessarily accessible, the semantic graph can be built from the API documentation, if one is available for the Data Management Platform. The API documentation will describe the endpoints and their parameters, which can be used to construct the triples in the semantic graph.
-
-Most LLMs will know how to build a semantic graph from an API documentation, or if there is another approach better suited. Several tools can also be used to build a semantic graph from an API documentation, or to prepare a semantic graph Query Language endpoint such as SparQL.
-
-One remaining issue is to use existing semantic graphs and ontologies to give an unified view. This is a complex task that requires a deep understanding of the data and its relationships, as well as semantic of existing semantic graphs and ontologies. LLMs can assist in this process by suggesting relevant semantic graphs and ontologies, and helping to map the data to these representations. But there will probably be a need for human expertise to ensure that the mapping is accurate and meaningful.
-
-::: {.callout-note}
-The data do not have to be stored in a semantic graph, and can rely on the built semantic graph only to be queried using a semantic graph Query Language endpoint such as SparQL.
+:::  {.callout-note}
+Ontologies and shared meta-data are an important part of most data management platforms, especially to be FAIR. If not familiar with them, we recommend getting a good overview of the topic, for instance with the [FAIR Data Maturity Model](https://www.go-fair.org/fair-principles/fair-data-maturity-model/) and the [RDMKit](https://rdmkit.elixir-europe.org/).
 :::
-
-::: {.callout-note}
-As the database schema is fixed but the metadata part of the dynamic data, the resulting semantic graph will be a mix of a read-only part (the database schema) and a dynamic part (the metadata). In that case it might be better to create 2 semantic graphs, one for the read-only part and one for the dynamic part. If the data is also stored in a semantic graph, then a 3rd semantic graph can be created to represent the data itself.
-:::
-
-### Semantic graphs and assemblies
-
-The main benefit of using a semantic graph in an assembly is that it allows for a unified view of the data and metadata across the various tools and resources being used. This also can allow an unique endpoint for querying the data and metadata, regardless of where they are stored or how they are represented.
-
-The building cost will be quite high, and it is not something that can be built by the Scientists themselves, while necessitating a good knowledge of the domain. As such, it can be seen as the last step of building an assembly, and should be considered only if the assembly is expected to be used for a long time and/or by many users.

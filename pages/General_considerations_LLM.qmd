@@ -7,26 +7,185 @@ number-sections: true
 
 Local, tiny local, or online LLMs. The choice of which type of LLM to use will depend on the specific needs and requirements of the research project or task. Local LLMs may be preferred for tasks that require access to sensitive data, while online LLMs may be preferred for tasks that require access to a wider range of resources and tools.
 
+| | Online LLM | Local LLM | Tiny local LLM |
+|---|---|---|---|
+| Where it runs | On the servers of a company (ChatGPT, Claude, Gemini, ...) | On a server of your institution, usually with a powerful graphics card | On your own laptop or desktop computer |
+| Typical tools | A web page or an app | Ollama, vLLM, or a service run by the IT team | Ollama, LM Studio, GPT4All |
+| Quality of answers | Best available | Good to very good, depending on the model | Good for simple tasks, weaker for complex ones |
+| Where your text goes | To the provider | Stays in your institution | Stays on your computer |
+| Cost | Free tier or subscription | Hardware and maintenance, by the institution | Free, but needs a reasonably recent computer |
+| Needs | An account | Someone to install and maintain it | Some patience for the installation |
+
+"Tiny" here simply means a small model that is light enough to run on a normal computer. It will be slower and make more mistakes than the large online models, but it is often enough for tasks such as explaining a table, drafting a short description, or fixing the syntax of a small script.
+
+A simple rule of thumb: **the more sensitive the data, the closer to you the LLM should run.** Online LLMs are fine for general questions that do not contain any research data (for instance "how do I read a CSV file in R?"). Whenever the content of the question is sensitive, unpublished, or covered by an agreement, a local LLM, or an online service approved by your institution, is the better choice. See also [Where is the data?](#where-is-the-data) below.
+
+::: {.callout-note}
+The tools and models change quickly, and what is "the best" today will probably be replaced within months. The principles on this page are meant to stay valid even if the tools change.
+:::
+
 # Which uses?
+
+An LLM is a general helper: it is good with language, with code, and with explaining things. This makes it useful in many parts of research data management. In all cases below, the LLM is an assistant that proposes, and the person remains responsible for checking and deciding (see [Limits and risks](#limits-and-risks)).
 
 ## technical issues and tasks
 
+This is probably the area where LLMs help the most, in particular for people who are not IT specialists:
+
+* explaining an error message in plain words, and suggesting what to try
+* writing small scripts, for instance in Python or R, to rename files, convert a format, or call the API of a tool (see [Building an Assembly](Building_an_assembly.qmd))
+* explaining a command, a configuration file, or a piece of code found in a documentation
+* suggesting which tool could fit a need
+
+When asking, give the context: what you want to achieve, which system you use, the exact error message, and what you have already tried. The more precise the question, the better the answer.
+
+::: {.callout-warning}
+Do not run a command or a script that you do not understand, especially if it deletes, moves, or overwrites files. Ask the LLM to explain it first, and test on a copy.
+
+If you are not sure, ask a colleague or the IT team to check it, or run it in a safe environment (for instance a virtual machine or a container). At the last resort, *simply do not run it*.
+:::
+
 ## data analysis and visualization
+
+An LLM can suggest which type of analysis or graph fits a question, explain a statistical method, and write the code to produce a figure.
+
+One important point: **an LLM is not a calculator.** If asked directly for the mean of a column or the result of a test, it may give a plausible but wrong number. A better approach is to ask it to write the code (in R or Python, for instance), and to run that code yourself. The result then comes from the data, and the code can be kept, checked, and rerun, which also helps reproducibility.
+
+It is also good practice to test the result on a case where you already know the answer.
 
 ## data cleaning and preparation
 
+Typical tasks are harmonising spellings and units, converting date formats, merging tables, spotting suspicious values, or restructuring a table.
+
+The same advice applies: prefer asking the LLM for a **script** rather than letting it rewrite the data row by row. A script does the same thing for every row, can be checked, and can be rerun, whereas an LLM editing the data directly may change values without notice.
+
+* Always work on a copy and keep the raw data untouched.
+* Keep the script together with the data, so that every change is documented.
+* Check a few rows before and after.
+
+::: {.callout-warning}
+As before, do not let an LLM run a script that you do not understand. 
+:::
+
 ## data management and organization
+
+LLMs can propose a folder structure, naming conventions for files, or a template for a README, and can help to prepare a first draft of a data management plan (DMP). They are also useful to compare options, for instance which tool fits a given workflow.
+
+The suggestions are general, and need to be adapted to the practices of your group and institution. They are a starting point for a discussion with the Data Management Team, not a replacement for it.
+
+They can also suggest external resources and documentations, but the links should be checked: they may be outdated or point to a different content than what is claimed.
 
 ## data sharing and collaboration
 
+An LLM can help to:
+
+* choose between possible data repositories, and understand their requirements
+* explain what the different licenses mean, in simple words
+* write a README or a description of a dataset for colleagues who do not know it
+* summarise a long document, for instance a protocol, for a collaborator
+
+For licenses and agreements with other institutions, the LLM can explain the vocabulary, but it does not give legal advice. The final decision should be checked with the person responsible in the institution.
+
 ## data security and privacy
+
+LLMs can help to understand security settings, for instance who has access to a folder or a platform, and to draft access rules or a checklist. A local LLM can also help to check whether a dataset contains personal data that should not be shared, for instance names or e-mail addresses in a free-text column.
+
+The other direction is more important: **the LLM itself is a possible leak**. Anything pasted into an online LLM leaves your computer. This is covered in [Where is the data?](#where-is-the-data).
+
+Even if the LLM runs locally, it is important to check that the computer or server is secure, and that access is limited to the people who are allowed to see the data. A LLM might suggest a command to change the permissions of a folder, but it cannot check whether the computer is secure or whether the person running the command is allowed to do so. It also might remember information from previous questions, even if the information should not be retained.
 
 ## data governance and compliance
 
+Funders, journals, and institutions have rules on how data should be managed and shared. An LLM can help to read long policy documents, extract the requirements into a checklist, and prepare the answers for a DMP or a funding application.
+
+It can however miss an exception or invent a requirement that does not exist. Treat the result as a reading aid, and check each requirement against the original document. For questions on data protection law (such as GDPR), ask the data protection officer of your institution.
+
 ## data documentation and metadata management
+
+Writing documentation and metadata is a task that is often postponed, and an LLM can make it faster:
+
+* help drafting a documentation,
+* help review and improve the clarity of a text, for instance a README or a protocol,
+* drafting the description of a dataset, a method, or a column
+* building a data dictionary from a table
+* suggesting existing vocabularies and ontologies for the metadata
+* converting metadata from one format to another, for instance from a table to JSON-LD or Turtle (see [Semantic graphs](SemanticGraphs.qmd))
+* helping to write SPARQL queries (see [Semantic graphs](SemanticGraphs.qmd))
+
+The LLM does not know your experiment. It can write something that sounds right but does not correspond to what was actually done. The scientist who produced the data must read and correct every description, and the LLM should never be the only author of the metadata.
+
+:::{.callout-note}
+Using a LLM to write a document is often a tradeoff between writing and editing. Some LLM has a tendency to produce a long text that is mostly correct, but needs to be shortened and corrected.
+:::
 
 # Limits and risks
 
+LLMs produce text that is **likely**, not text that is **verified**. This leads to the following issues:
+
+* **Invented content ("hallucinations").** An LLM can invent references, function names, parameters, ontology terms, or facts, and present them with confidence. Invented property names in a SPARQL query or non-existing functions in a script are typical examples.
+* **Outdated knowledge.** An LLM only knows what was in its training data, and may suggest old versions of a tool or an approach that has since changed. Online LLMs with a web search are better, but not immune.
+* **Different answers to the same question.** The result can change from one try to the next, and from one version of the model to the next. For a work that needs to be reproducible, keep the prompt, the answer, the name of the model, and the date.
+* **Misplaced confidence.** The tone is always sure of itself, even when the answer is wrong. A fluent text is not a proof that it is correct.
+* **Bias.** The training data reflect what is available on the Internet, which is not a balanced picture of every field, language or region. That is especially true for research data, where the LLM may have seen only a few papers on a topic, and may not know the latest results.
+* **Dependence.** If a task is always delegated, the understanding of it can fade away. It is important that the person is still able to understand and explain what was done.
+* **Actions that cannot be undone.** If an LLM is allowed to act on its own, for instance to run commands or change data (so-called agents, see [Other AI tools](#other-ai-tools)), a mistake can delete or alter data. See [Building an Assembly](Building_an_assembly.qmd#sec-llm-assembly) for access levels that limit this risk.
+* **Hidden instructions.** If an LLM reads a document, a web page, or an e-mail, text hidden in it can try to give instructions to the LLM ("prompt injection"). This matters mostly if the LLM has access to tools or data.
+* **Questions of authorship and rights.** Journals and institutions have rules on the use of AI, which can include declaring it. Code and text produced by an LLM can also raise questions about licenses.
+
+Some simple habits reduce most of these risks:
+
+1. **Verify.** Read the answer, and check references, names, and numbers against a reliable source.
+2. **Test.** Try the result on a case for which you know the answer, or on a small subset.
+3. **Keep a human in the loop.** In particular for anything that changes or deletes data.
+4. **Keep a trace.** Note which LLM was used, for what, and keep the important prompts, in the same way as you would document any other tool.
+5. **Start small.** Use the LLM first for tasks where a mistake is cheap and easy to spot.
+
+::: {.callout-note}
+In all cases, the LLM is a helper whose output should be verified, not a source of truth.
+:::
+
 # Where is the data?
 
+The key question before using an LLM is: **where does what I type go?**
+
+With an **online LLM**, everything you send (the text of the question, the files you upload, and what is read by connected tools) is transmitted to the servers of the provider. Depending on the provider, the plan, and the settings, it may be stored for some time, read by staff for control purposes, and, in some cases, used to train future models. The servers may also be located in another country, which matters for data protection law.
+
+With a **local LLM** (at institution level or on your own computer), the data stays inside your institution or on your computer. No external provider is involved. It is not automatically "safe", the usual rules for protecting a computer or a server still apply, but there is no transfer to a third party.
+
+Before pasting something into an online LLM, ask yourself whether it contains:
+
+* personal data (names, contact details, health data, recordings of persons, ...)
+* unpublished results or data, or data from a collaborator or a company
+* data under a confidentiality or data transfer agreement
+* anything where the funder or the institution has set rules
+* passwords, access keys, tokens, or any other credential
+
+If the answer is yes for any of these, **do not paste it into an online LLM**, unless your institution has explicitly approved that service for this use.
+
+Often it is possible to get the help without sending the data:
+
+* **Send the structure, not the data.** The column names, the schema, the API documentation, or a few invented example rows are usually enough to get a script or a query. This is the approach used for SPARQL on the [Semantic graphs](SemanticGraphs.qmd) page.
+* **Replace the real values.** Use dummy values (`Sample_1`, `John Doe`) and apply the script that you received to the real data on your own computer.
+* **Use a local LLM** for the tasks that really need the data.
+
+These options correspond to the access levels described in [Building an Assembly](Building_an_assembly.qmd#sec-llm-assembly): documentation only, read-only access to the data, and, as a last step, a full access with strong safeguards.
+
+Finally, remember that the **conversations themselves** are data: they are stored in your account and may contain things that you pasted some days ago. Delete what is not needed anymore, and do not share an account between several persons.
+
+::: {.callout-note}
+If you are not sure which service is allowed for which kind of data, ask the Data Management Team, the IT department, or the data protection officer of your institution. It is better to ask before than after.
+:::
+
 # Other AI tools
+
+Chat-based LLMs are only one kind of AI tool. Others you might meet in research data management are:
+
+* **Coding assistants** inside an editor or on the command line (for instance GitHub Copilot, Cursor, or Claude Code). They read the files of your project, and sometimes run commands, so the points on [Where is the data?](#where-is-the-data) and on actions that cannot be undone apply fully.
+* **Literature and search tools** that summarise papers and answer questions with references (for instance Elicit, Consensus, or Perplexity). Always open the cited paper: a reference can exist and still not say what is claimed.
+* **Transcription and translation**, such as Whisper for speech to text (it can run locally) or DeepL for translation. Recordings of interviews are often personal data.
+* **Reading documents**: OCR and tools to extract text and tables from PDFs or scanned pages, which can help to digitise old lab notebooks or reports. Check the output carefully, a misread number is easy to miss.
+* **Search in your own documents**: LLMs combined with a collection of documents or a knowledge graph, so that answers are based on your sources (an approach known as retrieval-augmented generation, or RAG; see the [Semantic graphs](SemanticGraphs.qmd) page for the graph variant).
+* **Agents**: LLMs that plan and carry out several steps on their own, such as running code or calling tools. They are powerful, but need the strongest limits: read-only access by default, and human approval for anything that changes or deletes data.
+* **Machine learning that is not an LLM**: classification of images, detection of outliers, prediction models... These are analysis methods in their own right, with their own need for validation, and are not covered here.
+
+The same principles apply to all of them: know where the data goes, check the results, keep a human in charge, and document what was used.

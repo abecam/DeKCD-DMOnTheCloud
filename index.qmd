@@ -18,6 +18,10 @@ We will also compile advices and tips, and we welcome all contributions (and cor
 
 Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases. By Data Management Platforms we mean an online application with a data repository (database or other), such as those listed in our [Data Management Platforms registry](https://dekcd.github.io/FAIR-DMP-Registry/)
 
+# Onboarding
+
+This page is an step-by-step guide to set-up a Data Management Platform, so still rather extensive. If you are mostly looking for a quick overview, we provide a onboarding page with a summary of the main points and links to the relevant sections: [Onboarding](pages/Onboarding.qmd).
+
 # Before and beyond: RDMKit
 
 While the guide is only focused on technical aspects and consideration, RDMKit covers most aspects of Research Data Management, including technical considerations which are out of the scope of this guide. It also provides links to related resources.
