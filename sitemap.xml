@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/navigation-overview-short.html</loc>
-    <lastmod>2026-11-18T12:48:25.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/roadblocks.html</loc>
-    <lastmod>2026-11-18T12:48:25.447Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/readme.html</loc>
-    <lastmod>2026-11-18T12:48:25.447Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/DM_planning.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/privacy.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Backups_and_security.html</loc>
-    <lastmod>2026-11-18T12:48:25.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Building_an_assembly.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
     <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/General_considerations_LLM.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/SemanticGraphs.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Kubernetes_introduction.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/parked/navigation-overview.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/onboarding.html</loc>
-    <lastmod>2026-11-18T12:48:25.445Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/parked/readme.html</loc>
-    <lastmod>2026-11-18T12:48:25.447Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/about.html</loc>
-    <lastmod>2026-11-18T12:48:25.444Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Data_storage.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/TechPlatformDecisionTree.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Basic_web_apps_troubleshooting.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
-  </url>
-  <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/draft.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
   </url>
   <url>
     <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Costs_Limits_Troubleshooting.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Kubernetes_introduction.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/privacy.html</loc>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
   </url>
   <url>
     <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Pseudonymization.html</loc>
-    <lastmod>2026-11-18T12:48:25.446Z</lastmod>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Building_an_assembly.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Basic_web_apps_troubleshooting.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/readme.html</loc>
+    <lastmod>2026-11-18T12:55:21.008Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/roadblocks.html</loc>
+    <lastmod>2026-11-18T12:55:21.009Z</lastmod>
   </url>
   <url>
     <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/static_md/tutorials_links.html</loc>
-    <lastmod>2026-11-18T12:48:25.447Z</lastmod>
+    <lastmod>2026-11-18T12:55:21.008Z</lastmod>
   </url>
   <url>
-    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/to_investigate.html</loc>
-    <lastmod>2026-11-18T12:48:25.447Z</lastmod>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/parked/navigation-overview.html</loc>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/navigation-overview-short.html</loc>
+    <lastmod>2026-11-18T12:55:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/onboarding.html</loc>
+    <lastmod>2026-11-18T12:55:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/parked/readme.html</loc>
+    <lastmod>2026-11-18T12:55:21.008Z</lastmod>
   </url>
   <url>
     <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/index.html</loc>
-    <lastmod>2026-11-18T12:48:25.445Z</lastmod>
+    <lastmod>2026-11-18T12:55:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/working_pages/to_investigate.html</loc>
+    <lastmod>2026-11-18T12:55:21.009Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/about.html</loc>
+    <lastmod>2026-11-18T12:55:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/draft.html</loc>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Data_storage.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/TechPlatformDecisionTree.html</loc>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/Backups_and_security.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/DM_planning.html</loc>
+    <lastmod>2026-11-18T12:55:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://abecam.github.io/DeKCD-DMOnTheCloud/pages/SemanticGraphs.html</loc>
+    <lastmod>2026-11-18T12:55:21.007Z</lastmod>
   </url>
 </urlset>
