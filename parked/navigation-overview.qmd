@@ -1,5 +1,5 @@
 ---
-title: "Navigation guide: De.KCD – Data Management Platform on the Cloud"
+title: "Navigation guide"
 subtitle: "How the pages fit together, and where to go for what"
 date: 2026-11-18
 format:

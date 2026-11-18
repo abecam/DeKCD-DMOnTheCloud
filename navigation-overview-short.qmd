@@ -1,5 +1,5 @@
 ---
-title: "Navigation guide: De.KCD – Data Management Platform on the Cloud"
+title: "Navigation guide"
 subtitle: "Where to go for what"
 date: 2026-11-18
 format:
@@ -134,20 +134,20 @@ flowchart LR
   CL -.- K
   OS -.- K
 
-  click BM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
-  click VM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
-  click DK "index.qmd#sec-containers" "Open Docker"
-  click DC "index.qmd#sec-docker-compose" "Open Docker Compose"
-  click K "index.qmd#sec-compose-to-kubernetes" "Open the Kubernetes transition"
-  click PX "index.qmd#sec-proxmox" "Open Proxmox VE"
-  click SW "index.qmd#sec-nomad" "Open Nomad"
-  click CL "index.qmd#sec-cloudrun" "Open Cloud Run"
-  click OS "index.qmd#sec-openstack" "Open OpenStack"
+  click BM "./#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click VM "./#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click DK "./#sec-containers" "Open Docker"
+  click DC "./#sec-docker-compose" "Open Docker Compose"
+  click K "./#sec-compose-to-kubernetes" "Open the Kubernetes transition"
+  click PX "./#sec-proxmox" "Open Proxmox VE"
+  click SW "./#sec-nomad" "Open Nomad"
+  click CL "./#sec-cloudrun" "Open Cloud Run"
+  click OS "./#sec-openstack" "Open OpenStack"
 ```
 
 ::: {.callout-note}
 ## What applies at every step
-[Linux basics](index.qmd#sec-linux), [scalability](index.qmd#sec-scalability), [databases](index.qmd#sec-databases), [security](index.qmd#sec-security), [the *Backups and Security* page][bak], [automation](index.qmd#sec-automatize-the-setup), and [the choice of tools](index.qmd#sec-many-choices) are not tied to one step. Treat them as a layer under the whole ladder.
+[Linux basics](./#sec-linux), [scalability](./#sec-scalability), [databases](./#sec-databases), [security](./#sec-security), [the *Backups and Security* page][bak], [automation](./#sec-automatize-the-setup), and [the choice of tools](./#sec-many-choices) are not tied to one step. Treat them as a layer under the whole ladder.
 :::
 
 # The journey of the data across the pages
@@ -209,24 +209,24 @@ flowchart LR
 [pse]: pages/Pseudonymization.qmd
 [sem]: pages/SemanticGraphs.qmd
 [k8s]: pages/Kubernetes_introduction.qmd
-[when-to]: index.qmd#sec-when-to
-[common-remarks]: index.qmd#sec-common-remarks
-[level-of-service]: index.qmd#sec-level-of-service
-[linux]: index.qmd#sec-linux
-[containers]: index.qmd#sec-containers
-[compose]: index.qmd#sec-docker-compose
-[env-files]: index.qmd#sec-env-files
-[namespaces]: index.qmd#sec-namespaces
-[bind-mounts]: index.qmd#sec-bind-mounts
-[dockerfile]: index.qmd#sec-dockerfile
-[compose-k8s]: index.qmd#sec-compose-to-kubernetes
-[other-solutions]: index.qmd#sec-other-solutions
-[proxmox]: index.qmd#sec-proxmox
-[openstack]: index.qmd#sec-openstack
-[nomad]: index.qmd#sec-nomad
-[swarm]: index.qmd#sec-swarm
-[cloudrun]: index.qmd#sec-cloudrun
-[automation]: index.qmd#sec-automatize-the-setup
+[when-to]: ./#sec-when-to
+[common-remarks]: ./#sec-common-remarks
+[level-of-service]: ./#sec-level-of-service
+[linux]: ./#sec-linux
+[containers]: ./#sec-containers
+[compose]: ./#sec-docker-compose
+[env-files]: ./#sec-env-files
+[namespaces]: ./#sec-namespaces
+[bind-mounts]: ./#sec-bind-mounts
+[dockerfile]: ./#sec-dockerfile
+[compose-k8s]: ./#sec-compose-to-kubernetes
+[other-solutions]: ./#sec-other-solutions
+[proxmox]: ./#sec-proxmox
+[openstack]: ./#sec-openstack
+[nomad]: ./#sec-nomad
+[swarm]: ./#sec-swarm
+[cloudrun]: ./#sec-cloudrun
+[automation]: ./#sec-automatize-the-setup
 [onb-linux]: onboarding.qmd#sec-onboarding-linux
 [onb-docker]: onboarding.qmd#sec-onboarding-docker-basics
 [k8s-cloud]: pages/Kubernetes_introduction.qmd#sec-cloud-benefits
