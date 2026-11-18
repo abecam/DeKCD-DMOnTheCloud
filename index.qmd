@@ -631,7 +631,7 @@ The usage below is the typical one: ```attribute_name: ${VARIABLE_NAME:-default_
 
 Note that it is an interpolation, and it can be combined with text or other variables: ```attribute_name: "text${VARIABLE_NAME}:${ANOTHER_VARIABLE_NAME}"```
 
-There are more possibilities explained on the official [Docker documentation}(https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)
+There are more possibilities explained on the official [Docker documentation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/)
 
 The variables used in ```environment:``` are available within the application as environment variable, making it simple to use them.
 
