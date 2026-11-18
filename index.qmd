@@ -1431,6 +1431,8 @@ They are generally connected via APIs, which can be at a programmatic level (for
 
 The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the [Data Anonymisation and Pseudonymisation page](pages/Pseudonymisation.qmd).
 
+You can read more about how to build an assembly in the [Building an Assembly page](pages/Building_an_assembly.qmd).
+
 # Automatize the setup
 
 When you need to repeat a setup, or when you need to set-up a complex application, it is generally better to automate the setup, rather than doing it by hand. This can be done with tools such as Puppet, Ansible, and Terraform, which allow you to describe the desired state of your system in a declarative way, and then apply that state to your machines.

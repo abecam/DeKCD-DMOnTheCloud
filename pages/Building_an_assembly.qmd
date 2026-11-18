@@ -32,7 +32,7 @@ Using a version control system, such as Git, to manage the code and track change
 
 We recommend to write this tools following the KISS principle (Keep It Simple, Stupid), so that they are easy to understand and maintain.
 
-# Avoid using the wrong tools
+## Avoid using the wrong tools
 
 An important aspect of data management is to use the right tools for the right tasks. Using a tool that is not designed for a specific task can lead to issues with data integrity, security, and usability.
 
@@ -49,6 +49,12 @@ When building an assembly, it is important to consider the following concerns:
 * Compatibility: Ensure that the tools and resources being used are compatible with each other and can work together seamlessly.
 * Security: Ensure that the tools and resources being used are secure and protect sensitive data.
 * Scalability: Ensure that the assembly can handle the volume of data and users that will be involved in the research project.
+
+## Security and privacy
+
+When building an assembly, it is important to consider the security and privacy of the data being used. This may involve implementing access controls, encryption, and other security measures to protect sensitive data.
+
+If needed, the data can be anonymized or pseudonymized. Anonymization is the process of removing personally identifiable information from data, while pseudonymization is the process of replacing personally identifiable information with a pseudonym. You will find more information on the [Pseudonymization page](Pseudonymization.qmd).
 
 # Connecting using APIs
 
