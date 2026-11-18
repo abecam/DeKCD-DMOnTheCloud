@@ -235,6 +235,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../navigation-overview-short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigation guide: De.KCD – Data Management Platform on the Cloud</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -299,7 +305,7 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#our-showcase-application-fairdom-seek" id="toc-our-showcase-application-fairdom-seek" class="nav-link active" data-scroll-target="#our-showcase-application-fairdom-seek"><span class="header-section-number">1</span> Our showcase application: FAIRDOM Seek</a>
+  <li><a href="#sec-kubernetes-part-1" id="toc-sec-kubernetes-part-1" class="nav-link active" data-scroll-target="#sec-kubernetes-part-1"><span class="header-section-number">1</span> Our showcase application: FAIRDOM Seek</a>
   <ul class="collapse">
   <li><a href="#seek-and-its-components" id="toc-seek-and-its-components" class="nav-link" data-scroll-target="#seek-and-its-components"><span class="header-section-number">1.1</span> Seek and its components</a></li>
   <li><a href="#the-default-docker-compose" id="toc-the-default-docker-compose" class="nav-link" data-scroll-target="#the-default-docker-compose"><span class="header-section-number">1.2</span> The default Docker Compose</a>
@@ -311,10 +317,10 @@ cookieconsent.run({
   <li><a href="#the-search-engine-solr" id="toc-the-search-engine-solr" class="nav-link" data-scroll-target="#the-search-engine-solr"><span class="header-section-number">1.2.5</span> The Search Engine (<code>solr</code>)</a></li>
   <li><a href="#volumes" id="toc-volumes" class="nav-link" data-scroll-target="#volumes"><span class="header-section-number">1.2.6</span> Volumes</a></li>
   </ul></li>
-  <li><a href="#what-could-benefit-from-a-cloud-setup" id="toc-what-could-benefit-from-a-cloud-setup" class="nav-link" data-scroll-target="#what-could-benefit-from-a-cloud-setup"><span class="header-section-number">1.3</span> What could benefit from a cloud setup</a></li>
+  <li><a href="#sec-cloud-benefits" id="toc-sec-cloud-benefits" class="nav-link" data-scroll-target="#sec-cloud-benefits"><span class="header-section-number">1.3</span> What could benefit from a cloud setup</a></li>
   <li><a href="#a-pragmatic-approach-of-cloud-setup" id="toc-a-pragmatic-approach-of-cloud-setup" class="nav-link" data-scroll-target="#a-pragmatic-approach-of-cloud-setup"><span class="header-section-number">1.4</span> A pragmatic approach of Cloud setup</a></li>
   </ul></li>
-  <li><a href="#a-quick-overview-of-kubernetes" id="toc-a-quick-overview-of-kubernetes" class="nav-link" data-scroll-target="#a-quick-overview-of-kubernetes"><span class="header-section-number">2</span> A quick overview of Kubernetes</a>
+  <li><a href="#sec-kubernetes-part-2" id="toc-sec-kubernetes-part-2" class="nav-link" data-scroll-target="#sec-kubernetes-part-2"><span class="header-section-number">2</span> A quick overview of Kubernetes</a>
   <ul class="collapse">
   <li><a href="#good-free-instructory-resources" id="toc-good-free-instructory-resources" class="nav-link" data-scroll-target="#good-free-instructory-resources"><span class="header-section-number">2.1</span> Good free instructory resources</a>
   <ul class="collapse">
@@ -328,7 +334,7 @@ cookieconsent.run({
   <li><a href="#the-various-objects-for-your-application" id="toc-the-various-objects-for-your-application" class="nav-link" data-scroll-target="#the-various-objects-for-your-application"><span class="header-section-number">2.6</span> The various objects for your application</a></li>
   <li><a href="#visual-overview" id="toc-visual-overview" class="nav-link" data-scroll-target="#visual-overview"><span class="header-section-number">2.7</span> Visual overview</a></li>
   <li><a href="#updating-an-application" id="toc-updating-an-application" class="nav-link" data-scroll-target="#updating-an-application"><span class="header-section-number">2.8</span> Updating an application</a></li>
-  <li><a href="#where-do-you-store-the-data" id="toc-where-do-you-store-the-data" class="nav-link" data-scroll-target="#where-do-you-store-the-data"><span class="header-section-number">2.9</span> Where do you store the data</a>
+  <li><a href="#sec-kubernetes-storage" id="toc-sec-kubernetes-storage" class="nav-link" data-scroll-target="#sec-kubernetes-storage"><span class="header-section-number">2.9</span> Where do you store the data</a>
   <ul class="collapse">
   <li><a href="#a-note-about-automatic-storage-storageclass" id="toc-a-note-about-automatic-storage-storageclass" class="nav-link" data-scroll-target="#a-note-about-automatic-storage-storageclass"><span class="header-section-number">2.9.1</span> A note about automatic storage (StorageClass)</a></li>
   <li><a href="#visual-overview-of-automatic-storage-provisioning" id="toc-visual-overview-of-automatic-storage-provisioning" class="nav-link" data-scroll-target="#visual-overview-of-automatic-storage-provisioning"><span class="header-section-number">2.9.2</span> Visual overview of automatic storage provisioning</a></li>
@@ -370,7 +376,7 @@ cookieconsent.run({
 </header>
 
 
-<section id="our-showcase-application-fairdom-seek" class="level1" data-number="1">
+<section id="sec-kubernetes-part-1" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Our showcase application: <a href="https://seek4science.org/">FAIRDOM Seek</a></h1>
 <p>Seek is an extensive Data Management platform mostly aimed at Life Sciences but that can be used in any domain. It is a good example for going from bare metal to full cloud setup as:</p>
 <ul>
@@ -641,8 +647,8 @@ cookieconsent.run({
 <p>All four volumes are marked <code>external: true</code>, meaning Compose expects them to already exist on the host — it will <strong>not</strong> create or delete them automatically. This is a deliberate safety measure: running <code>docker compose down -v</code> won’t wipe your data.</p>
 </section>
 </section>
-<section id="what-could-benefit-from-a-cloud-setup" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="what-could-benefit-from-a-cloud-setup"><span class="header-section-number">1.3</span> What could benefit from a cloud setup</h2>
+<section id="sec-cloud-benefits" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-cloud-benefits"><span class="header-section-number">1.3</span> What could benefit from a cloud setup</h2>
 <p>The benefits that can be expected from a cloud setup depends mostly on the scale of the platform and the expected traffic. As such, they are listed from the most general benefits to those that will be more relevant for larger platforms or more needs:</p>
 <ul>
 <li><strong>High availability</strong>: Cloud providers often have multiple data centers and availability zones, which can help ensure that your application remains available even if one data center experiences an outage. This can be achieved through load balancing and failover mechanisms. This is especially beneficial is the Kubernetes cluster is managed by an IT team (on site or not), even if they are not directly involved in the platform management: if one node of the cluster goes down, Kubernetes will automatically move the application to another node, ensuring that it remains available without any manual intervention. If the crash has to be investigated, it can be done later on without any rush, and without the need to restore the platform from a backup.</li>
@@ -662,7 +668,7 @@ cookieconsent.run({
 <p>As such, it is often not beneficial to use the whole capability of a Cloud setup, but to pick what will be a real benefit and what need to be ignored in order to keep things manageable. It is also important to consider which level of availability, security and scalibility is really needed. Going from a 99% uptime (the platform need to be available 99% of the time) to 99.9% might involve a very high cost, needing several instance behind a load balancer, using a distributed database with automatic replication of data, having a redundant identity server… Going from 99.9% to 99.99% will have an even greater cost.</p>
 </section>
 </section>
-<section id="a-quick-overview-of-kubernetes" class="level1" data-number="2">
+<section id="sec-kubernetes-part-2" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> A quick overview of Kubernetes</h1>
 <section id="good-free-instructory-resources" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="good-free-instructory-resources"><span class="header-section-number">2.1</span> Good free instructory resources</h2>
@@ -1028,8 +1034,8 @@ RS1 --&gt; P3
 <p>Applications are still running in containers, so updating means updating the container image. If <strong>Deployments</strong> are used, the update is managed automatically by Kubernetes: it follows an update strategy to start new containers while stopping and removing the old ones. This allows smooth, gradual updates with no downtime.</p>
 <p>You can also roll back easily if something goes wrong, as Kubernetes keeps the previous version ready.</p>
 </section>
-<section id="where-do-you-store-the-data" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="where-do-you-store-the-data"><span class="header-section-number">2.9</span> Where do you store the data</h2>
+<section id="sec-kubernetes-storage" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="sec-kubernetes-storage"><span class="header-section-number">2.9</span> Where do you store the data</h2>
 <p>Kubernetes itself also stores data — but not application data.</p>
 <p>The cluster state (what pods exist, their configuration, secrets, etc.) is stored in <strong>etcd</strong>, a distributed key-value database used internally by Kubernetes. This data is critical for the cluster to function, but it is not meant for your application data.</p>
 <p>Containers are temporary — when they stop, everything inside disappears. For most applications, you need to keep data somewhere safe and separate from the containers. The common way to store data in Kubernetes is in <strong>volumes</strong>.</p>

@@ -196,6 +196,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../navigation-overview-short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigation guide: De.KCD – Data Management Platform on the Cloud</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -260,8 +266,8 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#which-kind-of-llm-to-use" id="toc-which-kind-of-llm-to-use" class="nav-link active" data-scroll-target="#which-kind-of-llm-to-use"><span class="header-section-number">1</span> Which kind of LLM to use?</a></li>
-  <li><a href="#which-uses" id="toc-which-uses" class="nav-link" data-scroll-target="#which-uses"><span class="header-section-number">2</span> Which uses?</a>
+  <li><a href="#sec-llm-kind" id="toc-sec-llm-kind" class="nav-link active" data-scroll-target="#sec-llm-kind"><span class="header-section-number">1</span> Which kind of LLM to use?</a></li>
+  <li><a href="#sec-llm-uses" id="toc-sec-llm-uses" class="nav-link" data-scroll-target="#sec-llm-uses"><span class="header-section-number">2</span> Which uses?</a>
   <ul class="collapse">
   <li><a href="#technical-issues-and-tasks" id="toc-technical-issues-and-tasks" class="nav-link" data-scroll-target="#technical-issues-and-tasks"><span class="header-section-number">2.1</span> technical issues and tasks</a></li>
   <li><a href="#data-analysis-and-visualization" id="toc-data-analysis-and-visualization" class="nav-link" data-scroll-target="#data-analysis-and-visualization"><span class="header-section-number">2.2</span> data analysis and visualization</a></li>
@@ -272,9 +278,9 @@ cookieconsent.run({
   <li><a href="#data-governance-and-compliance" id="toc-data-governance-and-compliance" class="nav-link" data-scroll-target="#data-governance-and-compliance"><span class="header-section-number">2.7</span> data governance and compliance</a></li>
   <li><a href="#data-documentation-and-metadata-management" id="toc-data-documentation-and-metadata-management" class="nav-link" data-scroll-target="#data-documentation-and-metadata-management"><span class="header-section-number">2.8</span> data documentation and metadata management</a></li>
   </ul></li>
-  <li><a href="#limits-and-risks" id="toc-limits-and-risks" class="nav-link" data-scroll-target="#limits-and-risks"><span class="header-section-number">3</span> Limits and risks</a></li>
-  <li><a href="#where-is-the-data" id="toc-where-is-the-data" class="nav-link" data-scroll-target="#where-is-the-data"><span class="header-section-number">4</span> Where is the data?</a></li>
-  <li><a href="#other-ai-tools" id="toc-other-ai-tools" class="nav-link" data-scroll-target="#other-ai-tools"><span class="header-section-number">5</span> Other AI tools</a></li>
+  <li><a href="#sec-limits-and-risks" id="toc-sec-limits-and-risks" class="nav-link" data-scroll-target="#sec-limits-and-risks"><span class="header-section-number">3</span> Limits and risks</a></li>
+  <li><a href="#sec-where-is-the-data" id="toc-sec-where-is-the-data" class="nav-link" data-scroll-target="#sec-where-is-the-data"><span class="header-section-number">4</span> Where is the data?</a></li>
+  <li><a href="#sec-other-ai-tools" id="toc-sec-other-ai-tools" class="nav-link" data-scroll-target="#sec-other-ai-tools"><span class="header-section-number">5</span> Other AI tools</a></li>
   </ul>
 </nav>
     </div>
@@ -300,7 +306,7 @@ cookieconsent.run({
 </header>
 
 
-<section id="which-kind-of-llm-to-use" class="level1" data-number="1">
+<section id="sec-llm-kind" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Which kind of LLM to use?</h1>
 <p>Local, tiny local, or online LLMs. The choice of which type of LLM to use will depend on the specific needs and requirements of the research project or task. Local LLMs may be preferred for tasks that require access to sensitive data, while online LLMs may be preferred for tasks that require access to a wider range of resources and tools.</p>
 <table class="caption-top table">
@@ -373,7 +379,7 @@ Note
 </div>
 </div>
 </section>
-<section id="which-uses" class="level1" data-number="2">
+<section id="sec-llm-uses" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Which uses?</h1>
 <p>An LLM is a general helper: it is good with language, with code, and with explaining things. This makes it useful in many parts of research data management. In all cases below, the LLM is an assistant that proposes, and the person remains responsible for checking and deciding (see <a href="#limits-and-risks">Limits and risks</a>).</p>
 <section id="technical-issues-and-tasks" class="level2" data-number="2.1">
@@ -486,7 +492,7 @@ Note
 </div>
 </section>
 </section>
-<section id="limits-and-risks" class="level1" data-number="3">
+<section id="sec-limits-and-risks" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Limits and risks</h1>
 <p>LLMs produce text that is <strong>likely</strong>, not text that is <strong>verified</strong>. This leads to the following issues:</p>
 <ul>
@@ -522,7 +528,7 @@ Note
 </div>
 </div>
 </section>
-<section id="where-is-the-data" class="level1" data-number="4">
+<section id="sec-where-is-the-data" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Where is the data?</h1>
 <p>The key question before using an LLM is: <strong>where does what I type go?</strong></p>
 <p>With an <strong>online LLM</strong>, everything you send (the text of the question, the files you upload, and what is read by connected tools) is transmitted to the servers of the provider. Depending on the provider, the plan, and the settings, it may be stored for some time, read by staff for control purposes, and, in some cases, used to train future models. The servers may also be located in another country, which matters for data protection law.</p>
@@ -558,7 +564,7 @@ Note
 </div>
 </div>
 </section>
-<section id="other-ai-tools" class="level1" data-number="5">
+<section id="sec-other-ai-tools" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Other AI tools</h1>
 <p>Chat-based LLMs are only one kind of AI tool. Others you might meet in research data management are:</p>
 <ul>

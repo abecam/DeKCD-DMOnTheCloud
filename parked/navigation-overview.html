@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-18">
+
+<title>Navigation guide: De.KCD – Data Management Platform on the Cloud – De.KCD - Data Management Platform on the Cloud - Quickstart</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ce0f0d1e95892c391167071f7e5e54e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":"",
+"website_privacy_policy_url":"https://dekcd.github.io/FAIR-DMP-Registry/pages/privacy.html"
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+<meta name="mermaid-theme" content="default">
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script type="text/plain" cookie-consent="tracking">
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['setVisitorCookieTimeout', '2592000']);
+  _paq.push(['setSessionCookieTimeout', '0']);
+  _paq.push(["setDomains", ["*.dekcd.github.io/DeKCD-DMOnTheCloud"]]);
+  _paq.push(["setCookieDomain", "*.dekcd.github.io"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  _paq.push(['enableHeartBeatTimer', 15]);
+  (function() {
+    var u="https://piwik.cebitec.uni-bielefeld.de/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '38']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+</script>
+ 
+<noscript></noscript></head><body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><p><img referrerpolicy="no-referrer-when-downgrade" src="https://piwik.cebitec.uni-bielefeld.de/matomo.php?idsite=38&amp;rec=1" style="border:0;" alt=""></p>
+
+
+<link rel="stylesheet" href="../styles.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">De.KCD - Data Management Platform on the Cloud - Quickstart</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/privacy.html"> 
+<span class="menu-text">Privacy Policy</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/abecam/DeKCD-DMOnTheCloud" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item">Navigation guide: De.KCD – Data Management Platform on the Cloud</li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">De.KCD - Data Management Platform on the Cloud, step by step</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../onboarding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">De.KCD - Data Management Platform on the Cloud: Onboarding</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../navigation-overview-short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigation guide: De.KCD – Data Management Platform on the Cloud</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Backups_and_security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Backups and Security</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Data_storage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Storage</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Pseudonymization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pseudonymization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Building_an_assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building an Assembly</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/SemanticGraphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Semantic graphs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/General_considerations_LLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Considerations for Using LLMs in Research Data Management</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Kubernetes</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Kubernetes_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kubernetes - step by step</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#site-map" id="toc-site-map" class="nav-link active" data-scroll-target="#site-map">Site map</a></li>
+  <li><a href="#the-complexity-ladder" id="toc-the-complexity-ladder" class="nav-link" data-scroll-target="#the-complexity-ladder">The complexity ladder</a></li>
+  <li><a href="#structure-of-the-step-by-step-guide" id="toc-structure-of-the-step-by-step-guide" class="nav-link" data-scroll-target="#structure-of-the-step-by-step-guide">Structure of the step-by-step guide</a></li>
+  <li><a href="#the-decision-tree-condensed" id="toc-the-decision-tree-condensed" class="nav-link" data-scroll-target="#the-decision-tree-condensed">The decision tree, condensed</a></li>
+  <li><a href="#the-journey-of-the-data-across-the-pages" id="toc-the-journey-of-the-data-across-the-pages" class="nav-link" data-scroll-target="#the-journey-of-the-data-across-the-pages">The journey of the data across the pages</a></li>
+  <li><a href="#inside-the-big-pages" id="toc-inside-the-big-pages" class="nav-link" data-scroll-target="#inside-the-big-pages">Inside the big pages</a></li>
+  <li><a href="#the-pages-one-by-one" id="toc-the-pages-one-by-one" class="nav-link" data-scroll-target="#the-pages-one-by-one">The pages one by one</a></li>
+  <li><a href="#i-want-to" id="toc-i-want-to" class="nav-link" data-scroll-target="#i-want-to">I want to…</a></li>
+  <li><a href="#suggested-reading-paths" id="toc-suggested-reading-paths" class="nav-link" data-scroll-target="#suggested-reading-paths">Suggested reading paths</a></li>
+  <li><a href="#outside-the-site" id="toc-outside-the-site" class="nav-link" data-scroll-target="#outside-the-site">Outside the site</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Navigation guide: De.KCD – Data Management Platform on the Cloud</h1>
+<p class="subtitle lead">How the pages fit together, and where to go for what</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 18, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This page is a map of <a href="index.qmd">the documentation</a>. It does not repeat the content. It shows <strong>what is where</strong>, <strong>how the pages relate to each other</strong>, and <strong>in which order to read them</strong> depending on what you want to do.</p>
+<p>It covers the ten content pages of the site menu. <em>About</em> and <em>Privacy Policy</em> are not covered.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>The one-paragraph version
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The documentation helps you to choose <strong>the simplest setup that meets your current needs</strong> (a hosted service first, then local install, virtual machine, Docker Compose, Kubernetes) and to understand it well enough to find your way in each tool’s own documentation. Linux, containers, storage, backups, security, data protection, assemblies of several tools, semantic graphs and LLMs are covered in separate pages that point to each other.</p>
+</div>
+</div>
+<section id="site-map" class="level1">
+<h1>Site map</h1>
+<p>Every box is a page of the site. Solid arrows are direct links between pages (the label says where they come from or what they carry). Dashed arrows are links to outside resources or thematic relations.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-sitemap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sitemap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-sitemap">flowchart TB
+  classDef entry  fill:#dbeafe,stroke:#2563eb,color:#111
+  classDef decide fill:#fef3c7,stroke:#d97706,color:#111
+  classDef build  fill:#dcfce7,stroke:#16a34a,color:#111
+  classDef data   fill:#ede9fe,stroke:#7c3aed,color:#111
+  classDef ext    fill:#f3f4f6,stroke:#9ca3af,color:#111,stroke-dasharray: 4 3
+
+  subgraph ENTRY["Entry points"]
+    direction LR
+    ONB["Onboarding&lt;br/&gt;15-minute summary"]:::entry
+    IDX["Step-by-step guide&lt;br/&gt;(home page, 19 sections)"]:::entry
+  end
+
+  DT["Technical platform&lt;br/&gt;decision tree"]:::decide
+
+  subgraph BUILD["Build and run"]
+    direction LR
+    K8S["Kubernetes&lt;br/&gt;step by step"]:::build
+    STO["Data Storage"]:::build
+    BAK["Backups and Security"]:::build
+  end
+
+  subgraph DATA["Data in practice"]
+    direction LR
+    PSE["Pseudonymization"]:::data
+    ASM["Building an Assembly"]:::data
+    SEM["Semantic graphs"]:::data
+    LLM["LLMs in&lt;br/&gt;Research Data Management"]:::data
+  end
+
+  RDM["RDMKit&lt;br/&gt;(ELIXIR)"]:::ext
+  REG["FAIR-DMP-Registry"]:::ext
+
+  ONB &lt;--&gt;|"summary and details"| IDX
+  IDX --&gt;|"When to use a setup"| DT
+  ONB --&gt;|"Which solution"| DT
+  IDX --&gt;|"Docker to Kubernetes"| K8S
+  ONB --&gt;|"Kubernetes"| K8S
+  IDX --&gt;|"Linux, security, backups"| BAK
+  ONB --&gt;|"Security"| BAK
+  IDX --&gt;|"Object storage"| STO
+  IDX --&gt;|"Assemblies"| ASM
+  ONB --&gt;|"Assemblies"| ASM
+  ONB --&gt;|"pseudonymise"| PSE
+
+  STO &lt;--&gt;|"volumes, DB operators"| K8S
+  BAK --&gt;|"personal data"| PSE
+  ASM --&gt;|"sensitive data"| PSE
+  ASM &lt;--&gt;|"graph in an assembly"| SEM
+  ASM &lt;--&gt;|"LLM access levels"| LLM
+  SEM &lt;--&gt;|"SPARQL, GraphRAG"| LLM
+  K8S -.-&gt;|"alternatives"| IDX
+
+  DT -.-&gt;|"after a data management plan"| RDM
+  IDX -.-&gt; RDM
+  IDX -.-&gt; REG
+  BAK -.-&gt; RDM
+  STO -.-&gt; RDM
+
+  click ONB "onboarding.qmd" "Open the onboarding page"
+  click IDX "index.qmd" "Open the step-by-step guide"
+  click DT "pages/TechPlatformDecisionTree.qmd" "Open the decision tree"
+  click K8S "pages/Kubernetes_introduction.qmd" "Open the Kubernetes page"
+  click STO "pages/Data_storage.qmd" "Open the data storage page"
+  click BAK "pages/Backups_and_security.qmd" "Open the backups and security page"
+  click PSE "pages/Pseudonymization.qmd" "Open the pseudonymization page"
+  click ASM "pages/Building_an_assembly.qmd" "Open the assembly page"
+  click SEM "pages/SemanticGraphs.qmd" "Open the semantic graphs page"
+  click LLM "pages/General_considerations_LLM.qmd" "Open the LLM page"
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sitemap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The ten content pages and how they link to each other
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-complexity-ladder" class="level1">
+<h1>The complexity ladder</h1>
+<p>The core idea of the guide is to choose the simplest setup that meets your current needs, and to check first whether a hosted service already exists. When a ready-made image is available, Docker and then Docker Compose are the easiest ways to set a platform up, and Kubernetes is the step up when you need scale and availability. Installing by hand, in a virtual machine or on bare metal, is the fallback when no usable image exists or the application cannot be containerised: it is more work to install, update and maintain. The boxes carry the section of the step-by-step guide where each option is explained.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-ladder" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ladder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-ladder">flowchart LR
+  classDef main fill:#dbeafe,stroke:#2563eb,color:#111
+  classDef side fill:#f3f4f6,stroke:#9ca3af,color:#111
+  classDef start fill:#fef3c7,stroke:#d97706,color:#111
+  classDef manual fill:#fce7f3,stroke:#db2777,color:#111
+  HOST["Hosted service&lt;br/&gt;from your institution&lt;br/&gt;or consortium"]:::start
+  DK["Docker"]:::main
+  DC["Docker Compose&lt;br/&gt;and Dockerfile"]:::main
+  K["Kubernetes"]:::main
+
+  subgraph MAN["Manual installation&lt;br/&gt;(no usable image, or not containerisable)"]
+  direction TB
+    BM["Bare metal"]:::main
+    VM["Virtual machine"]:::main
+  end
+
+  HOST -.-&gt;|"if none is suitable"| DK
+  DK --&gt; DC --&gt; K
+  DK -.-&gt;|"fallback"| MAN
+
+  PX["Proxmox VE"]:::side
+  SW["Docker Swarm, Nomad"]:::side
+  CL["ECS, GKE, Cloud Run"]:::side
+  OS["OpenStack, Ceph, Magnum"]:::side
+
+  PX -.- VM
+  SW -.- DC
+  CL -.- K
+  OS -.- K
+
+  click BM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click VM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click DK "index.qmd#sec-containers" "Open Docker"
+  click DC "index.qmd#sec-docker-compose" "Open Docker Compose"
+  click K "index.qmd#sec-compose-to-kubernetes" "Open the Kubernetes transition"
+  click PX "index.qmd#sec-proxmox" "Open Proxmox VE"
+  click SW "index.qmd#sec-nomad" "Open Nomad"
+  click CL "index.qmd#sec-cloudrun" "Open Cloud Run"
+  click OS "index.qmd#sec-openstack" "Open OpenStack"
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ladder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: From a hosted service to Kubernetes, with manual installation as a fallback and the alternative infrastructure options
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What applies at every rung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="index.qmd#sec-linux">Linux basics</a>, <a href="index.qmd#sec-scalability">scalability</a>, <a href="index.qmd#sec-databases">databases</a>, <a href="index.qmd#sec-security">security</a>, <a href="pages/Backups_and_security.qmd">the <em>Backups and Security</em> page</a>, <a href="index.qmd#sec-automatize-the-setup">automation</a>, and <a href="index.qmd#sec-many-choices">the choice of tools</a> are not tied to one rung. Treat them as a layer under the whole ladder.</p>
+</div>
+</div>
+</section>
+<section id="structure-of-the-step-by-step-guide" class="level1">
+<h1>Structure of the step-by-step guide</h1>
+<p>The home page is one long document. Its 19 sections fall into seven blocks. The guide says that each section assumes you know the previous ones, but you can skip what you already know.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-structure" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-structure">flowchart TB
+  classDef blk fill:#f8fafc,stroke:#64748b,color:#111
+
+  subgraph A["A · Orientation"]
+    A1["Goals and scope"]
+    A2["Onboarding"]
+    A3["Before and beyond: RDMKit"]
+    A4["How to use"]
+    A5["When to…"]
+    A6["Common remarks"]
+  end
+  subgraph B["B · Foundations"]
+    B1["Linux / Unix"]
+    B2["Bare metal and VMs"]
+  end
+  subgraph C["C · Containers"]
+    C1["Docker"]
+    C2["Docker Compose"]
+    C3["Dockerfile"]
+  end
+  subgraph D["D · Orchestration"]
+    D1["Compose to Kubernetes"]
+  end
+  subgraph E["E · Other solutions"]
+    E1["Packaging, Proxmox,&lt;br/&gt;OpenStack, orchestrators,&lt;br/&gt;Apache projects"]
+  end
+  subgraph F["F · Cross-cutting"]
+    F1["Scalability"]
+    F2["Databases"]
+    F3["Security"]
+  end
+  subgraph G["G · Operations"]
+    G1["Going to an assembly"]
+    G2["Automatise the setup"]
+    G3["Many choices"]
+  end
+
+  A --&gt; B --&gt; C --&gt; D --&gt; E --&gt; F --&gt; G
+  A5 -.-&gt;|"detailed version"| DT["Decision tree page"]
+  A2 -.-&gt;|"short version"| ON["Onboarding page"]
+  D1 -.-&gt;|"details"| KP["Kubernetes page"]
+  F3 -.-&gt;|"details"| BP["Backups and Security page"]
+  G1 -.-&gt;|"details"| AP["Building an Assembly page"]
+
+  click A1 "index.qmd#sec-goals-and-scope" "Open Goals and scope"
+  click A2 "index.qmd#sec-onboarding" "Open Onboarding"
+  click A3 "index.qmd#sec-rdmkit" "Open RDMKit"
+  click A4 "index.qmd#sec-how-to-use" "Open How to use"
+  click A5 "index.qmd#sec-when-to" "Open When to"
+  click A6 "index.qmd#sec-common-remarks" "Open Common remarks"
+  click B1 "index.qmd#sec-linux" "Open Linux / Unix"
+  click B2 "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click C1 "index.qmd#sec-containers" "Open Docker"
+  click C2 "index.qmd#sec-docker-compose" "Open Docker Compose"
+  click C3 "index.qmd#sec-dockerfile" "Open Dockerfile"
+  click D1 "index.qmd#sec-compose-to-kubernetes" "Open Compose to Kubernetes"
+  click E1 "index.qmd#sec-other-solutions" "Open Other Solutions"
+  click F1 "index.qmd#sec-scalability" "Open Scalability"
+  click F2 "index.qmd#sec-databases" "Open Databases"
+  click F3 "index.qmd#sec-security" "Open Security"
+  click G1 "index.qmd#sec-going-to-an-assembly" "Open Going to an assembly"
+  click G2 "index.qmd#sec-automatize-the-setup" "Open Automation"
+  click G3 "index.qmd#sec-many-choices" "Open Many choices"
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-structure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The 19 sections of the home page grouped in seven blocks
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block</th>
+<th>What you get</th>
+<th>Learning difficulty stated in the guide</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A · Orientation</td>
+<td>Scope, the five levels of setup, six common rules (keep difficulty under control, level of service, plan for problems not features, document changes, use version control)</td>
+<td>none</td>
+</tr>
+<tr class="even">
+<td>B · Foundations</td>
+<td>Commands, folders, users and groups, cgroups, firewall/SSH/VPN, remote display, web servers; vocabulary for bare metal, emulation and virtualisation</td>
+<td>easy to very hard, “intermediate” for a cloud installation</td>
+</tr>
+<tr class="odd">
+<td>C · Containers</td>
+<td>Image, container, volume, Compose; a typical compose file with <code>.env</code>, health checks and YAML anchors; namespaces, bind mounts; multi-stage Dockerfiles</td>
+<td>Docker easy, Compose easy/medium, Dockerfile medium</td>
+</tr>
+<tr class="even">
+<td>D · Orchestration</td>
+<td>Pods, nodes, replicas, declarative manifests; when Kubernetes is overkill</td>
+<td>medium/hard</td>
+</tr>
+<tr class="odd">
+<td>E · Other solutions</td>
+<td>Proxmox, OpenStack (Nova, Neutron, Cinder, Swift, Ceph, Magnum…), Nomad, Swarm, ECS, GKE, Cloud Run, six Apache projects</td>
+<td>not stated</td>
+</tr>
+<tr class="even">
+<td>F · Cross-cutting</td>
+<td>Vertical vs.&nbsp;horizontal scaling, relational vs.&nbsp;other databases, security checklist</td>
+<td>not stated</td>
+</tr>
+<tr class="odd">
+<td>G · Operations</td>
+<td>Assemblies, Puppet/Ansible/Terraform, CI/CD and GitOps, choosing tools</td>
+<td>not stated</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-decision-tree-condensed" class="level1">
+<h1>The decision tree, condensed</h1>
+<p>The page <a href="pages/TechPlatformDecisionTree.qmd">Technical platform decision tree</a> contains the full tree. This is a shortened version to see the logic at a glance. The full tree adds a branch for institution-managed virtual servers (check backups, snapshots and load balancing there).</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-decision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-decision">flowchart TD
+  classDef q fill:#fef3c7,stroke:#d97706,color:#111
+  classDef r fill:#dcfce7,stroke:#16a34a,color:#111
+
+  S(["Start&lt;br/&gt;(repeat for each platform of an assembly)"])
+  Q1{"Hosted service from&lt;br/&gt;institution or consortium?"}:::q
+  Q2{"24/7 availability&lt;br/&gt;needed?"}:::q
+  Q3{"Managed Kubernetes&lt;br/&gt;available?"}:::q
+  Q4{"Skills, platform fits Kubernetes,&lt;br/&gt;benefits outweigh complexity?"}:::q
+  Q5{"Familiar with Docker / Compose&lt;br/&gt;and platform supports it?"}:::q
+  Q6{"Specific need for&lt;br/&gt;orchestration (HA, load balancing)?"}:::q
+  Q7{"Can you create and&lt;br/&gt;manage VMs?"}:::q
+  Q8{"Can you install on a&lt;br/&gt;dedicated physical server?"}:::q
+
+  R1["Use the service&lt;br/&gt;(check API access)"]:::r
+  R2["Kubernetes-based stack"]:::r
+  R3["Swarm, Nomad or similar"]:::r
+  R4["Docker Compose"]:::r
+  R5["Single VM&lt;br/&gt;(image or manual install)"]:::r
+  R6["Bare metal&lt;br/&gt;(ready-made image if possible)"]:::r
+  R7["External service"]:::r
+
+  S --&gt; Q1
+  Q1 --&gt;|yes| R1
+  Q1 --&gt;|no| Q2
+  Q2 --&gt;|yes| Q3
+  Q2 --&gt;|no| Q5
+  Q3 --&gt;|"yes, supported"| R2
+  Q3 --&gt;|no| Q4
+  Q4 --&gt;|yes| R2
+  Q4 --&gt;|no| Q5
+  Q5 --&gt;|yes| Q6
+  Q5 --&gt;|no| Q7
+  Q6 --&gt;|yes| R3
+  Q6 --&gt;|no| R4
+  Q7 --&gt;|yes| R5
+  Q7 --&gt;|no| Q8
+  Q8 --&gt;|yes| R6
+  Q8 --&gt;|no| R7
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Condensed decision tree (see the decision tree page for the full version)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The tree deliberately leaves out OpenStack and Proxmox (OpenStack is very complex; Proxmox only makes sense if your IT does not offer enough servers <em>and</em> someone has the time to run it). It also comes <em>after</em> a data management plan (see RDMKit).</p>
+</div>
+</div>
+</section>
+<section id="the-journey-of-the-data-across-the-pages" class="level1">
+<h1>The journey of the data across the pages</h1>
+<p>Six pages deal with the data itself, not with the infrastructure. They follow a natural order, from where the data lives to how it is described, queried and assisted by an LLM.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-journey" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-journey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-journey">flowchart LR
+  classDef p fill:#ede9fe,stroke:#7c3aed,color:#111
+
+  STO["1 · Data Storage&lt;br/&gt;volumes, databases,&lt;br/&gt;object storage"]:::p
+  BAK["2 · Backups and Security&lt;br/&gt;personal data, 3-2-1,&lt;br/&gt;attack surface"]:::p
+  PSE["3 · Pseudonymization&lt;br/&gt;mapping, masking,&lt;br/&gt;tools"]:::p
+  ASM["4 · Building an Assembly&lt;br/&gt;APIs, SSO,&lt;br/&gt;small tools"]:::p
+  SEM["5 · Semantic graphs&lt;br/&gt;RDF, OWL, SPARQL"]:::p
+  LLM["6 · LLMs in RDM&lt;br/&gt;uses, limits,&lt;br/&gt;where is the data?"]:::p
+
+  STO --&gt; BAK --&gt; PSE --&gt; ASM --&gt; SEM --&gt; LLM
+  LLM -.-&gt;|"access levels: docs only,&lt;br/&gt;read-only, full"| ASM
+  SEM -.-&gt;|"LLM writes SPARQL&lt;br/&gt;from the schema only"| LLM
+  BAK -.-&gt;|"backups are personal data too"| STO
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-journey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: From storage to LLM assistance: the data-centred pages in reading order
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="inside-the-big-pages" class="level1">
+<h1>Inside the big pages</h1>
+<p>The four largest pages each have their own internal logic. The tabs show it.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Step-by-step guide</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Kubernetes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Data Storage</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Backups and Security</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>See the block diagram above. The most useful anchors for deep links:</p>
+<ul>
+<li><code>#when-to</code> for the five levels of setup</li>
+<li><code>#quick-introduction-to-linuxunix</code> for the Linux checklist</li>
+<li><code>#moving-to-docker-compose</code> for the compose file and its pitfalls</li>
+<li><code>#sec-other-solutions</code> for Proxmox, OpenStack, orchestrators and Apache projects</li>
+<li><code>#automatize-the-setup</code> for Ansible, Terraform, CI/CD and GitOps</li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The page has two parts. Part 1 uses FAIRDOM Seek (web app, MySQL, Solr, workers) as the example to explain <em>why</em> and <em>what for</em>. Part 2 introduces Kubernetes itself.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-k8s" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-k8s-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-k8s">flowchart TB
+  classDef a fill:#dbeafe,stroke:#2563eb,color:#111
+  classDef b fill:#dcfce7,stroke:#16a34a,color:#111
+
+  subgraph P1["Part 1 · Showcase: FAIRDOM Seek"]
+    direction TB
+    A1["1.1 Components&lt;br/&gt;seek · mysql · solr · workers"]:::a
+    A2["1.2 Default Docker Compose&lt;br/&gt;explained piece by piece"]:::a
+    A3["1.3 What benefits from a cloud setup"]:::a
+    A4["1.4 Pragmatic approach&lt;br/&gt;(cost, benefit, uptime)"]:::a
+    A1 --&gt; A2 --&gt; A3 --&gt; A4
+  end
+  subgraph P2["Part 2 · Kubernetes"]
+    direction TB
+    B1["2.1–2.2 Resources and limits"]:::b
+    B2["2.3–2.5 Terminology,&lt;br/&gt;decoupling, declarative model"]:::b
+    B3["2.6–2.8 Deployment, StatefulSet,&lt;br/&gt;DaemonSet, Job; updates"]:::b
+    B4["2.9 Data: volumes, PVC,&lt;br/&gt;StorageClass"]:::b
+    B5["2.10 Keeping things running,&lt;br/&gt;ConfigMap, Secret, RBAC"]:::b
+    B6["2.11–2.13 Namespaces,&lt;br/&gt;network, load balancing"]:::b
+    B7["2.14–2.16 Helm, kustomize,&lt;br/&gt;Artifact Hub, affinities"]:::b
+    B1 --&gt; B2 --&gt; B3 --&gt; B4 --&gt; B5 --&gt; B6 --&gt; B7
+  end
+  A4 --&gt; B1
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-k8s-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Structure of the Kubernetes page
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-storage" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-storage">flowchart TD
+  DS["Data Storage"]
+  V["2 · Volumes&lt;br/&gt;local · NFS · block · distributed"]
+  D["3 · Databases"]
+  O["4 · Object storage"]
+  DM["Managed service"]
+  DSH["Self-hosted"]
+  DS1["Dedicated server&lt;br/&gt;(physical, VM, Docker)"]
+  DS2["OpenStack&lt;br/&gt;(Nova, Trove, Cinder)"]
+  DS3["Proxmox&lt;br/&gt;(VM or LXC)"]
+  DS4["Kubernetes with an operator&lt;br/&gt;(CloudNativePG, KubeBlocks)"]
+  OC["Cloud-managed&lt;br/&gt;S3 · Blob · GCS"]
+  OSH["Self-hosted&lt;br/&gt;Swift · Garage · RustFS"]
+  COM["Object storage vs. volumes at a glance"]
+
+  DS --&gt; V
+  DS --&gt; D
+  DS --&gt; O
+  D --&gt; DM
+  D --&gt; DSH
+  DSH --&gt; DS1
+  DSH --&gt; DS2
+  DSH --&gt; DS3
+  DSH --&gt; DS4
+  O --&gt; OC
+  O --&gt; OSH
+  V -.-&gt; COM
+  O -.-&gt; COM
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-storage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Structure of the Data Storage page
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-security" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-security-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+<pre class="mermaid mermaid-js" data-label="fig-security">flowchart TB
+  classDef h fill:#fee2e2,stroke:#dc2626,color:#111
+
+  W["1 · Which data"]:::h
+  W1["1.1 Personal data&lt;br/&gt;GDPR rights, minimisation,&lt;br/&gt;pseudonymisation, sharing"]
+  W2["1.2 Confidential data"]
+  W3["1.3 Passwords and keys"]
+  B["2 · Backups&lt;br/&gt;3-2-1 rule, tools,&lt;br/&gt;testing, handling data loss"]:::h
+  S["3 · Security"]:::h
+  S1["Mindset, aspects, limits,&lt;br/&gt;general dispositions"]
+  S2["Attack surface, firewall,&lt;br/&gt;protection against attacks"]
+  S3["Passwords and keys,&lt;br/&gt;what never to log or store"]
+  S4["Know your infrastructure,&lt;br/&gt;deleting data"]
+
+  W --&gt; W1
+  W --&gt; W2
+  W --&gt; W3
+  W --&gt; B --&gt; S
+  S --&gt; S1
+  S --&gt; S2
+  S --&gt; S3
+  S --&gt; S4
+  W1 -.-&gt;|"Pseudonymization page"| P["Pseudonymization"]
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-security-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Structure of the Backups and Security page
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-pages-one-by-one" class="level1">
+<h1>The pages one by one</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th>Question it answers</th>
+<th>Main contents</th>
+<th>Links to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="index.qmd">Step-by-step guide</a></td>
+<td>Which level of infrastructure fits, and how do I climb it?</td>
+<td>19 sections, Linux to Kubernetes, alternatives, automation</td>
+<td><a href="onboarding.qmd">Onboarding</a>, <a href="pages/TechPlatformDecisionTree.qmd">decision tree</a>, <a href="pages/Kubernetes_introduction.qmd">Kubernetes</a>, <a href="pages/Backups_and_security.qmd">Backups and Security</a>, <a href="pages/Data_storage.qmd">Data Storage</a>, RDMKit, FAIR-DMP-Registry</td>
+</tr>
+<tr class="even">
+<td><a href="onboarding.qmd">Onboarding</a></td>
+<td>What is the 15-minute version?</td>
+<td>Five rules, Linux, Docker in five minutes, Kubernetes in a nutshell, other solutions, a seven-step path for newcomers</td>
+<td>Matching sections of <a href="index.qmd">the step-by-step guide</a>, plus <a href="pages/TechPlatformDecisionTree.qmd">decision tree</a>, <a href="pages/Kubernetes_introduction.qmd">Kubernetes</a>, <a href="pages/Backups_and_security.qmd">Backups</a>, <a href="pages/Pseudonymization.qmd">Pseudonymization</a></td>
+</tr>
+<tr class="odd">
+<td><a href="pages/TechPlatformDecisionTree.qmd">Decision tree</a></td>
+<td>Which platform do I choose?</td>
+<td>One flowchart, from hosted service to bare metal</td>
+<td>RDMKit (data management plan)</td>
+</tr>
+<tr class="even">
+<td><a href="pages/Backups_and_security.qmd">Backups and Security</a></td>
+<td>What must I protect, and how?</td>
+<td>Personal and confidential data, backups, security, deleting data</td>
+<td>RDMKit, <a href="pages/Pseudonymization.qmd">Pseudonymization</a></td>
+</tr>
+<tr class="odd">
+<td><a href="pages/Data_storage.qmd">Data Storage</a></td>
+<td>Where does the data live?</td>
+<td>Volumes, databases (managed and self-hosted), object storage</td>
+<td>RDMKit, <a href="index.qmd#sec-openstack">OpenStack</a>, <a href="index.qmd#sec-proxmox">Proxmox</a>, <a href="pages/Data_storage.qmd#sec-databases">Kubernetes operators</a></td>
+</tr>
+<tr class="even">
+<td><a href="pages/Pseudonymization.qmd">Pseudonymization</a></td>
+<td>How do I share sensitive data safely?</td>
+<td>What to pseudonymise, mapping, masking, tools (Mainzelliste, gPAS, Kodex, Amnesia, OpenPseudonymiser, PIMO)</td>
+<td>UK ICO code on anonymisation</td>
+</tr>
+<tr class="odd">
+<td><a href="pages/Building_an_assembly.qmd">Building an Assembly</a></td>
+<td>How do I connect several tools?</td>
+<td>Keep it simple, small tools, APIs, SSO, institutions, LLM help, semantic graphs in an assembly</td>
+<td><a href="pages/SemanticGraphs.qmd">Semantic graphs</a>, <a href="pages/Pseudonymization.qmd">Pseudonymization</a></td>
+</tr>
+<tr class="even">
+<td><a href="pages/SemanticGraphs.qmd">Semantic graphs</a></td>
+<td>What are RDF, OWL and SPARQL, and when do I need them?</td>
+<td>Definitions, formats, graph models compared, relational to RDF, SPARQL endpoint, LLM and graphs, glossary</td>
+<td><a href="pages/Building_an_assembly.qmd">Building an Assembly</a>, <a href="pages/General_considerations_LLM.qmd">LLM page</a></td>
+</tr>
+<tr class="odd">
+<td><a href="pages/General_considerations_LLM.qmd">LLMs in RDM</a></td>
+<td>How do I use LLMs without leaking or breaking data?</td>
+<td>Online vs.&nbsp;local LLMs, eight uses, limits and risks, where the data goes, other AI tools</td>
+<td><a href="pages/Building_an_assembly.qmd">Building an Assembly</a>, <a href="pages/SemanticGraphs.qmd">Semantic graphs</a></td>
+</tr>
+<tr class="even">
+<td><a href="pages/Kubernetes_introduction.qmd">Kubernetes</a></td>
+<td>What is Kubernetes, shown on a real application?</td>
+<td>FAIRDOM Seek compose file, Kubernetes concepts, storage, config, network, Helm</td>
+<td><a href="index.qmd">main guide</a> (for alternatives)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i-want-to" class="level1">
+<h1>I want to…</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>I want to…</th>
+<th>Go to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>decide which kind of setup to use</td>
+<td><a href="pages/TechPlatformDecisionTree.qmd">Decision tree</a>, then <a href="index.qmd#sec-when-to">When to use each setup</a> and <a href="index.qmd#sec-common-remarks">Common remarks</a></td>
+</tr>
+<tr class="even">
+<td>judge what higher availability costs</td>
+<td><a href="index.qmd#sec-level-of-service">Level of service</a>; <a href="pages/Kubernetes_introduction.qmd#sec-cloud-benefits">Kubernetes benefits and cloud setup</a></td>
+</tr>
+<tr class="odd">
+<td>learn the Linux I need</td>
+<td><a href="index.qmd#sec-linux">Linux introduction</a>, or <a href="onboarding.qmd#sec-onboarding-linux">Onboarding Linux</a> for the short list</td>
+</tr>
+<tr class="even">
+<td>understand image, container, volume</td>
+<td><a href="index.qmd#sec-containers">Docker overview</a>; <a href="onboarding.qmd#sec-onboarding-docker-basics">Onboarding Docker basics</a></td>
+</tr>
+<tr class="odd">
+<td>write or improve a compose file</td>
+<td><a href="index.qmd#sec-docker-compose">Docker Compose</a> (<a href="index.qmd#sec-env-files">env files</a>, <a href="index.qmd#sec-namespaces">namespaces</a>, <a href="index.qmd#sec-bind-mounts">bind mounts</a>)</td>
+</tr>
+<tr class="even">
+<td>know when <em>not</em> to write a Dockerfile</td>
+<td><a href="index.qmd#sec-dockerfile">Dockerfile guide</a></td>
+</tr>
+<tr class="odd">
+<td>compare Proxmox, OpenStack, Swarm, Nomad, cloud services</td>
+<td><a href="index.qmd#sec-other-solutions">Other solutions</a> (<a href="index.qmd#sec-proxmox">Proxmox</a>, <a href="index.qmd#sec-openstack">OpenStack</a>, <a href="index.qmd#sec-nomad">Nomad</a>, <a href="index.qmd#sec-swarm">Docker Swarm</a>, <a href="index.qmd#sec-cloudrun">Cloud Run</a>)</td>
+</tr>
+<tr class="even">
+<td>learn Kubernetes with an example</td>
+<td><a href="index.qmd#sec-compose-to-kubernetes">Compose to Kubernetes</a>, then <a href="pages/Kubernetes_introduction.qmd">Kubernetes page</a></td>
+</tr>
+<tr class="odd">
+<td>decide where to keep files, databases, large objects</td>
+<td><a href="pages/Data_storage.qmd">Data Storage</a></td>
+</tr>
+<tr class="even">
+<td>plan backups</td>
+<td><a href="pages/Backups_and_security.qmd#sec-backups">Backups</a></td>
+</tr>
+<tr class="odd">
+<td>know what GDPR means for my platform</td>
+<td><a href="pages/Backups_and_security.qmd#sec-personal-data">Personal data</a>, then <a href="pages/Pseudonymization.qmd">Pseudonymization</a></td>
+</tr>
+<tr class="even">
+<td>reduce the attack surface, set up passwords and keys</td>
+<td><a href="pages/Backups_and_security.qmd#sec-security">Security</a></td>
+</tr>
+<tr class="odd">
+<td>connect several platforms, single sign-on</td>
+<td><a href="pages/Building_an_assembly.qmd#sec-central-identity">Central identity management</a> and <a href="pages/Building_an_assembly.qmd#sec-assemblies-between-institutions">assemblies between institutions</a></td>
+</tr>
+<tr class="even">
+<td>query data with SPARQL, build a knowledge graph</td>
+<td><a href="pages/SemanticGraphs.qmd">Semantic graphs</a></td>
+</tr>
+<tr class="odd">
+<td>use an LLM safely</td>
+<td><a href="pages/General_considerations_LLM.qmd#sec-where-is-the-data">Where the data goes</a>, <a href="pages/Building_an_assembly.qmd#sec-using-llm-in-assembly">Building an Assembly LLM access</a></td>
+</tr>
+<tr class="even">
+<td>automate the setup</td>
+<td><a href="index.qmd#sec-automatize-the-setup">Automation</a> (Ansible, Terraform, CI/CD, GitOps)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="suggested-reading-paths" class="level1">
+<h1>Suggested reading paths</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Path</th>
+<th>You are…</th>
+<th>Read in this order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>1 · First contact</strong> (about 1–2 h)</td>
+<td>new to the topic</td>
+<td><a href="onboarding.qmd">Onboarding</a> → <a href="pages/TechPlatformDecisionTree.qmd">Decision tree</a> → <a href="index.qmd#sec-when-to">When to use each setup</a> and <a href="index.qmd#sec-common-remarks">Common remarks</a> → <a href="index.qmd#sec-containers">Docker</a> and <a href="index.qmd#sec-docker-compose">Docker Compose</a> → <a href="pages/Backups_and_security.qmd#sec-backups">Backups</a></td>
+</tr>
+<tr class="even">
+<td><strong>2 · Deploying with Compose</strong></td>
+<td>installing a platform on one server</td>
+<td><a href="index.qmd#sec-linux">Linux</a> as needed → <a href="index.qmd#sec-containers">Docker</a> through <a href="index.qmd#sec-dockerfile">Dockerfile</a> → <a href="pages/Data_storage.qmd#sec-volumes">Volumes and databases</a> → <a href="pages/Backups_and_security.qmd">Backups and Security</a> → <a href="index.qmd#sec-automatize-the-setup">Automation</a></td>
+</tr>
+<tr class="odd">
+<td><strong>3 · Towards Kubernetes</strong></td>
+<td>already comfortable with Compose</td>
+<td><a href="index.qmd#sec-compose-to-kubernetes">Compose to Kubernetes</a> → <a href="pages/Kubernetes_introduction.qmd#sec-kubernetes-part-1">Kubernetes showcase</a> → <a href="pages/Kubernetes_introduction.qmd#sec-kubernetes-part-2">Kubernetes overview</a> → <a href="pages/Kubernetes_introduction.qmd#sec-kubernetes-storage">Kubernetes storage</a> → <a href="index.qmd#sec-other-solutions">alternative solutions</a></td>
+</tr>
+<tr class="even">
+<td><strong>4 · Data protection</strong></td>
+<td>responsible for sensitive data</td>
+<td><a href="pages/Backups_and_security.qmd#sec-personal-data">Personal data</a> → <a href="pages/Pseudonymization.qmd">Pseudonymization</a> → <a href="pages/Building_an_assembly.qmd#sec-assembly-graphs">Assembly graph safety</a> → <a href="pages/General_considerations_LLM.qmd#sec-where-is-the-data">LLM data handling</a></td>
+</tr>
+<tr class="odd">
+<td><strong>5 · Interoperability and FAIR</strong></td>
+<td>connecting and describing data</td>
+<td><a href="pages/SemanticGraphs.qmd#sec-scope">Semantic graph scope</a> and <a href="pages/SemanticGraphs.qmd#sec-rdm-use">RDM uses</a> → <a href="pages/Building_an_assembly.qmd#sec-assembly-graphs">Assembly graphs</a> → <a href="pages/SemanticGraphs.qmd#sec-how-to">Semantic graph how-to</a> → <a href="pages/General_considerations_LLM.qmd">LLMs in RDM</a></td>
+</tr>
+<tr class="even">
+<td><strong>6 · Working with AI tools</strong></td>
+<td>using LLMs in research data work</td>
+<td><a href="pages/General_considerations_LLM.qmd">LLMs in RDM</a> → <a href="pages/SemanticGraphs.qmd#sec-llm-and-knowledge-graphs">LLM and knowledge graphs</a> and <a href="pages/SemanticGraphs.qmd#sec-sparql-llm">SPARQL with LLM</a> → <a href="pages/Building_an_assembly.qmd#sec-using-llm-in-assembly">LLM use in assemblies</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="outside-the-site" class="level1">
+<h1>Outside the site</h1>
+<p>The documentation points to a few external resources repeatedly:</p>
+<ul>
+<li><strong>RDMKit</strong> (<a href="https://rdmkit.elixir-europe.org/" class="uri">https://rdmkit.elixir-europe.org/</a>): the wider context of research data management. The guide recommends starting there and using these pages for the technical depth.</li>
+<li><strong>FAIR-DMP-Registry</strong> (<a href="https://dekcd.github.io/FAIR-DMP-Registry/" class="uri">https://dekcd.github.io/FAIR-DMP-Registry/</a>): the list of data management platforms the guide has in mind.</li>
+<li><strong>Hosted services</strong> named in the guide: De.NBI Cloud, European Open Science Cloud, EGI Federation, GWDG Academic Cloud and others.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/abecam\.github\.io\/DeKCD-DMOnTheCloud\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Update cookies preferences</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

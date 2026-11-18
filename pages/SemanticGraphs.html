@@ -235,6 +235,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../navigation-overview-short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigation guide: De.KCD – Data Management Platform on the Cloud</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -299,8 +305,8 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#scope" id="toc-scope" class="nav-link active" data-scroll-target="#scope"><span class="header-section-number">1</span> Scope</a></li>
-  <li><a href="#what-are-semantic-graphs" id="toc-what-are-semantic-graphs" class="nav-link" data-scroll-target="#what-are-semantic-graphs"><span class="header-section-number">2</span> What are Semantic graphs</a>
+  <li><a href="#sec-scope" id="toc-sec-scope" class="nav-link active" data-scroll-target="#sec-scope"><span class="header-section-number">1</span> Scope</a></li>
+  <li><a href="#sec-what-are-semantic-graphs" id="toc-sec-what-are-semantic-graphs" class="nav-link" data-scroll-target="#sec-what-are-semantic-graphs"><span class="header-section-number">2</span> What are Semantic graphs</a>
   <ul class="collapse">
   <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">2.1</span> Definition</a>
   <ul class="collapse">
@@ -318,20 +324,20 @@ cookieconsent.run({
   <li><a href="#other-solutions" id="toc-other-solutions" class="nav-link" data-scroll-target="#other-solutions"><span class="header-section-number">3.0.2</span> Other solutions</a></li>
   <li><a href="#rdf-with-owl-or-a-property-graph" id="toc-rdf-with-owl-or-a-property-graph" class="nav-link" data-scroll-target="#rdf-with-owl-or-a-property-graph"><span class="header-section-number">3.0.3</span> RDF with OWL or a property graph?</a></li>
   </ul></li>
-  <li><a href="#use-in-research-data-management" id="toc-use-in-research-data-management" class="nav-link" data-scroll-target="#use-in-research-data-management"><span class="header-section-number">4</span> Use in Research Data Management</a>
+  <li><a href="#sec-rdm-use" id="toc-sec-rdm-use" class="nav-link" data-scroll-target="#sec-rdm-use"><span class="header-section-number">4</span> Use in Research Data Management</a>
   <ul class="collapse">
   <li><a href="#as-a-different-way-to-store-and-access-data" id="toc-as-a-different-way-to-store-and-access-data" class="nav-link" data-scroll-target="#as-a-different-way-to-store-and-access-data"><span class="header-section-number">4.1</span> As a different way to store and access data</a></li>
   <li><a href="#for-an-assembly" id="toc-for-an-assembly" class="nav-link" data-scroll-target="#for-an-assembly"><span class="header-section-number">4.2</span> For an assembly</a></li>
   </ul></li>
   <li><a href="#rdf-and-sparql" id="toc-rdf-and-sparql" class="nav-link" data-scroll-target="#rdf-and-sparql"><span class="header-section-number">5</span> RDF and SPARQL</a></li>
-  <li><a href="#llm-and-knowledge-graphs" id="toc-llm-and-knowledge-graphs" class="nav-link" data-scroll-target="#llm-and-knowledge-graphs"><span class="header-section-number">6</span> LLM and Knowledge graphs</a></li>
-  <li><a href="#how-to" id="toc-how-to" class="nav-link" data-scroll-target="#how-to"><span class="header-section-number">7</span> How to</a>
+  <li><a href="#sec-llm-and-knowledge-graphs" id="toc-sec-llm-and-knowledge-graphs" class="nav-link" data-scroll-target="#sec-llm-and-knowledge-graphs"><span class="header-section-number">6</span> LLM and Knowledge graphs</a></li>
+  <li><a href="#sec-how-to" id="toc-sec-how-to" class="nav-link" data-scroll-target="#sec-how-to"><span class="header-section-number">7</span> How to</a>
   <ul class="collapse">
   <li><a href="#sec-rdb-to-rdf" id="toc-sec-rdb-to-rdf" class="nav-link" data-scroll-target="#sec-rdb-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">7.2</span> Data</a></li>
   <li><a href="#meta-data" id="toc-meta-data" class="nav-link" data-scroll-target="#meta-data"><span class="header-section-number">7.3</span> Meta-data</a></li>
   <li><a href="#nosql-and-other-cases" id="toc-nosql-and-other-cases" class="nav-link" data-scroll-target="#nosql-and-other-cases"><span class="header-section-number">7.4</span> NoSQL and other cases</a></li>
-  <li><a href="#a-sparql-endpoint" id="toc-a-sparql-endpoint" class="nav-link" data-scroll-target="#a-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</a>
+  <li><a href="#sec-sparql-endpoint" id="toc-sec-sparql-endpoint" class="nav-link" data-scroll-target="#sec-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</a>
   <ul class="collapse">
   <li><a href="#implementing-a-sparql-endpoint-with-a-llm" id="toc-implementing-a-sparql-endpoint-with-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-with-a-llm"><span class="header-section-number">7.5.1</span> Implementing a SPARQL endpoint with a LLM</a></li>
   <li><a href="#implementing-a-sparql-endpoint-without-a-llm" id="toc-implementing-a-sparql-endpoint-without-a-llm" class="nav-link" data-scroll-target="#implementing-a-sparql-endpoint-without-a-llm"><span class="header-section-number">7.5.2</span> Implementing a SPARQL endpoint without a LLM</a></li>
@@ -364,14 +370,14 @@ cookieconsent.run({
 </header>
 
 
-<section id="scope" class="level1" data-number="1">
+<section id="sec-scope" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Scope</h1>
 <p>While setting up a Data Management Platform, you will have to choose a compatible way to store the data, which will be documented in the Data Management Platform’s documentation. In this case, you generally do not have to care about the implementation, even if it could help for certain cases and for maintenance.</p>
 <p>But Semantic graphs answer a more general need: they are a way to represent data with semantic meaning, with shared, agreed-upon vocabularies and ontologies. As such, they are a good way to help with the Interoperability and Reusability of data, the IR of FAIR.</p>
 <p>Another interesting aspect is how they can be queried and navigated, which is a good way to help with the Accessibility of data, the A of FAIR. SPARQL is a standard query language for most semantic graphs (those based on RDF), and it is possible to use a LLM to query a SPARQL endpoint or create queries.</p>
 <p>Semantic graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.</p>
 </section>
-<section id="what-are-semantic-graphs" class="level1" data-number="2">
+<section id="sec-what-are-semantic-graphs" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> What are Semantic graphs</h1>
 <p>Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities.</p>
 <section id="definition" class="level2" data-number="2.1">
@@ -664,7 +670,7 @@ INSERT INTO triples VALUES
 <p>The two are not mutually exclusive. RDF-star brings edge attributes to RDF, and some property graph databases can import and export RDF (for instance, the neosemantics plugin for Neo4j), so you can start with one model and convert later if your needs change.</p>
 </section>
 </section>
-<section id="use-in-research-data-management" class="level1" data-number="4">
+<section id="sec-rdm-use" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Use in Research Data Management</h1>
 <p>Semantic graphs offer two main benefits for research data management, (1) they allow to store and query data in a flexible way, which might be better adapted for some types of data, for instance analysis of classical literature, where the relationships between entities are complex, and (2) they make it easier to combine information from different sources, as they rely on global identifiers.</p>
 <section id="as-a-different-way-to-store-and-access-data" class="level2" data-number="4.1">
@@ -718,7 +724,7 @@ WHERE {
 <li>Other query types exist: <code>ASK</code> returns yes or no, and <code>CONSTRUCT</code> returns a new graph instead of a table.</li>
 </ul>
 </section>
-<section id="llm-and-knowledge-graphs" class="level1" data-number="6">
+<section id="sec-llm-and-knowledge-graphs" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> LLM and Knowledge graphs</h1>
 <p>Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:</p>
 <ul>
@@ -728,7 +734,7 @@ WHERE {
 </ul>
 <p>In all cases, the LLM is a helper whose output should be verified, not a source of truth.</p>
 </section>
-<section id="how-to" class="level1" data-number="7">
+<section id="sec-how-to" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> How to</h1>
 <section id="sec-rdb-to-rdf" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-rdb-to-rdf"><span class="header-section-number">7.1</span> From relational database to RDF</h2>
@@ -876,8 +882,8 @@ ex:person_1 ex:name    "John Doe" ;
             ex:address "123 Main St" .</code></pre>
 <p>Note that here the predicates (<code>name</code>, <code>age</code>, <code>address</code>) come from the <em>values</em> of the column <code>Type of Data</code>, not from column names.</p>
 </section>
-<section id="a-sparql-endpoint" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="a-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</h2>
+<section id="sec-sparql-endpoint" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="sec-sparql-endpoint"><span class="header-section-number">7.5</span> A SPARQL endpoint</h2>
 <p>TO REVIEW and complete</p>
 <p>A SPARQL endpoint is a web address that accepts SPARQL queries and returns the results. It can be used from a web form, from a script, or from another program. Some public examples are Wikidata (<code>query.wikidata.org</code>) and UniProt (<code>sparql.uniprot.org</code>).</p>
 <p>To offer your own, you need a <strong>triple store</strong>: a database made to store triples, which usually provides the endpoint. Common choices are Apache Jena Fuseki, GraphDB, Virtuoso and Oxigraph. The steps are:</p>

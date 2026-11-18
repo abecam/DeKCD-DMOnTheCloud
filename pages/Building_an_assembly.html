@@ -196,6 +196,12 @@ cookieconsent.run({
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../navigation-overview-short.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigation guide: De.KCD – Data Management Platform on the Cloud</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/TechPlatformDecisionTree.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Technical Platform decision tree for Data Management Platforms</span></a>
   </div>
@@ -260,20 +266,20 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-is-an-assembly" id="toc-what-is-an-assembly" class="nav-link active" data-scroll-target="#what-is-an-assembly"><span class="header-section-number">1</span> What is an assembly?</a></li>
-  <li><a href="#keep-it-simple" id="toc-keep-it-simple" class="nav-link" data-scroll-target="#keep-it-simple"><span class="header-section-number">2</span> Keep it simple</a>
+  <li><a href="#sec-what-is-an-assembly" id="toc-sec-what-is-an-assembly" class="nav-link active" data-scroll-target="#sec-what-is-an-assembly"><span class="header-section-number">1</span> What is an assembly?</a></li>
+  <li><a href="#sec-keep-it-simple" id="toc-sec-keep-it-simple" class="nav-link" data-scroll-target="#sec-keep-it-simple"><span class="header-section-number">2</span> Keep it simple</a>
   <ul class="collapse">
   <li><a href="#small-tools" id="toc-small-tools" class="nav-link" data-scroll-target="#small-tools"><span class="header-section-number">2.1</span> Small tools</a></li>
   <li><a href="#avoid-using-the-wrong-tools" id="toc-avoid-using-the-wrong-tools" class="nav-link" data-scroll-target="#avoid-using-the-wrong-tools"><span class="header-section-number">2.2</span> Avoid using the wrong tools</a></li>
   </ul></li>
-  <li><a href="#concerns-with-assemblies" id="toc-concerns-with-assemblies" class="nav-link" data-scroll-target="#concerns-with-assemblies"><span class="header-section-number">3</span> Concerns with assemblies</a>
+  <li><a href="#sec-assembly-concerns" id="toc-sec-assembly-concerns" class="nav-link" data-scroll-target="#sec-assembly-concerns"><span class="header-section-number">3</span> Concerns with assemblies</a>
   <ul class="collapse">
   <li><a href="#security-and-privacy" id="toc-security-and-privacy" class="nav-link" data-scroll-target="#security-and-privacy"><span class="header-section-number">3.1</span> Security and privacy</a></li>
   </ul></li>
-  <li><a href="#connecting-using-apis" id="toc-connecting-using-apis" class="nav-link" data-scroll-target="#connecting-using-apis"><span class="header-section-number">4</span> Connecting using APIs</a></li>
-  <li><a href="#avoid-several-logins-central-identity-management" id="toc-avoid-several-logins-central-identity-management" class="nav-link" data-scroll-target="#avoid-several-logins-central-identity-management"><span class="header-section-number">5</span> Avoid several logins: central identity management</a></li>
-  <li><a href="#assemblies-between-institutions" id="toc-assemblies-between-institutions" class="nav-link" data-scroll-target="#assemblies-between-institutions"><span class="header-section-number">6</span> Assemblies between institutions</a></li>
-  <li><a href="#using-a-llm-to-build-an-assembly" id="toc-using-a-llm-to-build-an-assembly" class="nav-link" data-scroll-target="#using-a-llm-to-build-an-assembly"><span class="header-section-number">7</span> Using a LLM to build an assembly</a>
+  <li><a href="#sec-assembly-apis" id="toc-sec-assembly-apis" class="nav-link" data-scroll-target="#sec-assembly-apis"><span class="header-section-number">4</span> Connecting using APIs</a></li>
+  <li><a href="#sec-central-identity" id="toc-sec-central-identity" class="nav-link" data-scroll-target="#sec-central-identity"><span class="header-section-number">5</span> Avoid several logins: central identity management</a></li>
+  <li><a href="#sec-assemblies-between-institutions" id="toc-sec-assemblies-between-institutions" class="nav-link" data-scroll-target="#sec-assemblies-between-institutions"><span class="header-section-number">6</span> Assemblies between institutions</a></li>
+  <li><a href="#sec-using-llm-in-assembly" id="toc-sec-using-llm-in-assembly" class="nav-link" data-scroll-target="#sec-using-llm-in-assembly"><span class="header-section-number">7</span> Using a LLM to build an assembly</a>
   <ul class="collapse">
   <li><a href="#sec-online-llm-help" id="toc-sec-online-llm-help" class="nav-link" data-scroll-target="#sec-online-llm-help"><span class="header-section-number">7.1</span> As a general help with online LLMs</a></li>
   <li><a href="#sec-llm-assembly" id="toc-sec-llm-assembly" class="nav-link" data-scroll-target="#sec-llm-assembly"><span class="header-section-number">7.2</span> With a local LLM aside the assembly</a>
@@ -307,11 +313,11 @@ cookieconsent.run({
 </header>
 
 
-<section id="what-is-an-assembly" class="level1" data-number="1">
+<section id="sec-what-is-an-assembly" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> What is an assembly?</h1>
 <p>An assembly in Research Data Management is the connected usage of one or many Research Data Management (RDM) tools to achieve a specific goal. It is a way to combine different tools and resources to create a workflow that meets the needs of a particular research project or task. Assemblies can be simple, involving just a few tools, or complex, involving many tools and resources. It could be with a Research Data Management Platform and other tools like a data repository, a data visualization tool, or a data analysis tool, or between different Research Data Management Platforms, such as a sharing platform, an electronic lab notebook (ELN), and a data repository such as iRODS or Aruna. The goal of an assembly is to streamline the research process, improve data management practices, and facilitate collaboration among researchers.</p>
 </section>
-<section id="keep-it-simple" class="level1" data-number="2">
+<section id="sec-keep-it-simple" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Keep it simple</h1>
 <p>When working on a Data Management Solution, it is important to think about the actual usage: will the Scientists benefits from it enough that they will use it and justify the cost of building and maintaining it? One benefit might be a requirement of the funding agency, so might be felt by the Scientists as a burden. The role of a Data Management Solution is to reduce the friction as much as possible (together with the training and support from the Data Management Team), so that the benefits, even if not directly felt by the Scientists, will be enough to justify the usage of the Data Management Solution.</p>
 <p>As such it is important to keep the assembly as simple as possible, and to avoid adding unnecessary complexity or features that do not directly contribute to the research goals. The assembly should be designed with the end-users in mind, and should be easy to use and understand.</p>
@@ -334,7 +340,7 @@ cookieconsent.run({
 <p>Convoluted ways to connect the data management platforms have the potential to be extremely damaging in the long term. If there is a need for a quick and dirty solution, it is important to ensure that it will be replaced by a proper solution as soon as possible. “Hacks” are generally time bombs and often, if left in place, will be a problem long after anyone properly remember what it does and how it does it. One good way of providing a temporary fix is when it informs by itself of his temporary nature, if possible.</p>
 </section>
 </section>
-<section id="concerns-with-assemblies" class="level1" data-number="3">
+<section id="sec-assembly-concerns" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Concerns with assemblies</h1>
 <p>When building an assembly, it is important to consider the following concerns:</p>
 <ul>
@@ -348,7 +354,7 @@ cookieconsent.run({
 <p>If needed, the data can be anonymized or pseudonymized. Anonymization is the process of removing personally identifiable information from data, while pseudonymization is the process of replacing personally identifiable information with a pseudonym. You will find more information on the <a href="../pages/Pseudonymization.html">Pseudonymization page</a>.</p>
 </section>
 </section>
-<section id="connecting-using-apis" class="level1" data-number="4">
+<section id="sec-assembly-apis" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Connecting using APIs</h1>
 <p>Data management platforms and other tools often provide APIs (Application Programming Interfaces) that allow for programmatic access to their functionality. Using APIs to connect the different parts of the assembly is generally the preferred approach, as it allows using the platforms together while ensuring the right level of control and security. The integration of APIs can be done using small tools, as described above, or using a workflow management system, such as Nextflow or Snakemake, that can orchestrate the different parts of the assembly and ensure that the data flows correctly between them. In some cases, one platform can directly connect to another platform using its API, without the need for an additional tool. This is generally the preferred approach, as it reduces the complexity of the assembly and ensures that the data flows correctly between the platforms.</p>
 <p>LLMs can be used to help with the integration of APIs, see <a href="#sec-online-llm-help">Using a LLM to build an assembly</a> for more information.</p>
@@ -359,19 +365,19 @@ cookieconsent.run({
 <li>Error handling: Ensure that the APIs being used have appropriate error handling to prevent issues with data integrity and usability.</li>
 </ul>
 </section>
-<section id="avoid-several-logins-central-identity-management" class="level1" data-number="5">
+<section id="sec-central-identity" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Avoid several logins: central identity management</h1>
 <p>Authentik, Keycloak, or other identity management systems can be used to provide single sign-on (SSO) capabilities for the assembly. This allows users to log in once and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.</p>
 <p>Consortium (such as Life Science login) or institutional identity management systems can also be used to provide SSO capabilities for the assembly. This allows users to log in using their institutional credentials and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.</p>
 </section>
-<section id="assemblies-between-institutions" class="level1" data-number="6">
+<section id="sec-assemblies-between-institutions" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Assemblies between institutions</h1>
 <p>What is allowed and how to get it allowed?</p>
 <p>Tunneling between institutions can be achieved through the use of virtual private networks (VPNs) or other secure communication protocols. This allows researchers from different institutions to access the tools and resources in the assembly as if they were on the same network.</p>
 <p>Security and privacy concerns must be addressed when building assemblies between institutions. This may involve implementing access controls, encryption, and other security measures to protect sensitive data.</p>
 <p>Performance and reliability concerns must also be addressed when building assemblies between institutions. This may involve optimizing the assembly for performance, implementing redundancy and failover mechanisms, and monitoring the assembly for issues.</p>
 </section>
-<section id="using-a-llm-to-build-an-assembly" class="level1" data-number="7">
+<section id="sec-using-llm-in-assembly" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Using a LLM to build an assembly</h1>
 <section id="sec-online-llm-help" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-online-llm-help"><span class="header-section-number">7.1</span> As a general help with online LLMs</h2>
