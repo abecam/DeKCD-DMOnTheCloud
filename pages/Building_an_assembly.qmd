@@ -83,8 +83,9 @@ Performance and reliability concerns must also be addressed when building assemb
 
 ## As a general help with online LLMs {#sec-online-llm-help}
 
-Help with APIs, integration, and general assembly building. 
 If the used data management platforms have APIs and are well known and documented, most online LLMs can write code to use the APIs. It might necessitate some trial and error, and need some manual input (also to provide login credentials, API keys, or other authentication information) but can be a good starting point to build the assembly.
+
+They can also help with the integration of the different parts of the assembly, point to used taxonomies, ontologies and metadata standards, and finding existing tools. For such tasks, it is important to provide the LLM with as much context as possible, and to ask for links to the used online resources, so that the suggestions can be verified.
 
 LLMs can also provide guidance on best practices, suggest compatible tools, and help troubleshoot issues that arise during the assembly building process.
 
