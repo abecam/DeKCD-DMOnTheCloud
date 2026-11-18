@@ -95,7 +95,11 @@ The simple approach would be using exposed APIs and documentation, without acces
 
 The next step would be to provide the LLM with access to the data as read-only (no write operations permitted), allowing it to perform more advanced tasks such as data analysis or visualization. It is still important to ensure that the results of the LLM's analysis are accurate and reliable, and to verify its suggestions with other sources.
 
-The last step is a "full" approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e. not actually deleted but marked as deleted) and/or require human approval before being executed.
+::: {.callout-caution}
+## We strongly suggest to avoid giving a LLM write access to the data.
+If it is clear that the benefits outweigh the risks, please proceed with caution.
+:::
+The last step is a "full" approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e. not actually deleted but marked as deleted) and/or require human approval before being executed. Logging and monitoring should also be used to track the LLM's actions, and are generally recommended for any usage, also by researchers.
 
 ### Semantic graphs in an assembly {#sec-assembly-graphs}
 
@@ -114,3 +118,7 @@ A [semantic graph](SemanticGraphs.qmd) describes data and metadata as shared, ma
 :::  {.callout-note}
 Ontologies and shared meta-data are an important part of most data management platforms, especially to be FAIR. If not familiar with them, we recommend getting a good overview of the topic, for instance with the [FAIR Data Maturity Model](https://www.go-fair.org/fair-principles/fair-data-maturity-model/) and the [RDMKit](https://rdmkit.elixir-europe.org/).
 :::
+
+### Semantic graphs and LLMs together for an assembly {#sec-assembly-graphs-llm}
+
+The semantic graph can be used to provide a unified view of the data and metadata in the assembly, while the LLM can be used to provide guidance and support for researchers working on the assembly. The LLM can use the semantic graph to understand the relationships between different data and metadata elements, and to provide suggestions for how to best use the tools and resources in the assembly. As explained in [Using a LLM to query a SPARQL endpoint](SemanticGraphs.qmd#sec-sparql-llm), the LLM can be used to generate SPARQL queries based on natural language input, allowing researchers to easily access the data and metadata in the assembly without needing to know the details of the underlying graph structure.
