@@ -1,0 +1,1 @@
+Parked pages, i.e. pages that were written but are not used. They might be deleted in the future but it allow to keep them in git history.

@@ -1,0 +1,239 @@
+---
+title: "Navigation guide: De.KCD – Data Management Platform on the Cloud"
+subtitle: "Where to go for what"
+date: 2026-11-18
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "On this page"
+    number-sections: false
+    mermaid:
+      theme: default
+---
+
+**New here?** Start with the [Onboarding][onb] page (about 15 minutes), then come back to find your way. This page is a map of [the documentation][idx]: **what is where** and **how the pages relate to each other**. It does not repeat the content.
+
+::: {.callout-tip}
+## The one-paragraph version
+The documentation helps you to choose **the simplest setup that meets your current needs**: a hosted service first, then Docker and Docker Compose, and Kubernetes when you need scale and availability. Installing by hand (virtual machine, bare metal) is the fallback when no usable image exists. Storage, backups, security, data protection, assemblies of several tools, semantic graphs and LLMs are covered in separate pages that point to each other.
+:::
+
+# Site map
+
+Every box is a page of the site and can be clicked. Solid arrows are direct links between pages. Dashed arrows are links to outside resources or thematic relations.
+
+```{mermaid}
+%%| label: fig-sitemap
+%%| fig-cap: "The ten content pages and how they link to each other"
+flowchart TB
+  classDef entry  fill:#dbeafe,stroke:#2563eb,color:#111
+  classDef decide fill:#fef3c7,stroke:#d97706,color:#111
+  classDef build  fill:#dcfce7,stroke:#16a34a,color:#111
+  classDef data   fill:#ede9fe,stroke:#7c3aed,color:#111
+  classDef ext    fill:#f3f4f6,stroke:#9ca3af,color:#111,stroke-dasharray: 4 3
+
+  subgraph ENTRY["Entry points"]
+    direction LR
+    ONB["Onboarding<br/>15-minute summary"]:::entry
+    IDX["Step-by-step guide<br/>(home page, 19 sections)"]:::entry
+  end
+
+  DT["Technical platform<br/>decision tree"]:::decide
+
+  subgraph BUILD["Build and run"]
+    direction LR
+    K8S["Kubernetes<br/>step by step"]:::build
+    STO["Data Storage"]:::build
+    BAK["Backups and Security"]:::build
+  end
+
+  subgraph DATA["Data in practice"]
+    direction LR
+    PSE["Pseudonymization"]:::data
+    ASM["Building an Assembly"]:::data
+    SEM["Semantic graphs"]:::data
+    LLM["LLMs in<br/>Research Data Management"]:::data
+  end
+
+  RDM["RDMKit<br/>(ELIXIR)"]:::ext
+  REG["FAIR-DMP-Registry"]:::ext
+
+  ONB <-->|"summary and details"| IDX
+  IDX -->|"When to use a setup"| DT
+  ONB -->|"Which solution"| DT
+  IDX -->|"Docker to Kubernetes"| K8S
+  ONB -->|"Kubernetes"| K8S
+  IDX -->|"Linux, security, backups"| BAK
+  ONB -->|"Security"| BAK
+  IDX -->|"Object storage"| STO
+  IDX -->|"Assemblies"| ASM
+  ONB -->|"Assemblies"| ASM
+  ONB -->|"pseudonymise"| PSE
+
+  STO <-->|"volumes, DB operators"| K8S
+  BAK -->|"personal data"| PSE
+  ASM -->|"sensitive data"| PSE
+  ASM <-->|"graph in an assembly"| SEM
+  ASM <-->|"LLM access levels"| LLM
+  SEM <-->|"SPARQL, GraphRAG"| LLM
+  K8S -.->|"alternatives"| IDX
+
+  DT -.->|"after a data management plan"| RDM
+  IDX -.-> RDM
+  IDX -.-> REG
+  BAK -.-> RDM
+  STO -.-> RDM
+
+  click ONB "onboarding.qmd" "Open the onboarding page"
+  click IDX "index.qmd" "Open the step-by-step guide"
+  click DT "pages/TechPlatformDecisionTree.qmd" "Open the decision tree"
+  click K8S "pages/Kubernetes_introduction.qmd" "Open the Kubernetes page"
+  click STO "pages/Data_storage.qmd" "Open the data storage page"
+  click BAK "pages/Backups_and_security.qmd" "Open the backups and security page"
+  click PSE "pages/Pseudonymization.qmd" "Open the pseudonymization page"
+  click ASM "pages/Building_an_assembly.qmd" "Open the assembly page"
+  click SEM "pages/SemanticGraphs.qmd" "Open the semantic graphs page"
+  click LLM "pages/General_considerations_LLM.qmd" "Open the LLM page"
+```
+
+# The complexity ladder
+
+Choose the simplest setup that meets your needs, and check first whether a hosted service already exists. When a ready-made image is available, Docker and then Docker Compose are the easiest ways to set a platform up, and Kubernetes is the step up when you need scale and availability. Read the blue line from left to right as growing scale. The pink box is about something else: installing by hand, which is the fallback when no usable image exists, and is more work to install, update and maintain. Every box links to its section of the step-by-step guide.
+
+```{mermaid}
+%%| label: fig-ladder
+%%| fig-cap: "From a hosted service to Kubernetes, with manual installation as a fallback and the alternative infrastructure options"
+flowchart LR
+  classDef main fill:#dbeafe,stroke:#2563eb,color:#111
+  classDef side fill:#f3f4f6,stroke:#9ca3af,color:#111
+  classDef start fill:#fef3c7,stroke:#d97706,color:#111
+  classDef manual fill:#fce7f3,stroke:#db2777,color:#111
+  HOST["Hosted service<br/>from your institution<br/>or consortium"]:::start
+  DK["Docker"]:::main
+  DC["Docker Compose<br/>and Dockerfile"]:::main
+  K["Kubernetes"]:::main
+
+  subgraph MAN["Manual installation<br/>(no usable image, or not containerisable)"]
+  direction TB
+    BM["Bare metal"]:::manual
+    VM["Virtual machine"]:::manual
+  end
+
+  HOST -.->|"if none is suitable"| DK
+  DK --> DC --> K
+  DK -.->|"fallback"| MAN
+
+  PX["Proxmox VE"]:::side
+  SW["Docker Swarm, Nomad"]:::side
+  CL["ECS, GKE, Cloud Run"]:::side
+  OS["OpenStack, Ceph, Magnum"]:::side
+
+  PX -.- VM
+  SW -.- DC
+  CL -.- K
+  OS -.- K
+
+  click BM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click VM "index.qmd#sec-bare-metal-vms" "Open Bare-Metal setup and Virtual Machines"
+  click DK "index.qmd#sec-containers" "Open Docker"
+  click DC "index.qmd#sec-docker-compose" "Open Docker Compose"
+  click K "index.qmd#sec-compose-to-kubernetes" "Open the Kubernetes transition"
+  click PX "index.qmd#sec-proxmox" "Open Proxmox VE"
+  click SW "index.qmd#sec-nomad" "Open Nomad"
+  click CL "index.qmd#sec-cloudrun" "Open Cloud Run"
+  click OS "index.qmd#sec-openstack" "Open OpenStack"
+```
+
+::: {.callout-note}
+## What applies at every step
+[Linux basics](index.qmd#sec-linux), [scalability](index.qmd#sec-scalability), [databases](index.qmd#sec-databases), [security](index.qmd#sec-security), [the *Backups and Security* page][bak], [automation](index.qmd#sec-automatize-the-setup), and [the choice of tools](index.qmd#sec-many-choices) are not tied to one step. Treat them as a layer under the whole ladder.
+:::
+
+# The journey of the data across the pages
+
+Six pages deal with the data itself, not with the infrastructure. They follow a natural order, from where the data lives to how it is described, queried and assisted by an LLM.
+
+```{mermaid}
+%%| label: fig-journey
+%%| fig-cap: "From storage to LLM assistance: the data-centred pages in reading order"
+flowchart LR
+  classDef p fill:#ede9fe,stroke:#7c3aed,color:#111
+
+  STO["1 · Data Storage<br/>volumes, databases,<br/>object storage"]:::p
+  BAK["2 · Backups and Security<br/>personal data, 3-2-1,<br/>attack surface"]:::p
+  PSE["3 · Pseudonymization<br/>mapping, masking,<br/>tools"]:::p
+  ASM["4 · Building an Assembly<br/>APIs, SSO,<br/>small tools"]:::p
+  SEM["5 · Semantic graphs<br/>RDF, OWL, SPARQL"]:::p
+  LLM["6 · LLMs in RDM<br/>uses, limits,<br/>where is the data?"]:::p
+
+  STO --> BAK --> PSE --> ASM --> SEM --> LLM
+  LLM -.->|"access levels: docs only,<br/>read-only, full"| ASM
+  SEM -.->|"LLM writes SPARQL<br/>from the schema only"| LLM
+  BAK -.->|"backups are personal data too"| STO
+
+  click STO "pages/Data_storage.qmd" "Open the data storage page"
+  click BAK "pages/Backups_and_security.qmd" "Open the backups and security page"
+  click PSE "pages/Pseudonymization.qmd" "Open the pseudonymization page"
+  click ASM "pages/Building_an_assembly.qmd" "Open the assembly page"
+  click SEM "pages/SemanticGraphs.qmd" "Open the semantic graphs page"
+  click LLM "pages/General_considerations_LLM.qmd" "Open the LLM page"
+```
+
+# I want to…
+
+| I want to… | Go to |
+|---|---|
+| decide which kind of setup to use | [Decision tree][dt], then [When to use each setup][when-to] and [Common remarks][common-remarks] |
+| judge what higher availability costs | [Level of service][level-of-service]; [Kubernetes benefits and cloud setup][k8s-cloud] |
+| learn the Linux I need | [Linux introduction][linux], or [Onboarding Linux][onb-linux] for the short list |
+| understand image, container, volume | [Docker overview][containers]; [Onboarding Docker basics][onb-docker] |
+| write or improve a compose file | [Docker Compose][compose] ([env files][env-files], [namespaces][namespaces], [bind mounts][bind-mounts]) |
+| know when *not* to write a Dockerfile | [Dockerfile guide][dockerfile] |
+| compare Proxmox, OpenStack, Swarm, Nomad, cloud services | [Other solutions][other-solutions] ([Proxmox][proxmox], [OpenStack][openstack], [Nomad][nomad], [Docker Swarm][swarm], [Cloud Run][cloudrun]) |
+| learn Kubernetes with an example | [Compose to Kubernetes][compose-k8s], then [Kubernetes page][k8s] |
+| decide where to keep files, databases, large objects | [Data Storage][sto] |
+| plan backups | [Backups][backups] |
+| know what GDPR means for my platform | [Personal data][personal-data], then [Pseudonymization][pse] |
+| reduce the attack surface, set up passwords and keys | [Security][bak-security] |
+| connect several platforms, single sign-on | [Central identity management][central-identity] and [assemblies between institutions][assembly-institutions] |
+| query data with SPARQL, build a knowledge graph | [Semantic graphs][sem] |
+| use an LLM safely | [Where the data goes][llm-data], [Building an Assembly LLM access][asm-llm] |
+| automate the setup | [Automation][automation] (Ansible, Terraform, CI/CD, GitOps) |
+
+[idx]: index.qmd
+[onb]: onboarding.qmd
+[dt]: pages/TechPlatformDecisionTree.qmd
+[bak]: pages/Backups_and_security.qmd
+[sto]: pages/Data_storage.qmd
+[pse]: pages/Pseudonymization.qmd
+[sem]: pages/SemanticGraphs.qmd
+[k8s]: pages/Kubernetes_introduction.qmd
+[when-to]: index.qmd#sec-when-to
+[common-remarks]: index.qmd#sec-common-remarks
+[level-of-service]: index.qmd#sec-level-of-service
+[linux]: index.qmd#sec-linux
+[containers]: index.qmd#sec-containers
+[compose]: index.qmd#sec-docker-compose
+[env-files]: index.qmd#sec-env-files
+[namespaces]: index.qmd#sec-namespaces
+[bind-mounts]: index.qmd#sec-bind-mounts
+[dockerfile]: index.qmd#sec-dockerfile
+[compose-k8s]: index.qmd#sec-compose-to-kubernetes
+[other-solutions]: index.qmd#sec-other-solutions
+[proxmox]: index.qmd#sec-proxmox
+[openstack]: index.qmd#sec-openstack
+[nomad]: index.qmd#sec-nomad
+[swarm]: index.qmd#sec-swarm
+[cloudrun]: index.qmd#sec-cloudrun
+[automation]: index.qmd#sec-automatize-the-setup
+[onb-linux]: onboarding.qmd#sec-onboarding-linux
+[onb-docker]: onboarding.qmd#sec-onboarding-docker-basics
+[k8s-cloud]: pages/Kubernetes_introduction.qmd#sec-cloud-benefits
+[backups]: pages/Backups_and_security.qmd#sec-backups
+[personal-data]: pages/Backups_and_security.qmd#sec-personal-data
+[bak-security]: pages/Backups_and_security.qmd#sec-security
+[central-identity]: pages/Building_an_assembly.qmd#sec-central-identity
+[assembly-institutions]: pages/Building_an_assembly.qmd#sec-assemblies-between-institutions
+[asm-llm]: pages/Building_an_assembly.qmd#sec-using-llm-in-assembly
+[llm-data]: pages/General_considerations_LLM.qmd#sec-where-is-the-data

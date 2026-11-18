@@ -3,12 +3,12 @@ title: "Building an Assembly"
 number-sections: true
 ---
 
-# What is an assembly?
+# What is an assembly? {#sec-what-is-an-assembly}
 
 An assembly in Research Data Management is the connected usage of one or many Research Data Management (RDM) tools to achieve a specific goal. It is a way to combine different tools and resources to create a workflow that meets the needs of a particular research project or task. Assemblies can be simple, involving just a few tools, or complex, involving many tools and resources.
 It could be with a Research Data Management Platform and other tools like a data repository, a data visualization tool, or a data analysis tool, or between different Research Data Management Platforms, such as a sharing platform, an electronic lab notebook (ELN), and a data repository such as iRODS or Aruna. The goal of an assembly is to streamline the research process, improve data management practices, and facilitate collaboration among researchers.
 
-# Keep it simple
+# Keep it simple {#sec-keep-it-simple}
 
 When working on a Data Management Solution, it is important to think about the actual usage: will the Scientists benefits from it enough that they will use it and justify the cost of building and maintaining it? One benefit might be a requirement of the funding agency, so might be felt by the Scientists as a burden. The role of a Data Management Solution is to reduce the friction as much as possible (together with the training and support from the Data Management Team), so that the benefits, even if not directly felt by the Scientists, will be enough to justify the usage of the Data Management Solution.
 
@@ -42,7 +42,7 @@ The opposite, i.e. using a general file storage solution for storing research da
 
 Convoluted ways to connect the data management platforms have the potential to be extremely damaging in the long term. If there is a need for a quick and dirty solution, it is important to ensure that it will be replaced by a proper solution as soon as possible. "Hacks" are generally time bombs and often, if left in place, will be a problem long after anyone properly remember what it does and how it does it. One good way of providing a temporary fix is when it informs by itself of his temporary nature, if possible.
 
-# Concerns with assemblies
+# Concerns with assemblies {#sec-assembly-concerns}
 
 When building an assembly, it is important to consider the following concerns:
 
@@ -56,7 +56,7 @@ When building an assembly, it is important to consider the security and privacy 
 
 If needed, the data can be anonymized or pseudonymized. Anonymization is the process of removing personally identifiable information from data, while pseudonymization is the process of replacing personally identifiable information with a pseudonym. You will find more information on the [Pseudonymization page](Pseudonymization.qmd).
 
-# Connecting using APIs
+# Connecting using APIs {#sec-assembly-apis}
 
 Data management platforms and other tools often provide APIs (Application Programming Interfaces) that allow for programmatic access to their functionality. Using APIs to connect the different parts of the assembly is generally the preferred approach, as it allows using the platforms together while ensuring the right level of control and security.
 The integration of APIs can be done using small tools, as described above, or using a workflow management system, such as Nextflow or Snakemake, that can orchestrate the different parts of the assembly and ensure that the data flows correctly between them. In some cases, one platform can directly connect to another platform using its API, without the need for an additional tool. This is generally the preferred approach, as it reduces the complexity of the assembly and ensures that the data flows correctly between the platforms.
@@ -69,13 +69,13 @@ When using APIs, it is important to consider the following:
 * Rate limits: Ensure that the APIs being used have appropriate rate limits to prevent abuse and ensure that the assembly can handle the volume of requests that will be made.
 * Error handling: Ensure that the APIs being used have appropriate error handling to prevent issues with data integrity and usability.
 
-# Avoid several logins: central identity management
+# Avoid several logins: central identity management {#sec-central-identity}
 
 Authentik, Keycloak, or other identity management systems can be used to provide single sign-on (SSO) capabilities for the assembly. This allows users to log in once and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.
 
 Consortium (such as Life Science login) or institutional identity management systems can also be used to provide SSO capabilities for the assembly. This allows users to log in using their institutional credentials and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.
 
-# Assemblies between institutions
+# Assemblies between institutions {#sec-assemblies-between-institutions}
 
 What is allowed and how to get it allowed?
 
@@ -85,7 +85,7 @@ Security and privacy concerns must be addressed when building assemblies between
 
 Performance and reliability concerns must also be addressed when building assemblies between institutions. This may involve optimizing the assembly for performance, implementing redundancy and failover mechanisms, and monitoring the assembly for issues.
 
-# Using a LLM to build an assembly
+# Using a LLM to build an assembly {#sec-using-llm-in-assembly}
 
 ## As a general help with online LLMs {#sec-online-llm-help}
 

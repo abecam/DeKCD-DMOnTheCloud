@@ -5,7 +5,7 @@ number-sections: true
 
 Process and documentation on adapting a docker-based Data Management platform, Seek4Science, to Kubernetes, and using it in the cloud.
 
-# Goals and scope
+# Goals and scope {#sec-goals-and-scope}
 
 This documentation is intended as a quickstart for setting up and managing one or several Data Management platforms, while considering the benefits and costs: how much effort, how complex, the security risks, what is gain.
 It does not replace a detailed explanation on each topics, but intend on saving time in (1) deciding which solution to adopt, (2) understand enough of each solution to navigate efficiently through their documentation, (3) give working and explained solutions that can be used as it or as base for your own solution.
@@ -18,11 +18,13 @@ We will also compile advices and tips, and we welcome all contributions (and cor
 
 Finally it is targeted mostly at Research Projects and/or Institutions so focus on the particular aspects in this cases. By Data Management Platforms we mean an online application with a data repository (database or other), such as those listed in our [Data Management Platforms registry](https://dekcd.github.io/FAIR-DMP-Registry/)
 
-# Onboarding
+# Onboarding {#sec-onboarding}
 
-This page is an step-by-step guide to set-up a Data Management Platform, so still rather extensive. If you are mostly looking for a quick overview, we provide a onboarding page with a summary of the main points and links to the relevant sections: [Onboarding](pages/Onboarding.qmd).
+This page is an step-by-step guide to set-up a Data Management Platform, so still rather extensive. If you are mostly looking for a quick overview, we provide a onboarding page with a summary of the main points and links to the relevant sections: [Onboarding](onboarding.qmd).
 
-# Before and beyond: RDMKit
+If you are looking for a specific topic, we also provide a short navigation overview page: [Navigation overview](navigation-overview-short.qmd).
+
+# Before and beyond: RDMKit {#sec-rdmkit}
 
 While the guide is only focused on technical aspects and consideration, RDMKit covers most aspects of Research Data Management, including technical considerations which are out of the scope of this guide. It also provides links to related resources.
 
@@ -33,11 +35,11 @@ Generally, it is a good idea to start with RDMKit, then use these guide for a de
 
 We will try to provide links for the relevant RDMKit pages in the related sections.
 
-# How to use
+# How to use {#sec-how-to-use}
 
 Each section assumes that you know the precedents. If you already know one section, feel free to jump to the next one.
 
-# When to...
+# When to... {#sec-when-to}
 
 When to go full cloud, or with a containerised solution for your datamanagement platforms. We provide below a very simplified answer and you can find a [detailed decision tree](pages/TechPlatformDecisionTree.qmd).
 
@@ -57,7 +59,7 @@ There are also some Data management solutions that can be used by academic insti
 :::
 
 
-# Common remarks
+# Common remarks {#sec-common-remarks}
 
 ## Keeping the difficulty under control
 
@@ -67,7 +69,7 @@ As such, this step-by-step page is mostly to determine if the complexity of one 
 
 What this documentation cannot fully plan for is what is in place already: existing servers with some applications, a Virtual Machine infrastructure... Which can be used as a base for the set-up, if well documented and supported. Using these can be a major plus for a new solution.
 
-## Which level of service?
+## Which level of service? {#sec-level-of-service}
 
 The difference in cost between allowing a downtime of 1 night and one of 1 hour is probably smaller than between allowing a downtime of 1 hour and one of 1 minute. And such differences can be found with storage, security and network access.
 
@@ -100,7 +102,7 @@ Commits should still be manual with meaningfull messages (related to the previou
 
 If there is no export functionalities or API support but the changes are saved in an accessible database, it is still possible to export the change from there. To ensure consistency, it is advised to write a script or program doing the export. Using Python is a good option for doing so.
 
-# Quick introduction to Linux/Unix
+# Quick introduction to Linux/Unix {#sec-linux}
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -460,7 +462,7 @@ Another web server gaining tracktion is **Caddy**, that try to integrate more as
 
 **IIS** is rarely use for Research project but can be the best choice if the application is built using Microsoft technologies.
 
-# Bare-Metal setup and Virtual Machines
+# Bare-Metal setup and Virtual Machines {#sec-bare-metal-vms}
 
 ## Vocabulary
 
@@ -483,7 +485,7 @@ Or a **virtualization**, where the hosted machine is running directly or semi-di
 A main protection against threat is being up-to-date: a recent or LTS, Long-Term-Support: that is supported for a long time, Operating System on a physical computer, Virtual Machine software, and virtualization software (which might have a direct support in the CPU).
 :::
 
-# Containers,  Overview of Docker usage
+# Containers,  Overview of Docker usage {#sec-containers}
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -580,7 +582,7 @@ A container might need some extra steps once started, especially with a first in
 **Often**, a test setup rely *only* on running the container, which will use a tempary database (often SQLite) and temporary file system. Once the container is removed or replaced, all data is gone. A production setup will need some extra steps, at least to set-up volumes so the data can persist, but some time some initial steps for the applications. Thus it is almost always needed to follow the documentation to set-up a platform. 
 :::
 
-# Moving to Docker compose
+# Moving to Docker compose {#sec-docker-compose}
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -769,11 +771,11 @@ One the containers are running, they are generally managed directly using docker
 Some complex setup can have several configuration file (used from the main file using ```include:```).
 :::
 
-## Env files
+## Env files {#sec-env-files}
 
 The environment file has to be created in the same folder as the docker compose configuration file (if not defined otherwise). It should never be provided! Most application will provide an example either as a default env file (that can be modified and renamed) or in their documentation. 
 
-## Namespaces and namespaces collisions
+## Namespaces and namespaces collisions {#sec-namespaces}
 
 Namespacing is by using the name of the containing folder of the docker-compose file. Using the same name, even in different parent folder, will use the same namespace. So running 2 different docker-compose setup using a parent folder of the same name will use the same docker network. If the applications use the same images, it could mean that one container communicate with one other container from the other docker-compose setup.
 For instance, you want 2 instances of the same application, **testApp**, that uses a MySQL database. The database is defined in the docker-compose and used by the **testApp**. The set-up is the following:
@@ -791,7 +793,7 @@ By default the containers get a name composed of their namespace and their key (
 
 It is rarely useful and can pause problem while testing.
 
-## Bind mounts
+## Bind mounts {#sec-bind-mounts}
 
 The default volume in a docker-compose are named volumes (```name:``` without any value). They are managed by docker and allow several containers to use different volumes (if the namespace is not the same, see above).
 It's possible to have a bind mounts, i.e. a volume attached to a specific path on the host. These are useful if the data need to be accessed and eventually used by other applications (the named volumes are also on the local file system, but are not supposed to be accessed directly). But 2 instances from the same docker-compose using bind mounts will use the same folder, thus conflicting for using the storage. Depending on the use, it can create very strange problems which are eventually very difficult to find.
@@ -803,7 +805,7 @@ It might be tempting to use bind mounts for backups. It is acceptable if it is s
 Generally it is better to use named volume and do backups using the dump tools for databases, or copying the data outside the volumes (often by using the *tar* archiving tool).
 :::
 
-# How to build a Dockerfile
+# How to build a Dockerfile {#sec-dockerfile}
 
 ::: {.callout-note}
 As opposite to Docker compose, we do not recommend writing a dockerfile if none exists. The reasoning is developed below.
@@ -851,7 +853,7 @@ But it can also be more interesting to use a dockerized application only for tes
 A light image can be very barebone and offer the minimum linux commands. It might be useful, even on production, to use a slightly more feature-rich image or to add some needed tools. Once the setup is stable, a new image can be built.
 :::
 
-## When containerization is not possible
+## When containerization is not possible {#sec-containerization-not-possible}
 
 If you plan to containerize an existing application, depending on how it is built and the functionality it offers, it might be difficult or even impossible to containerize it. Particularly, the following cases can be problematic:
 * The application needs to run as root, which is generally not recommended for security reason and thus not allowed in most container engines.
@@ -860,7 +862,7 @@ If you plan to containerize an existing application, depending on how it is buil
 * The application needs to run with a specific kernel version, which is not available in a container. It might be interesting to try with a supported kernel, either newer or older, but could be really risky as the failure might come later.
 * The application needs to run with a specific network configuration, which is not available in a container.
 
-# From Docker compose to Kubernetes
+# From Docker compose to Kubernetes {#sec-compose-to-kubernetes}
 
 ::: {.callout-tip}
 ## Recommended learning path
@@ -1383,7 +1385,7 @@ Many data management platforms use Solr to power their search functionality. Sol
 
 : Apache Software Foundation projects relevant to research data management {.striped .hover}
 
-# Scalability
+# Scalability {#sec-scalability}
 
 Scalability is the capability to adapt for more needs: more simultaneous users, more data to save, more processing power needed, more storage (bigger files), more network traffic.
 It is generally not needed to have a scalable solution at the beginning, but it is good to have an idea of what it means and how to do it, as it can be a problem if you need to change your solution later on. It can have strong consequences on the technical aspects, but also on the costs.
@@ -1395,7 +1397,7 @@ Horizontal scalability is the capability to adapt to more needs by using more re
 
 Kubernetes is designed for horizontal scalability, but it is not the only solution.
 
-# Databases
+# Databases {#sec-databases}
 
 Most Data Management Platforms rely on a database to store their data. It is generally better to have a basic knowledge of databases, and of the one used by the Data Management Platform you are using, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations.
 The most used databases are relational databases, such as MySQL, PostgreSQL, MariaDB, Oracle Database, Microsoft SQL Server, and SQLite. They rely on a schema, with tables and relations between them. All operations are row based, and normally querying is done by matching rows with other rows and/or a value. SQL (Structured Query Language) is the standard language for relational databases, and it is used to perform various operations on the data, such as querying, inserting, updating, and deleting data. SQL is a powerful language that allows you to manipulate and retrieve data in a flexible way, making it a popular choice for many applications.
@@ -1404,7 +1406,7 @@ SQL is relatively straightforward and it is probably a good idea, if not already
 
 But there are also non-relational databases, such as MongoDB, Cassandra, Redis, and Elasticsearch.
 
-# Security
+# Security {#sec-security}
 
 Security in Data Management is an important topic, as the data is often sensitive and valuable. It is important to have a basic knowledge of security principles and practices, and to apply them to your Data Management Platform. This includes:
 
@@ -1423,17 +1425,17 @@ It is also important to be aware of the specific security risks associated with 
 
 We will explore these topics in more details in the [Backups and Security page](pages/Backups_and_security.qmd).
 
-# Going to an assembly
+# Going to an assembly {#sec-going-to-an-assembly}
 
 An assembly is when several Data Management Platforms are interconnected to provide a more complete solution. For instance, a Data Management Platform for a research group might need to be connected to a storage solution, to a computing cluster, to a data visualization tool, and to a data analysis tool. It is generally better to have a basic knowledge of the different components of the assembly, and of how they work together, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations.
 
 They are generally connected via APIs, which can be at a programmatic level (for instance a Python API), or at a higher level (for instance a REST API). It is important to have a basic knowledge of how to use these APIs, as it can be useful for troubleshooting, for doing some specific operations (for instance a bulk update), or for doing some backup and restore operations. It is also important to be aware of the security implications of using APIs, and to take appropriate measures to secure them.
 
-The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the [Data Anonymisation and Pseudonymisation page](pages/Pseudonymisation.qmd).
+The different components of the assembly might have different requirements in terms of scalability, security, and maintenance, and it is important to take these into account when designing the assembly. For instance, if one component needs to be highly available, it might be a good idea to use a load balancer and multiple instances of that component, while if another component is only used for occasional tasks, it might be sufficient to run it on a single machine. There can also be some strong limitations, for instance if one applications store sensitive data encrypted which is shared with another application that cannot work with encrypted data. In that case, the data might need to be stripped down of its sensitive part before being shared, and/or anonymised or pseudonymised. You can read more about data anonymisation and pseudonymisation in the [Data Anonymisation and Pseudonymisation page](pages/Pseudonymization.qmd).
 
 You can read more about how to build an assembly in the [Building an Assembly page](pages/Building_an_assembly.qmd).
 
-# Automatize the setup
+# Automatize the setup {#sec-automatize-the-setup}
 
 When you need to repeat a setup, or when you need to set-up a complex application, it is generally better to automate the setup, rather than doing it by hand. This can be done with tools such as Puppet, Ansible, and Terraform, which allow you to describe the desired state of your system in a declarative way, and then apply that state to your machines.
 
@@ -1553,7 +1555,7 @@ jobs:
 
 This file lives in your repo at `.github/workflows/deploy.yml`. GitHub picks it up automatically, no extra configuration needed. Every push to `main` triggers a fresh build and deploy.
 
-# Many choices: tools, solutions and platforms
+# Many choices: tools, solutions and platforms {#sec-many-choices}
 
 Aside the obvious choices, which are generally for the most complex problems (databases, orchestration, Virtual Machines, LDAP) or accepted as de facto standard (Docker, Kubernetes (which is also in the previous category), S3), there are many other tools, solutions and platforms:
 * tools might be to help with some platforms, like a full ecosystem around Kubernetes to containers (visualising, managing, ...) or doing something independant (analysing something, transforming, ...),

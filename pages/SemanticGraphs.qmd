@@ -3,7 +3,7 @@ title: "Semantic graphs"
 number-sections: true
 ---
 
-# Scope
+# Scope {#sec-scope}
 
 While setting up a Data Management Platform, you will have to choose a compatible way to store the data, which will be documented in the Data Management Platform's documentation. In this case, you generally do not have to care about the implementation, even if it could help for certain cases and for maintenance.
 
@@ -13,7 +13,7 @@ Another interesting aspect is how they can be queried and navigated, which is a 
 
 Semantic graphs are therefore not necessarily a replacement for existing storage solutions, but rather a way to describe, connect, and query data across systems, potentially complementing relational databases and other storage technologies.
 
-# What are Semantic graphs
+# What are Semantic graphs {#sec-what-are-semantic-graphs}
 
 Semantic graphs represent data in a graph structure where nodes represent entities and edges represent relationships between those entities. 
 
@@ -256,7 +256,7 @@ A property graph is the better fit when:
 
 The two are not mutually exclusive. RDF-star brings edge attributes to RDF, and some property graph databases can import and export RDF (for instance, the neosemantics plugin for Neo4j), so you can start with one model and convert later if your needs change.
 
-# Use in Research Data Management
+# Use in Research Data Management {#sec-rdm-use}
 
 Semantic graphs offer two main benefits for research data management, (1) they allow to store and query data in a flexible way, which might be better adapted for some types of data, for instance analysis of classical literature, where the relationships between entities are complex, and (2) they make it easier to combine information from different sources, as they rely on global identifiers.
 
@@ -323,7 +323,7 @@ A few words that help when reading the documentation:
 * There is no `JOIN`. Using the same variable (`?lab`) in two places is what links the statements.
 * Other query types exist: `ASK` returns yes or no, and `CONSTRUCT` returns a new graph instead of a table.
 
-# LLM and Knowledge graphs
+# LLM and Knowledge graphs {#sec-llm-and-knowledge-graphs}
 
 Large language models (LLMs) and knowledge graphs have opposite strengths. An LLM understands natural language but can invent facts. A knowledge graph is precise and explicit, but needs a query language to be used. They can be combined in three ways:
 
@@ -333,7 +333,7 @@ Large language models (LLMs) and knowledge graphs have opposite strengths. An LL
 
 In all cases, the LLM is a helper whose output should be verified, not a source of truth.
 
-# How to
+# How to {#sec-how-to}
 
 ## From relational database to RDF {#sec-rdb-to-rdf}
 
@@ -445,7 +445,7 @@ ex:person_1 ex:name    "John Doe" ;
 
 Note that here the predicates (`name`, `age`, `address`) come from the *values* of the column `Type of Data`, not from column names.
 
-## A SPARQL endpoint
+## A SPARQL endpoint {#sec-sparql-endpoint}
 
 TO REVIEW and complete
 

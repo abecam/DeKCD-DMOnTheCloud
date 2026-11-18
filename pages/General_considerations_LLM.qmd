@@ -3,7 +3,7 @@ title: "General Considerations for Using LLMs in Research Data Management"
 number-sections: true
 ---
 
-# Which kind of LLM to use?
+# Which kind of LLM to use? {#sec-llm-kind}
 
 Local, tiny local, or online LLMs. The choice of which type of LLM to use will depend on the specific needs and requirements of the research project or task. Local LLMs may be preferred for tasks that require access to sensitive data, while online LLMs may be preferred for tasks that require access to a wider range of resources and tools.
 
@@ -24,7 +24,7 @@ A simple rule of thumb: **the more sensitive the data, the closer to you the LLM
 The tools and models change quickly, and what is "the best" today will probably be replaced within months. The principles on this page are meant to stay valid even if the tools change.
 :::
 
-# Which uses?
+# Which uses? {#sec-llm-uses}
 
 An LLM is a general helper: it is good with language, with code, and with explaining things. This makes it useful in many parts of research data management. In all cases below, the LLM is an assistant that proposes, and the person remains responsible for checking and deciding (see [Limits and risks](#limits-and-risks)).
 
@@ -118,7 +118,7 @@ The LLM does not know your experiment. It can write something that sounds right 
 Using a LLM to write a document is often a tradeoff between writing and editing. Some LLM has a tendency to produce a long text that is mostly correct, but needs to be shortened and corrected.
 :::
 
-# Limits and risks
+# Limits and risks {#sec-limits-and-risks}
 
 LLMs produce text that is **likely**, not text that is **verified**. This leads to the following issues:
 
@@ -144,7 +144,7 @@ Some simple habits reduce most of these risks:
 In all cases, the LLM is a helper whose output should be verified, not a source of truth.
 :::
 
-# Where is the data?
+# Where is the data? {#sec-where-is-the-data}
 
 The key question before using an LLM is: **where does what I type go?**
 
@@ -176,7 +176,7 @@ Finally, remember that the **conversations themselves** are data: they are store
 If you are not sure which service is allowed for which kind of data, ask the Data Management Team, the IT department, or the data protection officer of your institution. It is better to ask before than after.
 :::
 
-# Other AI tools
+# Other AI tools {#sec-other-ai-tools}
 
 Chat-based LLMs are only one kind of AI tool. Others you might meet in research data management are:
 

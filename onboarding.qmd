@@ -9,7 +9,7 @@ A short introduction to setting up and running a Data Management Platform (such 
 This is the condensed version. Each section ends with a pointer to the matching part of the [full step-by-step guide](index.qmd), which has the details, examples and further reading.
 :::
 
-# What this guide is for
+# What this guide is for {#sec-onboarding-purpose}
 
 It helps you to decide **which solution fits your project** and to understand it well enough to find your way through its documentation. It does not replace the documentation of each tool.
 
@@ -20,7 +20,7 @@ It helps you to decide **which solution fits your project** and to understand it
 
 For the wider topic of research data management, start with [RDMKit](https://rdmkit.elixir-europe.org/research_software_engineer) and come back here for the technical depth.
 
-# Which solution do I need?
+# Which solution do I need? {#sec-onboarding-solution}
 
 Choose the **simplest level that meets your current needs**. Moving up is possible later; moving down is rarely needed.
 
@@ -38,7 +38,7 @@ Choose the **simplest level that meets your current needs**. Moving up is possib
 
 More detail: [decision tree](pages/TechPlatformDecisionTree.qmd).
 
-# Five rules to follow from day one
+# Five rules to follow from day one {#sec-onboarding-five-rules}
 
 1. **Keep the difficulty under control.** A solution you cannot maintain is a bad solution. Reuse what already exists at your institution (servers, virtual machines) when it is well documented and supported.
 2. **Decide the level of service.** Going from "down for one night" to "down for one hour" costs less than going from one hour to one minute. Pick what the users really need.
@@ -46,7 +46,7 @@ More detail: [decision tree](pages/TechPlatformDecisionTree.qmd).
 4. **Document every specific change**: what, why, who, when, and how to undo it. A central document plus a short README next to each change works well.
 5. **Use version control (Git)** for anything you customise: configuration files, compose files, scripts. If the platform has no export or API, write a small script (for instance in Python) that exports the settings.
 
-# The Linux you need
+# The Linux you need {#sec-onboarding-linux}
 
 Linux is the usual operating system for these setups, and basic knowledge is a must for security reasons. Learn the basics from the [Software Carpentry shell lesson](https://swcarpentry.github.io/shell-novice/index.html) or similar tutorials.
 
@@ -74,9 +74,9 @@ Linux is the usual operating system for these setups, and basic knowledge is a m
 
 More detail: [Linux introduction](index.qmd#quick-introduction-to-linuxunix).
 
-# Containers and Docker in five minutes
+# Containers and Docker in five minutes {#sec-onboarding-docker}
 
-## The four words to know
+## The four words to know {#sec-onboarding-docker-basics}
 
 | Term | Meaning |
 |---|---|
@@ -142,7 +142,7 @@ docker compose down      # stop and remove the containers (named volumes are kep
 
 More detail: [Docker](index.qmd#containers-overview-of-docker-usage), [Docker Compose](index.qmd#moving-to-docker-compose).
 
-# Kubernetes in a nutshell
+# Kubernetes in a nutshell {#sec-onboarding-kubernetes}
 
 Kubernetes is an **orchestrator**. Where Docker Compose runs containers on one machine, Kubernetes decides on which machine containers run, replicates them, replaces unhealthy ones, and exposes them as services.
 
@@ -153,7 +153,7 @@ Kubernetes is an **orchestrator**. Where Docker Compose runs containers on one m
 
 More detail: [Kubernetes introduction](pages/Kubernetes_introduction.qmd).
 
-# Other solutions at a glance
+# Other solutions at a glance {#sec-onboarding-other-solutions}
 
 | Solution | What it is | When to consider it |
 |---|---|---|
@@ -165,7 +165,7 @@ More detail: [Kubernetes introduction](pages/Kubernetes_introduction.qmd).
 
 Proxmox and Kubernetes work at different layers and combine well: Kubernetes can run on virtual machines managed by Proxmox.
 
-# Topics that matter at every level
+# Topics that matter at every level {#sec-onboarding-cross-cutting}
 
 **Scalability.** You rarely need it on day one, but know what it means. *Vertical*: a bigger machine, or moving the database to its own machine. *Horizontal*: more instances behind a load balancer. Horizontal scaling only works if the application handles shared data correctly, for example when two users edit the same item.
 
@@ -182,7 +182,7 @@ Proxmox and Kubernetes work at different layers and combine well: Kubernetes can
 
 More detail: [Backups and security](pages/Backups_and_security.qmd).
 
-**Assemblies.** Platforms are often connected to each other (storage, compute clusters, analysis tools), usually through APIs. Check the security of each connection, and note that sensitive data may need to be anonymised or pseudonymised before being shared ([details](pages/Pseudonymisation.qmd)).
+**Assemblies.** Platforms are often connected to each other (storage, compute clusters, analysis tools), usually through APIs. Check the security of each connection, and note that sensitive data may need to be anonymised or pseudonymised before being shared ([details](pages/Pseudonymization.qmd)).
 
 **Automation.** Once you repeat a setup, automate it. **Ansible** configures machines over SSH with YAML playbooks and is the easiest to start with. **Puppet** enforces configuration continuously on large fleets. **Terraform** creates the infrastructure itself (virtual machines, networks) and is usually handled by your sysadmin.
 
@@ -190,7 +190,7 @@ More detail: [Backups and security](pages/Backups_and_security.qmd).
 
 **Choosing tools.** There are always more tools than you need. Prefer popular, well-documented, well-maintained ones from known sources. Use brand-new products only where there is no security risk, they cannot break the platform, and the gain is major. For databases, stick to the well-known ones.
 
-# Suggested path for newcomers
+# Suggested path for newcomers {#sec-onboarding-path}
 
 1. Read the sections above and decide on the **simplest level** that fits (hosted service first).
 2. Get comfortable with **Linux basics** and SSH.

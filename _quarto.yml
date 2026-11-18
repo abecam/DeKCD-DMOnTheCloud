@@ -27,6 +27,7 @@ website:
     contents:
         - index.qmd
         - onboarding.qmd
+        - navigation-overview-short.qmd
         - pages/TechPlatformDecisionTree.qmd
         - pages/Backups_and_security.qmd
         - pages/Data_storage.qmd

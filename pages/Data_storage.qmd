@@ -9,7 +9,7 @@ Evidently, an important part of Data Management is the storage of data.
 
 For a wider context on data storage, please refer to the [RDMKit](https://rdmkit.elixir-europe.org/storage), which provides a comprehensive overview of storage solutions within the FAIR data principles.
 
-## Volumes: Keeping Data Alive
+## Volumes: Keeping Data Alive {#sec-volumes}
 
 From container to orchestrated system, data that need to be persisted is saved in volumes. Volume is a kind of abstract name for various solutions, which might be more adapted to certain cases.
 
@@ -48,7 +48,7 @@ flowchart TD
     style V fill:#F5A623,color:#fff
 ```
 
-## Databases on the Cloud
+## Databases on the Cloud {#sec-databases}
 
 Most Data Management platform will need a database, generally a relational one, such as MySQL, MariaSQL or PostgreSQL. Cloud infrastrures are not immediately adapted for running database. The 2 main options are the following
 
@@ -165,7 +165,7 @@ flowchart TD
     style DS fill:#7ED321,color:#fff
 ```
 
-## Object Storage
+## Object Storage {#sec-object-storage}
 
 Object storage is a fundamentally different approach from volumes. Rather than behaving like a hard drive that an application reads and writes to directly, object storage works more like a **postal service**: you send a file (an "object") to a central repository and get back a unique address to retrieve it later. Applications interact with it through standard web requests (HTTP), not through the filesystem.
 

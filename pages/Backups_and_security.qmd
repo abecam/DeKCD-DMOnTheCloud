@@ -7,11 +7,11 @@ While backups and security are a very important aspect of running a Data Managem
 
 So it is important to be realistic and think carefully about what is actually needed and what can realistically achieved. For each section, we provide the importance we estimate in term of security. This has to be considered critically.
 
-# Which data
+# Which data {#sec-which-data}
 
 One generally important aspect of Data Management and data usage is to know which data to store and how to store it. 
 
-## Personal data
+## Personal data {#sec-personal-data}
 
 ::: {.callout-note}
 Importance: *high*. It is a very crucial aspect.
@@ -70,7 +70,7 @@ Limitation of use for public data is generally only ensured by a license, but it
 
 ## Passwords & keys
 
-# Backups
+# Backups {#sec-backups}
 
 ::: {.callout-note}
 Importance: *high*. Backup needs to be in place once a platform is in production.
@@ -110,7 +110,7 @@ Long term backups should also be tested, for instance for a random selection of 
 
 Backups cannot fully prevent the loss of data, as all activity since the last backup will be lost. In RDM, the data submitted for a project is generally still available on the submitter's computer, so it can be re-submitted. It is important to inform the users quickly and to explain how to check for data loss on their side, and how to re-submit the data if needed.
 
-# Security
+# Security {#sec-security}
 
 ## Defence need to be always a success, attack need only one
 

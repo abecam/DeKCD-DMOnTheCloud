@@ -1,0 +1,1 @@
+Pages containing notes are remarks for working on the documentation. Feel free to use.
