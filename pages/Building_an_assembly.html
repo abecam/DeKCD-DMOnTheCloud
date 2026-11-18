@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d24e9988e144b212bf8980b3ab8c7ee6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ce0f0d1e95892c391167071f7e5e54e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -276,6 +276,7 @@ cookieconsent.run({
   <li><a href="#sec-llm-assembly" id="toc-sec-llm-assembly" class="nav-link" data-scroll-target="#sec-llm-assembly"><span class="header-section-number">8.2</span> With a local LLM aside the assembly</a>
   <ul class="collapse">
   <li><a href="#sec-assembly-graphs" id="toc-sec-assembly-graphs" class="nav-link" data-scroll-target="#sec-assembly-graphs"><span class="header-section-number">8.2.1</span> Semantic graphs in an assembly</a></li>
+  <li><a href="#sec-assembly-graphs-llm" id="toc-sec-assembly-graphs-llm" class="nav-link" data-scroll-target="#sec-assembly-graphs-llm"><span class="header-section-number">8.2.2</span> Semantic graphs and LLMs together for an assembly</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -374,7 +375,20 @@ cookieconsent.run({
 <p>For instance to help with data analysis, data visualization, or other tasks that are part of the assembly. A local LLM can be used to provide additional support and guidance for researchers working on the assembly. It can for instance help with SparQL queries, data cleaning, or other tasks that require specialized knowledge or expertise.</p>
 <p>The simple approach would be using exposed APIs and documentation, without access to the data itself. This allows the LLM to provide guidance and support without compromising the security or privacy of the data being used in the assembly.</p>
 <p>The next step would be to provide the LLM with access to the data as read-only (no write operations permitted), allowing it to perform more advanced tasks such as data analysis or visualization. It is still important to ensure that the results of the LLM’s analysis are accurate and reliable, and to verify its suggestions with other sources.</p>
-<p>The last step is a “full” approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e.&nbsp;not actually deleted but marked as deleted) and/or require human approval before being executed.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>We strongly suggest to avoid giving a LLM write access to the data.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If it is clear that the benefits outweigh the risks, please proceed with caution.</p>
+</div>
+</div>
+<p>The last step is a “full” approach, where the LLM has full access to the data and can perform any operations necessary to support the assembly. This approach should only be used in cases where the LLM is trusted and has been thoroughly vetted for security and privacy concerns. The access should be limited to the specific tasks required for the assembly, and appropriate safeguards should be in place to protect sensitive data. In no case should the LLM be allowed to make changes to the data without human oversight and approval, and all destructive operation should either be disabled, soft deleted (i.e.&nbsp;not actually deleted but marked as deleted) and/or require human approval before being executed. Logging and monitoring should also be used to track the LLM’s actions, and are generally recommended for any usage, also by researchers.</p>
 <section id="sec-assembly-graphs" class="level3" data-number="8.2.1">
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="sec-assembly-graphs"><span class="header-section-number">8.2.1</span> Semantic graphs in an assembly</h3>
 <p>A <a href="../pages/SemanticGraphs.html">semantic graph</a> describes data and metadata as shared, machine-readable statements. In an assembly, it can give a <strong>unified view</strong> of what is stored in the different tools, and a <strong>single endpoint</strong> to query it (typically SPARQL), wherever the data actually lives. How a semantic graph works is explained on the <a href="../pages/SemanticGraphs.html">Semantic graphs page</a>; this section only covers what matters when deciding whether to use one in an assembly.</p>
@@ -399,6 +413,10 @@ Note
 <p>Ontologies and shared meta-data are an important part of most data management platforms, especially to be FAIR. If not familiar with them, we recommend getting a good overview of the topic, for instance with the <a href="https://www.go-fair.org/fair-principles/fair-data-maturity-model/">FAIR Data Maturity Model</a> and the <a href="https://rdmkit.elixir-europe.org/">RDMKit</a>.</p>
 </div>
 </div>
+</section>
+<section id="sec-assembly-graphs-llm" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="sec-assembly-graphs-llm"><span class="header-section-number">8.2.2</span> Semantic graphs and LLMs together for an assembly</h3>
+<p>The semantic graph can be used to provide a unified view of the data and metadata in the assembly, while the LLM can be used to provide guidance and support for researchers working on the assembly. The LLM can use the semantic graph to understand the relationships between different data and metadata elements, and to provide suggestions for how to best use the tools and resources in the assembly. As explained in <a href="../pages/SemanticGraphs.html#sec-sparql-llm">Using a LLM to query a SPARQL endpoint</a>, the LLM can be used to generate SPARQL queries based on natural language input, allowing researchers to easily access the data and metadata in the assembly without needing to know the details of the underlying graph structure.</p>
 
 
 </section>
