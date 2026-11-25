@@ -75,6 +75,20 @@ Authentik, Keycloak, or other identity management systems can be used to provide
 
 Consortium (such as Life Science login) or institutional identity management systems can also be used to provide SSO capabilities for the assembly. This allows users to log in using their institutional credentials and access all the tools and resources in the assembly without having to remember multiple usernames and passwords.
 
+# Assembly and Kubernetes {#sec-assembly-kubernetes}
+
+Kubernetes, presented in more detail in the [introduction to Kubernetes page](pages/Introduction_to_Kubernetes.qmd), is an orchestration system for containerized applications. It is most useful when you need several servers (physical or virtual) and high availability. Instead of deploying applications on each server individually and configuring fail-over and load balancing yourself, you declare the desired state of your applications in Kubernetes manifests and let Kubernetes handle deployment, scaling, and recovery across the servers.
+
+Adopting Kubernetes is always a trade-off between what you gain and the effort of learning and operating it. With a managed Kubernetes service, ideally with IT support, much of the operational burden is carried for you, and it can be a good solution. If you must run the cluster yourself, a simpler tool may fit better, depending on your needs: [Docker Compose](../index.qmd#sec-docker-compose) or [Docker Swarm](../index.qmd#sec-swarm) for running containers on one or a few hosts, [Ansible](../index.qmd#sec-ansible) for automated server configuration, or [Proxmox](../index.qmd#sec-proxmox) for managing virtual machines.
+
+[OpenStack](../index.qmd#sec-openstack) operates at a different level: it provides the underlying infrastructure (virtual machines, networking, storage) on which Kubernetes can run. It can be worthwhile when managed and supported, but it is even more complex than Kubernetes to set up and maintain.
+
+A common benefit of all these solutions (Kubernetes, but also simpler ones such as [Docker Compose](../index.qmd#sec-docker-compose) or [Docker Swarm](../index.qmd#sec-swarm), or virtual machines on [OpenStack](../index.qmd#sec-openstack)) is that the applications run together in a private network managed by the solution. They can communicate with each other in relative security, isolated from the outside. Some access points (e.g. an ingress, a reverse proxy, a load balancer or a floating IP) must of course be defined so that users can reach the applications, and these must be properly secured. With a managed solution, exposing an application is either something you can do yourself, generally following rules and restrictions set by the provider, or something IT does on request. In both cases, this should be discussed with IT before any production setup.
+
+::: {.callout-note}
+Some Kubernetes distributions (e.g. K3s, MicroK8s) are easy to install, but the real cost lies in ongoing maintenance and in the learning curve for users. For a trivial setup (one server), they offer little benefit over a simpler solution, and the complexity grows quickly with larger setups. Consider the long-term maintenance and support of the cluster, and whether staff with the right expertise will be available to run it.
+:::
+
 # Assemblies between institutions {#sec-assemblies-between-institutions}
 
 What is allowed and how to get it allowed?

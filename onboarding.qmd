@@ -206,5 +206,7 @@ More detail: [Backups and security](pages/Backups_and_security.qmd).
 * [Decision tree](pages/TechPlatformDecisionTree.qmd)
 * [Kubernetes introduction](pages/Kubernetes_introduction.qmd)
 * [Backups and security](pages/Backups_and_security.qmd)
+* [Pseudonymization](pages/Pseudonymization.qmd)
+* [Building an assembly](pages/Building_an_assembly.qmd)
 * [RDMKit](https://rdmkit.elixir-europe.org/)
 * Official documentation: [Docker](https://docs.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Proxmox VE](https://pve.proxmox.com/pve-docs/), [Ansible](https://docs.ansible.com)

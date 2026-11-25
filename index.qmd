@@ -1439,7 +1439,7 @@ You can read more about how to build an assembly in the [Building an Assembly pa
 
 When you need to repeat a setup, or when you need to set-up a complex application, it is generally better to automate the setup, rather than doing it by hand. This can be done with tools such as Puppet, Ansible, and Terraform, which allow you to describe the desired state of your system in a declarative way, and then apply that state to your machines.
 
-## Puppet, Ansible & Terraform
+## Puppet, Ansible & Terraform {#sec-ansible}
 
 ::: {.callout-tip}
 ## Recommended learning path
